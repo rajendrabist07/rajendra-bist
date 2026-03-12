@@ -113,52 +113,61 @@ function SkillCard({ skill }) {
   const Icon = SkillIcons[skill.name]
   return (
     <div
-      className="glass-card"
-      style={{ padding: '20px 18px', display: 'flex', flexDirection: 'column', gap: '14px' }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{ flexShrink: 0 }}>
-          {Icon ? <Icon /> : (
-            <div style={{
-              width: 36, height: 36,
-              borderRadius: 8,
-              background: 'var(--glass-bg)',
-              border: '1px solid var(--glass-border)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)',
-            }}>
-              {skill.name.slice(0,2)}
-            </div>
-          )}
-        </div>
-        <div>
-          <div style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 600,
-            fontSize: '0.9rem',
-            color: 'var(--text-primary)',
-          }}>{skill.name}</div>
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.68rem',
-            color: 'var(--text-muted)',
-          }}>{skill.level}%</div>
-        </div>
-      </div>
-      {/* Progress bar */}
-      <div style={{
-        height: '3px',
-        background: 'var(--border-subtle)',
-        borderRadius: '2px',
+      className="glass-card skill-card"
+      style={{
+        padding: '18px 20px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '14px',
+        cursor: 'default',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        border: '1px solid var(--border-subtle)',
+        position: 'relative',
         overflow: 'hidden',
-      }}>
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = skill.color + '60'
+        e.currentTarget.style.background = skill.color + '12'
+        e.currentTarget.style.transform = 'translateY(-3px)'
+        e.currentTarget.style.boxShadow = `0 12px 24px ${skill.color}20`
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = 'var(--border-subtle)'
+        e.currentTarget.style.background = 'var(--glass-bg)'
+        e.currentTarget.style.transform = 'none'
+        e.currentTarget.style.boxShadow = 'none'
+      }}
+    >
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0,
+        height: '100%', width: '3px',
+        background: skill.color,
+        opacity: 0.8,
+      }} />
+
+      <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {Icon ? <Icon /> : (
+          <div style={{
+            width: 36, height: 36,
+            borderRadius: 8,
+            background: 'var(--glass-bg)',
+            border: '1px solid var(--glass-border)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)',
+          }}>
+            {skill.name.slice(0,2)}
+          </div>
+        )}
+      </div>
+      <div>
         <div style={{
-          height: '100%',
-          width: `${skill.level}%`,
-          background: `linear-gradient(90deg, ${skill.color}aa, ${skill.color})`,
-          borderRadius: '2px',
-          transition: 'width 1.2s cubic-bezier(0.4,0,0.2,1)',
-        }} />
+          fontFamily: 'var(--font-display)',
+          fontWeight: 600,
+          fontSize: '0.95rem',
+          color: 'var(--text-primary)',
+          letterSpacing: '-0.01em',
+        }}>{skill.name}</div>
       </div>
     </div>
   )
