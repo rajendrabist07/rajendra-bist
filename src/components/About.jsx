@@ -5,7 +5,7 @@ const principles = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
     ),
     text: 'Interfaces that scale, not just render',
@@ -13,7 +13,7 @@ const principles = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
       </svg>
     ),
     text: 'Code readable months later',
@@ -21,7 +21,7 @@ const principles = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-        <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/>
+        <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" />
       </svg>
     ),
     text: 'HTML & CSS as architecture',
@@ -29,7 +29,7 @@ const principles = [
   {
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-        <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        <circle cx="12" cy="12" r="10" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
     text: 'Systems thinking over framework thinking',
@@ -148,8 +148,8 @@ function PhotoCard() {
         borderRadius: '12px',
         boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0,212,255,0.08)',
       }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-cyan)', lineHeight: 1, marginBottom: '2px' }}>2+</div>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Yrs Building</div>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-cyan)', lineHeight: 1, marginBottom: '2px' }}>~</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Passionate Builder</div>
       </div>
 
       {/* Floating chip — bottom-right */}
@@ -162,8 +162,8 @@ function PhotoCard() {
         borderRadius: '12px',
         boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(168,85,247,0.08)',
       }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-purple)', lineHeight: 1, marginBottom: '2px' }}>10+</div>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Projects Done</div>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent-purple)', lineHeight: 1, marginBottom: '2px' }}>~</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Projects in Progress</div>
       </div>
 
       <style>{`
@@ -256,14 +256,14 @@ export default function About() {
                     transition: 'all 0.2s ease',
                     cursor: 'default',
                   }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(0,212,255,0.3)'
-                    e.currentTarget.style.background = 'var(--bg-card-hover)'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'var(--border-subtle)'
-                    e.currentTarget.style.background = 'var(--bg-card)'
-                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'rgba(0,212,255,0.3)'
+                      e.currentTarget.style.background = 'var(--bg-card-hover)'
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)'
+                      e.currentTarget.style.background = 'var(--bg-card)'
+                    }}
                   >
                     <span style={{ color: 'var(--accent-cyan)', flexShrink: 0, marginTop: '1px' }}>{p.icon}</span>
                     <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{p.text}</span>
@@ -291,16 +291,16 @@ export default function About() {
                     transition: 'all 0.2s ease',
                     cursor: 'default',
                   }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'var(--accent-cyan)'
-                    e.currentTarget.style.color = 'var(--accent-cyan)'
-                    e.currentTarget.style.background = 'var(--accent-cyan-dim)'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'var(--border-subtle)'
-                    e.currentTarget.style.color = 'var(--text-secondary)'
-                    e.currentTarget.style.background = 'var(--bg-card)'
-                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'var(--accent-cyan)'
+                      e.currentTarget.style.color = 'var(--accent-cyan)'
+                      e.currentTarget.style.background = 'var(--accent-cyan-dim)'
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)'
+                      e.currentTarget.style.color = 'var(--text-secondary)'
+                      e.currentTarget.style.background = 'var(--bg-card)'
+                    }}
                   >{t}</span>
                 ))}
               </div>

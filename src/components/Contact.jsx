@@ -4,8 +4,8 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 const socials = [
   {
     name: 'GitHub',
-    handle: '@rajendrabist396',
-    href: 'https://github.com/rajendrabist396',
+    handle: '@rajendrabist07',
+    href: 'https://github.com/rajendrabist07',
     desc: 'See the code behind the projects',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -100,7 +100,7 @@ export default function Contact() {
                 marginBottom: '8px',
               }}>Email me directly</p>
               <a
-                href="mailto:rajendrabist07@gmail.com"
+                href="mailto:rajendrabist396@gmail.com"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: '1.1rem',
