@@ -76,7 +76,7 @@ function ScrollIndicator() {
 
 export default function Hero() {
   const handleViewProjects = () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-  const handleExploreWork  = () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+  const handleExploreWork = () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <section id="hero" style={{
@@ -193,16 +193,16 @@ export default function Hero() {
                 transition: 'all 0.2s ease',
                 cursor: 'default',
               }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'var(--accent-cyan)'
-                e.currentTarget.style.color = 'var(--accent-cyan)'
-                e.currentTarget.style.background = 'var(--accent-cyan-dim)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--border-subtle)'
-                e.currentTarget.style.color = 'var(--text-secondary)'
-                e.currentTarget.style.background = 'transparent'
-              }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = 'var(--accent-cyan)'
+                  e.currentTarget.style.color = 'var(--accent-cyan)'
+                  e.currentTarget.style.background = 'var(--accent-cyan-dim)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = 'var(--border-subtle)'
+                  e.currentTarget.style.color = 'var(--text-secondary)'
+                  e.currentTarget.style.background = 'transparent'
+                }}
               >{v}</span>
             ))}
           </div>
@@ -214,25 +214,25 @@ export default function Hero() {
           }}>
             <button className="btn-primary" onClick={handleViewProjects}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <rect x="3" y="3" width="7" height="7" rx="1"/>
-                <rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/>
-                <rect x="14" y="14" width="7" height="7" rx="1"/>
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
               </svg>
               View Projects
             </button>
             <button className="btn-secondary" onClick={handleExploreWork}>
               Explore Work
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12,5 19,12 12,19"/>
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12,5 19,12 12,19" />
               </svg>
             </button>
             <a href="https://github.com/rajendrabist07" target="_blank" rel="noopener noreferrer"
               className="btn-secondary"
               style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
               </svg>
               GitHub
             </a>
@@ -278,7 +278,7 @@ export default function Hero() {
                 background: 'var(--bg-secondary)',
               }}>
                 <img
-                  src="/rajendra.jpg"
+                  src="/rajendra.jpeg"
                   alt="Rajendra Bist"
                   style={{
                     width: '100%', height: '100%',
@@ -302,13 +302,13 @@ export default function Hero() {
               display: 'flex', alignItems: 'center', gap: '6px',
             }}>
               <svg viewBox="0 0 24 24" width="14" height="14">
-                <circle cx="12" cy="12" r="12" fill="#20232a"/>
+                <circle cx="12" cy="12" r="12" fill="#20232a" />
                 <g fill="none" stroke="#61dafb" strokeWidth="1.2">
-                  <ellipse cx="12" cy="12" rx="8" ry="3"/>
-                  <ellipse cx="12" cy="12" rx="8" ry="3" transform="rotate(60 12 12)"/>
-                  <ellipse cx="12" cy="12" rx="8" ry="3" transform="rotate(120 12 12)"/>
+                  <ellipse cx="12" cy="12" rx="8" ry="3" />
+                  <ellipse cx="12" cy="12" rx="8" ry="3" transform="rotate(60 12 12)" />
+                  <ellipse cx="12" cy="12" rx="8" ry="3" transform="rotate(120 12 12)" />
                 </g>
-                <circle cx="12" cy="12" r="1.8" fill="#61dafb"/>
+                <circle cx="12" cy="12" r="1.8" fill="#61dafb" />
               </svg>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: '#61dafb' }}>React</span>
             </div>

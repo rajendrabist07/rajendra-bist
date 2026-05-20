@@ -68,7 +68,7 @@ function PhotoCard() {
         <div style={{ borderRadius: '22px', overflow: 'hidden', background: 'var(--bg-secondary)', position: 'relative' }}>
           {/* Photo */}
           <img
-            src="/rajendra.jpg"
+            src="/rajendra.jpeg"
             alt="Rajendra Bist — Full-Stack Developer"
             loading="lazy"
             style={{
