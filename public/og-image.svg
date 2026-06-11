@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0f" />
+      <stop offset="100%" stop-color="#1a1a2e" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative blurred circles -->
+  <circle cx="150" cy="120" r="100" fill="rgba(99, 102, 241, 0.12)" filter="url(#blur)"/>
+  <circle cx="1050" cy="550" r="120" fill="rgba(168, 85, 247, 0.1)" filter="url(#blur)"/>
+  
+  <!-- Main content -->
+  <g>
+    <!-- Name -->
+    <text x="600" y="200" font-family="Inter, sans-serif" font-size="84" font-weight="700" fill="#f8fafc" text-anchor="middle">
+      Rajendra Bist
+    </text>
+    
+    <!-- Role with gradient -->
+    <text x="600" y="310" font-family="Inter, sans-serif" font-size="56" font-weight="600" fill="url(#textGrad)" text-anchor="middle">
+      Full-Stack Web Developer
+    </text>
+    
+    <!-- Tagline -->
+    <text x="600" y="390" font-family="Inter, sans-serif" font-size="28" fill="#cbd5e1" text-anchor="middle">
+      Building systems. Designing backends.
+    </text>
+    <text x="600" y="430" font-family="Inter, sans-serif" font-size="28" fill="#cbd5e1" text-anchor="middle">
+      Shipping products that work.
+    </text>
+    
+    <!-- Tech stack footer -->
+    <rect x="200" y="500" width="800" height="90" fill="rgba(99, 102, 241, 0.08)" rx="12"/>
+    <text x="600" y="530" font-family="monospace" font-size="16" fill="#94a3b8" text-anchor="middle">
+      Next.js 15 • React • TypeScript • Tailwind CSS
+    </text>
+    <text x="600" y="560" font-family="monospace" font-size="16" fill="#94a3b8" text-anchor="middle">
+      Node.js • MongoDB • Gemini AI • Vercel
+    </text>
+  </g>
+</svg>

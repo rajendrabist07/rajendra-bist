@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://rajendrabist.vercel.app/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
