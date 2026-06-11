@@ -23,7 +23,12 @@ export async function POST(req: NextRequest) {
     await ContactMessage.create({ name, email, message })
 
     return Response.json({ ok: true, message: 'Message sent successfully.' })
-  } catch {
+  } catch (error) {
+    console.error('Contact API failed', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      hasMongoUri: Boolean(process.env.MONGODB_URI),
+    })
+
     return Response.json({ error: 'Could not send message right now.' }, { status: 500 })
   }
 }

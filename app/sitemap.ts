@@ -1,33 +1,34 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/site-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://rajendrabist.vercel.app',
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://rajendrabist.vercel.app/#about',
+      url: `${SITE_URL}/#about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://rajendrabist.vercel.app/#skills',
+      url: `${SITE_URL}/#skills`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://rajendrabist.vercel.app/#projects',
+      url: `${SITE_URL}/#projects`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: 'https://rajendrabist.vercel.app/#contact',
+      url: `${SITE_URL}/#contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,

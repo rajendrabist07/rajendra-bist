@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import '../styles/globals.css';
 import { Providers } from './providers';
+import { SITE_URL } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   title: 'Rajendra Bist — Systems-First Full-Stack Developer',
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     'backend engineer',
     'system design',
   ],
-  metadataBase: new URL('https://rajendrabist.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   robots: {
     index: true,
     follow: true,
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     title: 'Rajendra Bist — Systems-First Full-Stack Developer',
     description:
       'Personal portfolio showcasing full-stack development, AI integration, and real projects. Built with Next.js, MongoDB, and Gemini AI.',
-    url: 'https://rajendrabist.vercel.app',
+    url: SITE_URL,
     siteName: 'Rajendra Bist',
     images: [
       {
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#0a0a0f" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href="https://rajendrabist.vercel.app" />
+        <link rel="canonical" href={SITE_URL} />
       </head>
       <body className="bg-[--bg-primary] text-[--text-primary]">
         <Providers>{children}</Providers>

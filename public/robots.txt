@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://rajendrabist.vercel.app/sitemap.xml
+Sitemap: https://rajendra-bist.vercel.app/sitemap.xml
 
 User-agent: Googlebot
 Allow: /
