@@ -1,4 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#2dd4bf" />
-  <text x="50" y="55" font-family="sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">RB</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#0d0d14" />
+  
+  <!-- Inner glow -->
+  <circle cx="32" cy="32" r="26" fill="none" stroke="url(#grad)" stroke-width="1" opacity="0.3" />
+
+  <!-- Hexagon stroke -->
+  <polygon
+    points="32,8 50,16 50,40 32,48 14,40 14,16"
+    fill="none"
+    stroke="url(#grad)"
+    stroke-width="1.5"
+  />
+
+  <!-- R letter -->
+  <g fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="18">
+    <text x="22" y="35" text-anchor="middle" dominant-baseline="central">R</text>
+    <text x="38" y="35" text-anchor="middle" dominant-baseline="central">B</text>
+  </g>
+
+  <!-- Accent dots -->
+  <circle cx="32" cy="10" r="1.5" fill="#6366f1" opacity="0.6" />
+  <circle cx="50" cy="32" r="1.5" fill="#6366f1" opacity="0.6" />
+  <circle cx="32" cy="52" r="1.5" fill="#6366f1" opacity="0.6" />
+  <circle cx="14" cy="32" r="1.5" fill="#6366f1" opacity="0.6" />
 </svg>

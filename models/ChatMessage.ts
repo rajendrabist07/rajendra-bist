@@ -1,12 +1,20 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, Document } from 'mongoose'
 
-const ChatMessageSchema = new mongoose.Schema({
+export interface IChatMessage extends Document {
+  sessionId: string
+  userMessage: string
+  aiResponse: string
+  timestamp: Date
+}
+
+const ChatMessageSchema = new Schema<IChatMessage>({
   sessionId: { type: String, required: true, index: true },
-  userMessage: { type: String, required: true },
+  userMessage: { type: String, required: true, maxlength: 2000 },
   aiResponse: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
 })
 
-const ChatMessage = mongoose.models.ChatMessage || mongoose.model('ChatMessage', ChatMessageSchema)
+ChatMessageSchema.index({ timestamp: 1 }, { expireAfterSeconds: 2592000 })
 
-export default ChatMessage
+export default mongoose.models.ChatMessage ||
+  mongoose.model<IChatMessage>('ChatMessage', ChatMessageSchema)

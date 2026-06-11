@@ -1,12 +1,17 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
-import { getGemini } from "@/lib/gemini";
 import { PORTFOLIO_CONTEXT } from "@/lib/portfolio-context";
 import ChatMessage from "@/models/ChatMessage";
 
 const WINDOW_MS = 60 * 60 * 1000;
-const MAX_REQUESTS_PER_WINDOW = 20;
-const rateLimitMap = new Map<string, { count: number; expires: number }>();
+const MAX_REQUESTS_PER_WINDOW = 30;
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+type ClientHistoryItem = {
+  role: string;
+  content: string;
+};
 
 function getClientIp(req: NextRequest) {
   return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
@@ -16,8 +21,8 @@ function checkRateLimit(ip: string) {
   const now = Date.now();
   const existing = rateLimitMap.get(ip);
 
-  if (!existing || existing.expires < now) {
-    rateLimitMap.set(ip, { count: 1, expires: now + WINDOW_MS });
+  if (!existing || existing.resetAt < now) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS });
     return true;
   }
 
@@ -27,88 +32,121 @@ function checkRateLimit(ip: string) {
 
   rateLimitMap.set(ip, {
     count: existing.count + 1,
-    expires: existing.expires,
+    resetAt: existing.resetAt,
   });
   return true;
 }
 
 export async function POST(req: NextRequest) {
-  const ip = getClientIp(req);
+  let parsedBody: {
+    message: string;
+    history: Array<{ role: string; content: string }>;
+    sessionId: string;
+  } | null = null;
 
-  if (!checkRateLimit(ip)) {
+  try {
+    if (!process.env.GEMINI_API_KEY) {
+      return Response.json({ error: "AI service not configured" }, { status: 500 });
+    }
+
+    const ip = getClientIp(req);
+
+    if (!checkRateLimit(ip)) {
+      return Response.json(
+        { error: "Rate limit exceeded. Please try again later." },
+        { status: 429 },
+      );
+    }
+
+    const body = await req.json().catch(() => null);
+    const message = typeof body?.message === "string" ? body.message.trim() : "";
+    const history = Array.isArray(body?.history) ? body.history.slice(-20) : [];
+    const sessionId = typeof body?.sessionId === "string" && body.sessionId.trim()
+      ? body.sessionId.trim().slice(0, 120)
+      : crypto.randomUUID();
+
+    parsedBody = { message, history, sessionId };
+
+    if (!message || message.length > 1000) {
+      return Response.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+    const geminiHistory = history
+      .filter((item: ClientHistoryItem) => typeof item?.content === "string" && item.content.trim())
+      .map((item: ClientHistoryItem) => ({
+        role: item.role === "assistant" ? "model" : "user",
+        parts: [{ text: item.content.slice(0, 2000) }],
+      }));
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+      systemInstruction: PORTFOLIO_CONTEXT,
+      generationConfig: {
+        maxOutputTokens: 500,
+        temperature: 0.7,
+      },
+    });
+
+    const chat = model.startChat({ history: geminiHistory });
+    const result = await chat.sendMessageStream(message);
+
     return new Response(
-      JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
+      new ReadableStream({
+        async start(controller) {
+          const encoder = new TextEncoder();
+          let fullResponse = "";
+
+          try {
+            for await (const chunk of result.stream) {
+              const text = chunk.text();
+              if (text) {
+                fullResponse += text;
+                controller.enqueue(encoder.encode(text));
+              }
+            }
+
+            void connectToDatabase()
+              .then(() =>
+                ChatMessage.create({
+                  sessionId,
+                  userMessage: message,
+                  aiResponse: fullResponse,
+                }),
+              )
+              .catch(() => {
+                /** Non-critical logging failure */
+              });
+          } catch {
+            controller.enqueue(encoder.encode("[Error: Could not get response]"));
+          } finally {
+            controller.close();
+          }
+        },
+      }),
       {
-        status: 429,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-cache",
+          "X-Session-Id": sessionId,
+        },
       },
     );
+  } catch (error) {
+    if (!parsedBody?.message) {
+      return Response.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+    const message = error instanceof Error ? error.message : "";
+    const isKeyError = message.includes("API key not valid") || message.includes("API_KEY_INVALID");
+
+    return Response.json(
+      {
+        error: isKeyError
+          ? "Gemini API key is not valid. Please update GEMINI_API_KEY in .env.local."
+          : "AI service could not respond right now. Please try again shortly.",
+      },
+      { status: 502 },
+    );
   }
-
-  const body = await req.json();
-  const message = String(body.message || "").trim();
-  const history = Array.isArray(body.history) ? body.history : [];
-
-  if (!message) {
-    return new Response(JSON.stringify({ error: "Message is required." }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
-  await connectToDatabase();
-
-  const chatInput = [
-    { role: "system", content: PORTFOLIO_CONTEXT },
-    ...history.map((item: any) => ({
-      role: item.role === "assistant" ? "assistant" : "user",
-      content: String(item.content || ""),
-    })),
-    { role: "user", content: message },
-  ];
-
-  const gemini = getGemini();
-  const model = gemini.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-  const result = await model.generateContentStream({
-    contents: chatInput.map((item) => ({
-      role: item.role === "system" ? "user" : item.role,
-      parts: [{ text: item.content }],
-    })),
-  });
-
-  let aiResponse = "";
-  const encoder = new TextEncoder();
-
-  const readable = new ReadableStream({
-    async start(controller) {
-      try {
-        for await (const chunk of result.stream) {
-          const text = chunk.text();
-          if (text && text.length > 0) {
-            aiResponse += text;
-            controller.enqueue(encoder.encode(text));
-          }
-        }
-      } catch (error) {
-        controller.error(error);
-      } finally {
-        controller.close();
-        void ChatMessage.create({
-          sessionId: ip,
-          userMessage: message,
-          aiResponse,
-        }).catch(() => {
-          /** Fire and forget logging failure */
-        });
-      }
-    },
-  });
-
-  return new Response(readable, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-cache",
-    },
-  });
 }

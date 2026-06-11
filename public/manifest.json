@@ -2,8 +2,8 @@
   "name": "Rajendra Bist — Full-Stack Web Developer",
   "short_name": "Rajendra Bist",
   "description": "Full-stack web developer from Nepal. Passionate about backend architecture and AI-integrated products.",
-  "start_url": "https://rajendrabist.vercel.app",
-  "scope": "https://rajendrabist.vercel.app",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#6366f1",
@@ -16,13 +16,12 @@
       "purpose": "any"
     }
   ],
+  "categories": ["productivity", "portfolio"],
   "screenshots": [
     {
       "src": "/og-image.svg",
       "sizes": "1200x630",
       "type": "image/svg+xml"
     }
-  ],
-  "categories": ["productivity", "portfolio"],
-  "screenshots": []
+  ]
 }

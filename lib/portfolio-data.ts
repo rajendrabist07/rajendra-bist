@@ -1,7 +1,7 @@
 export const PERSONAL = {
   name: 'Rajendra Bist',
-  role: 'Full-Stack Web Developer',
-  tagline: 'I build systems, design backends, and ship products that work.',
+  role: 'Full-Stack Developer',
+  tagline: 'Systems-first developer focused on web architecture, backend foundations, performance, and scale.',
   location: 'Nepal',
   email: 'rajendrabist396@gmail.com',
   github: 'https://github.com/rajendrabist07',
@@ -10,18 +10,8 @@ export const PERSONAL = {
 
 export const EDUCATION = [
   {
-    school: 'Shree Phulwari Secondary School',
-    degree: 'Secondary Education',
-    timeframe: 'Completed',
-  },
-  {
-    school: 'KMC — Kailali Multiple Campus',
-    degree: '+2 Science',
-    timeframe: 'Completed',
-  },
-  {
     school: 'Vcare Technical Institute',
-    degree: 'Full-Stack Web Development',
+    degree: 'Full-Stack Web Development Training',
     timeframe: 'Completed',
   },
 ]
