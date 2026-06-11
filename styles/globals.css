@@ -117,6 +117,17 @@ body {
   background-clip: text;
 }
 
+.hero-name-gradient {
+  background:
+    linear-gradient(110deg, #f8fafc 0%, #a5b4fc 24%, #38bdf8 48%, #c084fc 72%, #ffffff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 7s ease infinite;
+  filter: drop-shadow(0 18px 42px rgba(99, 102, 241, 0.18));
+}
+
 .surface-panel {
   background: var(--bg-surface);
   border: 1px solid var(--border);

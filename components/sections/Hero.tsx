@@ -12,6 +12,12 @@ const heroVariants = {
 
 const itemTransition = { duration: 0.6 };
 
+const titlePhrases = [
+  "Systems-First Full-Stack Developer",
+  "Web Architecture, Performance & Scale",
+  "Backend Foundations for Real Products",
+];
+
 export default function Hero() {
   const openChat = () => {
     if (typeof window !== "undefined") {
@@ -43,8 +49,9 @@ export default function Hero() {
               <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]" />
               Available for Work
             </p>
-            <h1 className="mt-8 text-6xl font-black uppercase leading-[0.86] tracking-normal text-white sm:text-7xl lg:text-8xl">
-              Rajendra Bist
+            <h1 className="mt-8 text-6xl font-black uppercase leading-[0.86] tracking-normal sm:text-7xl lg:text-8xl">
+              <span className="hero-name-gradient">Rajendra</span>
+              <span className="mt-2 block text-white">Bist</span>
             </h1>
           </motion.div>
 
@@ -54,9 +61,24 @@ export default function Hero() {
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.15 }}
           >
-            <p className="mt-8 text-xl font-semibold text-indigo-300 sm:text-2xl">
-              Full-Stack Developer | Systems-First Thinking
-            </p>
+            <div className="mt-8 h-[72px] overflow-hidden sm:h-[40px]">
+              <motion.div
+                animate={{ y: ["0%", "-33.333%", "-66.666%", "0%"] }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  times: [0, 0.31, 0.64, 1],
+                }}
+                className="space-y-6 sm:space-y-2"
+              >
+                {titlePhrases.map((phrase) => (
+                  <p key={phrase} className="text-xl font-semibold text-indigo-200 sm:text-2xl">
+                    {phrase}
+                  </p>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
 
           <motion.p

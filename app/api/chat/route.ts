@@ -88,8 +88,15 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const chat = model.startChat({ history: geminiHistory });
-    const result = await chat.sendMessageStream(message);
+    let result: Awaited<ReturnType<ReturnType<typeof model.startChat>["sendMessageStream"]>>;
+
+    try {
+      const chat = model.startChat({ history: geminiHistory });
+      result = await chat.sendMessageStream(message);
+    } catch (error) {
+      console.error("Gemini stream setup failed", error);
+      throw error;
+    }
 
     return new Response(
       new ReadableStream({
@@ -139,11 +146,19 @@ export async function POST(req: NextRequest) {
 
     const message = error instanceof Error ? error.message : "";
     const isKeyError = message.includes("API key not valid") || message.includes("API_KEY_INVALID");
+    const isModelError = message.includes("not found for API version") || message.includes("not supported");
+
+    console.error("Chat API failed", {
+      message,
+      hasParsedBody: Boolean(parsedBody),
+    });
 
     return Response.json(
       {
         error: isKeyError
           ? "Gemini API key is not valid. Please update GEMINI_API_KEY in .env.local."
+          : isModelError
+            ? "Gemini model is not available for this API key. Please use a supported Gemini model."
           : "AI service could not respond right now. Please try again shortly.",
       },
       { status: 502 },
