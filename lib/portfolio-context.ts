@@ -67,7 +67,8 @@ Technical highlights: Custom Socket.io event architecture, room-based
   WebSocket server combination.
 This is Rajendra's strongest current project for backend + real-time systems.
 
-### 3. SocraticAI (IN DEVELOPMENT)
+### 3. SocraticAI (LIVE)
+URL: https://socratic-ai-tau.vercel.app/
 GitHub: https://github.com/rajendrabist07/socratic-ai
 Stack: Next.js, Node.js, Gemini AI, MongoDB, Tailwind CSS
 What it is: A chat-first AI learning assistant that applies the Socratic
@@ -77,8 +78,7 @@ What it is: A chat-first AI learning assistant that applies the Socratic
 Technical highlights: LLM integration via Gemini API, streaming chat
   responses, conversation history management, MongoDB for session logging,
   custom system prompt engineering.
-Status: Core architecture complete, actively building UI and refining
-  the Socratic questioning system.
+Status: Completed and deployed on Vercel.
 This project demonstrates Rajendra's AI product thinking — a significant
   signal for 2026 hiring.
 

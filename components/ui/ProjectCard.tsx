@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { ExternalLink, Github } from 'lucide-react'
 import StatusBadge from './StatusBadge'
 import SkillBadge from './SkillBadge'
 
@@ -7,6 +9,7 @@ export type ProjectCardProps = {
   status: 'Live' | 'In Development'
   description: string
   stack: string[]
+  imageUrl?: string
   liveUrl?: string
   githubUrl?: string
 }
@@ -26,13 +29,13 @@ const borderVariants = {
   hover: { borderColor: 'rgba(99, 102, 241, 0.3)' },
 }
 
-export default function ProjectCard({ title, status, description, stack, liveUrl, githubUrl }: ProjectCardProps) {
+export default function ProjectCard({ title, status, description, stack, imageUrl, liveUrl, githubUrl }: ProjectCardProps) {
   return (
     <motion.article
       variants={cardVariants}
       initial="rest"
       whileHover="hover"
-      className="surface-panel group flex h-full flex-col justify-between gap-6 rounded-3xl p-6 shadow-glow transition border border-white/10"
+      className="surface-panel group relative flex h-full flex-col justify-between gap-6 rounded-3xl p-6 shadow-glow transition border border-white/10"
     >
       <motion.div
         variants={borderVariants}
@@ -40,6 +43,18 @@ export default function ProjectCard({ title, status, description, stack, liveUrl
         style={{ borderWidth: '1px' }}
       />
       
+      {imageUrl ? (
+        <motion.div variants={hoverVariants} className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+          <Image
+            src={imageUrl}
+            alt={`${title} project preview`}
+            fill
+            sizes="(min-width: 1024px) 360px, 92vw"
+            className="object-cover"
+          />
+        </motion.div>
+      ) : null}
+
       <motion.div variants={hoverVariants} className="relative space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-xl font-semibold text-white">{title}</h3>
@@ -61,9 +76,9 @@ export default function ProjectCard({ title, status, description, stack, liveUrl
               target="_blank"
               rel="noreferrer"
               whileHover={{ scale: 1.05 }}
-              className="inline-flex rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white outline-none ring-indigo-500/20 transition hover:bg-indigo-500"
+              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white outline-none ring-indigo-500/20 transition hover:bg-indigo-500"
             >
-              Live Demo ↗
+              Live Demo <ExternalLink size={15} />
             </motion.a>
           ) : null}
           {githubUrl ? (
@@ -72,9 +87,9 @@ export default function ProjectCard({ title, status, description, stack, liveUrl
               target="_blank"
               rel="noreferrer"
               whileHover={{ scale: 1.05 }}
-              className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10"
             >
-              GitHub ↗
+              GitHub <Github size={15} />
             </motion.a>
           ) : null}
         </div>

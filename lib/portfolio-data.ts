@@ -6,6 +6,11 @@ export const PERSONAL = {
   email: 'rajendrabist396@gmail.com',
   github: 'https://github.com/rajendrabist07',
   linkedin: 'https://www.linkedin.com/in/rajendra-bist-169926370',
+  resumeUrl: '/Resume/resume.pdf',
+}
+
+export const FEATURED_LINKS = {
+  socraticAi: 'https://socratic-ai-tau.vercel.app/',
 }
 
 export const EDUCATION = [
@@ -56,9 +61,11 @@ export const PROJECTS = [
   },
   {
     title: 'SocraticAI',
-    status: 'In Development' as const,
-    description: 'AI-driven learning assistant using Socratic questioning to guide learners through deeper understanding.',
-    stack: ['Next.js', 'Gemini API', 'MongoDB'],
+    status: 'Live' as const,
+    description: 'Completed AI learning assistant that uses Socratic questioning, guided chat, and saved learning sessions to help learners reason through concepts.',
+    stack: ['Next.js', 'Gemini API', 'MongoDB', 'Vercel'],
+    imageUrl: '/images/socratic-ai.svg',
+    liveUrl: FEATURED_LINKS.socraticAi,
     githubUrl: 'https://github.com/rajendrabist07/socratic-ai.git',
   },
 ]

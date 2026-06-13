@@ -1,0 +1,51 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SocraticAI project preview</title>
+  <desc id="desc">A polished AI learning assistant interface with guided question bubbles and connected knowledge nodes.</desc>
+  <rect width="960" height="600" rx="36" fill="#080A12"/>
+  <path d="M0 0H960V600H0V0Z" fill="url(#bg)"/>
+  <path d="M88 78C88 61.4315 101.431 48 118 48H842C858.569 48 872 61.4315 872 78V522C872 538.569 858.569 552 842 552H118C101.431 552 88 538.569 88 522V78Z" fill="#10131F" stroke="#30385C" stroke-width="2"/>
+  <path d="M88 105H872" stroke="#30385C" stroke-width="2"/>
+  <circle cx="130" cy="77" r="9" fill="#F87171"/>
+  <circle cx="160" cy="77" r="9" fill="#FBBF24"/>
+  <circle cx="190" cy="77" r="9" fill="#34D399"/>
+  <rect x="235" y="63" width="284" height="28" rx="14" fill="#171B2C"/>
+  <path d="M259 77H491" stroke="#53608C" stroke-width="4" stroke-linecap="round"/>
+  <rect x="125" y="139" width="192" height="367" rx="24" fill="#0C1020" stroke="#242B4A"/>
+  <rect x="150" y="166" width="80" height="80" rx="24" fill="url(#mark)"/>
+  <path d="M179 198C179 186.954 187.954 178 199 178H202C213.046 178 222 186.954 222 198V201C222 212.046 213.046 221 202 221H199C187.954 221 179 212.046 179 201V198Z" fill="#F8FAFC" fill-opacity=".94"/>
+  <path d="M190 199H211M200.5 188.5V209.5" stroke="#4F46E5" stroke-width="6" stroke-linecap="round"/>
+  <text x="150" y="279" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">SocraticAI</text>
+  <text x="150" y="310" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">Guided learning assistant</text>
+  <rect x="150" y="346" width="132" height="34" rx="17" fill="#172554"/>
+  <text x="170" y="369" fill="#BFDBFE" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Live on Vercel</text>
+  <rect x="150" y="400" width="112" height="12" rx="6" fill="#334155"/>
+  <rect x="150" y="429" width="138" height="12" rx="6" fill="#334155"/>
+  <rect x="150" y="458" width="92" height="12" rx="6" fill="#334155"/>
+  <rect x="347" y="139" width="488" height="367" rx="24" fill="#0B1020" stroke="#242B4A"/>
+  <rect x="384" y="177" width="252" height="68" rx="22" fill="#172033"/>
+  <text x="414" y="206" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">What do you already know?</text>
+  <text x="414" y="229" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="15">Start with your current reasoning.</text>
+  <rect x="493" y="274" width="293" height="78" rx="24" fill="#312E81"/>
+  <text x="523" y="306" fill="#EEF2FF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Can you test that assumption?</text>
+  <text x="523" y="331" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="15">Use one example, then refine it.</text>
+  <rect x="384" y="383" width="309" height="68" rx="22" fill="#0F766E" fill-opacity=".48"/>
+  <text x="414" y="413" fill="#CCFBF1" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Now connect the concept.</text>
+  <text x="414" y="436" fill="#99F6E4" font-family="Inter, Arial, sans-serif" font-size="15">Build understanding through questions.</text>
+  <path d="M701 193C760 207 793 246 799 300" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 12"/>
+  <path d="M736 414C793 388 824 342 817 284" stroke="#A78BFA" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 12"/>
+  <circle cx="744" cy="198" r="13" fill="#38BDF8"/>
+  <circle cx="801" cy="300" r="13" fill="#A78BFA"/>
+  <circle cx="736" cy="414" r="13" fill="#34D399"/>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(709 107) rotate(135.73) scale(641.031 881.567)">
+      <stop stop-color="#2563EB" stop-opacity=".44"/>
+      <stop offset=".42" stop-color="#7C3AED" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#080A12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mark" x1="150" y1="166" x2="230" y2="246" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset=".52" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, MessageSquare } from "lucide-react";
+import { Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
 
@@ -103,6 +103,13 @@ export default function Hero() {
               className="inline-flex items-center justify-center rounded-2xl bg-[#6366f1] px-7 py-4 text-sm font-semibold text-white shadow-glow transition hover:bg-[#4f46e5]"
             >
               View My Work
+            </a>
+            <a
+              href={PERSONAL.resumeUrl}
+              download="Rajendra-Bist-Resume.pdf"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-indigo-300/30 bg-indigo-400/10 px-7 py-4 text-sm font-semibold text-indigo-100 transition hover:border-indigo-300/50 hover:bg-indigo-400/20"
+            >
+              <Download size={18} /> Download CV
             </a>
             <button
               type="button"

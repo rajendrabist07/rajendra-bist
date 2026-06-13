@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Github, Mail, Linkedin, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Github, Mail, Linkedin, MapPin, Send, CheckCircle2, AlertCircle, Download } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { PERSONAL } from '@/lib/portfolio-data'
 
@@ -153,6 +153,21 @@ export default function Contact() {
                 </a>
               )
             })}
+            <a
+              href={PERSONAL.resumeUrl}
+              download="Rajendra-Bist-Resume.pdf"
+              className="surface-panel group block rounded-3xl p-6 transition hover:border-indigo-400/40 hover:bg-white/[0.06]"
+            >
+              <div className="flex items-center gap-4">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-300 transition group-hover:bg-emerald-500 group-hover:text-white">
+                  <Download size={20} />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm text-slate-500">Resume</p>
+                  <p className="mt-1 break-words font-semibold text-white">Download Resume</p>
+                </div>
+              </div>
+            </a>
             <a
               href="#home"
               className="inline-flex w-full items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/[0.08]"
