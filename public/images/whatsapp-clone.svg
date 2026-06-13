@@ -1,0 +1,44 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">WhatsApp Clone project preview</title>
+  <desc id="desc">A realtime messaging interface with chat list, active conversation, and socket connection indicator.</desc>
+  <rect width="960" height="600" rx="36" fill="#07130F"/>
+  <path d="M0 0H960V600H0V0Z" fill="url(#bg)"/>
+  <rect x="92" y="58" width="776" height="484" rx="34" fill="#0D1714" stroke="#24443A" stroke-width="2"/>
+  <rect x="122" y="92" width="234" height="416" rx="26" fill="#0A120F" stroke="#203B33"/>
+  <rect x="384" y="92" width="454" height="416" rx="26" fill="#101A17" stroke="#203B33"/>
+  <circle cx="166" cy="140" r="30" fill="#22C55E"/>
+  <text x="154" y="151" fill="#052E16" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900">R</text>
+  <text x="214" y="132" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800">Realtime Chat</text>
+  <text x="214" y="159" fill="#86EFAC" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Socket connected</text>
+  <rect x="148" y="206" width="182" height="64" rx="20" fill="#13261F"/>
+  <circle cx="178" cy="238" r="16" fill="#34D399"/>
+  <rect x="208" y="225" width="88" height="9" rx="4.5" fill="#D1FAE5"/>
+  <rect x="208" y="246" width="58" height="8" rx="4" fill="#64748B"/>
+  <rect x="148" y="294" width="182" height="64" rx="20" fill="#0F1B18"/>
+  <circle cx="178" cy="326" r="16" fill="#60A5FA"/>
+  <rect x="208" y="313" width="94" height="9" rx="4.5" fill="#CBD5E1"/>
+  <rect x="208" y="334" width="70" height="8" rx="4" fill="#64748B"/>
+  <rect x="148" y="382" width="182" height="64" rx="20" fill="#0F1B18"/>
+  <circle cx="178" cy="414" r="16" fill="#A78BFA"/>
+  <rect x="208" y="401" width="76" height="9" rx="4.5" fill="#CBD5E1"/>
+  <rect x="208" y="422" width="96" height="8" rx="4" fill="#64748B"/>
+  <rect x="422" y="124" width="378" height="54" rx="18" fill="#0A120F"/>
+  <circle cx="452" cy="151" r="15" fill="#22C55E"/>
+  <text x="482" y="158" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">WhatsApp Clone</text>
+  <rect x="456" y="224" width="248" height="56" rx="20" fill="#13261F"/>
+  <text x="482" y="258" fill="#DCFCE7" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Message delivered instantly.</text>
+  <rect x="542" y="310" width="258" height="58" rx="20" fill="#14532D"/>
+  <text x="568" y="345" fill="#ECFDF5" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Typing status is live now.</text>
+  <rect x="456" y="399" width="230" height="56" rx="20" fill="#13261F"/>
+  <text x="482" y="433" fill="#DCFCE7" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Rooms keep chats isolated.</text>
+  <rect x="422" y="472" width="378" height="12" rx="6" fill="#1F332D"/>
+  <circle cx="782" cy="151" r="9" fill="#22C55E"/>
+  <path d="M782 151C753 210 741 256 751 309C760 356 737 393 696 427" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 12"/>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(753 76) rotate(138.331) scale(699.429 832.367)">
+      <stop stop-color="#22C55E" stop-opacity=".35"/>
+      <stop offset=".48" stop-color="#06B6D4" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#07130F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -61,11 +61,14 @@ export default function Hero() {
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.15 }}
           >
-            <div className="mt-8 h-[72px] overflow-hidden sm:h-[40px]">
+            <div className="hero-role-window mt-8 h-[76px] overflow-hidden sm:h-[42px]">
               <motion.div
-                animate={{ y: ["0%", "-33.333%", "-66.666%", "0%"] }}
+                animate={{
+                  y: ["0%", "-33.333%", "-66.666%", "0%"],
+                  filter: ["blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)"],
+                }}
                 transition={{
-                  duration: 10,
+                  duration: 11,
                   repeat: Infinity,
                   ease: "easeInOut",
                   times: [0, 0.31, 0.64, 1],
@@ -73,7 +76,7 @@ export default function Hero() {
                 className="space-y-6 sm:space-y-2"
               >
                 {titlePhrases.map((phrase) => (
-                  <p key={phrase} className="text-xl font-semibold text-indigo-200 sm:text-2xl">
+                  <p key={phrase} className="hero-role-text text-xl font-semibold sm:text-2xl">
                     {phrase}
                   </p>
                 ))}

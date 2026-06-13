@@ -109,6 +109,18 @@ body {
   }
 }
 
+@keyframes role-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Utility classes */
 .text-gradient {
   background: var(--gradient);
@@ -126,6 +138,22 @@ body {
   background-clip: text;
   animation: gradient-shift 7s ease infinite;
   filter: drop-shadow(0 18px 42px rgba(99, 102, 241, 0.18));
+}
+
+.hero-role-window {
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+}
+
+.hero-role-text {
+  width: fit-content;
+  max-width: 100%;
+  background: linear-gradient(110deg, #c7d2fe 0%, #f8fafc 28%, #38bdf8 54%, #a7f3d0 78%, #c7d2fe 100%);
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: role-sheen 5.4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 28px rgba(56, 189, 248, 0.12));
 }
 
 .surface-panel {

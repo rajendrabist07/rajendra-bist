@@ -50,14 +50,18 @@ export const PROJECTS = [
     status: 'Live' as const,
     description: 'Task management app with clean CRUD operations, responsive state handling, and polished UI execution.',
     stack: ['Next.js', 'Tailwind CSS', 'Vercel'],
+    imageUrl: '/images/todo-app.svg',
     liveUrl: 'https://todo-app-azure-five-70.vercel.app/',
+    githubUrl: 'https://github.com/rajendrabist07/todo-app-frontend',
   },
   {
     title: 'WhatsApp Clone',
     status: 'Live' as const,
     description: 'Real-time messaging experience built with WebSocket integration, multi-user sessions, and instant delivery.',
     stack: ['React', 'Node.js', 'Socket.io', 'Tailwind CSS'],
+    imageUrl: '/images/whatsapp-clone.svg',
     liveUrl: 'https://whats-app-clone-client-liart.vercel.app/',
+    githubUrl: 'https://github.com/rajendrabist07/whats-app-clone-client-',
   },
   {
     title: 'SocraticAI',
