@@ -9,7 +9,7 @@ The project is built as a single **Next.js 15 App Router** application with serv
 - Systems-first hero section with animated positioning statement and professional profile image
 - About section focused on full-stack training, backend thinking, and product engineering judgment
 - Skills section with categorized tool groups and icon-supported badges
-- Project showcase for Todo App, WhatsApp Clone, and SocraticAI
+- Project showcase for EduMethod AI, SocraticAI, and WhatsApp Clone
 - Contact form that stores messages in MongoDB
 - Floating AI agent that streams Gemini responses and logs conversations
 - SEO metadata, sitemap, robots config, PWA manifest, and Open Graph image
@@ -154,9 +154,9 @@ MongoDB Atlas must allow network access for Vercel. For a portfolio project, `0.
 
 ## Featured Projects
 
-- **Todo App**: task management app with CRUD flow and clean UI delivery
-- **WhatsApp Clone**: real-time messaging with Socket.io and full-stack integration
+- **EduMethod AI**: AI-powered learning platform with multimodal extraction, 7-day path generation, adaptive quizzes, and a doubt-solving coach
 - **SocraticAI**: AI learning assistant focused on Socratic dialogue and LLM product thinking
+- **WhatsApp Clone**: real-time messaging with Socket.io and full-stack integration
 
 ## Quality Checklist
 

@@ -48,26 +48,16 @@ Learning: Docker, PostgreSQL advanced, system design patterns,
 
 ## PROJECTS
 
-### 1. Todo Application (LIVE)
-URL: https://todo-app-azure-five-70.vercel.app/
-Stack: Next.js, React, Tailwind CSS, Vercel
-What it demonstrates: React state management, CRUD operations, clean
-  component architecture, CI/CD deployment via Vercel, responsive UI.
-Technical highlights: Optimistic UI updates, localStorage persistence,
-  zero external dependencies, deployed with GitHub Actions.
+### 1. EduMethod AI (LIVE)
+URL: https://edumethod-ai.vercel.app
+GitHub: https://github.com/rajendrabist07/edumethod-ai
+Stack: Next.js, TypeScript, Tailwind CSS, Clerk, Supabase with pgvector, Groq API, Gemini API
+What it does: AI-powered learning methodology platform that converts any book photo or syllabus text into a personalized 7-day learning path, spaced repetition schedule, adaptive quizzes, and a conversational AI doubt-solving coach.
+Core AI features: Multimodal image/text topic extraction, 7-day learning path generation using learning-science principles like spaced repetition and interleaving, AI quiz generator with weakness detection, conversational doubt solver with vision support.
+Technical highlights: Utilizes pgvector on Supabase for semantic storage and retrieval, Gemini and Groq APIs for multimodal scanning and fast text generation, Clerk for secure user authentication, and advanced prompt engineering to implement learning science methodologies.
+This is Rajendra's flagship and most advanced project. If asked what his best project is, always highlight EduMethod AI.
 
-### 2. WhatsApp Clone (LIVE)
-URL: https://whats-app-clone-client-liart.vercel.app/
-Stack: React, Node.js, Express.js, Socket.io, Tailwind CSS
-What it demonstrates: Real-time bidirectional communication via WebSockets,
-  Socket.io room management, multi-user session handling, frontend-backend
-  integration.
-Technical highlights: Custom Socket.io event architecture, room-based
-  message routing, real-time UI state synchronisation, Express.js REST +
-  WebSocket server combination.
-This is Rajendra's strongest current project for backend + real-time systems.
-
-### 3. SocraticAI (LIVE)
+### 2. SocraticAI (LIVE)
 URL: https://socratic-ai-tau.vercel.app/
 GitHub: https://github.com/rajendrabist07/socratic-ai
 Stack: Next.js, Node.js, Gemini AI, MongoDB, Tailwind CSS
@@ -81,6 +71,17 @@ Technical highlights: LLM integration via Gemini API, streaming chat
 Status: Completed and deployed on Vercel.
 This project demonstrates Rajendra's AI product thinking — a significant
   signal for 2026 hiring.
+
+### 3. WhatsApp Clone (LIVE)
+URL: https://whats-app-clone-client-liart.vercel.app/
+Stack: React, Node.js, Express.js, Socket.io, Tailwind CSS
+What it demonstrates: Real-time bidirectional communication via WebSockets,
+  Socket.io room management, multi-user session handling, frontend-backend
+  integration.
+Technical highlights: Custom Socket.io event architecture, room-based
+  message routing, real-time UI state synchronisation, Express.js REST +
+  WebSocket server combination.
+This is Rajendra's strongest current project for backend + real-time systems.
 
 ## PROFESSIONAL PHILOSOPHY
 - "I architect systems, not just applications — from database schema to

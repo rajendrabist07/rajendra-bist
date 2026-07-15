@@ -1,0 +1,83 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">EduMethod AI project preview</title>
+  <desc id="desc">AI learning methodology platform with 7-day personalized path UI and chat-based doubt solving coach.</desc>
+  <rect width="960" height="600" rx="36" fill="#090D1A"/>
+  <path d="M0 0H960V600H0V0Z" fill="url(#bg)"/>
+  <path d="M88 78C88 61.4315 101.431 48 118 48H842C858.569 48 872 61.4315 872 78V522C872 538.569 858.569 552 842 552H118C101.431 552 88 538.569 88 522V78Z" fill="#0F1322" stroke="#2D375B" stroke-width="2"/>
+  <path d="M88 105H872" stroke="#2D375B" stroke-width="2"/>
+  <circle cx="130" cy="77" r="9" fill="#FF5F56"/>
+  <circle cx="160" cy="77" r="9" fill="#FFBD2E"/>
+  <circle cx="190" cy="77" r="9" fill="#27C93F"/>
+  <rect x="235" y="63" width="284" height="28" rx="14" fill="#181D33"/>
+  <path d="M259 77H491" stroke="#5F6D9F" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Left Column: 7-Day Plan (width: 320) -->
+  <rect x="122" y="139" width="310" height="367" rx="24" fill="#0A0E1C" stroke="#222B4B"/>
+  <text x="146" y="180" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">7-Day Study Plan</text>
+  
+  <!-- Day 1: Done -->
+  <rect x="146" y="210" width="262" height="66" rx="18" fill="#143A2C" fill-opacity="0.3" stroke="#10B981" stroke-width="1.5"/>
+  <circle cx="176" cy="243" r="14" fill="#10B981"/>
+  <path d="M171 243L174 246L181 239" stroke="#052E16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="206" y="238" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Day 1: Topic Extraction</text>
+  <text x="206" y="254" fill="#6EE7B7" font-family="Inter, Arial, sans-serif" font-size="11">Multimodal photo scan complete</text>
+
+  <!-- Day 2: In Progress -->
+  <rect x="146" y="290" width="262" height="66" rx="18" fill="#1E2A4F" fill-opacity="0.4" stroke="#6366F1" stroke-width="1.5"/>
+  <circle cx="176" cy="323" r="14" fill="#6366F1"/>
+  <circle cx="176" cy="323" r="6" fill="#F8FAFC"/>
+  <text x="206" y="318" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Day 2: Core Concepts</text>
+  <text x="206" y="334" fill="#A5B4FC" font-family="Inter, Arial, sans-serif" font-size="11">7-Day Path Active • quiz ready</text>
+
+  <!-- Day 3: Scheduled -->
+  <rect x="146" y="370" width="262" height="66" rx="18" fill="#131625" stroke="#252C48" stroke-width="1.5"/>
+  <circle cx="176" cy="403" r="14" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+  <text x="206" y="398" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Day 3: Spaced Repetition</text>
+  <text x="206" y="414" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="11">Scheduled for tomorrow</text>
+  
+  <rect x="146" y="452" width="262" height="12" rx="6" fill="#1E293B"/>
+  <rect x="146" y="452" width="160" height="12" rx="6" fill="url(#progressGrad)"/>
+
+  <!-- Right Column: AI Doubt Coach Chat (width: 370) -->
+  <rect x="456" y="139" width="380" height="367" rx="24" fill="#0A0E1C" stroke="#222B4B"/>
+  <text x="480" y="180" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">AI Doubt Coach</text>
+  <circle cx="796" cy="174" r="8" fill="#10B981"/>
+  
+  <!-- Message from Coach -->
+  <rect x="480" y="210" width="290" height="74" rx="20" fill="#1F243A" stroke="#333A5E" stroke-width="1"/>
+  <text x="500" y="235" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">I scanned your syllabus scan. I&apos;ve</text>
+  <text x="500" y="252" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">generated a 7-day plan on memory retrieval.</text>
+  <text x="500" y="269" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="11">EduMethod AI Coach • 2m ago</text>
+
+  <!-- Message from User -->
+  <rect x="526" y="298" width="284" height="58" rx="20" fill="#312E81" stroke="#4F46E5" stroke-width="1"/>
+  <text x="546" y="323" fill="#EEF2FF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Awesome! Can we test my weakness</text>
+  <text x="546" y="340" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="11">You • 1m ago</text>
+
+  <!-- Message from Coach 2 -->
+  <rect x="480" y="370" width="310" height="74" rx="20" fill="#1F243A" stroke="#333A5E" stroke-width="1"/>
+  <text x="500" y="395" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Absolutely. Starting adaptive quiz on</text>
+  <text x="500" y="412" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Spaced Repetition &amp; Interleaving...</text>
+  <text x="500" y="429" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="11">EduMethod AI Coach • Just now</text>
+
+  <!-- Input bar -->
+  <rect x="480" y="458" width="330" height="34" rx="17" fill="#131625" stroke="#252C48"/>
+  <circle cx="497" cy="475" r="9" fill="#A855F7"/>
+  <text x="515" y="480" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="12">Ask your doubt...</text>
+
+  <!-- Connected graph vector node decoration in background -->
+  <path d="M432 290C440 280 445 285 456 295" stroke="#A855F7" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/>
+  <path d="M432 323C442 323 446 323 456 323" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/>
+
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(750 90) rotate(138.141) scale(750 900)">
+      <stop stop-color="#4F46E5" stop-opacity="0.38"/>
+      <stop offset="0.45" stop-color="#A855F7" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#090D1A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="progressGrad" x1="146" y1="452" x2="306" y2="452" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+</svg>
