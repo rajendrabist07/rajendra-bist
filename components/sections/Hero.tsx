@@ -72,7 +72,7 @@ export default function Hero() {
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.15 }}
           >
-            <div className="hero-role-window mt-8 relative h-[76px] sm:h-[42px] overflow-hidden flex items-center justify-center md:justify-start">
+            <div className="mt-8 relative h-[96px] sm:h-[72px] overflow-hidden flex items-center justify-center md:justify-start">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={index}
@@ -80,7 +80,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
                   transition={{ duration: 0.45, ease: "easeInOut" }}
-                  className="hero-role-text text-xl font-semibold sm:text-2xl absolute w-full text-center md:text-left"
+                  className="hero-role-text text-xl font-semibold sm:text-2xl absolute inset-x-0 top-1/2 -translate-y-1/2 text-center md:text-left"
                 >
                   {titlePhrases[index]}
                 </motion.p>

@@ -70,15 +70,15 @@ export default function About() {
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                 <GraduationCap className="text-indigo-300" size={24} />
-                <p className="mt-4 text-sm text-slate-500">Training</p>
+                <p className="mt-4 text-sm text-slate-500">Technical Credentials</p>
                 <p className="mt-1 font-semibold text-white">Full-Stack Web Development</p>
                 <p className="mt-1 text-sm text-slate-400">Vcare Technical Institute</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                 <Rocket className="text-indigo-300" size={24} />
-                <p className="mt-4 text-sm text-slate-500">Current Focus</p>
-                <p className="mt-1 font-semibold text-white">SocraticAI and backend architecture</p>
-                <p className="mt-1 text-sm text-slate-400">LLM UX, streaming, MongoDB, APIs</p>
+                <p className="mt-4 text-sm text-slate-500">Production Systems</p>
+                <p className="mt-1 font-semibold text-white">AI-Integrated Architectures</p>
+                <p className="mt-1 text-sm text-slate-400">SocraticAI, streaming pipelines, MongoDB clustering, APIs</p>
               </div>
             </div>
           </motion.div>
