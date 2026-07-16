@@ -7,22 +7,22 @@ import SectionHeader from "@/components/ui/SectionHeader";
 const steps = [
   {
     title: "Understand",
-    description: "Clarify the product goal, user flow, and technical constraints before writing code.",
+    description: "Analyze constraints, define state flows, and establish core data-handling requirements before writing code.",
     icon: Search,
   },
   {
     title: "Design",
-    description: "Plan data models, API boundaries, UI states, and deployment needs with maintainability in mind.",
+    description: "Architect database schemas, detail JSON API contracts, and draft resilient failure-recovery states.",
     icon: Database,
   },
   {
     title: "Build",
-    description: "Ship focused frontend and backend slices, keeping components reusable and APIs predictable.",
+    description: "Implement clean vertical slices, ensuring component modularity on the frontend and strict data validation on the backend.",
     icon: Code2,
   },
   {
     title: "Deploy",
-    description: "Test the build, configure environment variables, and deploy through Vercel with clean documentation.",
+    description: "Validate production builds, secure environment variables, and release continuously via automated Vercel pipelines.",
     icon: Rocket,
   },
 ];

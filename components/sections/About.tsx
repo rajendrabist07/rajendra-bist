@@ -27,22 +27,22 @@ const itemVariants = {
 const strengths = [
   {
     title: "Systems-first mindset",
-    description: "I think through data flow, API boundaries, failure cases, and maintainability before polishing the UI.",
+    description: "Mapping database schemas, validation requirements, and failure modes prior to frontend execution.",
     icon: Network,
   },
   {
     title: "Full-stack execution",
-    description: "Comfortable moving from responsive interfaces to Node.js APIs, MongoDB schemas, and deployment workflows.",
+    description: "Bridging complex user interface state with structured, type-safe API communication patterns.",
     icon: Blocks,
   },
   {
     title: "Backend depth",
-    description: "Focused on authentication, database modelling, REST contracts, real-time systems, and production-ready foundations.",
+    description: "Architecting secure authentications, real-time WebSockets, and predictable REST API contracts.",
     icon: Database,
   },
   {
-    title: "AI product thinking",
-    description: "Building LLM-powered experiences where prompts, context, streaming UX, and persistence work together.",
+    title: "AI integration rigor",
+    description: "Applying validation guardrails and structured generation patterns to yield deterministic LLM outputs.",
     icon: BrainCircuit,
   },
 ];
@@ -62,15 +62,10 @@ export default function About() {
         >
           <motion.div variants={itemVariants} className="surface-panel rounded-3xl p-8 shadow-glow">
             <p className="text-xl leading-9 text-slate-200">
-              I&apos;m Rajendra Bist, a full-stack developer trained in Full-Stack Web Development at
-              Vcare Technical Institute. I build with a systems-first approach: clear data models,
-              predictable APIs, resilient backend logic, and interfaces that feel fast and focused.
+              Software achieves its purpose when the architecture behind it is as deliberate as the user experience. I design systems from the data layer up—planning validation schemas, API boundaries, and real-time state before laying down a single line of layout.
             </p>
             <p className="mt-6 text-base leading-8 text-slate-400">
-              My strongest direction is backend-heavy full-stack work: Node.js, MongoDB, API architecture,
-              real-time communication, and AI-integrated products. I care about the engineering behind the
-              screen as much as the pixels on it, because useful products need both good experience and
-              solid foundations.
+              My core competency lies in backend-intensive full-stack engineering. By combining Node.js, PostgreSQL, and MongoDB with LLM integration pipelines, I build applications that process complex structured data and synchronize real-time updates. Clean judgment means balancing efficient data delivery with fast, responsive frontend states.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">

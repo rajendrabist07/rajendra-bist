@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
@@ -13,12 +14,22 @@ const heroVariants = {
 const itemTransition = { duration: 0.6 };
 
 const titlePhrases = [
-  "Systems-First Full-Stack Developer",
-  "Web Architecture, Performance & Scale",
-  "Backend Foundations for Real Products",
+  "Designing robust systems before writing UI code",
+  "Architecting clean APIs, auth contracts, and database schemas",
+  "Integrating LLMs with runtime validation and deterministic flow",
+  "Building responsive interfaces backed by solid backend foundations",
 ];
 
 export default function Hero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % titlePhrases.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   const openChat = () => {
     if (typeof window !== "undefined") {
       window.dispatchEvent(new CustomEvent("open-chat-widget"));
@@ -61,26 +72,19 @@ export default function Hero() {
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.15 }}
           >
-            <div className="hero-role-window mt-8 h-[76px] overflow-hidden sm:h-[42px]">
-              <motion.div
-                animate={{
-                  y: ["0%", "-33.333%", "-66.666%", "0%"],
-                  filter: ["blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)"],
-                }}
-                transition={{
-                  duration: 11,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  times: [0, 0.31, 0.64, 1],
-                }}
-                className="space-y-6 sm:space-y-2"
-              >
-                {titlePhrases.map((phrase) => (
-                  <p key={phrase} className="hero-role-text text-xl font-semibold sm:text-2xl">
-                    {phrase}
-                  </p>
-                ))}
-              </motion.div>
+            <div className="hero-role-window mt-8 relative h-[76px] sm:h-[42px] overflow-hidden flex items-center justify-center md:justify-start">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={index}
+                  initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
+                  transition={{ duration: 0.45, ease: "easeInOut" }}
+                  className="hero-role-text text-xl font-semibold sm:text-2xl absolute w-full text-center md:text-left"
+                >
+                  {titlePhrases[index]}
+                </motion.p>
+              </AnimatePresence>
             </div>
           </motion.div>
 

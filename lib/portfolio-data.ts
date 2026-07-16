@@ -28,19 +28,19 @@ export const SKILLS = [
   },
   {
     category: 'Backend',
-    items: ['Node.js', 'Express.js', 'REST APIs', 'Socket.io'],
+    items: ['Node.js', 'Express.js', 'REST APIs', 'Socket.io', 'Zod'],
   },
   {
     category: 'Database',
-    items: ['MongoDB', 'Mongoose', 'PostgreSQL'],
+    items: ['MongoDB', 'Mongoose', 'PostgreSQL', 'Supabase'],
   },
   {
     category: 'Tools & DevOps',
-    items: ['Git', 'GitHub', 'Vercel', 'Railway', 'Docker'],
+    items: ['Git', 'GitHub', 'Vercel', 'Railway', 'Docker', 'Clerk'],
   },
   {
     category: 'AI & APIs',
-    items: ['Gemini API', 'Vercel AI SDK', 'LangChain.js'],
+    items: ['Gemini API', 'Groq API', 'Vercel AI SDK', 'LangChain.js'],
   },
 ]
 
