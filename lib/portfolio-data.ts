@@ -22,7 +22,7 @@ export const EDUCATION = [
   {
     school: 'Vcare Technical Institute',
     degree: 'Full-Stack Web Development Training',
-    timeframe: 'Completed',
+    timeframe: 'Completed 2025',
   },
 ]
 

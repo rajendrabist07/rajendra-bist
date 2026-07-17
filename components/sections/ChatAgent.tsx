@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Bot, Send, Sparkles, X, RotateCcw, User, Check, Terminal } from 'lucide-react'
+import { Bot, Send, Sparkles, X, RotateCcw, User, Check, Terminal, Copy, Volume2, ThumbsUp, ThumbsDown, RotateCw } from 'lucide-react'
 
 type Message = {
   id: string
@@ -44,7 +44,7 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1 rounded-md bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition hover:bg-white/[0.08] hover:text-white active:scale-95"
+          className="inline-flex items-center gap-1 rounded-md bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition hover:bg-white/[0.08] hover:text-white active:scale-95 cursor-pointer"
         >
           {copied ? (
             <>
@@ -188,6 +188,12 @@ export default function ChatAgent() {
   const [isLoading, setIsLoading] = useState(false)
   const [sessionId, setSessionId] = useState('')
   const [error, setError] = useState<string | null>(null)
+  
+  // Interactive Message Actions State
+  const [copiedMsgId, setCopiedMsgId] = useState<string | null>(null)
+  const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null)
+  const [ratings, setRatings] = useState<Record<string, 'like' | 'dislike' | null>>({})
+  
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -208,11 +214,21 @@ export default function ChatAgent() {
     }
   }, [messages, isOpen])
 
-  const sendMessage = async (content: string) => {
+  // Stop speaking when widget is closed or on unmount
+  useEffect(() => {
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.speechSynthesis?.cancel()
+      }
+    }
+  }, [isOpen])
+
+  const sendMessage = async (content: string, historyOverride?: Message[]) => {
     if (!content.trim() || isLoading) return
 
     setError(null)
     const trimmed = content.trim()
+    
     const userMessage: Message = {
       id: window.crypto?.randomUUID?.() || `${Date.now()}-user`,
       role: 'user',
@@ -227,7 +243,20 @@ export default function ChatAgent() {
       timestamp: new Date(),
       isStreaming: true,
     }
-    const history = messages
+
+    let updatedMessages: Message[]
+    let historyMessagesForApi: Message[]
+
+    if (historyOverride) {
+      // Regenerating: historyOverride has messages up to the user message
+      updatedMessages = [...historyOverride, assistantMessage]
+      historyMessagesForApi = historyOverride.slice(0, -1)
+    } else {
+      updatedMessages = [...messages, userMessage, assistantMessage]
+      historyMessagesForApi = messages
+    }
+
+    const history = historyMessagesForApi
       .filter(item => item.content.trim())
       .slice(-20)
       .map(item => ({
@@ -235,7 +264,7 @@ export default function ChatAgent() {
         content: item.content,
       }))
 
-    setMessages(prev => [...prev, userMessage, assistantMessage])
+    setMessages(updatedMessages)
     setInputValue('')
     setIsLoading(true)
 
@@ -282,6 +311,10 @@ export default function ChatAgent() {
   }
 
   const handleClearHistory = () => {
+    if (typeof window !== 'undefined') {
+      window.speechSynthesis?.cancel()
+    }
+    setSpeakingMsgId(null)
     setMessages([])
     setError(null)
     setSessionId(window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`)
@@ -290,6 +323,74 @@ export default function ChatAgent() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     sendMessage(inputValue)
+  }
+
+  // Action Bar Handlers
+  const handleCopyMessage = async (msgId: string, text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedMsgId(msgId)
+      setTimeout(() => setCopiedMsgId(null), 2000)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+  }
+
+  const handleReadAloud = (msgId: string, text: string) => {
+    if (typeof window === 'undefined') return
+
+    if (speakingMsgId === msgId) {
+      window.speechSynthesis.cancel()
+      setSpeakingMsgId(null)
+      return
+    }
+
+    window.speechSynthesis.cancel()
+
+    // Strip code blocks and markdown symbols before reading to sound professional
+    const cleanText = text
+      .replace(/```[\s\S]*?```/g, '') // strip code blocks
+      .replace(/###/g, '') // strip headers
+      .replace(/\*\*/g, '') // strip bold markers
+      .replace(/`/g, '') // strip inline code
+      .replace(/[-*]\s+/g, '') // strip lists
+      .trim()
+
+    const utterance = new SpeechSynthesisUtterance(cleanText)
+    utterance.onend = () => setSpeakingMsgId(null)
+    utterance.onerror = () => setSpeakingMsgId(null)
+
+    setSpeakingMsgId(msgId)
+    window.speechSynthesis.speak(utterance)
+  }
+
+  const handleToggleRating = (msgId: string, type: 'like' | 'dislike') => {
+    setRatings(prev => {
+      const current = prev[msgId]
+      return {
+        ...prev,
+        [msgId]: current === type ? null : type,
+      }
+    })
+  }
+
+  const handleRedo = async (assistantMsgId: string) => {
+    if (isLoading) return
+    const msgIndex = messages.findIndex(m => m.id === assistantMsgId)
+    if (msgIndex === -1) return
+
+    // Find the user message directly before this assistant response
+    const userMsg = messages[msgIndex - 1]
+    if (!userMsg || userMsg.role !== 'user') return
+
+    if (speakingMsgId === assistantMsgId) {
+      window.speechSynthesis?.cancel()
+      setSpeakingMsgId(null)
+    }
+
+    // Capture history up to the user message and run send
+    const historyOverride = messages.slice(0, msgIndex)
+    await sendMessage(userMsg.content, historyOverride)
   }
 
   return (
@@ -337,7 +438,7 @@ export default function ChatAgent() {
                   <button
                     type="button"
                     onClick={handleClearHistory}
-                    className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white"
+                    className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white cursor-pointer"
                     title="Reset Conversation"
                   >
                     <RotateCcw size={16} />
@@ -346,7 +447,7 @@ export default function ChatAgent() {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white"
+                  className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white cursor-pointer"
                   aria-label="Close chat"
                 >
                   <X size={18} />
@@ -393,7 +494,7 @@ export default function ChatAgent() {
                           key={question}
                           type="button"
                           onClick={() => sendMessage(question)}
-                          className="w-full text-left rounded-xl border border-white/[0.04] bg-white/[0.02] px-4 py-2.5 text-xs text-slate-300 transition duration-200 hover:border-indigo-500/30 hover:bg-white/[0.06] hover:text-white"
+                          className="w-full text-left rounded-xl border border-white/[0.04] bg-white/[0.02] px-4 py-2.5 text-xs text-slate-300 transition duration-200 hover:border-indigo-500/30 hover:bg-white/[0.06] hover:text-white cursor-pointer"
                         >
                           {question}
                         </button>
@@ -413,25 +514,93 @@ export default function ChatAgent() {
                       </span>
                     )}
 
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-md ${
-                        message.role === 'user'
-                          ? 'bg-gradient-to-br from-indigo-600 to-indigo-700 text-white rounded-tr-none'
-                          : 'bg-white/[0.03] border border-white/[0.05] text-slate-200 rounded-tl-none'
-                      }`}
-                    >
-                      {message.role === 'user' ? (
-                        <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
-                      ) : (
-                        <MarkdownRenderer content={message.content} />
-                      )}
-                      
-                      {/* Streaming cursor effect */}
-                      {message.role === 'assistant' && message.isStreaming && !message.content && (
-                        <div className="flex items-center gap-1 py-1">
-                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '0ms' }} />
-                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '150ms' }} />
-                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '300ms' }} />
+                    <div className="flex flex-col gap-1.5 max-w-[85%]">
+                      <div
+                        className={`rounded-2xl px-4 py-3 shadow-md ${
+                          message.role === 'user'
+                            ? 'bg-gradient-to-br from-indigo-600 to-indigo-700 text-white rounded-tr-none'
+                            : 'bg-white/[0.03] border border-white/[0.05] text-slate-200 rounded-tl-none'
+                        }`}
+                      >
+                        {message.role === 'user' ? (
+                          <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
+                        ) : (
+                          <MarkdownRenderer content={message.content} />
+                        )}
+                        
+                        {/* Streaming cursor effect */}
+                        {message.role === 'assistant' && message.isStreaming && !message.content && (
+                          <div className="flex items-center gap-1 py-1">
+                            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '0ms' }} />
+                            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '150ms' }} />
+                            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '300ms' }} />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Interactive Actions Bar */}
+                      {message.role === 'assistant' && !message.isStreaming && message.content && (
+                        <div className="flex items-center gap-4 pl-1 text-slate-500">
+                          {/* Copy Action */}
+                          <button
+                            type="button"
+                            onClick={() => handleCopyMessage(message.id, message.content)}
+                            className="transition hover:text-slate-300 active:scale-95 cursor-pointer"
+                            title="Copy response"
+                          >
+                            {copiedMsgId === message.id ? (
+                              <Check size={13} className="text-emerald-400" />
+                            ) : (
+                              <Copy size={13} />
+                            )}
+                          </button>
+
+                          {/* Read Aloud Action */}
+                          <button
+                            type="button"
+                            onClick={() => handleReadAloud(message.id, message.content)}
+                            className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
+                              speakingMsgId === message.id ? 'text-indigo-400 animate-pulse' : ''
+                            }`}
+                            title={speakingMsgId === message.id ? "Stop reading" : "Read aloud"}
+                          >
+                            <Volume2 size={13} />
+                          </button>
+
+                          {/* Like Action */}
+                          <button
+                            type="button"
+                            onClick={() => handleToggleRating(message.id, 'like')}
+                            className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
+                              ratings[message.id] === 'like' ? 'text-emerald-400 fill-emerald-400/20' : ''
+                            }`}
+                            title="Like"
+                          >
+                            <ThumbsUp size={13} />
+                          </button>
+
+                          {/* Dislike Action */}
+                          <button
+                            type="button"
+                            onClick={() => handleToggleRating(message.id, 'dislike')}
+                            className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
+                              ratings[message.id] === 'dislike' ? 'text-rose-400 fill-rose-400/20' : ''
+                            }`}
+                            title="Dislike"
+                          >
+                            <ThumbsDown size={13} />
+                          </button>
+
+                          {/* Redo Action */}
+                          <button
+                            type="button"
+                            onClick={() => handleRedo(message.id)}
+                            className="transition hover:text-slate-300 active:scale-95 cursor-pointer"
+                            title="Regenerate response"
+                            disabled={isLoading}
+                          >
+                            <RotateCw size={13} />
+                          </button>
                         </div>
                       )}
                     </div>
