@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Bot, Send, Sparkles, X } from 'lucide-react'
+import { Bot, Send, Sparkles, X, RotateCcw, User, Check, Terminal } from 'lucide-react'
 
 type Message = {
   id: string
@@ -19,6 +19,167 @@ const QUICK_QUESTIONS = [
   'Tell me about SocraticAI',
   "What's his background?",
 ]
+
+// Custom CodeBlock Component with Copy Functionality
+function CodeBlock({ language, code }: { language: string; code: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code.trim())
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy text: ', err)
+    }
+  }
+
+  return (
+    <div className="my-4 overflow-hidden rounded-xl border border-white/[0.08] bg-black/40 font-mono text-[13px] shadow-inner">
+      <div className="flex items-center justify-between bg-white/[0.02] px-4 py-2 text-xs text-slate-400 border-b border-white/[0.06]">
+        <div className="flex items-center gap-1.5 font-medium text-slate-300">
+          <Terminal size={13} className="text-indigo-400" />
+          <span className="uppercase tracking-wider">{language || 'code'}</span>
+        </div>
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="inline-flex items-center gap-1 rounded-md bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition hover:bg-white/[0.08] hover:text-white active:scale-95"
+        >
+          {copied ? (
+            <>
+              <Check size={11} className="text-emerald-400" />
+              <span className="text-emerald-400">Copied!</span>
+            </>
+          ) : (
+            <>
+              <span className="text-slate-400">Copy</span>
+            </>
+          )}
+        </button>
+      </div>
+      <pre className="overflow-x-auto p-4 leading-relaxed text-slate-300 max-w-full">
+        <code>{code.trim()}</code>
+      </pre>
+    </div>
+  )
+}
+
+// Inline Markdown Parser helper
+function parseInline(text: string): React.ReactNode[] {
+  const regex = /(\*\*.*?\*\*|`.*?`)/g
+  const parts = text.split(regex)
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={index} className="font-semibold text-white">
+          {part.slice(2, -2)}
+        </strong>
+      )
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={index} className="mx-0.5 rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-xs text-indigo-300">
+          {part.slice(1, -1)}
+        </code>
+      )
+    }
+    return part
+  })
+}
+
+// Custom Light-weight Markdown Renderer
+function MarkdownRenderer({ content }: { content: string }) {
+  if (!content) return null
+
+  // Split content by code blocks first
+  const parts = content.split(/(```[\s\S]*?```)/g)
+
+  return (
+    <div className="space-y-3">
+      {parts.map((part, index) => {
+        if (part.startsWith('```') && part.endsWith('```')) {
+          const match = part.match(/```(\w*)\n([\s\S]*?)```/)
+          const lang = match ? match[1] : 'code'
+          const code = match ? match[2] : part.slice(3, -3)
+
+          return <CodeBlock key={index} language={lang} code={code} />
+        }
+
+        // Handle paragraphs and text structures line by line
+        return (
+          <div key={index} className="space-y-2">
+            {part.split('\n').map((line, lineIdx) => {
+              const trimmedLine = line.trim()
+
+              // Headers: ###, ##, #
+              if (trimmedLine.startsWith('###')) {
+                return (
+                  <h4 key={lineIdx} className="text-sm font-semibold text-white mt-4 mb-2 border-b border-white/[0.05] pb-1 tracking-wide">
+                    {parseInline(trimmedLine.slice(3).trim())}
+                  </h4>
+                )
+              }
+              if (trimmedLine.startsWith('##')) {
+                return (
+                  <h3 key={lineIdx} className="text-base font-bold text-white mt-5 mb-2 tracking-tight">
+                    {parseInline(trimmedLine.slice(2).trim())}
+                  </h3>
+                )
+              }
+              if (trimmedLine.startsWith('#')) {
+                return (
+                  <h2 key={lineIdx} className="text-lg font-bold text-indigo-200 mt-6 mb-3 tracking-tight">
+                    {parseInline(trimmedLine.slice(1).trim())}
+                  </h2>
+                )
+              }
+
+              // Bullet lists
+              if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
+                return (
+                  <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-300">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                    <span className="text-sm leading-relaxed flex-1">
+                      {parseInline(trimmedLine.slice(2).trim())}
+                    </span>
+                  </div>
+                )
+              }
+
+              // Numbered lists
+              const numMatch = trimmedLine.match(/^(\d+)\.\s(.*)/)
+              if (numMatch) {
+                return (
+                  <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-300">
+                    <span className="font-mono text-xs font-semibold text-indigo-400 mt-0.5 shrink-0">
+                      {numMatch[1]}.
+                    </span>
+                    <span className="text-sm leading-relaxed flex-1">
+                      {parseInline(numMatch[2].trim())}
+                    </span>
+                  </div>
+                )
+              }
+
+              // Empty lines
+              if (!trimmedLine) {
+                return <div key={lineIdx} className="h-2" />
+              }
+
+              // Regular text
+              return (
+                <p key={lineIdx} className="text-sm leading-relaxed text-slate-300">
+                  {parseInline(line)}
+                </p>
+              )
+            })}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function ChatAgent() {
   const [isOpen, setIsOpen] = useState(false)
@@ -40,7 +201,11 @@ export default function ChatAgent() {
   }, [])
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (isOpen) {
+      setTimeout(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 80)
+    }
   }, [messages, isOpen])
 
   const sendMessage = async (content: string) => {
@@ -98,20 +263,28 @@ export default function ChatAgent() {
         const { done, value } = await reader.read()
         if (done) break
         const chunk = decoder.decode(value, { stream: true })
-        setMessages(prev => {
-          return prev.map(item =>
+        setMessages(prev =>
+          prev.map(item =>
             item.id === assistantId ? { ...item, content: item.content + chunk } : item,
-          )
-        })
+          ),
+        )
       }
 
-      setMessages(prev => prev.map(item => (item.id === assistantId ? { ...item, isStreaming: false } : item)))
+      setMessages(prev =>
+        prev.map(item => (item.id === assistantId ? { ...item, isStreaming: false } : item)),
+      )
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
       setMessages(prev => prev.filter(item => item.id !== assistantId))
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleClearHistory = () => {
+    setMessages([])
+    setError(null)
+    setSessionId(window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`)
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -121,99 +294,186 @@ export default function ChatAgent() {
 
   return (
     <>
+      {/* Floating Ask AI Launch Button */}
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-[#11101b]/90 px-5 py-3 text-sm font-semibold text-indigo-100 shadow-[0_20px_80px_rgba(99,102,241,0.28)] backdrop-blur-xl transition hover:border-indigo-300/50 hover:bg-indigo-500 hover:text-white"
+        className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2.5 rounded-full border border-indigo-500/30 bg-[#0d0c16]/95 px-6 py-3.5 text-sm font-semibold text-indigo-100 shadow-[0_0_50px_rgba(99,102,241,0.25)] backdrop-blur-xl transition duration-300 hover:border-indigo-400/60 hover:bg-indigo-600 hover:text-white hover:shadow-[0_0_60px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95 cursor-pointer"
         aria-label="Open chat widget"
       >
-        <Sparkles size={17} />
-        Ask AI
-        <span className="hidden rounded-full border border-white/10 px-2 py-0.5 text-xs text-slate-400 sm:inline">⌘K</span>
+        <Sparkles size={16} className="animate-pulse" />
+        Ask AI Agent
+        <span className="hidden rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-slate-400 sm:inline">⌘K</span>
       </button>
 
+      {/* Main Chat Dialog */}
       <AnimatePresence>
         {isOpen ? (
           <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.95 }}
+            initial={{ opacity: 0, y: 35, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            className="fixed bottom-24 right-6 z-50 flex max-h-[78vh] w-[420px] max-w-[95vw] flex-col rounded-[28px] border border-white/10 bg-[#0d0d16] p-4 shadow-[0_40px_120px_rgba(15,23,42,0.5)]"
+            exit={{ opacity: 0, y: 35, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+            className="fixed bottom-24 right-6 z-50 flex h-[620px] max-h-[80vh] w-[480px] max-w-[95vw] flex-col rounded-3xl border border-white/[0.08] bg-[#09090f]/95 shadow-[0_25px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl overflow-hidden"
           >
-            <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-white/[0.06] bg-white/[0.02] px-5 py-4">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,rgba(99,102,241,0.24),rgba(14,165,233,0.18))] text-indigo-200 ring-1 ring-indigo-300/20">
-                  <Bot size={20} />
+                <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md">
+                  <Bot size={18} />
+                  <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#09090f] bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
                 </span>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Ask about Rajendra</p>
-                  <p className="text-base font-semibold text-white">RB Assistant</p>
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-sm font-semibold text-white">RB Assistant</p>
+                    <span className="rounded-full bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-medium text-indigo-300 border border-indigo-400/20">Active</span>
+                  </div>
+                  <p className="text-xs text-slate-400">Ask about Rajendra&apos;s architecture & projects</p>
                 </div>
               </div>
-              <button type="button" onClick={() => setIsOpen(false)} className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white" aria-label="Close chat">
-                <X size={20} />
-              </button>
+
+              <div className="flex items-center gap-1">
+                {messages.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearHistory}
+                    className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white"
+                    title="Reset Conversation"
+                  >
+                    <RotateCcw size={16} />
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white"
+                  aria-label="Close chat"
+                >
+                  <X size={18} />
+                </button>
+              </div>
             </div>
 
-            <div className="chat-scroll mt-4 flex-1 space-y-3 overflow-y-auto pr-1">
+            {/* Scrollable Messages Panel */}
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 custom-scrollbar">
               {messages.length === 0 ? (
-                <div className="space-y-3">
-                  <div className="rounded-3xl border border-indigo-400/15 bg-indigo-400/10 p-4">
-                    <div className="flex items-center gap-2 text-indigo-200">
-                      <Sparkles size={16} />
-                      <p className="text-sm font-semibold">Portfolio AI agent</p>
+                <div className="space-y-5 py-6">
+                  {/* Empty state welcome card */}
+                  <div className="rounded-2xl border border-indigo-500/15 bg-gradient-to-b from-indigo-500/[0.06] to-transparent p-5">
+                    <div className="flex items-center gap-2.5 text-indigo-300">
+                      <div className="p-1.5 rounded-lg bg-indigo-500/10">
+                        <Sparkles size={15} />
+                      </div>
+                      <p className="text-sm font-bold tracking-tight">Systems-first Assistant</p>
                     </div>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">
-                      Ask about Rajendra&apos;s projects, backend skills, education, availability, or AI product work.
+                    <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                      Welcome! I represent Rajendra Bist, an engineering-focused developer. Ask me about:
                     </p>
+                    <ul className="mt-3 space-y-1.5 text-xs text-slate-400 pl-1">
+                      <li className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-indigo-400" />
+                        His flagship platform <strong>EduMethod AI</strong>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-indigo-400" />
+                        Socratic AI learning mechanics
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-indigo-400" />
+                        Real-time Socket.io & backend scale
+                      </li>
+                    </ul>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {QUICK_QUESTIONS.map(question => (
-                      <button
-                        key={question}
-                        type="button"
-                        onClick={() => sendMessage(question)}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-slate-100 transition hover:border-white/20 hover:bg-white/10"
-                      >
-                        {question}
-                      </button>
-                    ))}
+
+                  <div className="space-y-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 px-1">Quick Prompts</p>
+                    <div className="flex flex-col gap-2">
+                      {QUICK_QUESTIONS.map(question => (
+                        <button
+                          key={question}
+                          type="button"
+                          onClick={() => sendMessage(question)}
+                          className="w-full text-left rounded-xl border border-white/[0.04] bg-white/[0.02] px-4 py-2.5 text-xs text-slate-300 transition duration-200 hover:border-indigo-500/30 hover:bg-white/[0.06] hover:text-white"
+                        >
+                          {question}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ) : (
-                messages.map((message) => (
-                  <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[86%] rounded-3xl p-3 ${message.role === 'user' ? 'bg-[#4f46e5] text-white' : 'surface-panel text-slate-200'}`}>
-                      <p className="whitespace-pre-wrap text-sm leading-6">
-                        {message.content || (message.isStreaming ? 'Thinking...' : '')}
-                      </p>
+                messages.map(message => (
+                  <div
+                    key={message.id}
+                    className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    {message.role !== 'user' && (
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-950 border border-indigo-500/20 text-indigo-300 text-xs">
+                        <Bot size={14} />
+                      </span>
+                    )}
+
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-4 py-3 shadow-md ${
+                        message.role === 'user'
+                          ? 'bg-gradient-to-br from-indigo-600 to-indigo-700 text-white rounded-tr-none'
+                          : 'bg-white/[0.03] border border-white/[0.05] text-slate-200 rounded-tl-none'
+                      }`}
+                    >
+                      {message.role === 'user' ? (
+                        <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
+                      ) : (
+                        <MarkdownRenderer content={message.content} />
+                      )}
+                      
+                      {/* Streaming cursor effect */}
+                      {message.role === 'assistant' && message.isStreaming && !message.content && (
+                        <div className="flex items-center gap-1 py-1">
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '0ms' }} />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '150ms' }} />
+                          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: '300ms' }} />
+                        </div>
+                      )}
                     </div>
+
+                    {message.role === 'user' && (
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-600/20 border border-indigo-500/10 text-indigo-200 text-xs">
+                        <User size={14} />
+                      </span>
+                    )}
                   </div>
                 ))
               )}
               <div ref={bottomRef} />
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-4 flex items-center gap-3">
-              <input
-                value={inputValue}
-                onChange={event => setInputValue(event.target.value)}
-                placeholder="Ask about Rajendra..."
-                className="w-full rounded-2xl border border-white/10 bg-[#11101b] px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-indigo-500/50"
-                disabled={isLoading}
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !inputValue.trim()}
-                className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-600 text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <Send size={18} />
-              </button>
-            </form>
+            {/* Error notifications */}
+            {error && (
+              <div className="px-5 py-2 bg-rose-500/10 border-t border-rose-500/20 text-rose-400 text-xs flex items-center justify-between">
+                <span>{error}</span>
+                <button type="button" onClick={() => setError(null)} className="font-bold underline hover:text-white">Dismiss</button>
+              </div>
+            )}
 
-            {isLoading ? <p className="mt-3 text-sm text-slate-400">Thinking...</p> : null}
-            {error ? <p className="mt-3 text-sm text-rose-400">{error}</p> : null}
+            {/* Input Bar Form */}
+            <form onSubmit={handleSubmit} className="border-t border-white/[0.06] bg-[#0c0c14] p-4 flex items-center gap-2">
+              <div className="relative flex-1 flex items-center">
+                <input
+                  value={inputValue}
+                  onChange={event => setInputValue(event.target.value)}
+                  placeholder="Ask about Rajendra's engineering philosophy..."
+                  className="w-full rounded-2xl border border-white/[0.06] bg-[#07070c]/60 py-3.5 pl-4 pr-12 text-sm text-slate-100 placeholder-slate-500 outline-none transition focus:border-indigo-500/40 focus:bg-[#07070c]/90 focus:ring-1 focus:ring-indigo-500/20 disabled:opacity-50"
+                  disabled={isLoading}
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !inputValue.trim()}
+                  className="absolute right-2.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-white/[0.04] disabled:text-slate-500"
+                >
+                  <Send size={14} />
+                </button>
+              </div>
+            </form>
           </motion.div>
         ) : null}
       </AnimatePresence>

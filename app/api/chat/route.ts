@@ -83,8 +83,8 @@ export async function POST(req: NextRequest) {
       model: "gemini-2.5-flash",
       systemInstruction: PORTFOLIO_CONTEXT,
       generationConfig: {
-        maxOutputTokens: 500,
-        temperature: 0.7,
+        maxOutputTokens: 1200,
+        temperature: 0.6,
       },
     });
 

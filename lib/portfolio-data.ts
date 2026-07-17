@@ -15,6 +15,11 @@ export const FEATURED_LINKS = {
 
 export const EDUCATION = [
   {
+    school: 'Indira Gandhi National Open University',
+    degree: 'Bachelor of Technology (B.Tech)',
+    timeframe: 'Ongoing',
+  },
+  {
     school: 'Vcare Technical Institute',
     degree: 'Full-Stack Web Development Training',
     timeframe: 'Completed',
