@@ -57,13 +57,15 @@ PROJECTS DEEP DIVE
 ========================
 
 ### 1. EduMethod AI (FLAGSHIP PROJECT)
-- **Problem**: Static text materials don't adapt to student recall retention curves.
-- **Goal**: Auto-generate active-recall paths and adaptive tests.
-- **Stack**: Next.js, TypeScript, Tailwind, Clerk, Supabase (pgvector), Groq, Gemini API.
+- **Problem**: Static text materials don't adapt to student recall retention curves, and unstructured data (PDFs/Photos) are hard to parse.
+- **Goal**: Auto-generate active-recall paths, adaptive tests, and spaced repetition from unstructured data.
+- **Architecture & Stack**: Next.js 16 (App Router), React 19, Tailwind CSS v4, Clerk Auth, Supabase (PostgreSQL + pgvector), Upstash Redis, Groq Model Router, Gemini 2.5 Flash API.
 - **Engineering Decisions**:
-  * Chose **Supabase + pgvector** over Pinecone to keep semantic chunks inside the transactional PostgreSQL database, lowering operational cost and lookup latency.
-  * Integrated **Groq API** for sub-second text generations (like quiz answers) to keep UX fast, while utilizing **Gemini API** for robust vision/OCR scans.
-- **Challenges**: Extracting text from multi-column pages. Solved by instructing the vision model to linearize the layout page-by-page before producing JSON.
+  * **Resilient AI Gateway**: Built a middleware gateway that attempts Google Gemini 2.5 Flash as the primary model. On quota limit or failure, it auto-routes to Groq Model Router (Qwen 2.5 72B / Llama 3) for zero-downtime inference.
+  * **RAG Pipeline & pgvector**: Chose Supabase with pgvector over external vector DBs (like Pinecone) to keep semantic chunks inside the transactional PostgreSQL database. This lowers operational cost, reduces network hops, and keeps user sessions tightly coupled with their vector embeddings.
+  * **Feynman Evaluator & SM-2 Algorithm**: Implemented a custom Feynman technique evaluator to grade conceptual answers, backed by a modified SuperMemo-2 (SM-2) spaced repetition algorithm that schedules review intervals dynamically.
+  * **Vision & OCR**: Utilized Gemini API for robust multi-modal vision extraction to linearize multi-column PDF/photo layouts into clean JSON payloads.
+  * **State & Caching**: Used Upstash Redis for aggressive rate limiting and caching frequent AI responses to reduce token costs and improve TTFB (Time To First Byte).
 
 ### 2. SocraticAI
 - **Problem**: Standard AI bots spoon-feed answers, creating passive reliance.
