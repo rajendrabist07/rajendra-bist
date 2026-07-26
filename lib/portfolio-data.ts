@@ -71,8 +71,8 @@ export const PROJECTS = [
   {
     title: 'WhatsApp Clone',
     status: 'Live' as const,
-    description: 'Real-time messaging experience built with WebSocket integration, multi-user sessions, and instant delivery.',
-    stack: ['React', 'Node.js', 'Socket.io', 'Tailwind CSS'],
+    description: 'Real-time WhatsApp-style MERN chat application featuring user search, protected sessions, JWT refresh-token retries, and instant Socket.io message delivery.',
+    stack: ['React 19', 'Vite 8', 'Node.js', 'Socket.io', 'Tailwind CSS', 'React Router 7'],
     imageUrl: '/images/whatsapp-clone.svg',
     liveUrl: 'https://whats-app-clone-client-liart.vercel.app/',
     githubUrl: 'https://github.com/rajendrabist07/whats-app-clone-client-',

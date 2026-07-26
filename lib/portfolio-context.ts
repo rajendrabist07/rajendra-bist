@@ -76,12 +76,13 @@ PROJECTS DEEP DIVE
   * Formulated negative prompt constraints ("NEVER give the solution directly") to prevent character slippage.
 
 ### 3. WhatsApp Clone
-- **Problem**: Low-latency message delivery and socket session stability.
-- **Goal**: Deliver messages in sub-100ms with room separation.
-- **Stack**: React, Node.js, Express, Socket.io, Tailwind CSS.
+- **Problem**: Low-latency message delivery, secure session persistence, and socket stability across different browser states.
+- **Goal**: Deliver messages in sub-100ms with room separation, and handle JWT token refresh seamlessly on the client.
+- **Architecture & Stack**: React 19, Vite 8, React Router 7, Node.js, Express, Socket.io, Tailwind CSS.
 - **Engineering Decisions**:
-  * Used Socket.io room abstractions to isolate chat traffic.
-  * Managed network shifts (Wi-Fi to cell) by implementing custom client-side reconnect attempts and offline queues.
+  * **Axios Interceptors & JWT Refresh**: Implemented an automatic access-token refresh flow. If a protected request fails with a 401, Axios automatically calls the refresh endpoint and retries the original request transparently, maintaining user session without interruption.
+  * **Socket.io Room Isolation**: Used Socket.io room abstractions (creating 1-to-1 chat rooms) to isolate chat traffic, ensuring users only receive real-time messages intended for their active chat window.
+  * **Real-time State Architecture**: Engineered React Contexts (Auth, Chat, Socket) to instantly reflect connection states (Online/Offline) and seamlessly merge incoming Socket.io \`new_message\` events into the active chat UI.
 
 ========================
 AUDIENCE ROLES
