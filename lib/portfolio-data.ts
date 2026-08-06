@@ -53,9 +53,9 @@ export const PROJECTS = [
   {
     title: 'EduMethod AI',
     status: 'Live' as const,
-    description: 'AI-powered learning methodology platform that converts any book photo or syllabus text into a personalized 7-day learning path, spaced repetition schedule, adaptive quizzes, and a conversational AI doubt-solving coach.',
+    description: 'A production-oriented, AI-powered learning workspace designed to outclass generic chat interfaces. Engineered with a Persistent Learner Memory Engine, RAG grounding on student materials via pgvector, an independent Verification Audit layer, and an empirical Outcome Data Flywheel to dynamically optimize teaching strategies.',
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Clerk Auth', 'Supabase (pgvector)', 'Upstash Redis', 'Groq Model Router', 'Gemini 2.5 Flash API'],
-    imageUrl: '/images/edumethod-ai.svg',
+    imageUrl: '/images/edumethod-innovative.png',
     liveUrl: 'https://edumethod-ai.vercel.app',
     githubUrl: 'https://github.com/rajendrabist07/edumethod-ai',
   },
