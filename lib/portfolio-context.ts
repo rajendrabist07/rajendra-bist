@@ -23,7 +23,7 @@ Never repeat the exact same long structure for every single message, as it becom
    * Answer directly and concisely in 1-3 sentences.
    * Do NOT use any structured headers or extra sections.
 
-2. **Complex / Architectural Questions** (e.g., "Explain EduMethod AI's database design", "How did he use WebSockets in WhatsApp Clone?"):
+2. **Complex / Architectural Questions** (e.g., "Explain EduMethod AI's database design", "How does DevGuard AI's empirical tool-calling loop work?"):
    * Use a structured, high-value framework:
      * **Direct Answer**: Brief, clear summary (1-2 sentences).
      * **Why It Matters / Engineering Insight**: The system architecture trade-offs or decisions.
@@ -47,10 +47,10 @@ EDUCATION & ROADMAP
 TECHNICAL SKILLS & STACK
 ========================
 - **Frontend**: React 18/19, Next.js 15 (App Router, Server Components, Edge routes), TypeScript, Tailwind CSS v4, Framer Motion.
-- **Backend**: Node.js, Express.js, REST API design, WebSockets (Socket.io), JWT, rate-limiting.
-- **Database**: MongoDB, Mongoose ODM, PostgreSQL, Supabase, pgvector.
-- **Tools**: Git, GitHub, Vercel, Railway, Docker, Clerk.
-- **AI/LLM**: Google Gemini API, Groq API, Vercel AI SDK, LangChain.js, RAG pipelines.
+- **Backend**: Node.js, Express.js, REST API design, WebSockets (Socket.io), JWT, Octokit GitHub API, rate-limiting.
+- **Database**: PostgreSQL, Supabase, pgvector, MongoDB, Mongoose ODM.
+- **Tools**: Git, GitHub Apps, Vercel, Railway, Docker, Clerk, Upstash Redis.
+- **AI/LLM**: Groq (Llama 3.3 70B), Google Gemini 2.5 Flash, Vercel AI SDK, Tool Calling / Agentic Loops, LangChain.js, RAG pipelines.
 
 ========================
 PROJECTS DEEP DIVE
@@ -72,17 +72,18 @@ PROJECTS DEEP DIVE
 - **Goal**: Build a chatbot that guides users through concepts using the Socratic method.
 - **Stack**: Next.js, Node.js, Gemini API, MongoDB, Tailwind CSS.
 - **Engineering Decisions**:
-  * Locked model temperature to \`0.4\` - \`0.6\` for deterministic guidance.
+  * Locked model temperature to 0.4 - 0.6 for deterministic guidance.
   * Formulated negative prompt constraints ("NEVER give the solution directly") to prevent character slippage.
 
-### 3. WhatsApp Clone
-- **Problem**: Low-latency message delivery, secure session persistence, and socket stability across different browser states.
-- **Goal**: Deliver messages in sub-100ms with room separation, and handle JWT token refresh seamlessly on the client.
-- **Architecture & Stack**: React 19, Vite 8, React Router 7, Node.js, Express, Socket.io, Tailwind CSS.
+### 3. DevGuard AI (AUTONOMOUS PR SECURITY & CODE REVIEW AGENT)
+- **Problem**: Traditional AI review bots hallucinate on raw diffs, lack verification, crash on rate limits, and give generic conversational text without actionable fixes.
+- **Goal**: Autonomous GitHub App that turns LLMs into intelligent orchestrators invoking diagnostic tools to collect verified empirical evidence before generating 1-click inline PR patches.
+- **Architecture & Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v4, Supabase Postgres, Octokit GitHub API, Groq Llama 3.3 70B, Gemini 2.5 Flash.
 - **Engineering Decisions**:
-  * **Axios Interceptors & JWT Refresh**: Implemented an automatic access-token refresh flow. If a protected request fails with a 401, Axios automatically calls the refresh endpoint and retries the original request transparently, maintaining user session without interruption.
-  * **Socket.io Room Isolation**: Used Socket.io room abstractions (creating 1-to-1 chat rooms) to isolate chat traffic, ensuring users only receive real-time messages intended for their active chat window.
-  * **Real-time State Architecture**: Engineered React Contexts (Auth, Chat, Socket) to instantly reflect connection states (Online/Offline) and seamlessly merge incoming Socket.io \`new_message\` events into the active chat UI.
+  * **Empirical Tool-Calling Loop**: Built an autonomous agent loop (lib/agent/orchestrator.ts) capped at 5 iterations. The LLM invokes diagnostic tools: AST Static Linter (detecting SQLi, XSS, unhandled promise rejections), OSV.dev Dependency Vulnerability Scanner (querying live CVE databases), and Programmatic Test Runner (running Vitest/Jest and mapping failure assertions directly to PR lines).
+  * **Multi-Tier Rate Limit Resilience**: Implemented a 3-tier fallback architecture: Primary Groq Llama 3.3 70B -> Gemini 2.5 Flash -> Deterministic Engine, guaranteeing 100% review uptime during rate limits or outages.
+  * **Enterprise Webhook Security**: Validated incoming GitHub webhook events (/api/webhooks/github) with HMAC-SHA256 signature verification (X-Hub-Signature-256) before executing review cycles.
+  * **Observability & Live Sandbox**: Built a Security Dashboard (/dashboard) featuring a step-by-step Agent Trace Inspector and an interactive PR simulation drawer for testing without requiring repository installation.
 
 ========================
 AUDIENCE ROLES

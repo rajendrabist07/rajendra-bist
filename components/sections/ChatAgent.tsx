@@ -15,9 +15,9 @@ type Message = {
 const QUICK_QUESTIONS = [
   'What projects has Rajendra built?',
   "What's his tech stack?",
+  'Tell me about DevGuard AI',
+  'Tell me about EduMethod AI',
   'Is he open to work?',
-  'Tell me about SocraticAI',
-  "What's his background?",
 ]
 
 // Custom CodeBlock Component with Copy Functionality
@@ -499,11 +499,11 @@ export default function ChatAgent() {
                         </li>
                         <li className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
-                          Socratic AI learning mechanics
+                          Autonomous <strong>DevGuard AI</strong> agent loop
                         </li>
                         <li className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
-                          Real-time Socket.io & backend scale
+                          SocraticAI learning mechanics
                         </li>
                       </ul>
                     </div>

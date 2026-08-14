@@ -69,12 +69,12 @@ export const PROJECTS = [
     githubUrl: 'https://github.com/rajendrabist07/socratic-ai.git',
   },
   {
-    title: 'WhatsApp Clone',
+    title: 'DevGuard AI',
     status: 'Live' as const,
-    description: 'Real-time WhatsApp-style MERN chat application featuring user search, protected sessions, JWT refresh-token retries, and instant Socket.io message delivery.',
-    stack: ['React 19', 'Vite 8', 'Node.js', 'Socket.io', 'Tailwind CSS', 'React Router 7'],
-    imageUrl: '/images/whatsapp-clone.svg',
-    liveUrl: 'https://whats-app-clone-client-liart.vercel.app/',
-    githubUrl: 'https://github.com/rajendrabist07/whats-app-clone-client-',
+    description: 'Autonomous GitHub PR security & code review agent built on an empirical tool-calling loop (AST static linter, OSV.dev vulnerability scanner, unit test runner). Generates 1-click inline PR patches with multi-tier LLM fallback and real-time dashboard observability.',
+    stack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Supabase', 'Groq Llama 3.3', 'Gemini 2.5 Flash', 'GitHub App'],
+    imageUrl: '/images/dev-guard-ai.png',
+    liveUrl: 'https://dev-guard-ai.vercel.app/',
+    githubUrl: 'https://github.com/rajendrabist07/dev-guard-ai',
   },
 ]
