@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
+import { motion } from "framer-motion";
+import { Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
-
-import CodeBioBlock from "@/components/ui/CodeBioBlock";
 
 const heroVariants = {
   hidden: { opacity: 0, y: 28 },
@@ -15,29 +12,7 @@ const heroVariants = {
 
 const itemTransition = { duration: 0.6 };
 
-const titlePhrases = [
-  "Backend Developer & AI Systems Engineer in Nepal",
-  "Designing clean APIs, auth contracts, and database schemas",
-  "Building RAG pipelines, LLM integrations, and verified AI workflows",
-  "Shipping full-stack products on strong backend foundations",
-];
-
 export default function Hero() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % titlePhrases.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const openChat = () => {
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("open-chat-widget"));
-    }
-  };
-
   return (
     <section
       id="home"
@@ -63,27 +38,15 @@ export default function Hero() {
             </h1>
           </motion.div>
 
-          <motion.div
+          <motion.p
             initial="hidden"
             animate="visible"
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.15 }}
+            className="hero-role-text mx-auto mt-8 max-w-xl text-2xl font-semibold leading-snug sm:text-3xl md:mx-0"
           >
-            <div className="mt-8 relative h-[96px] sm:h-[72px] overflow-hidden flex items-center justify-center md:justify-start">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={index}
-                  initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
-                  transition={{ duration: 0.45, ease: "easeInOut" }}
-                  className="hero-role-text text-xl font-semibold sm:text-2xl absolute inset-x-0 top-1/2 -translate-y-1/2 text-center md:text-left"
-                >
-                  {titlePhrases[index]}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-          </motion.div>
+            Building RAG pipelines, LLM integrations, and verified AI workflows
+          </motion.p>
 
           <motion.p
             initial="hidden"
@@ -100,28 +63,21 @@ export default function Hero() {
             animate="visible"
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.45 }}
-            className="mx-auto mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:justify-start"
+            className="mx-auto mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:justify-start"
           >
             <a
               href="#projects"
-              className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_34px_rgba(99,102,241,0.25)] transition hover:bg-indigo-500"
+              className="inline-flex min-h-11 min-w-36 items-center justify-center rounded-2xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_34px_rgba(99,102,241,0.22)] transition hover:bg-indigo-500"
             >
-              View My Work
+              View Work
             </a>
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-300/30 hover:bg-sky-400/10"
+              className="inline-flex min-h-11 min-w-36 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-sky-300/30 hover:bg-sky-400/10"
             >
               <Download size={18} /> Download CV
             </a>
-            <button
-              type="button"
-              onClick={openChat}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10"
-            >
-              <MessageSquare size={18} /> Talk to My AI Agent
-            </button>
           </motion.div>
 
           <motion.div
@@ -158,9 +114,9 @@ export default function Hero() {
           animate="visible"
           variants={heroVariants}
           transition={{ ...itemTransition, delay: 0.35 }}
-          className="relative mx-auto flex w-full max-w-[560px] flex-col items-center lg:mr-0 lg:min-h-[570px] lg:items-end"
+          className="relative mx-auto flex w-full max-w-[520px] flex-col items-center lg:mr-0 lg:items-center"
         >
-          <div className="relative w-full max-w-[340px] lg:max-w-[390px]">
+          <div className="relative w-full max-w-[340px] lg:max-w-[420px]">
             <div className="absolute -inset-8 rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.34),rgba(56,189,248,0.12)_45%,transparent_70%)] blur-2xl" />
             <div className="relative aspect-square overflow-hidden rounded-full border-2 border-sky-400/70 bg-[#10131c] p-2 shadow-[0_0_90px_rgba(99,102,241,0.26)]">
               <div className="relative h-full w-full overflow-hidden rounded-full bg-[#10131c]">
@@ -176,11 +132,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="mt-7 w-full lg:absolute lg:bottom-20 lg:left-0 lg:mt-0 lg:max-w-[430px]">
-            <CodeBioBlock />
-          </div>
-
-          <div className="mt-4 grid w-full gap-3 sm:grid-cols-3 lg:absolute lg:bottom-0 lg:left-10 lg:max-w-[500px]">
+          <div className="mt-7 grid w-full gap-3 sm:grid-cols-3">
             {[
               ["3", "AI products"],
               ["Node", "backend focus"],

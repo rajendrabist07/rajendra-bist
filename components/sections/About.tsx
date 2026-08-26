@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Blocks, BrainCircuit, Database, GraduationCap, Network, Rocket } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import CodeBioBlock from "@/components/ui/CodeBioBlock";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -101,6 +102,16 @@ export default function About() {
               );
             })}
           </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={itemVariants}
+          className="mx-auto mt-10 max-w-3xl"
+        >
+          <CodeBioBlock />
         </motion.div>
       </div>
     </section>
