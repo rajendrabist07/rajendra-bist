@@ -1,0 +1,19 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="600" rx="36" fill="#0A0B12"/>
+  <rect x="1" y="1" width="958" height="598" rx="35" stroke="#2B3140"/>
+  <rect x="146" y="116" width="668" height="368" rx="28" fill="#101420" stroke="#2A3447" stroke-width="3"/>
+  <rect x="180" y="156" width="182" height="288" rx="20" fill="#0C111B" stroke="#202A3C"/>
+  <circle cx="226" cy="209" r="28" fill="#6366F1"/>
+  <path d="M218 209h16M226 201v16" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <path d="M207 279h102M207 312h122M207 345h76" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+  <rect x="398" y="156" width="382" height="288" rx="20" fill="#0E1421" stroke="#202A3C"/>
+  <rect x="462" y="201" width="190" height="54" rx="18" fill="#4338CA"/>
+  <rect x="506" y="315" width="202" height="58" rx="18" fill="#0F766E"/>
+  <path d="M674 228c62 20 94 62 94 124 0 54-26 96-78 126" stroke="#8B5CF6" stroke-width="7" stroke-dasharray="16 14" stroke-linecap="round"/>
+  <circle cx="768" cy="352" r="12" fill="#38BDF8"/>
+  <circle cx="690" cy="478" r="12" fill="#34D399"/>
+  <path d="M514 256c-48 15-78 46-91 94" stroke="#38BDF8" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="514" cy="256" r="11" fill="#38BDF8"/>
+  <text x="64" y="84" fill="#E5E7EB" font-family="Inter, Arial" font-size="34" font-weight="700">SocraticAI</text>
+  <text x="64" y="125" fill="#64748B" font-family="Inter, Arial" font-size="18">Guided reasoning assistant</text>
+</svg>

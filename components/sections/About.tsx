@@ -62,10 +62,10 @@ export default function About() {
         >
           <motion.div variants={itemVariants} className="surface-panel rounded-3xl p-8 shadow-glow">
             <p className="text-xl leading-9 text-slate-200">
-              I&apos;m a backend developer building full-stack products. I design systems from the data layer up—establishing validation schemas, API boundaries, and database integrity before writing a single line of client layout.
+              I&apos;m Rajendra Bist, a backend developer and AI systems engineer from Nepal. I design systems from the data layer up, establishing validation schemas, API boundaries, and database integrity before writing client-facing flows.
             </p>
             <p className="mt-6 text-base leading-8 text-slate-400">
-              My core work focuses on building scalable web backends with Node.js, PostgreSQL, and MongoDB, and deploying production AI pipelines with deterministic tool guardrails. Clean engineering judgment means delivering high-throughput data layers paired with fast, responsive frontend states.
+              My core work focuses on scalable web backends with Node.js, PostgreSQL, MongoDB, and Next.js, plus production AI pipelines using RAG grounding, LLM integrations, and deterministic tool guardrails. Clean engineering judgment means delivering high-throughput data layers paired with fast, responsive frontend states.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">

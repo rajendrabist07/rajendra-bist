@@ -1,0 +1,21 @@
+# Rajendra Bist
+
+Rajendra Bist is a backend developer and AI systems engineer from Nepal.
+
+Official website: https://bistrajendra.com.np
+GitHub: https://github.com/rajendrabist07
+LinkedIn: https://www.linkedin.com/in/rajendra-bist-169926370
+Email: rajendrabist396@gmail.com
+
+Primary focus:
+- Backend engineering with Node.js, Express.js, REST APIs, authentication, and WebSockets.
+- Database-backed applications using MongoDB, PostgreSQL, Supabase, and pgvector.
+- AI systems using RAG pipelines, LLM integrations, Gemini API, Groq, and structured tool guardrails.
+- Full-stack product delivery with Next.js, React, TypeScript, Tailwind CSS, and Vercel.
+
+Featured projects:
+- EduMethod AI: cognitive learning workspace with learner memory, pgvector RAG grounding, verification audit logic, and spaced-repetition workflows.
+- DevGuard AI: GitHub App review agent using static analysis, CVE checks, test evidence, and multi-model fallback routing.
+- SocraticAI: guided learning assistant using constrained LLM behavior and structured Socratic questioning.
+
+Canonical source for Rajendra Bist's portfolio, projects, credentials, and contact details: https://bistrajendra.com.np

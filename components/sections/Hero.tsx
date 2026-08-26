@@ -16,10 +16,10 @@ const heroVariants = {
 const itemTransition = { duration: 0.6 };
 
 const titlePhrases = [
-  "Designing robust systems before writing UI code",
-  "Architecting clean APIs, auth contracts, and database schemas",
-  "Integrating LLMs with runtime validation and deterministic flow",
-  "Building responsive interfaces backed by solid backend foundations",
+  "Backend Developer & AI Systems Engineer in Nepal",
+  "Designing clean APIs, auth contracts, and database schemas",
+  "Building RAG pipelines, LLM integrations, and verified AI workflows",
+  "Shipping full-stack products on strong backend foundations",
 ];
 
 export default function Hero() {
@@ -41,16 +41,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden px-6 py-28 md:px-8"
+      className="relative overflow-hidden px-6 pb-20 pt-28 md:px-8 md:pb-24"
     >
       <div className="hero-grid" />
-      <div className="pointer-events-none absolute inset-0 opacity-50">
-        <div className="absolute left-[10%] top-[26%] h-1 w-1 rounded-full bg-white/70" />
-        <div className="absolute left-[38%] top-[18%] h-1 w-1 rounded-full bg-white/40" />
-        <div className="absolute right-[14%] top-[34%] h-1 w-1 rounded-full bg-white/60" />
-        <div className="absolute right-[30%] bottom-[18%] h-1 w-1 rounded-full bg-white/50" />
-      </div>
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 pt-16 lg:min-h-[calc(100vh-7rem)] lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="star-field" />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 pt-10 lg:grid-cols-[0.92fr_1.08fr]">
         <div className="text-center md:text-left">
           <motion.div
             initial="hidden"
@@ -62,7 +57,7 @@ export default function Hero() {
               <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]" />
               Available for Work
             </p>
-            <h1 className="mt-8 text-6xl font-black uppercase leading-[0.86] tracking-normal sm:text-7xl lg:text-8xl">
+            <h1 className="mt-8 text-5xl font-black uppercase leading-[0.9] tracking-normal sm:text-6xl lg:text-7xl">
               <span className="hero-name-gradient">Rajendra</span>
               <span className="mt-2 block text-white">Bist</span>
             </h1>
@@ -95,9 +90,9 @@ export default function Hero() {
             animate="visible"
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.3 }}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:mx-0"
+            className="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-300 sm:mx-0"
           >
-            Backend developer building full-stack products with systems-first architecture, database integrity, and production AI integration.
+            Backend developer from Nepal building scalable APIs, database-driven products, RAG pipelines, and production AI integrations with a systems-first engineering mindset.
           </motion.p>
 
           <motion.div
@@ -105,25 +100,25 @@ export default function Hero() {
             animate="visible"
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.45 }}
-            className="mx-auto mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-start"
+            className="mx-auto mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:justify-start"
           >
             <a
               href="#projects"
-              className="inline-flex items-center justify-center rounded-2xl bg-[#6366f1] px-7 py-4 text-sm font-semibold text-white shadow-glow transition hover:bg-[#4f46e5]"
+              className="inline-flex items-center justify-center rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_34px_rgba(249,115,22,0.18)] transition hover:bg-orange-400"
             >
               View My Work
             </a>
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-indigo-300/30 bg-indigo-400/10 px-7 py-4 text-sm font-semibold text-indigo-100 transition hover:border-indigo-300/50 hover:bg-indigo-400/20"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-orange-300/30 hover:bg-orange-400/10"
             >
               <Download size={18} /> Download CV
             </a>
             <button
               type="button"
               onClick={openChat}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10"
             >
               <MessageSquare size={18} /> Talk to My AI Agent
             </button>
@@ -134,7 +129,7 @@ export default function Hero() {
             animate="visible"
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.6 }}
-            className="mt-10 flex justify-center gap-4 md:justify-start"
+            className="mt-8 flex justify-center gap-3 md:justify-start"
           >
             {[
               { href: PERSONAL.github, icon: Github, label: "GitHub" },
@@ -149,7 +144,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-slate-400 transition hover:border-indigo-400/40 hover:text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-400 transition hover:border-orange-400/40 hover:text-white"
                 >
                   <Icon size={19} />
                 </a>
@@ -163,25 +158,30 @@ export default function Hero() {
           animate="visible"
           variants={heroVariants}
           transition={{ ...itemTransition, delay: 0.35 }}
-          className="relative mx-auto w-full max-w-[460px] lg:mr-0 flex flex-col gap-8"
+          className="relative mx-auto w-full max-w-[560px] lg:mr-0"
         >
-          <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[340px]">
-            <div className="absolute -inset-7 rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.42),rgba(14,165,233,0.16)_38%,transparent_68%)] blur-2xl" />
-            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-indigo-400/80 bg-[#11101b] p-2 shadow-[0_0_90px_rgba(99,102,241,0.28)]">
-              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#11101b]">
-                <Image
-                  src="/images/rajendra-bist.jpeg"
-                  alt="Rajendra Bist — Backend Developer from Nepal profile photo"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 340px, 90vw"
-                  className="object-cover object-[50%_18%]"
-                />
-              </div>
-            </div>
-          </div>
-
           <CodeBioBlock />
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {[
+              ["3", "AI products"],
+              ["Node", "backend focus"],
+              ["NP", "remote ready"],
+            ].map(([value, label]) => (
+              <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3">
+                <p className="text-lg font-semibold text-white">{value}</p>
+                <p className="mt-1 text-xs text-slate-500">{label}</p>
+              </div>
+            ))}
+          </div>
+          <div className="sr-only">
+            <Image
+              src="/images/rajendra-bist.jpeg"
+              alt="Rajendra Bist - Backend Developer from Nepal profile photo"
+              width={320}
+              height={320}
+              priority
+            />
+          </div>
         </motion.div>
       </div>
     </section>

@@ -2,20 +2,20 @@
 
 :root {
   /* Dark theme (default) */
-  --bg-primary: #0a0a0f;
-  --bg-surface: #12121a;
-  --bg-elevated: #1a1a24;
-  --border: #1e1e2e;
-  --border-hover: #2e2e4e;
-  --accent-primary: #6366f1;
-  --accent-secondary: #a855f7;
-  --accent-glow: rgba(99, 102, 241, 0.15);
+  --bg-primary: #060708;
+  --bg-surface: #0f1117;
+  --bg-elevated: #151820;
+  --border: #242832;
+  --border-hover: #343b4a;
+  --accent-primary: #f97316;
+  --accent-secondary: #22c55e;
+  --accent-glow: rgba(249, 115, 22, 0.12);
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #475569;
   --success: #22c55e;
   --warning: #f59e0b;
-  --gradient: linear-gradient(135deg, #6366f1, #a855f7);
+  --gradient: linear-gradient(135deg, #f97316, #22c55e);
 }
 
 [data-theme="light"] {
@@ -48,7 +48,7 @@ body {
 
 h1, h2, h3, h4, h5, h6, .font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 code, kbd, samp, pre, .font-mono {
@@ -140,13 +140,13 @@ code, kbd, samp, pre, .font-mono {
 
 .hero-name-gradient {
   background:
-    linear-gradient(110deg, #f8fafc 0%, #a5b4fc 24%, #38bdf8 48%, #c084fc 72%, #ffffff 100%);
+    linear-gradient(110deg, #f8fafc 0%, #fed7aa 30%, #34d399 58%, #f97316 78%, #ffffff 100%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradient-shift 7s ease infinite;
-  filter: drop-shadow(0 18px 42px rgba(99, 102, 241, 0.18));
+  filter: drop-shadow(0 18px 42px rgba(249, 115, 22, 0.12));
 }
 
 .hero-role-window {
@@ -156,19 +156,45 @@ code, kbd, samp, pre, .font-mono {
 .hero-role-text {
   width: fit-content;
   max-width: 100%;
-  background: linear-gradient(110deg, #c7d2fe 0%, #f8fafc 28%, #38bdf8 54%, #a7f3d0 78%, #c7d2fe 100%);
+  background: linear-gradient(110deg, #f8fafc 0%, #fdba74 34%, #a7f3d0 70%, #f8fafc 100%);
   background-size: 240% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: role-sheen 5.4s ease-in-out infinite;
-  filter: drop-shadow(0 10px 28px rgba(56, 189, 248, 0.12));
+  filter: drop-shadow(0 10px 28px rgba(249, 115, 22, 0.1));
 }
 
 .surface-panel {
   background: var(--bg-surface);
   border: 1px solid var(--border);
   backdrop-filter: blur(18px);
+}
+
+.code-card {
+  background: #101010;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.36);
+}
+
+.project-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+    #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+.star-field {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 24%, rgba(255, 255, 255, 0.36) 0 1px, transparent 2px),
+    radial-gradient(circle at 36% 12%, rgba(255, 255, 255, 0.2) 0 1px, transparent 2px),
+    radial-gradient(circle at 68% 28%, rgba(255, 255, 255, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 84% 70%, rgba(255, 255, 255, 0.24) 0 1px, transparent 2px),
+    radial-gradient(circle at 24% 78%, rgba(255, 255, 255, 0.18) 0 1px, transparent 2px);
 }
 
 .pulse-dot {

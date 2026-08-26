@@ -1,0 +1,17 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="600" rx="36" fill="#090B10"/>
+  <rect x="1" y="1" width="958" height="598" rx="35" stroke="#293241"/>
+  <circle cx="470" cy="315" r="230" fill="#10B981" fill-opacity=".08"/>
+  <path d="M480 126 675 206v132c0 114-78 188-195 234-117-46-195-120-195-234V206l195-80Z" fill="#101923" stroke="#34D399" stroke-width="7"/>
+  <path d="M480 174 622 233v103c0 77-47 132-142 174-95-42-142-97-142-174V233l142-59Z" stroke="#10B981" stroke-width="3"/>
+  <path d="M383 340h75l30-86 34 140 31-79h77" stroke="#F97316" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M427 252h106M427 292h55M537 292h50M426 421h109" stroke="#5EEAD4" stroke-width="10" stroke-linecap="round"/>
+  <g stroke="#1F2937" stroke-width="2">
+    <path d="M270 164h-78v92"/><path d="M690 448h78v-94"/><path d="M232 488h88"/><path d="M732 126h-92"/>
+  </g>
+  <g fill="#64748B">
+    <circle cx="192" cy="256" r="6"/><circle cx="768" cy="354" r="6"/><circle cx="320" cy="488" r="5"/><circle cx="640" cy="126" r="5"/>
+  </g>
+  <text x="64" y="84" fill="#E5E7EB" font-family="Inter, Arial" font-size="34" font-weight="700">DevGuard AI</text>
+  <text x="64" y="125" fill="#64748B" font-family="Inter, Arial" font-size="18">Evidence-first code review</text>
+</svg>

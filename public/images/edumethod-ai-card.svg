@@ -1,0 +1,16 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="600" rx="36" fill="#0A0C12"/>
+  <rect x="1" y="1" width="958" height="598" rx="35" stroke="#283040"/>
+  <circle cx="740" cy="92" r="170" fill="#22C55E" fill-opacity=".08"/>
+  <circle cx="218" cy="500" r="190" fill="#F97316" fill-opacity=".08"/>
+  <path d="M242 172h290c96 0 174 78 174 174v82H416c-96 0-174-78-174-174v-82Z" fill="#111827" stroke="#263244" stroke-width="2"/>
+  <path d="M318 243c70-34 137-31 199 8 53-42 101-47 145-16v156c-50-25-99-20-145 14-65-40-132-43-199-9V243Z" stroke="#34D399" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M517 252v153" stroke="#FACC15" stroke-width="10" stroke-linecap="round"/>
+  <path d="M354 338l56-51 51 44 84-78 47 38" stroke="#F97316" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M592 291l1-80 76 19" stroke="#F97316" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#64748B">
+    <circle cx="184" cy="120" r="5"/><circle cx="792" cy="428" r="4"/><circle cx="142" cy="410" r="3"/><circle cx="826" cy="190" r="3"/>
+  </g>
+  <text x="64" y="84" fill="#E5E7EB" font-family="Inter, Arial" font-size="34" font-weight="700">EduMethod AI</text>
+  <text x="64" y="125" fill="#64748B" font-family="Inter, Arial" font-size="18">RAG learning engine</text>
+</svg>

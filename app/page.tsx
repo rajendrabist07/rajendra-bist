@@ -10,6 +10,7 @@ import Process from "@/components/sections/Process";
 import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
@@ -25,6 +26,7 @@ export default function HomePage() {
         <Credentials />
         <Contact />
       </main>
+      <Footer />
       <ChatAgent />
     </div>
   );

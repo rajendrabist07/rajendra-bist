@@ -29,24 +29,24 @@
     
     <!-- Role with gradient -->
     <text x="600" y="310" font-family="Inter, sans-serif" font-size="56" font-weight="600" fill="url(#textGrad)" text-anchor="middle">
-      Full-Stack Web Developer
+      Backend Developer &amp; AI Systems Engineer
     </text>
     
     <!-- Tagline -->
     <text x="600" y="390" font-family="Inter, sans-serif" font-size="28" fill="#cbd5e1" text-anchor="middle">
-      Building systems. Designing backends.
+      Scalable APIs. Database-driven products.
     </text>
     <text x="600" y="430" font-family="Inter, sans-serif" font-size="28" fill="#cbd5e1" text-anchor="middle">
-      Shipping products that work.
+      RAG pipelines and production AI integrations.
     </text>
     
     <!-- Tech stack footer -->
     <rect x="200" y="500" width="800" height="90" fill="rgba(99, 102, 241, 0.08)" rx="12"/>
     <text x="600" y="530" font-family="monospace" font-size="16" fill="#94a3b8" text-anchor="middle">
-      Next.js 15 • React • TypeScript • Tailwind CSS
+      Next.js • Node.js • TypeScript • PostgreSQL
     </text>
     <text x="600" y="560" font-family="monospace" font-size="16" fill="#94a3b8" text-anchor="middle">
-      Node.js • MongoDB • Gemini AI • Vercel
+      MongoDB • Supabase pgvector • Gemini • Groq
     </text>
   </g>
 </svg>
