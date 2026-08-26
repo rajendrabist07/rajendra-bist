@@ -95,7 +95,7 @@ export default function Hero() {
             transition={{ ...itemTransition, delay: 0.3 }}
             className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:mx-0"
           >
-            Web architecture, backend foundations, performance-aware interfaces, and AI-integrated products built with clean engineering judgment.
+            Backend developer building full-stack products with systems-first architecture, database integrity, and production AI integration.
           </motion.p>
 
           <motion.div

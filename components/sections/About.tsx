@@ -62,10 +62,10 @@ export default function About() {
         >
           <motion.div variants={itemVariants} className="surface-panel rounded-3xl p-8 shadow-glow">
             <p className="text-xl leading-9 text-slate-200">
-              Software achieves its purpose when the architecture behind it is as deliberate as the user experience. I design systems from the data layer up—planning validation schemas, API boundaries, and real-time state before laying down a single line of layout.
+              I&apos;m a backend developer building full-stack products. I design systems from the data layer up—establishing validation schemas, API boundaries, and database integrity before writing a single line of client layout.
             </p>
             <p className="mt-6 text-base leading-8 text-slate-400">
-              My core competency lies in backend-intensive full-stack engineering. By combining Node.js, PostgreSQL, and MongoDB with LLM integration pipelines, I build applications that process complex structured data and synchronize real-time updates. Clean judgment means balancing efficient data delivery with fast, responsive frontend states.
+              My core work focuses on building scalable web backends with Node.js, PostgreSQL, and MongoDB, and deploying production AI pipelines with deterministic tool guardrails. Clean engineering judgment means delivering high-throughput data layers paired with fast, responsive frontend states.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
@@ -77,8 +77,8 @@ export default function About() {
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
                 <Rocket className="text-indigo-300" size={24} />
                 <p className="mt-4 text-sm text-slate-500">Production Systems</p>
-                <p className="mt-1 font-semibold text-white">AI-Integrated Architectures</p>
-                <p className="mt-1 text-sm text-slate-400">SocraticAI, streaming pipelines, MongoDB clustering, APIs</p>
+                <p className="mt-1 font-semibold text-white">AI & Backend Architectures</p>
+                <p className="mt-1 text-sm text-slate-400">EduMethod AI, DevGuard AI, SocraticAI, pgvector, tool loops</p>
               </div>
             </div>
           </motion.div>
