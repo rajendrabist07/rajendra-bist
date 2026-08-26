@@ -168,7 +168,7 @@ export default function Hero() {
             <div className="relative h-full w-full overflow-hidden rounded-full bg-[#11101b]">
               <Image
                 src="/images/rajendra-bist.jpeg"
-                alt="Rajendra Bist"
+                alt="Rajendra Bist — Backend Developer from Nepal profile photo"
                 fill
                 priority
                 sizes="(min-width: 1024px) 420px, 90vw"

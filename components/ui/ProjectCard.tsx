@@ -47,7 +47,7 @@ export default function ProjectCard({ title, status, description, stack, imageUr
         <motion.div variants={hoverVariants} className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
           <Image
             src={imageUrl}
-            alt={`${title} project preview`}
+            alt={`Rajendra Bist — ${title} project preview and architecture`}
             fill
             sizes="(min-width: 1024px) 360px, 92vw"
             className="object-cover"

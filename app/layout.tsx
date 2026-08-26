@@ -4,18 +4,21 @@ import { Providers } from './providers';
 import { SITE_URL } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Rajendra Bist — Systems-First Full-Stack Developer',
+  title: 'Rajendra Bist — Backend Developer (Full-Stack Capable)',
   description:
-    'Systems-first full-stack developer from Nepal focused on backend engineering, web architecture, performance, scale, and AI-integrated products.',
+    'Rajendra Bist is a backend developer from Nepal specializing in Node.js, Next.js, MongoDB, PostgreSQL, and production AI integration for scalable web platforms.',
   keywords: [
-    'Full-Stack Developer Nepal',
-    'Next.js Developer',
-    'Node.js',
-    'MongoDB',
-    'React Developer',
     'Rajendra Bist',
-    'backend engineer',
-    'system design',
+    'Backend Developer Nepal',
+    'Full-Stack Developer Nepal',
+    'Node.js Developer',
+    'Next.js Developer',
+    'MongoDB Developer',
+    'PostgreSQL',
+    'AI Integration',
+    'RAG Pipelines',
+    'System Design',
+    'Software Engineer Nepal',
   ],
   metadataBase: new URL(SITE_URL),
   robots: {
@@ -29,17 +32,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Rajendra Bist — Systems-First Full-Stack Developer',
+    title: 'Rajendra Bist — Backend Developer',
     description:
-      'Personal portfolio showcasing full-stack development, AI integration, and real projects. Built with Next.js, MongoDB, and Gemini AI.',
+      'Rajendra Bist is a backend developer from Nepal specializing in Node.js, Next.js, MongoDB, PostgreSQL, and production AI integration for scalable web platforms.',
     url: SITE_URL,
-    siteName: 'Rajendra Bist',
+    siteName: 'Rajendra Bist Portfolio',
     images: [
       {
         url: '/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'Rajendra Bist - Full-Stack Web Developer',
+        alt: 'Rajendra Bist — Backend Developer Portfolio OpenGraph Image',
         type: 'image/svg+xml',
       },
     ],
@@ -48,8 +51,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rajendra Bist — Systems-First Full-Stack Developer',
-    description: 'Portfolio with AI chat, backend engineering, and production-ready web development.',
+    title: 'Rajendra Bist — Backend Developer',
+    description:
+      'Rajendra Bist is a backend developer from Nepal specializing in Node.js, Next.js, MongoDB, PostgreSQL, and production AI integration for scalable web platforms.',
     images: ['/og-image.svg'],
   },
   icons: {
@@ -65,6 +69,56 @@ export const viewport: Viewport = {
   themeColor: '#0a0a0f',
 };
 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rajendra Bist',
+  url: SITE_URL,
+  image: `${SITE_URL}/images/rajendra-bist.jpeg`,
+  jobTitle: 'Backend Developer',
+  description:
+    'Systems-first backend developer from Nepal building scalable web architectures, AI-integrated platforms, and high-throughput systems.',
+  sameAs: [
+    'https://github.com/rajendrabist07',
+    'https://www.linkedin.com/in/rajendra-bist-169926370',
+  ],
+  knowsAbout: [
+    'Node.js',
+    'Next.js',
+    'MongoDB',
+    'PostgreSQL',
+    'System Design',
+    'AI Integration',
+    'LLM Integration',
+    'RAG Pipelines',
+    'TypeScript',
+    'REST APIs',
+    'WebSockets',
+    'Tailwind CSS',
+  ],
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Open to work / Freelance',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'Nepal',
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Rajendra Bist — Backend Developer Portfolio',
+  url: SITE_URL,
+  description:
+    'Rajendra Bist is a backend developer from Nepal specializing in Node.js, Next.js, MongoDB, PostgreSQL, and production AI integration for scalable web platforms.',
+  author: {
+    '@type': 'Person',
+    name: 'Rajendra Bist',
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -73,6 +127,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#0a0a0f" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href={SITE_URL} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body className="bg-[--bg-primary] text-[--text-primary]">
         <Providers>{children}</Providers>
