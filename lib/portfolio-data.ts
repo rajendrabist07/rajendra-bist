@@ -26,6 +26,59 @@ export const EDUCATION = [
   },
 ]
 
+export const CREDENTIALS = [
+  {
+    institution: 'Vcare Technical Institute',
+    title: 'Full-Stack Web Development Training',
+    credentialType: 'Professional Engineering Training',
+    timeframe: 'Completed 2025',
+    status: 'Completed' as const,
+    description:
+      'Rigorous practical training across modern full-stack web architecture, API engineering, database schema design, and production deployment patterns.',
+    topics: ['Node.js & Express.js', 'React & Next.js', 'PostgreSQL & MongoDB', 'REST APIs & WebSockets', 'System Design'],
+  },
+  {
+    institution: 'Indira Gandhi National Open University (IGNOU)',
+    title: 'Bachelor of Technology (B.Tech)',
+    credentialType: 'Undergraduate Degree in Computer Science',
+    timeframe: 'Ongoing',
+    status: 'In Progress' as const,
+    description:
+      'Theoretical foundations and systems engineering coursework covering algorithms, operating systems, networking, database architecture, and software principles.',
+    topics: ['Data Structures & Algorithms', 'Database Management Systems', 'Computer Networks', 'Operating Systems', 'Software Engineering'],
+  },
+]
+
+export const EXPERIENCE = [
+  {
+    role: '[REPLACE WITH REAL ROLE: e.g. Full-Stack / Backend Engineer]',
+    company: '[REPLACE WITH REAL COMPANY / CLIENT: e.g. Freelance / Stealth Project]',
+    timeframe: '[REPLACE WITH DATES: e.g. 2024 — Present]',
+    location: 'Remote, Nepal',
+    description:
+      '[REPLACE WITH ROLE OVERVIEW: Architected scalable backend services, designed normalized database schemas, and built automated full-stack workflows with production AI tooling.]',
+    achievements: [
+      '[REPLACE: Engineered high-throughput API endpoints with strict validation guardrails and error boundaries]',
+      '[REPLACE: Designed and deployed Supabase PostgreSQL databases with pgvector embeddings for RAG pipelines]',
+      '[REPLACE: Optimized client-server synchronization reducing real-time WebSocket latency]',
+    ],
+    stack: ['Node.js', 'Next.js', 'PostgreSQL', 'Supabase', 'Docker', 'TypeScript'],
+  },
+  {
+    role: '[REPLACE WITH REAL ROLE: e.g. Software Engineering Intern / Junior Developer]',
+    company: '[REPLACE WITH REAL COMPANY / CLIENT: e.g. Tech Internship / Client Project]',
+    timeframe: '[REPLACE WITH DATES: e.g. 2023 — 2024]',
+    location: 'Nepal',
+    description:
+      '[REPLACE WITH SCOPE: Developed full-stack web modules, implemented secure JWT authentication flows, and maintained responsive user interfaces.]',
+    achievements: [
+      '[REPLACE: Implemented resilient token-refresh interceptors and protected API routing]',
+      '[REPLACE: Built reusable component libraries with modular Tailwind CSS design tokens]',
+    ],
+    stack: ['React', 'JavaScript', 'MongoDB', 'Express.js', 'REST APIs', 'Git'],
+  },
+]
+
 export const SKILLS = [
   {
     category: 'Frontend',
