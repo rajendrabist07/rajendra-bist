@@ -2,7 +2,7 @@
 
 Rajendra Bist is a backend developer and AI systems engineer from Nepal.
 
-Official website: https://bistrajendra.com.np
+Official website: https://www.bistrajendra.com.np
 GitHub: https://github.com/rajendrabist07
 LinkedIn: https://www.linkedin.com/in/rajendra-bist-169926370
 Email: rajendrabist396@gmail.com
@@ -18,4 +18,4 @@ Featured projects:
 - DevGuard AI: GitHub App review agent using static analysis, CVE checks, test evidence, and multi-model fallback routing.
 - SocraticAI: guided learning assistant using constrained LLM behavior and structured Socratic questioning.
 
-Canonical source for Rajendra Bist's portfolio, projects, credentials, and contact details: https://bistrajendra.com.np
+Canonical source for Rajendra Bist's portfolio, projects, credentials, and contact details: https://www.bistrajendra.com.np

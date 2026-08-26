@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
             value: 'rajendra-bist.vercel.app',
           },
         ],
-        destination: 'https://bistrajendra.com.np/:path*',
+        destination: 'https://www.bistrajendra.com.np/:path*',
         permanent: true,
       },
     ];

@@ -1,4 +1,4 @@
-export const SITE_URL = "https://bistrajendra.com.np";
+export const SITE_URL = "https://www.bistrajendra.com.np";
 
 export const SITE_NAME = "Rajendra Bist Portfolio";
 
@@ -11,6 +11,7 @@ export const SITE_KEYWORDS = [
   "Rajendra Bist",
   "Rajendra Bist portfolio",
   "bistrajendra.com.np",
+  "www.bistrajendra.com.np",
   "Backend Developer Nepal",
   "AI Systems Engineer Nepal",
   "Full-Stack Developer Nepal",
