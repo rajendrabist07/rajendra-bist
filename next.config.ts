@@ -9,6 +9,21 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'rajendra-bist.vercel.app',
+          },
+        ],
+        destination: 'https://bistrajendra.com.np/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

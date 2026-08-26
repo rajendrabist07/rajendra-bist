@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "rajendra-bist.vercel.app"
+        }
+      ],
+      "destination": "https://bistrajendra.com.np/:path*",
+      "permanent": true
+    }
+  ]
+}
