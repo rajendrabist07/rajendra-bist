@@ -83,7 +83,7 @@ export default function ProjectCard({ title, status, description, stack, imageUr
               target="_blank"
               rel="noreferrer"
               whileHover={{ scale: 1.03 }}
-              className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-sm font-semibold text-white outline-none transition hover:bg-orange-400"
+              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white outline-none transition hover:bg-indigo-500"
             >
               Live Demo <ExternalLink size={15} />
             </motion.a>

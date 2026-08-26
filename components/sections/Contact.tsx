@@ -55,8 +55,8 @@ export default function Contact() {
           <p className="mx-auto -mt-4 max-w-2xl text-slate-400">
             Remote-first full-stack work, backend-heavy products, AI-integrated tools, and practical freelance builds.
           </p>
-          <div className="mx-auto mt-8 inline-flex items-center gap-3 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-5 py-3 text-emerald-300">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]" />
+          <div className="mx-auto mt-8 inline-flex items-center gap-3 rounded-full border border-sky-400/20 bg-sky-400/10 px-5 py-3 text-sky-200">
+            <span className="h-2.5 w-2.5 rounded-full bg-sky-400 shadow-[0_0_18px_rgba(56,189,248,0.8)]" />
             Available for new roles and collaborations
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function Contact() {
                   name="name"
                   value={form.name}
                   onChange={event => updateField('name', event.target.value)}
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-orange-400/60"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-sky-400/60"
                   placeholder="Your name"
                   required
                 />
@@ -85,7 +85,7 @@ export default function Contact() {
                   value={form.email}
                   onChange={event => updateField('email', event.target.value)}
                   type="email"
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-orange-400/60"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-sky-400/60"
                   placeholder="you@company.com"
                   required
                 />
@@ -97,7 +97,7 @@ export default function Contact() {
                   name="message"
                   value={form.message}
                   onChange={event => updateField('message', event.target.value)}
-                  className="mt-2 min-h-[168px] w-full resize-none rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-orange-400/60"
+                  className="mt-2 min-h-[168px] w-full resize-none rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-sky-400/60"
                   placeholder="Tell me about the role, project, or idea..."
                   required
                 />
@@ -106,13 +106,13 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-orange-500 px-5 py-4 text-base font-semibold text-white transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-5 py-4 text-base font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Send size={18} />
               {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
             {feedback ? (
-              <p className={`mt-4 flex items-center gap-2 text-sm ${status === 'success' ? 'text-emerald-300' : 'text-rose-300'}`}>
+              <p className={`mt-4 flex items-center gap-2 text-sm ${status === 'success' ? 'text-sky-300' : 'text-rose-300'}`}>
                 {status === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
                 {feedback}
               </p>
@@ -140,10 +140,10 @@ export default function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-orange-400/40 hover:bg-white/[0.06]"
+                className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-sky-400/40 hover:bg-white/[0.06]"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-300 transition group-hover:bg-orange-500 group-hover:text-white">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300 transition group-hover:bg-sky-500 group-hover:text-white">
                       <Icon size={20} />
                     </span>
                     <div className="min-w-0">
@@ -157,10 +157,10 @@ export default function Contact() {
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-orange-400/40 hover:bg-white/[0.06]"
+              className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-sky-400/40 hover:bg-white/[0.06]"
             >
               <div className="flex items-center gap-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-300 transition group-hover:bg-emerald-500 group-hover:text-white">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300 transition group-hover:bg-indigo-500 group-hover:text-white">
                   <Download size={20} />
                 </span>
                 <div className="min-w-0">

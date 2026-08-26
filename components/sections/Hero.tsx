@@ -45,7 +45,7 @@ export default function Hero() {
     >
       <div className="hero-grid" />
       <div className="star-field" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 pt-10 lg:grid-cols-[0.92fr_1.08fr]">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 pt-10 lg:min-h-[calc(100vh-9rem)] lg:grid-cols-[0.95fr_1.05fr]">
         <div className="text-center md:text-left">
           <motion.div
             initial="hidden"
@@ -53,11 +53,11 @@ export default function Hero() {
             variants={heroVariants}
             transition={itemTransition}
           >
-            <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-300 md:mx-0">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]" />
+            <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-200 md:mx-0">
+              <span className="h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_18px_rgba(56,189,248,0.8)]" />
               Available for Work
             </p>
-            <h1 className="mt-8 text-5xl font-black uppercase leading-[0.9] tracking-normal sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 text-6xl font-black uppercase leading-[0.88] tracking-normal sm:text-7xl lg:text-8xl">
               <span className="hero-name-gradient">Rajendra</span>
               <span className="mt-2 block text-white">Bist</span>
             </h1>
@@ -104,14 +104,14 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="inline-flex items-center justify-center rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_34px_rgba(249,115,22,0.18)] transition hover:bg-orange-400"
+              className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_34px_rgba(99,102,241,0.25)] transition hover:bg-indigo-500"
             >
               View My Work
             </a>
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-orange-300/30 hover:bg-orange-400/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-300/30 hover:bg-sky-400/10"
             >
               <Download size={18} /> Download CV
             </a>
@@ -144,7 +144,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-400 transition hover:border-orange-400/40 hover:text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-400 transition hover:border-sky-400/40 hover:text-white"
                 >
                   <Icon size={19} />
                 </a>
@@ -158,10 +158,29 @@ export default function Hero() {
           animate="visible"
           variants={heroVariants}
           transition={{ ...itemTransition, delay: 0.35 }}
-          className="relative mx-auto w-full max-w-[560px] lg:mr-0"
+          className="relative mx-auto flex w-full max-w-[560px] flex-col items-center lg:mr-0 lg:min-h-[570px] lg:items-end"
         >
-          <CodeBioBlock />
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="relative w-full max-w-[340px] lg:max-w-[390px]">
+            <div className="absolute -inset-8 rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.34),rgba(56,189,248,0.12)_45%,transparent_70%)] blur-2xl" />
+            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-sky-400/70 bg-[#10131c] p-2 shadow-[0_0_90px_rgba(99,102,241,0.26)]">
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#10131c]">
+                <Image
+                  src="/images/rajendra-bist.jpeg"
+                  alt="Rajendra Bist - Backend Developer from Nepal profile photo"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 360px, 82vw"
+                  className="object-cover object-[50%_18%]"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-7 w-full lg:absolute lg:bottom-20 lg:left-0 lg:mt-0 lg:max-w-[430px]">
+            <CodeBioBlock />
+          </div>
+
+          <div className="mt-4 grid w-full gap-3 sm:grid-cols-3 lg:absolute lg:bottom-0 lg:left-10 lg:max-w-[500px]">
             {[
               ["3", "AI products"],
               ["Node", "backend focus"],
@@ -172,15 +191,6 @@ export default function Hero() {
                 <p className="mt-1 text-xs text-slate-500">{label}</p>
               </div>
             ))}
-          </div>
-          <div className="sr-only">
-            <Image
-              src="/images/rajendra-bist.jpeg"
-              alt="Rajendra Bist - Backend Developer from Nepal profile photo"
-              width={320}
-              height={320}
-              priority
-            />
           </div>
         </motion.div>
       </div>

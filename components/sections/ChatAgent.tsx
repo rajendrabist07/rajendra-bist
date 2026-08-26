@@ -48,8 +48,8 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
         >
           {copied ? (
             <>
-              <Check size={11} className="text-emerald-400" />
-              <span className="text-emerald-400">Copied!</span>
+              <Check size={11} className="text-sky-400" />
+              <span className="text-sky-400">Copied!</span>
             </>
           ) : (
             <>
@@ -444,7 +444,7 @@ export default function ChatAgent() {
                 <div className="flex items-center gap-3">
                   <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md">
                     <Bot size={18} />
-                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#09090f] bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#09090f] bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
                   </span>
                   <div>
                     <div className="flex items-center gap-1.5">
@@ -573,7 +573,7 @@ export default function ChatAgent() {
                               aria-label="Copy response"
                             >
                               {copiedMsgId === message.id ? (
-                                <Check size={13} className="text-emerald-400" />
+                                <Check size={13} className="text-sky-400" />
                               ) : (
                                 <Copy size={13} />
                               )}
@@ -597,7 +597,7 @@ export default function ChatAgent() {
                               type="button"
                               onClick={() => handleToggleRating(message.id, 'like')}
                               className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
-                                ratings[message.id] === 'like' ? 'text-emerald-400 fill-emerald-400/20' : ''
+                                ratings[message.id] === 'like' ? 'text-sky-400 fill-sky-400/20' : ''
                               }`}
                               title="Like response"
                               aria-label="Like response"

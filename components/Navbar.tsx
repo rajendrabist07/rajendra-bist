@@ -20,7 +20,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#09090f]/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 md:px-8">
         <a href="#home" className="text-sm font-black uppercase tracking-normal text-slate-100">
-          RB<span className="text-orange-400">.</span>
+          RB<span className="text-sky-400">.</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map(item => (
@@ -32,7 +32,7 @@ export default function Navbar() {
         <a
           href={PERSONAL.resumeUrl}
           download="Rajendra-Bist-Resume.pdf"
-          className="hidden items-center justify-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-100 transition hover:border-orange-300/50 hover:bg-orange-500/20 md:inline-flex"
+          className="hidden items-center justify-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-sm font-semibold text-sky-100 transition hover:border-sky-300/50 hover:bg-sky-500/20 md:inline-flex"
         >
           <Download size={16} />
           Download CV
@@ -65,7 +65,7 @@ export default function Navbar() {
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-orange-400/30 bg-orange-500/10 px-4 py-3 text-base font-semibold text-orange-100 transition hover:border-orange-300/50 hover:bg-orange-500/20"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-400/30 bg-sky-500/10 px-4 py-3 text-base font-semibold text-sky-100 transition hover:border-sky-300/50 hover:bg-sky-500/20"
             >
               <Download size={18} />
               Download CV

@@ -56,8 +56,8 @@ export default function Credentials() {
                     <span
                       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold border ${
                         isCompleted
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                          : "bg-amber-500/10 text-amber-300 border-amber-500/20"
+                          ? "bg-sky-500/10 text-sky-300 border-sky-500/20"
+                          : "bg-indigo-500/10 text-indigo-300 border-indigo-500/20"
                       }`}
                     >
                       {isCompleted ? <CheckCircle2 size={13} /> : <Clock size={13} />}

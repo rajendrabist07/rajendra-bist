@@ -23,13 +23,13 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
             <a href="#home" className="text-2xl font-black tracking-normal text-white">
-              RB<span className="text-orange-400">.</span>
+              RB<span className="text-sky-400">.</span>
             </a>
             <p className="mt-5 max-w-sm leading-7 text-slate-500">
               Backend developer in Nepal building scalable APIs, RAG pipelines, and AI-integrated products.
             </p>
-            <p className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-400">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+            <p className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-sky-300">
+              <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />
               Open to Work
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label as string}
-                  className="text-slate-500 transition hover:text-orange-300"
+                  className="text-slate-500 transition hover:text-sky-300"
                 >
                   <Icon size={22} />
                 </a>
