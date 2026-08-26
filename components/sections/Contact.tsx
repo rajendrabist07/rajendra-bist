@@ -70,9 +70,11 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="surface-panel rounded-3xl p-6 shadow-glow sm:p-8">
             <h3 className="text-2xl font-semibold text-white">Send a message</h3>
             <div className="mt-8 space-y-5">
-              <label className="block">
+              <label htmlFor="contact-name" className="block">
                 <span className="text-sm font-medium text-slate-400">Name</span>
                 <input
+                  id="contact-name"
+                  name="name"
                   value={form.name}
                   onChange={event => updateField('name', event.target.value)}
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-indigo-400/60"
@@ -80,9 +82,11 @@ export default function Contact() {
                   required
                 />
               </label>
-              <label className="block">
+              <label htmlFor="contact-email" className="block">
                 <span className="text-sm font-medium text-slate-400">Email</span>
                 <input
+                  id="contact-email"
+                  name="email"
                   value={form.email}
                   onChange={event => updateField('email', event.target.value)}
                   type="email"
@@ -91,9 +95,11 @@ export default function Contact() {
                   required
                 />
               </label>
-              <label className="block">
+              <label htmlFor="contact-message" className="block">
                 <span className="text-sm font-medium text-slate-400">Message</span>
                 <textarea
+                  id="contact-message"
+                  name="message"
                   value={form.message}
                   onChange={event => updateField('message', event.target.value)}
                   className="mt-2 min-h-[168px] w-full resize-none rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-indigo-400/60"

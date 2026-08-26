@@ -462,6 +462,7 @@ export default function ChatAgent() {
                       onClick={handleClearHistory}
                       className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white cursor-pointer"
                       title="Reset Conversation"
+                      aria-label="Reset Conversation"
                     >
                       <RotateCcw size={16} />
                     </button>
@@ -569,6 +570,7 @@ export default function ChatAgent() {
                               onClick={() => handleCopyMessage(message.id, message.content)}
                               className="transition hover:text-slate-300 active:scale-95 cursor-pointer"
                               title="Copy response"
+                              aria-label="Copy response"
                             >
                               {copiedMsgId === message.id ? (
                                 <Check size={13} className="text-emerald-400" />
@@ -585,6 +587,7 @@ export default function ChatAgent() {
                                 speakingMsgId === message.id ? 'text-indigo-400 animate-pulse' : ''
                               }`}
                               title={speakingMsgId === message.id ? "Stop reading" : "Read aloud"}
+                              aria-label={speakingMsgId === message.id ? "Stop reading" : "Read aloud"}
                             >
                               <Volume2 size={13} />
                             </button>
@@ -596,7 +599,8 @@ export default function ChatAgent() {
                               className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
                                 ratings[message.id] === 'like' ? 'text-emerald-400 fill-emerald-400/20' : ''
                               }`}
-                              title="Like"
+                              title="Like response"
+                              aria-label="Like response"
                             >
                               <ThumbsUp size={13} />
                             </button>
@@ -608,7 +612,8 @@ export default function ChatAgent() {
                               className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
                                 ratings[message.id] === 'dislike' ? 'text-rose-400 fill-rose-400/20' : ''
                               }`}
-                              title="Dislike"
+                              title="Dislike response"
+                              aria-label="Dislike response"
                             >
                               <ThumbsDown size={13} />
                             </button>
@@ -619,6 +624,7 @@ export default function ChatAgent() {
                               onClick={() => handleRedo(message.id)}
                               className="transition hover:text-slate-300 active:scale-95 cursor-pointer"
                               title="Regenerate response"
+                              aria-label="Regenerate response"
                               disabled={isLoading}
                             >
                               <RotateCw size={13} />
