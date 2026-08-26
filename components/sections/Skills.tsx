@@ -74,7 +74,7 @@ const skillIcons = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="px-6 py-24 md:px-8">
+    <section id="skills" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeader subtitle="Skills" title="Engineering Toolkit" />
         <motion.div

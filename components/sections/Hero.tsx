@@ -6,6 +6,8 @@ import { Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
 
+import CodeBioBlock from "@/components/ui/CodeBioBlock";
+
 const heroVariants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
@@ -161,21 +163,25 @@ export default function Hero() {
           animate="visible"
           variants={heroVariants}
           transition={{ ...itemTransition, delay: 0.35 }}
-          className="relative mx-auto w-full max-w-[430px] lg:mr-0"
+          className="relative mx-auto w-full max-w-[460px] lg:mr-0 flex flex-col gap-8"
         >
-          <div className="absolute -inset-7 rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.42),rgba(14,165,233,0.16)_38%,transparent_68%)] blur-2xl" />
-          <div className="relative aspect-square overflow-hidden rounded-full border-2 border-indigo-400/80 bg-[#11101b] p-2 shadow-[0_0_90px_rgba(99,102,241,0.28)]">
-            <div className="relative h-full w-full overflow-hidden rounded-full bg-[#11101b]">
-              <Image
-                src="/images/rajendra-bist.jpeg"
-                alt="Rajendra Bist — Backend Developer from Nepal profile photo"
-                fill
-                priority
-                sizes="(min-width: 1024px) 420px, 90vw"
-                className="object-cover object-[50%_18%]"
-              />
+          <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[340px]">
+            <div className="absolute -inset-7 rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.42),rgba(14,165,233,0.16)_38%,transparent_68%)] blur-2xl" />
+            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-indigo-400/80 bg-[#11101b] p-2 shadow-[0_0_90px_rgba(99,102,241,0.28)]">
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#11101b]">
+                <Image
+                  src="/images/rajendra-bist.jpeg"
+                  alt="Rajendra Bist — Backend Developer from Nepal profile photo"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 340px, 90vw"
+                  className="object-cover object-[50%_18%]"
+                />
+              </div>
             </div>
           </div>
+
+          <CodeBioBlock />
         </motion.div>
       </div>
     </section>

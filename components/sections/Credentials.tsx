@@ -28,7 +28,7 @@ const itemVariants = {
 
 export default function Credentials() {
   return (
-    <section id="credentials" className="px-6 py-20 md:px-8">
+    <section id="credentials" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeader subtitle="Credentials" title="Education & Professional Training" />
 

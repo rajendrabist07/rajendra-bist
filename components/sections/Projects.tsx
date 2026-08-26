@@ -27,7 +27,7 @@ const itemVariants = {
 
 export default function Projects() {
   return (
-    <section id="projects" className="px-6 py-20 md:px-8">
+    <section id="projects" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeader subtitle="Projects" title="Featured Work" />
         <motion.div

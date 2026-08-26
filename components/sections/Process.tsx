@@ -49,7 +49,7 @@ const itemVariants = {
 
 export default function Process() {
   return (
-    <section id="process" className="px-6 py-20 md:px-8">
+    <section id="process" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeader subtitle="Process" title="How I Build Products" />
         <motion.div

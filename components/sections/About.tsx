@@ -49,7 +49,7 @@ const strengths = [
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-24 md:px-8">
+    <section id="about" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeader subtitle="About" title="Builder With a Systems Mindset" />
 

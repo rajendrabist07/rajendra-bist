@@ -1,7 +1,29 @@
 import type { Metadata, Viewport } from 'next';
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google';
 import '../styles/globals.css';
 import { Providers } from './providers';
 import { SITE_URL } from '@/lib/site-config';
+
+const displayFont = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['500', '600', '700', '800'],
+  display: 'swap',
+});
+
+const sansFont = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
+
+const monoFont = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: ['400', '500', '600'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Rajendra Bist — Backend Developer (Full-Stack Capable)',
@@ -136,7 +158,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className="bg-[--bg-primary] text-[--text-primary]">
+      <body className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} bg-[--bg-primary] text-[--text-primary] antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
