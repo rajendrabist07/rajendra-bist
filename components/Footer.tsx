@@ -51,7 +51,7 @@ export default function Footer() {
               {PERSONAL.email}
             </a>
             <p className="mt-3 text-slate-600">UTC+5:45</p>
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex gap-3">
               {socials.map(([Icon, href, label]) => (
                 <a
                   key={label as string}
@@ -59,9 +59,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label as string}
-                  className="text-slate-500 transition hover:text-sky-300"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition-all duration-200 hover:border-sky-400/50 hover:bg-sky-500/10 hover:text-sky-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
                 >
-                  <Icon size={22} />
+                  <Icon size={18} />
                 </a>
               ))}
             </div>

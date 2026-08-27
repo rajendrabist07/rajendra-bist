@@ -11,12 +11,14 @@ import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import StarryBackground from "@/components/ui/StarryBackground";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="relative min-h-screen bg-[#060708] text-white selection:bg-sky-500 selection:text-white">
+      <StarryBackground />
       <Navbar />
-      <main className="relative">
+      <main className="relative z-10">
         <Hero />
         <About />
         <Process />

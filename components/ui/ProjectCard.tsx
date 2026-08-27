@@ -83,7 +83,7 @@ export default function ProjectCard({ title, status, description, stack, imageUr
               target="_blank"
               rel="noreferrer"
               whileHover={{ scale: 1.03 }}
-              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white outline-none transition hover:bg-indigo-500"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-2 text-sm font-semibold text-white outline-none shadow-[0_0_20px_rgba(37,99,235,0.3)] transition hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] hover:from-blue-500 hover:to-sky-400"
             >
               Live Demo <ExternalLink size={15} />
             </motion.a>

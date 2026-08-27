@@ -106,7 +106,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-5 py-4 text-base font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 px-5 py-4 text-base font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
             >
               <Send size={18} />
               {status === 'sending' ? 'Sending...' : 'Send Message'}
@@ -122,7 +122,7 @@ export default function Contact() {
           <div className="space-y-4">
             <div className="surface-panel rounded-[1.5rem] p-6">
               <div className="flex items-center gap-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300">
                   <MapPin size={20} />
                 </span>
                 <div>
@@ -140,7 +140,7 @@ export default function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-sky-400/40 hover:bg-white/[0.06]"
+                  className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-sky-400/40 hover:bg-white/[0.06]"
                 >
                   <div className="flex items-center gap-4">
                     <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300 transition group-hover:bg-sky-500 group-hover:text-white">
@@ -160,7 +160,7 @@ export default function Contact() {
               className="surface-panel group block rounded-[1.5rem] p-6 transition hover:border-sky-400/40 hover:bg-white/[0.06]"
             >
               <div className="flex items-center gap-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300 transition group-hover:bg-indigo-500 group-hover:text-white">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300 transition group-hover:bg-sky-500 group-hover:text-white">
                   <Download size={20} />
                 </span>
                 <div className="min-w-0">

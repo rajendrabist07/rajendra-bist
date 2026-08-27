@@ -67,16 +67,16 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="inline-flex min-h-11 min-w-36 items-center justify-center rounded-2xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_34px_rgba(99,102,241,0.22)] transition hover:bg-indigo-500"
+              className="inline-flex min-h-12 min-w-40 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 bg-size-200 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(56,189,248,0.6)] hover:scale-[1.02] active:scale-[0.98]"
             >
               View Work
             </a>
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="inline-flex min-h-11 min-w-36 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-sky-300/30 hover:bg-sky-400/10"
+              className="inline-flex min-h-12 min-w-40 items-center justify-center gap-2 rounded-2xl border border-sky-400/30 bg-sky-500/10 px-6 py-3 text-sm font-semibold text-sky-100 transition-all duration-300 hover:border-sky-300/60 hover:bg-sky-500/20 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Download size={18} /> Download CV
+              <Download size={18} className="text-sky-300" /> Download CV
             </a>
           </motion.div>
 
@@ -85,12 +85,12 @@ export default function Hero() {
             animate="visible"
             variants={heroVariants}
             transition={{ ...itemTransition, delay: 0.6 }}
-            className="mt-8 flex justify-center gap-3 md:justify-start"
+            className="mt-8 flex justify-center gap-3.5 md:justify-start"
           >
             {[
-              { href: PERSONAL.github, icon: Github, label: "GitHub" },
-              { href: PERSONAL.linkedin, icon: Linkedin, label: "LinkedIn" },
-              { href: `mailto:${PERSONAL.email}`, icon: Mail, label: "Email" },
+              { href: PERSONAL.github, icon: Github, label: "GitHub", color: "hover:text-sky-300 hover:border-sky-400/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]" },
+              { href: PERSONAL.linkedin, icon: Linkedin, label: "LinkedIn", color: "hover:text-blue-400 hover:border-blue-400/60 hover:shadow-[0_0_20px_rgba(96,165,250,0.35)]" },
+              { href: `mailto:${PERSONAL.email}`, icon: Mail, label: "Email", color: "hover:text-emerald-300 hover:border-emerald-400/60 hover:shadow-[0_0_20px_rgba(52,211,153,0.35)]" },
             ].map((item) => {
               const Icon = item.icon;
               return (
@@ -100,9 +100,9 @@ export default function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-400 transition hover:border-sky-400/40 hover:text-white"
+                  className={`group relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-slate-300 transition-all duration-300 hover:scale-110 active:scale-95 ${item.color}`}
                 >
-                  <Icon size={19} />
+                  <Icon size={20} className="transition-transform group-hover:scale-110" />
                 </a>
               );
             })}
