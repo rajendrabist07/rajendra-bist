@@ -62,16 +62,16 @@ export default function About() {
           className="mt-12 space-y-6 text-base leading-relaxed text-slate-300 sm:text-lg sm:leading-8"
         >
           <motion.p variants={itemVariants}>
-            I&apos;m a backend developer based in Nepal working primarily with Node.js, TypeScript, and PostgreSQL. I don&apos;t build demo projects — I build systems that handle real users, real data, and real failures.
+            I&apos;m a backend developer and systems engineer based in Nepal working primarily with Node.js, TypeScript, and PostgreSQL. I don&apos;t build superficial demo projects — I design systems from first principles to handle real users, high concurrency, and real-world failure modes.
           </motion.p>
           <motion.p variants={itemVariants}>
-            I&apos;ve shipped three production systems including autonomous PR security agents, persistent cognitive learning engines, secure authentication flows, and vector similarity search with full CI/CD.
+            My engineering strategy is systems-first: establish rigid database schemas, enforce schema validation, and define fault-tolerant state boundaries before writing client-facing flows. I&apos;ve shipped production architectures including autonomous PR review agents with AST static verification, persistent cognitive learning engines, and vector similarity search with automated CI/CD pipelines.
           </motion.p>
           <motion.p variants={itemVariants}>
-            Right now I&apos;m going deeper into AI engineering — learning vector embeddings, RAG pipelines, and LLM integration properly, from first principles.
+            In modern AI engineering, I bridge probabilistic LLMs with deterministic software rigor — implementing self-hosted pgvector embeddings, grounded RAG retrieval pipelines, and multi-model fallback routers that eliminate hallucinations and guarantee uptime under strict rate limits.
           </motion.p>
           <motion.p variants={itemVariants}>
-            Pursuing B.Tech in Computer Science at IGNOU. Open to backend engineering roles onsite in Nepal or remote worldwide.
+            Formally grounded in Computer Science fundamentals with continuous applied engineering depth. Open to backend engineering, distributed systems, and AI infrastructure roles onsite in Nepal or remote worldwide.
           </motion.p>
         </motion.div>
 

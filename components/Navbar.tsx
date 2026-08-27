@@ -23,8 +23,8 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.08] bg-[#06080d]/80 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 md:px-8 pr-28 sm:pr-36">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.08] bg-[#06080d]/85 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3.5 md:px-8 pr-36 sm:pr-44 lg:pr-48">
         <a href="#home" className="text-base font-black tracking-widest text-white transition hover:text-sky-300">
           RB<span className="text-sky-400">.</span>
         </a>

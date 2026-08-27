@@ -38,10 +38,10 @@ export const CREDENTIALS = [
     topics: ['Node.js & Express.js', 'React & Next.js', 'PostgreSQL & MongoDB', 'REST APIs & WebSockets', 'System Design'],
   },
   {
-    institution: 'Indira Gandhi National Open University (IGNOU)',
-    title: 'Bachelor of Technology (B.Tech)',
+    institution: 'Computer Science & Engineering',
+    title: 'Bachelor of Technology (B.Tech) in CS',
     credentialType: 'Undergraduate Degree in Computer Science',
-    timeframe: 'Ongoing',
+    timeframe: 'In Progress',
     status: 'In Progress' as const,
     description:
       'Theoretical foundations and systems engineering coursework covering algorithms, operating systems, networking, database architecture, and software principles.',

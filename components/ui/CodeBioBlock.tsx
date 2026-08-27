@@ -4,11 +4,13 @@ import { useState } from "react";
 import { Check, Copy, Terminal } from "lucide-react";
 
 const codeString = `const rajendra = {
-  role: "Backend Engineer",
+  role: "Backend & Systems Engineer",
   location: "Nepal",
   timezone: "UTC+5:45",
   open: true,
-  focus: ["RAG Pipelines", "LLM Integration"]
+  architecture: ["Distributed Systems", "PostgreSQL", "Node.js", "TypeScript"],
+  ai_systems: ["RAG Pipelines", "pgvector", "Tool-Calling Agents", "LLM Fallbacks"],
+  mindset: "Data integrity and failure modes first, UI second"
 }`;
 
 const codeRows = [
@@ -18,7 +20,7 @@ const codeRows = [
   </>,
   <>
     <span className="text-sky-300">role</span>:{" "}
-    <span className="text-cyan-300">&quot;Backend Engineer&quot;</span>,
+    <span className="text-cyan-300">&quot;Backend &amp; Systems Engineer&quot;</span>,
   </>,
   <>
     <span className="text-sky-300">location</span>:{" "}
@@ -32,9 +34,20 @@ const codeRows = [
     <span className="text-sky-300">open</span>: <span className="text-indigo-300">true</span>,
   </>,
   <>
-    <span className="text-sky-300">focus</span>: [
+    <span className="text-sky-300">architecture</span>: [
+    <span className="text-cyan-300">&quot;Distributed Systems&quot;</span>,{" "}
+    <span className="text-cyan-300">&quot;PostgreSQL&quot;</span>,{" "}
+    <span className="text-cyan-300">&quot;Node.js&quot;</span>],
+  </>,
+  <>
+    <span className="text-sky-300">ai_systems</span>: [
     <span className="text-cyan-300">&quot;RAG Pipelines&quot;</span>,{" "}
-    <span className="text-cyan-300">&quot;LLM Integration&quot;</span>]
+    <span className="text-cyan-300">&quot;pgvector&quot;</span>,{" "}
+    <span className="text-cyan-300">&quot;Tool-Calling Agents&quot;</span>],
+  </>,
+  <>
+    <span className="text-sky-300">mindset</span>:{" "}
+    <span className="text-cyan-300">&quot;Data integrity and failure modes first, UI second&quot;</span>
   </>,
   <>{"}"}</>,
 ];
