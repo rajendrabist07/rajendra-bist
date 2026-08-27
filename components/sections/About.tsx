@@ -51,67 +51,63 @@ const strengths = [
 export default function About() {
   return (
     <section id="about" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeader subtitle="About" title="Builder With a Systems Mindset" />
+      <div className="mx-auto max-w-5xl">
+        <SectionHeader subtitle="About" title="Who I Am" />
 
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
-          className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
+          className="mt-12 space-y-6 text-base leading-relaxed text-slate-300 sm:text-lg sm:leading-8"
         >
-          <motion.div variants={itemVariants} className="surface-panel rounded-3xl p-8 shadow-glow">
-            <p className="text-xl leading-9 text-slate-200">
-              I&apos;m Rajendra Bist, a backend developer and AI systems engineer from Nepal. I design systems from the data layer up, establishing validation schemas, API boundaries, and database integrity before writing client-facing flows.
-            </p>
-            <p className="mt-6 text-base leading-8 text-slate-400">
-              My core work focuses on scalable web backends with Node.js, PostgreSQL, MongoDB, and Next.js, plus production AI pipelines using RAG grounding, LLM integrations, and deterministic tool guardrails. Clean engineering judgment means delivering high-throughput data layers paired with fast, responsive frontend states.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                <GraduationCap className="text-indigo-300" size={24} />
-                <p className="mt-4 text-sm text-slate-500">Technical Credentials</p>
-                <p className="mt-1 font-semibold text-white">Full-Stack Web Development</p>
-                <p className="mt-1 text-sm text-slate-400">Vcare Technical Institute</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                <Rocket className="text-indigo-300" size={24} />
-                <p className="mt-4 text-sm text-slate-500">Production Systems</p>
-                <p className="mt-1 font-semibold text-white">AI & Backend Architectures</p>
-                <p className="mt-1 text-sm text-slate-400">EduMethod AI, DevGuard AI, SocraticAI, pgvector, tool loops</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div variants={containerVariants} className="grid gap-4 sm:grid-cols-2">
-            {strengths.map((item) => {
-              const Icon = item.icon;
-              return (
-                <motion.article
-                  key={item.title}
-                  variants={itemVariants}
-                  className="surface-panel rounded-3xl p-6 transition hover:border-indigo-400/40"
-                >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300">
-                    <Icon size={22} />
-                  </span>
-                  <h3 className="mt-5 text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
-                </motion.article>
-              );
-            })}
-          </motion.div>
+          <motion.p variants={itemVariants}>
+            I&apos;m a backend developer based in Nepal working primarily with Node.js, TypeScript, and PostgreSQL. I don&apos;t build demo projects — I build systems that handle real users, real data, and real failures.
+          </motion.p>
+          <motion.p variants={itemVariants}>
+            I&apos;ve shipped three production systems including autonomous PR security agents, persistent cognitive learning engines, secure authentication flows, and vector similarity search with full CI/CD.
+          </motion.p>
+          <motion.p variants={itemVariants}>
+            Right now I&apos;m going deeper into AI engineering — learning vector embeddings, RAG pipelines, and LLM integration properly, from first principles.
+          </motion.p>
+          <motion.p variants={itemVariants}>
+            Pursuing B.Tech in Computer Science at IGNOU. Open to backend engineering roles onsite in Nepal or remote worldwide.
+          </motion.p>
         </motion.div>
 
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={itemVariants}
-          className="mx-auto mt-10 max-w-3xl"
+          className="mt-10"
         >
           <CodeBioBlock />
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {strengths.map((item) => {
+            const Icon = item.icon;
+            return (
+              <motion.article
+                key={item.title}
+                variants={itemVariants}
+                className="surface-panel rounded-2xl p-5 transition-all duration-200 hover:border-sky-400/40 hover:bg-white/[0.04]"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400">
+                  <Icon size={20} />
+                </span>
+                <h3 className="mt-4 text-base font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">{item.description}</p>
+              </motion.article>
+            );
+          })}
         </motion.div>
       </div>
     </section>

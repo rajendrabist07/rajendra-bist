@@ -23,36 +23,39 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#09090f]/90 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#06080d]/80 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 md:px-8">
-        <a href="#home" className="text-sm font-black uppercase tracking-normal text-slate-100">
+        <a href="#home" className="text-base font-black tracking-widest text-white transition hover:text-sky-300">
           RB<span className="text-sky-400">.</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map(item => (
-            <a key={item.href} href={item.href} className="text-sm text-slate-400 transition hover:text-white">
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-xs font-semibold uppercase tracking-widest text-slate-400 transition hover:text-white"
+            >
               {item.label}
             </a>
           ))}
-        </nav>
-        <div className="hidden items-center gap-3 md:flex">
-          <button
-            type="button"
-            onClick={openChat}
-            className="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-gradient-to-r from-sky-500/20 via-blue-500/20 to-sky-500/20 px-3.5 py-1.5 text-xs font-semibold text-sky-200 shadow-[0_0_20px_rgba(56,189,248,0.2)] transition hover:border-sky-300 hover:bg-sky-500/30 hover:text-white cursor-pointer"
-          >
-            <Sparkles size={14} className="text-sky-300 animate-pulse" />
-            <span>Ask AI Agent</span>
-            <span className="rounded bg-sky-400/20 px-1 py-0.5 text-[10px] text-sky-300 font-mono">⌘K</span>
-          </button>
           <a
             href={PERSONAL.resumeUrl}
             download="Rajendra-Bist-Resume.pdf"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition hover:border-white/20 hover:bg-white/10"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-white/[0.03] px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-white"
           >
-            <Download size={14} />
-            CV
+            Download CV
           </a>
+        </nav>
+        <div className="hidden items-center md:flex">
+          <button
+            type="button"
+            onClick={openChat}
+            className="inline-flex items-center gap-2 rounded-full border border-sky-400/50 bg-[#0c1017]/90 px-4 py-2 text-xs font-semibold text-sky-200 shadow-[0_0_25px_rgba(56,189,248,0.25)] transition duration-200 hover:border-sky-300 hover:bg-sky-500/20 hover:text-white hover:scale-105 cursor-pointer"
+          >
+            <Sparkles size={14} className="text-sky-300 animate-pulse" />
+            <span>Ask AI</span>
+            <span className="rounded bg-white/10 px-1 py-0.5 text-[10px] text-sky-300 font-mono">⌘K</span>
+          </button>
         </div>
         <button
           type="button"

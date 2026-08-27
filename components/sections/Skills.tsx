@@ -1,128 +1,165 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
+  Binary,
   Bot,
-  Braces,
+  BrainCircuit,
   Cloud,
   Code2,
+  Cpu,
   Database,
   GitBranch,
-  Layers3,
+  Layers,
+  Network,
   Server,
+  ShieldCheck,
+  Workflow,
   Zap,
 } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { SKILLS } from "@/lib/portfolio-data";
-import SkillBadge from "@/components/ui/SkillBadge";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
+interface ToolItem {
+  name: string;
+  category: "backend" | "databases" | "devops" | "frontend" | "aiml";
+  badge?: "LEARNING" | "CORE";
+  icon: any;
+}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-};
+const ALL_TOOLS: ToolItem[] = [
+  // Backend
+  { name: "Node.js", category: "backend", icon: Server },
+  { name: "Express.js", category: "backend", icon: Server },
+  { name: "TypeScript", category: "backend", icon: Code2 },
+  { name: "REST APIs", category: "backend", icon: Network },
+  { name: "Socket.io", category: "backend", icon: Zap },
+  { name: "Zod Schema", category: "backend", icon: ShieldCheck },
+  { name: "JWT Auth", category: "backend", icon: ShieldCheck },
 
-const categoryIcons = {
-  Frontend: Code2,
-  Backend: Server,
-  Database: Database,
-  "Tools & DevOps": Cloud,
-  "AI & APIs": Bot,
-};
+  // Databases
+  { name: "PostgreSQL", category: "databases", icon: Database },
+  { name: "MongoDB", category: "databases", icon: Database },
+  { name: "Redis", category: "databases", icon: Database },
+  { name: "Supabase", category: "databases", icon: Database },
+  { name: "Mongoose", category: "databases", icon: Database },
+  { name: "PGVector", category: "databases", badge: "CORE", icon: Database },
 
-const skillIcons = {
-  React: Braces,
-  "Next.js 15": Layers3,
-  TypeScript: Code2,
-  "Tailwind CSS": Zap,
-  HTML5: Code2,
-  CSS3: Code2,
-  "Node.js": Server,
-  "Express.js": Server,
-  "REST APIs": Braces,
-  "Socket.io": Zap,
-  Zod: Braces,
-  MongoDB: Database,
-  Mongoose: Database,
-  PostgreSQL: Database,
-  Supabase: Database,
-  Git: GitBranch,
-  GitHub: GitBranch,
-  Vercel: Cloud,
-  Railway: Cloud,
-  Docker: Cloud,
-  Clerk: Zap,
-  "Gemini API": Bot,
-  "Groq API": Bot,
-  "Vercel AI SDK": Bot,
-  "LangChain.js": Bot,
-};
+  // DevOps & Cloud
+  { name: "Docker", category: "devops", icon: Cloud },
+  { name: "Git / GitHub", category: "devops", icon: GitBranch },
+  { name: "GitHub Actions", category: "devops", icon: Workflow },
+  { name: "Vercel", category: "devops", icon: Cloud },
+  { name: "Railway", category: "devops", icon: Cloud },
+  { name: "Linux", category: "devops", icon: Cpu },
+
+  // Frontend
+  { name: "Next.js 15", category: "frontend", icon: Layers },
+  { name: "React 19", category: "frontend", icon: Code2 },
+  { name: "Tailwind CSS v4", category: "frontend", icon: Zap },
+  { name: "Framer Motion", category: "frontend", icon: Zap },
+
+  // AI & ML
+  { name: "RAG Pipelines", category: "aiml", badge: "CORE", icon: BrainCircuit },
+  { name: "LLM Integration", category: "aiml", badge: "CORE", icon: Bot },
+  { name: "Google Gemini API", category: "aiml", badge: "CORE", icon: Bot },
+  { name: "Groq Model Router", category: "aiml", badge: "CORE", icon: Zap },
+  { name: "LangChain.js", category: "aiml", badge: "LEARNING", icon: Binary },
+  { name: "Vector Embeddings", category: "aiml", badge: "LEARNING", icon: BrainCircuit },
+  { name: "LLM-as-Judge", category: "aiml", badge: "LEARNING", icon: ShieldCheck },
+];
+
+const TABS = [
+  { id: "all", label: "ALL" },
+  { id: "backend", label: "BACKEND" },
+  { id: "databases", label: "DATABASES" },
+  { id: "devops", label: "DEVOPS" },
+  { id: "frontend", label: "FRONTEND" },
+  { id: "aiml", label: "AI / ML (Learning)" },
+] as const;
 
 export default function Skills() {
+  const [activeTab, setActiveTab] = useState<typeof TABS[number]["id"]>("all");
+
+  const filteredTools =
+    activeTab === "all"
+      ? ALL_TOOLS
+      : ALL_TOOLS.filter((t) => t.category === activeTab);
+
   return (
     <section id="skills" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionHeader subtitle="Skills" title="Engineering Toolkit" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={containerVariants}
-          className="grid gap-6 md:grid-cols-2"
-        >
-          {SKILLS.map((skill) => (
-            <motion.div
-              key={skill.category}
-              variants={itemVariants}
-              className="surface-panel group rounded-3xl border border-white/10 p-6 transition hover:border-indigo-400/40 hover:bg-white/[0.045]"
-            >
-              <div className="flex items-center gap-4">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300 transition group-hover:bg-indigo-500 group-hover:text-white">
-                  {(() => {
-                    const Icon = categoryIcons[skill.category as keyof typeof categoryIcons] || Code2;
-                    return <Icon size={22} />;
-                  })()}
-                </span>
-                <div>
-                  <p className="text-lg font-semibold text-white">{skill.category}</p>
-                  <p className="mt-1 text-sm text-slate-500">{skill.items.length} production-focused tools</p>
-                </div>
-              </div>
-              <motion.div
-                className="mt-5 flex flex-wrap gap-3"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, staggerChildren: 0.05 }}
+        <SectionHeader subtitle="Tech Stack" title="Technical Arsenal" />
+
+        {/* Filter Tabs */}
+        <div className="mt-10 flex flex-wrap items-center gap-2 border-b border-white/10 pb-4 sm:gap-6">
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative px-3 py-2 text-xs font-semibold tracking-wider transition-colors duration-200 cursor-pointer sm:text-sm ${
+                  isActive
+                    ? "text-sky-400 font-bold"
+                    : "text-slate-400 hover:text-white"
+                }`}
               >
-                {skill.items.map((item) => (
+                {tab.label}
+                {isActive && (
                   <motion.div
-                    key={item}
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <SkillBadge label={item} icon={skillIcons[item as keyof typeof skillIcons]} />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          ))}
+                    layoutId="activeTabIndicator"
+                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.8)]"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Tools Grid */}
+        <motion.div
+          layout
+          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredTools.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <motion.div
+                  key={tool.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.2 }}
+                  className="group relative flex items-center justify-between gap-2.5 rounded-xl border border-white/[0.08] bg-[#0c1017]/80 px-4 py-3.5 backdrop-blur-sm transition-all duration-200 hover:border-sky-400/50 hover:bg-white/[0.04] hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+                >
+                  <div className="flex min-w-0 items-center gap-2.5">
+                    <Icon
+                      size={17}
+                      className="shrink-0 text-slate-400 transition-colors duration-200 group-hover:text-sky-400"
+                    />
+                    <span className="truncate text-xs font-medium text-slate-200 transition-colors duration-200 group-hover:text-white sm:text-sm">
+                      {tool.name}
+                    </span>
+                  </div>
+
+                  {tool.badge && (
+                    <span
+                      className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${
+                        tool.badge === "CORE"
+                          ? "bg-sky-500/20 text-sky-300 border border-sky-400/30"
+                          : "bg-amber-500/15 text-amber-300 border border-amber-400/30"
+                      }`}
+                    >
+                      {tool.badge}
+                    </span>
+                  )}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>

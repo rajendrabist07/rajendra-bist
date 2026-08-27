@@ -407,18 +407,6 @@ export default function ChatAgent() {
 
   return (
     <>
-      {/* Floating Ask AI Launch Button */}
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2.5 rounded-full border border-indigo-500/30 bg-[#0d0c16]/95 px-6 py-3.5 text-sm font-semibold text-indigo-100 shadow-[0_0_50px_rgba(99,102,241,0.25)] backdrop-blur-xl transition duration-300 hover:border-indigo-400/60 hover:bg-indigo-600 hover:text-white hover:shadow-[0_0_60px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95 cursor-pointer"
-        aria-label="Open chat widget"
-      >
-        <Sparkles size={16} className="animate-pulse" />
-        Ask AI Agent
-        <span className="hidden rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-slate-400 sm:inline">⌘K</span>
-      </button>
-
       {/* Main Chat Dialog */}
       <AnimatePresence>
         {isOpen ? (
