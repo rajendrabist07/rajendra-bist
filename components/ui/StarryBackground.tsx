@@ -152,10 +152,23 @@ export default function StarryBackground() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-75"
-      aria-hidden="true"
-    />
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+      {/* Architectural Alignment Grid */}
+      <div 
+        className="absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px)
+          `,
+          backgroundSize: "72px 72px",
+        }}
+      />
+      {/* Celestial Starry Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full opacity-70"
+      />
+    </div>
   );
 }

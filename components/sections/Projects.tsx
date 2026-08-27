@@ -1,5 +1,9 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Github, Sparkles, Zap } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Code2, ExternalLink, Eye, Github, Sparkles, Zap } from "lucide-react";
+import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const CASE_STUDIES = [
@@ -7,6 +11,7 @@ const CASE_STUDIES = [
     tag: "PRODUCTION SYSTEM • 2026",
     title: "DevGuard AI",
     tagline: "Autonomous PR Security & Code Review Agent",
+    image: "/images/dev-guard-ai.png",
     terminalTitle: "devguard-pipeline.sh",
     terminalContent: `PR Webhook → [AST Static Linter]
                   ↓
@@ -43,6 +48,7 @@ const CASE_STUDIES = [
     tag: "PRODUCTION SYSTEM • 2026",
     title: "EduMethod AI",
     tagline: "Cognitive EdTech Platform With Persistent Memory & pgvector RAG",
+    image: "/images/edumethod-innovative.png",
     terminalTitle: "edumethod-arch.sh",
     terminalContent: `Syllabus Upload → [pgvector Embeddings]
                         ↓
@@ -79,6 +85,7 @@ const CASE_STUDIES = [
     tag: "PRODUCTION SYSTEM • 2026",
     title: "SocraticAI",
     tagline: "Guided Reasoning & Cognitive Questioning Assistant",
+    image: "/images/socratic-ai-card.svg",
     terminalTitle: "socratic-loop.ts",
     terminalContent: `Student Query → [Negative Constraint Filter]
                         ↓
@@ -102,13 +109,120 @@ const CASE_STUDIES = [
   },
 ];
 
+function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }) {
+  const [activeView, setActiveView] = useState<"preview" | "architecture">("preview");
+
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0c1017] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+        {/* Window Titlebar with View Switcher */}
+        <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-rose-500/80" />
+            <span className="h-3 w-3 rounded-full bg-amber-500/80" />
+            <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
+          </div>
+
+          <div className="flex items-center rounded-lg border border-white/10 bg-black/40 p-0.5">
+            <button
+              type="button"
+              onClick={() => setActiveView("preview")}
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-colors duration-150 cursor-pointer ${
+                activeView === "preview"
+                  ? "bg-sky-500/20 text-sky-300 shadow"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Eye size={12} />
+              Preview
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveView("architecture")}
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-colors duration-150 cursor-pointer ${
+                activeView === "architecture"
+                  ? "bg-sky-500/20 text-sky-300 shadow"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Code2 size={12} />
+              Architecture Flow
+            </button>
+          </div>
+        </div>
+
+        {/* Content Box */}
+        <div className="relative min-h-[260px] sm:min-h-[300px]">
+          <AnimatePresence mode="wait">
+            {activeView === "preview" ? (
+              <motion.div
+                key="preview"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="relative aspect-video w-full overflow-hidden bg-[#06080d]"
+              >
+                <Image
+                  src={project.image}
+                  alt={`${project.title} live interface preview`}
+                  fill
+                  sizes="(min-width: 1024px) 500px, 90vw"
+                  className="object-cover"
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="architecture"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-center p-6 font-mono text-xs leading-relaxed text-slate-300"
+              >
+                <pre className="overflow-x-auto whitespace-pre text-sky-300 font-mono">
+                  {project.terminalContent}
+                </pre>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-3">
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Live Demo <ExternalLink size={15} />
+          </a>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:scale-[1.02] active:scale-[0.98]"
+          >
+            GitHub <Github size={15} />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
     <section id="projects" className="px-6 py-24 md:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeader subtitle="Featured Work" title="Production Systems" />
 
-        <div className="mt-16 space-y-24">
+        <div className="mt-16 space-y-28">
           {CASE_STUDIES.map((project, index) => (
             <motion.article
               key={project.title}
@@ -116,56 +230,10 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start"
+              className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start"
             >
-              {/* Left Column: Interactive Terminal Preview & Action Buttons */}
-              <div className="flex flex-col gap-6">
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0c1017] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-                  {/* Titlebar */}
-                  <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <span className="h-3 w-3 rounded-full bg-rose-500/80" />
-                      <span className="h-3 w-3 rounded-full bg-amber-500/80" />
-                      <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
-                    </div>
-                    <span className="font-mono text-xs text-slate-400">
-                      {project.terminalTitle}
-                    </span>
-                    <div className="w-10" />
-                  </div>
-
-                  {/* Code / Flow View */}
-                  <div className="p-6 font-mono text-xs leading-relaxed text-slate-300">
-                    <pre className="overflow-x-auto whitespace-pre text-sky-300">
-                      {project.terminalContent}
-                    </pre>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-wrap gap-3">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      Live Demo <ExternalLink size={15} />
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      GitHub <Github size={15} />
-                    </a>
-                  )}
-                </div>
-              </div>
+              {/* Left Column: Visual Card with Preview & Architecture Switcher */}
+              <ProjectVisualCard project={project} />
 
               {/* Right Column: Case Study Narrative */}
               <div className="flex flex-col">

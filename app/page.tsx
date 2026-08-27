@@ -12,11 +12,13 @@ import Skills from "@/components/sections/Skills";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StarryBackground from "@/components/ui/StarryBackground";
+import FloatingAskAI from "@/components/ui/FloatingAskAI";
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#060708] text-white selection:bg-sky-500 selection:text-white">
+    <div className="relative min-h-screen bg-[#06080d] text-white selection:bg-sky-500 selection:text-white">
       <StarryBackground />
+      <FloatingAskAI />
       <Navbar />
       <main className="relative z-10">
         <Hero />
