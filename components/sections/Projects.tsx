@@ -11,7 +11,7 @@ const CASE_STUDIES = [
     tag: "PRODUCTION SYSTEM • 2026",
     title: "DevGuard AI",
     tagline: "Autonomous PR Security & Code Review Agent",
-    image: "/images/dev-guard-ai.png",
+    image: "/images/devguard-ai-card.svg",
     terminalTitle: "devguard-pipeline.sh",
     terminalContent: `PR Webhook → [AST Static Linter]
                   ↓
@@ -48,7 +48,7 @@ const CASE_STUDIES = [
     tag: "PRODUCTION SYSTEM • 2026",
     title: "EduMethod AI",
     tagline: "Cognitive EdTech Platform With Persistent Memory & pgvector RAG",
-    image: "/images/edumethod-innovative.png",
+    image: "/images/edumethod-ai-card.svg",
     terminalTitle: "edumethod-arch.sh",
     terminalContent: `Syllabus Upload → [pgvector Embeddings]
                         ↓
