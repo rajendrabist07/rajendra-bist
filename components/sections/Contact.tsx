@@ -51,7 +51,7 @@ export default function Contact() {
     <section id="contact" className="relative overflow-hidden py-20 md:py-28">
       <Container>
         <div className="text-center">
-          <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="fluid-h2 font-black tracking-tight text-white">
             Open to the right opportunity
           </h2>
           <p className="mt-3 text-sm text-slate-400 sm:text-base">

@@ -16,6 +16,13 @@
   --success: #38bdf8;
   --warning: #60a5fa;
   --gradient: linear-gradient(135deg, #2563eb, #38bdf8);
+
+  /* Fluid Clamp Typography Scale */
+  --text-hero: clamp(2.5rem, 5.5vw + 0.8rem, 4.5rem);
+  --text-h2: clamp(1.85rem, 3.2vw + 0.5rem, 2.75rem);
+  --text-h3: clamp(1.2rem, 1.8vw + 0.3rem, 1.65rem);
+  --text-body: clamp(0.9rem, 0.3vw + 0.82rem, 1.0625rem);
+  --text-small: clamp(0.75rem, 0.2vw + 0.7rem, 0.875rem);
 }
 
 [data-theme="light"] {
@@ -131,6 +138,34 @@ code, kbd, samp, pre, .font-mono {
 }
 
 /* Utility classes */
+.fluid-hero {
+  font-size: var(--text-hero);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.fluid-h2 {
+  font-size: var(--text-h2);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.fluid-h3 {
+  font-size: var(--text-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.fluid-body {
+  font-size: var(--text-body);
+  line-height: 1.65;
+}
+
+.fluid-small {
+  font-size: var(--text-small);
+  line-height: 1.5;
+}
+
 .text-gradient {
   background: var(--gradient);
   -webkit-background-clip: text;
