@@ -1,21 +1,21 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site-config'
 
-const lastModified = new Date('2026-08-26')
-
 export default function sitemap(): MetadataRoute.Sitemap {
+  const currentDate = new Date()
+
   return [
     {
       url: SITE_URL,
-      lastModified,
+      lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
     },
     {
       url: `${SITE_URL}/Resume/resume.pdf`,
-      lastModified,
+      lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.8,
     },
   ]
 }
