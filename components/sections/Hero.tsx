@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
@@ -23,11 +23,17 @@ const heroVariants = {
 const itemTransition = { duration: 0.5 };
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState(shouldReduceMotion ? ROLES[0] : "");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setCurrentText(ROLES[0]);
+      return;
+    }
+
     const fullText = ROLES[roleIndex];
     let timeout: NodeJS.Timeout;
 
@@ -48,7 +54,7 @@ export default function Hero() {
     }
 
     return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, roleIndex]);
+  }, [currentText, isDeleting, roleIndex, shouldReduceMotion]);
 
   return (
     <section
@@ -162,7 +168,7 @@ export default function Hero() {
           className="relative flex justify-center lg:justify-end"
         >
           <motion.div
-            animate={{ y: [0, -8, 0] }}
+            animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="relative w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[330px]"
           >
