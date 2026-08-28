@@ -5,6 +5,7 @@ import { Award, BookOpen, Calendar, CheckCircle2, Clock } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SkillBadge from "@/components/ui/SkillBadge";
 import { CREDENTIALS } from "@/lib/portfolio-data";
+import Container from "@/components/ui/Container";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,8 +29,8 @@ const itemVariants = {
 
 export default function Credentials() {
   return (
-    <section id="credentials" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="credentials" className="py-20 md:py-28">
+      <Container>
         <SectionHeader subtitle="Credentials" title="Education & Professional Training" />
 
         <motion.div
@@ -101,7 +102,7 @@ export default function Credentials() {
             );
           })}
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

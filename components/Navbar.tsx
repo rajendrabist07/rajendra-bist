@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Download, Menu, Sparkles, X } from 'lucide-react'
 import { PERSONAL } from '@/lib/portfolio-data'
+import Container from '@/components/ui/Container'
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -24,7 +25,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.08] bg-[#06080d]/85 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 md:px-8">
+      <Container as="div" className="flex items-center justify-between gap-6 py-4">
         <a href="#home" className="text-base font-black tracking-widest text-white transition hover:text-sky-300">
           RB<span className="text-sky-400">.</span>
         </a>
@@ -56,7 +57,7 @@ export default function Navbar() {
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-      </div>
+      </Container>
       {open && (
         <div id="mobile-nav-menu" className="border-t border-white/10 bg-[#09090f] px-6 py-4 md:hidden">
           <div className="flex flex-col gap-3">

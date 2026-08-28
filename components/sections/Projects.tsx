@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Code2, ExternalLink, Eye, Github, Sparkles, Zap } from "lucide-react";
 import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
+import Container from "@/components/ui/Container";
 
 const CASE_STUDIES = [
   {
@@ -218,8 +219,8 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
 
 export default function Projects() {
   return (
-    <section id="projects" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="projects" className="py-20 md:py-28">
+      <Container>
         <SectionHeader subtitle="Featured Work" title="Production Systems" />
 
         <div className="mt-16 space-y-28">
@@ -305,7 +306,7 @@ export default function Projects() {
             </motion.article>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

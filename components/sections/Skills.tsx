@@ -17,6 +17,7 @@ import {
   Zap,
 } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import Container from "@/components/ui/Container";
 
 interface ToolItem {
   name: string;
@@ -77,7 +78,7 @@ const TABS = [
 ] as const;
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState<typeof TABS[number]["id"]>("all");
+  const [activeTab, setActiveTab] = useState<string>("all");
 
   const filteredTools =
     activeTab === "all"
@@ -85,12 +86,12 @@ export default function Skills() {
       : ALL_TOOLS.filter((t) => t.category === activeTab);
 
   return (
-    <section id="skills" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="skills" className="py-20 md:py-28">
+      <Container>
         <SectionHeader subtitle="Tech Stack" title="Technical Arsenal" />
 
         {/* Filter Tabs */}
-        <div className="mt-10 flex flex-wrap items-center gap-2 border-b border-white/10 pb-4 sm:gap-6">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-2 border-b border-white/10 pb-4 sm:gap-6 md:justify-start">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -161,7 +162,7 @@ export default function Skills() {
             })}
           </AnimatePresence>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

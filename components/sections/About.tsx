@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Blocks, BrainCircuit, Database, GraduationCap, Network, Rocket } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CodeBioBlock from "@/components/ui/CodeBioBlock";
+import Container from "@/components/ui/Container";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -50,8 +51,8 @@ const strengths = [
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-5xl">
+    <section id="about" className="py-20 md:py-28">
+      <Container>
         <SectionHeader subtitle="About" title="Who I Am" />
 
         <motion.div
@@ -109,7 +110,7 @@ export default function About() {
             );
           })}
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

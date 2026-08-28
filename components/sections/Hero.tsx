@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
+import Container from "@/components/ui/Container";
 
 const ROLES = [
   "Backend Developer & AI Systems Engineer",
@@ -52,9 +53,9 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden px-6 pt-28 pb-10 md:px-12 lg:pt-32"
+      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-28 pb-10 lg:pt-32"
     >
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <Container as="div" className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Left: Text & Bio Content */}
         <div className="text-center md:text-left">
           <motion.div
@@ -182,7 +183,7 @@ export default function Hero() {
             </div>
           </motion.div>
         </motion.div>
-      </div>
+      </Container>
 
       {/* Scroll indicator */}
       <div className="mx-auto mt-8 flex flex-col items-center gap-1 text-slate-500">

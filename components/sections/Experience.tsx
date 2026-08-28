@@ -5,6 +5,7 @@ import { Briefcase, Calendar, MapPin } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SkillBadge from "@/components/ui/SkillBadge";
 import { EXPERIENCE } from "@/lib/portfolio-data";
+import Container from "@/components/ui/Container";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,8 +29,8 @@ const itemVariants = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="experience" className="py-20 md:py-28">
+      <Container>
         <SectionHeader subtitle="Experience" title="Work & Engineering Timeline" />
 
         <motion.div
@@ -95,7 +96,7 @@ export default function Experience() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }

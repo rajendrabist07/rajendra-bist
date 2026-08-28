@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Github, Mail, Linkedin, MapPin, Send, CheckCircle2, AlertCircle, Download } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { PERSONAL } from '@/lib/portfolio-data'
+import Container from '@/components/ui/Container'
 
 const links = [
   { label: 'Email', href: `mailto:${PERSONAL.email}`, icon: Mail },
@@ -47,8 +48,8 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-5xl">
+    <section id="contact" className="relative overflow-hidden py-20 md:py-28">
+      <Container>
         <div className="text-center">
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
             Open to the right opportunity
@@ -157,7 +158,7 @@ export default function Contact() {
             </a>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

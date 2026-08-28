@@ -1,5 +1,6 @@
 import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react'
 import { PERSONAL } from '@/lib/portfolio-data'
+import Container from '@/components/ui/Container'
 
 const explore = [
   ['About', '#about'],
@@ -17,9 +18,9 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 px-6 py-16 md:px-8">
+    <footer className="relative overflow-hidden border-t border-white/10 py-16">
       <div className="star-field opacity-40" />
-      <div className="relative mx-auto max-w-6xl">
+      <Container className="relative">
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
             <a href="#home" className="text-2xl font-black tracking-normal text-white">
@@ -78,7 +79,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   )
 }

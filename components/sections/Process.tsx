@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Code2, Database, Rocket, Search } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
+import Container from "@/components/ui/Container";
 
 const steps = [
   {
@@ -49,8 +50,8 @@ const itemVariants = {
 
 export default function Process() {
   return (
-    <section id="process" className="px-6 py-24 md:px-8 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section id="process" className="py-20 md:py-28">
+      <Container>
         <SectionHeader subtitle="Process" title="How I Build Products" />
         <motion.div
           initial="hidden"
@@ -77,7 +78,7 @@ export default function Process() {
             );
           })}
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }
