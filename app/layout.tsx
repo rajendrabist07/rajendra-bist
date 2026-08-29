@@ -74,7 +74,10 @@ export const metadata: Metadata = {
     images: ['/og-image.svg'],
   },
   icons: {
-    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
     shortcut: '/favicon.svg',
   },
@@ -84,7 +87,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0a0a0f',
+  themeColor: '#06080d',
 };
 
 const personId = `${SITE_URL}/#rajendra-bist`;
@@ -98,14 +101,18 @@ const jsonLdGraph = {
       '@type': 'Person',
       '@id': personId,
       name: PERSONAL.name,
-      alternateName: ['Rajendra', 'Rajendra Bist Backend Developer'],
+      alternateName: ['Rajendra', 'Rajendra Bist Backend Developer', 'Rajendra Bist Nepal'],
       url: SITE_URL,
       mainEntityOfPage: webPageId,
       image: `${SITE_URL}/images/rajendra-bist.jpeg`,
       jobTitle: PERSONAL.role,
       description: SITE_DESCRIPTION,
       email: `mailto:${PERSONAL.email}`,
-      sameAs: [PERSONAL.github, PERSONAL.linkedin],
+      sameAs: [
+        PERSONAL.github,
+        PERSONAL.linkedin,
+        PERSONAL.facebook,
+      ],
       knowsAbout: [
         ...SITE_KEYWORDS,
         ...SKILLS.flatMap((skill) => skill.items),

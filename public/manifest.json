@@ -5,15 +5,15 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0a0a0f",
-  "theme_color": "#6366f1",
+  "background_color": "#06080d",
+  "theme_color": "#38bdf8",
   "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ],
   "categories": ["productivity", "portfolio"],

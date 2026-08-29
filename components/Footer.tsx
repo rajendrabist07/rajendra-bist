@@ -1,4 +1,4 @@
-import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowUp, Github, Linkedin, Mail, Facebook } from 'lucide-react'
 import { PERSONAL } from '@/lib/portfolio-data'
 import Container from '@/components/ui/Container'
 
@@ -13,6 +13,7 @@ const explore = [
 const socials = [
   [Github, PERSONAL.github, 'GitHub'],
   [Linkedin, PERSONAL.linkedin, 'LinkedIn'],
+  [Facebook, PERSONAL.facebook, 'Facebook'],
   [Mail, `mailto:${PERSONAL.email}`, 'Email'],
 ]
 

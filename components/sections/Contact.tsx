@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Github, Mail, Linkedin, MapPin, Send, CheckCircle2, AlertCircle, Download } from 'lucide-react'
+import { Github, Mail, Linkedin, Facebook, MapPin, Send, CheckCircle2, AlertCircle, Download } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { PERSONAL } from '@/lib/portfolio-data'
 import Container from '@/components/ui/Container'
@@ -10,6 +10,7 @@ const links = [
   { label: 'Email', href: `mailto:${PERSONAL.email}`, icon: Mail },
   { label: 'LinkedIn', href: PERSONAL.linkedin, icon: Linkedin },
   { label: 'GitHub', href: PERSONAL.github, icon: Github },
+  { label: 'Facebook', href: PERSONAL.facebook, icon: Facebook },
 ]
 
 export default function Contact() {

@@ -6,6 +6,7 @@ export const PERSONAL = {
   email: 'rajendrabist396@gmail.com',
   github: 'https://github.com/rajendrabist07',
   linkedin: 'https://www.linkedin.com/in/rajendra-bist-169926370',
+  facebook: 'https://www.facebook.com/rajendra.bist.302275',
   resumeUrl: '/Resume/resume.pdf',
 }
 
