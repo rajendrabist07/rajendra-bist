@@ -26,7 +26,10 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.08] bg-[#06080d]/85 backdrop-blur-2xl">
       <Container as="div" className="flex items-center justify-between gap-6 py-4">
-        <a href="#home" className="text-base font-black tracking-widest text-white transition hover:text-sky-300">
+        <a
+          href="#home"
+          className="text-base font-black tracking-widest text-white transition-colors duration-200 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg px-1"
+        >
           RB<span className="text-sky-400">.</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
@@ -34,7 +37,7 @@ export default function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className="text-xs font-semibold uppercase tracking-widest text-slate-400 transition hover:text-white"
+              className="text-xs font-semibold uppercase tracking-widest text-slate-400 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-md px-1 py-0.5"
             >
               {item.label}
             </a>
@@ -42,14 +45,14 @@ export default function Navbar() {
           <a
             href={PERSONAL.resumeUrl}
             download="Rajendra-Bist-Resume.pdf"
-            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-white/[0.03] px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-white"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-white/[0.03] px-3.5 py-1.5 text-xs font-semibold text-slate-200 transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
           >
             Download CV
           </a>
         </nav>
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-white/20 hover:bg-white/10 md:hidden cursor-pointer"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition-all duration-200 hover:border-white/20 hover:bg-white/10 md:hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
           onClick={() => setOpen(open => !open)}
           aria-label="Toggle navigation"
           aria-expanded={open}

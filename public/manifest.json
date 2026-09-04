@@ -19,9 +19,9 @@
   "categories": ["productivity", "portfolio"],
   "screenshots": [
     {
-      "src": "/og-image.svg",
+      "src": "/og-image.png",
       "sizes": "1200x630",
-      "type": "image/svg+xml"
+      "type": "image/png"
     }
   ]
 }

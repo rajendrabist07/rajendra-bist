@@ -99,7 +99,7 @@ export default function Skills() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative px-3 py-2 text-xs font-semibold tracking-wider transition-colors duration-200 cursor-pointer sm:text-sm ${
+                className={`relative rounded-md px-3 py-2 text-xs font-semibold tracking-wider transition-colors duration-200 cursor-pointer sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
                   isActive
                     ? "text-sky-400 font-bold"
                     : "text-slate-400 hover:text-white"

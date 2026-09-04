@@ -26,11 +26,11 @@ const CASE_STUDIES = [
     solution:
       "Empirical tool-calling review loop that executes AST linters and vulnerability scanners before synthesizing 1-click GitHub PR review comments.",
     keyDecision:
-      "Engineered a 3-tier fallback model router (Groq Llama 3.3 ➡️ Gemini 2.5 Flash ➡️ Deterministic AST rules) guaranteeing 100% review uptime under strict rate limits.",
+      "Engineered a 3-tier fallback model router (Groq Llama 3.3 ➡️ Gemini 2.5 Flash ➡️ Deterministic AST rules) guaranteeing review uptime resilience under strict rate limits.",
     metrics: [
-      { value: "100%", label: "Review Uptime" },
-      { value: "5 Iterations", label: "Tool Calling Cap" },
-      { value: "0", label: "Hallucinations" },
+      { value: "3-Tier", label: "Failover Router" },
+      { value: "5 Max", label: "Agentic Loop Cap" },
+      { value: "AST-Verified", label: "Syntax Assurance" },
     ],
     stack: [
       "Next.js 15",
@@ -65,12 +65,12 @@ const CASE_STUDIES = [
     keyDecision:
       "Chose self-hosted pgvector inside PostgreSQL over external vector databases to eliminate cold starts and keep user data and vector embeddings in a single atomic transaction.",
     metrics: [
-      { value: "~95%", label: "Grounding Accuracy" },
+      { value: "pgvector", label: "Syllabus Grounding" },
       { value: "SM-2", label: "Spaced Repetition" },
       { value: "7 Engines", label: "Cognitive Core" },
     ],
     stack: [
-      "Next.js 16",
+      "Next.js 15",
       "React 19",
       "TypeScript",
       "Clerk Auth",
@@ -100,11 +100,11 @@ const CASE_STUDIES = [
     keyDecision:
       "Implemented persistent session storage in MongoDB Atlas with structured feedback loops rather than stateless chat sessions.",
     metrics: [
-      { value: "100%", label: "Guided Inquiry" },
+      { value: "Zero-Direct", label: "Solution Masking" },
       { value: "0.4–0.6", label: "Locked Temperature" },
       { value: "MongoDB", label: "Session Retention" },
     ],
-    stack: ["Next.js", "Gemini API", "MongoDB", "Node.js", "TypeScript", "Tailwind CSS"],
+    stack: ["Next.js 15", "Gemini API", "MongoDB", "Node.js", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://socratic-ai-tau.vercel.app/",
     githubUrl: "https://github.com/rajendrabist07/socratic-ai.git",
   },
@@ -128,7 +128,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             <button
               type="button"
               onClick={() => setActiveView("preview")}
-              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-colors duration-150 cursor-pointer ${
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
                 activeView === "preview"
                   ? "bg-sky-500/20 text-sky-300 shadow"
                   : "text-slate-400 hover:text-white"
@@ -140,7 +140,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             <button
               type="button"
               onClick={() => setActiveView("architecture")}
-              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-colors duration-150 cursor-pointer ${
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
                 activeView === "architecture"
                   ? "bg-sky-500/20 text-sky-300 shadow"
                   : "text-slate-400 hover:text-white"
@@ -197,7 +197,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             href={project.liveUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080d]"
           >
             Live Demo <ExternalLink size={15} />
           </a>
@@ -207,7 +207,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             href={project.githubUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080d]"
           >
             GitHub <Github size={15} />
           </a>

@@ -76,7 +76,7 @@ export default function Contact() {
                   name="name"
                   value={form.name}
                   onChange={event => updateField('name', event.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-sky-400"
+                  className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 placeholder:text-slate-600 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20"
                   placeholder="Your name"
                   required
                 />
@@ -89,7 +89,7 @@ export default function Contact() {
                   value={form.email}
                   onChange={event => updateField('email', event.target.value)}
                   type="email"
-                  className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-sky-400"
+                  className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 placeholder:text-slate-600 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20"
                   placeholder="you@company.com"
                   required
                 />
@@ -101,7 +101,7 @@ export default function Contact() {
                   name="message"
                   value={form.message}
                   onChange={event => updateField('message', event.target.value)}
-                  className="mt-1.5 min-h-[140px] w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-sky-400"
+                  className="mt-1.5 min-h-[140px] w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 placeholder:text-slate-600 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20"
                   placeholder="Tell me about the role or project..."
                   required
                 />
@@ -110,7 +110,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080d]"
             >
               <Send size={16} />
               {status === 'sending' ? 'Sending...' : 'Send Message'}

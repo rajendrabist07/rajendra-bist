@@ -46,11 +46,11 @@ export default function Credentials() {
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className="surface-panel relative flex flex-col justify-between rounded-3xl p-6 sm:p-8 shadow-glow border border-white/10 transition hover:border-indigo-400/30"
+                className="surface-panel relative flex flex-col justify-between rounded-3xl p-6 sm:p-8 shadow-glow border border-white/10 transition-all duration-200 hover:border-sky-400/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.12)]"
               >
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300">
                       {isCompleted ? <Award size={22} /> : <BookOpen size={22} />}
                     </span>
 
@@ -58,7 +58,7 @@ export default function Credentials() {
                       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold border ${
                         isCompleted
                           ? "bg-sky-500/10 text-sky-300 border-sky-500/20"
-                          : "bg-indigo-500/10 text-indigo-300 border-indigo-500/20"
+                          : "bg-sky-500/10 text-sky-300 border-sky-500/20"
                       }`}
                     >
                       {isCompleted ? <CheckCircle2 size={13} /> : <Clock size={13} />}
@@ -66,7 +66,7 @@ export default function Credentials() {
                     </span>
                   </div>
 
-                  <p className="text-xs uppercase tracking-wider text-indigo-400 font-semibold">
+                  <p className="text-xs uppercase tracking-wider text-sky-400 font-semibold">
                     {item.credentialType}
                   </p>
 

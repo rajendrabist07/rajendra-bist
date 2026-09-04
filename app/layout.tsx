@@ -57,11 +57,11 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     images: [
       {
-        url: '/og-image.svg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Rajendra Bist - Backend Developer and AI Systems Engineer Portfolio OpenGraph Image',
-        type: 'image/svg+xml',
+        alt: 'Rajendra Bist - Backend Developer and AI Systems Engineer Portfolio Preview',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ['/og-image.svg'],
+    images: ['/og-image.png'],
   },
   icons: {
     icon: [

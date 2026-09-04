@@ -64,7 +64,7 @@ export default function CodeBioBlock() {
   };
 
   return (
-    <div className="code-card overflow-hidden rounded-[1.45rem] font-mono text-sm shadow-2xl transition hover:border-sky-400/30">
+    <div className="code-card overflow-hidden rounded-[1.45rem] font-mono text-xs sm:text-sm shadow-2xl transition-all duration-200 hover:border-sky-400/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.12)]">
       <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.025] px-4 py-3">
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-[#ff5f56]/80" />
@@ -78,7 +78,7 @@ export default function CodeBioBlock() {
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-1 rounded px-2 py-0.5 text-[11px] text-slate-400 transition hover:bg-white/10 hover:text-slate-200 cursor-pointer"
+          className="flex items-center gap-1 rounded px-2 py-0.5 text-[11px] text-slate-400 transition-all duration-200 hover:bg-white/10 hover:text-slate-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
           title="Copy config"
         >
           {copied ? <Check size={12} className="text-sky-400" /> : <Copy size={12} />}
@@ -86,8 +86,8 @@ export default function CodeBioBlock() {
         </button>
       </div>
 
-      <div className="overflow-x-auto p-5 text-slate-200 leading-8 custom-scrollbar sm:p-7">
-        <div className="table w-full">
+      <div className="overflow-x-auto p-4 text-slate-200 leading-7 sm:leading-8 custom-scrollbar sm:p-6">
+        <div className="table w-full min-w-max">
           {codeRows.map((row, index) => (
             <div className="table-row" key={index}>
               <span className="table-cell pr-4 text-right select-none text-slate-600 font-normal">
