@@ -26,7 +26,7 @@ const hoverVariants = {
 
 const borderVariants = {
   rest: { borderColor: 'rgba(255, 255, 255, 0.1)' },
-  hover: { borderColor: 'rgba(99, 102, 241, 0.3)' },
+  hover: { borderColor: 'rgba(224, 185, 166, 0.42)' },
 }
 
 export default function ProjectCard({ title, status, description, stack, imageUrl, liveUrl, githubUrl }: ProjectCardProps) {
@@ -38,22 +38,22 @@ export default function ProjectCard({ title, status, description, stack, imageUr
       variants={cardVariants}
       initial="rest"
       whileHover="hover"
-      className="project-card group relative flex h-full flex-col overflow-hidden rounded-[1.65rem] p-5 transition"
+      className="project-card group relative flex h-full flex-col overflow-hidden rounded-[1.65rem] p-5 transition-all duration-200 ease-out"
     >
       <motion.div
         variants={borderVariants}
-        className="absolute inset-0 rounded-[1.65rem] border transition pointer-events-none"
+        className="absolute inset-0 rounded-[1.65rem] border transition-colors duration-200 ease-out pointer-events-none"
         style={{ borderWidth: '1px' }}
       />
       
       {imageUrl ? (
-        <motion.div variants={hoverVariants} className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-white/10 bg-[#0e1017]">
+        <motion.div variants={hoverVariants} className="relative aspect-[16/10] overflow-hidden rounded-[1.15rem] border border-[--border] bg-[#15110e]">
           <Image
             src={imageUrl}
             alt={`Rajendra Bist — ${title} project preview and architecture`}
             fill
             sizes="(min-width: 1024px) 360px, 92vw"
-            className="object-cover transition duration-700 group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           />
         </motion.div>
       ) : null}
@@ -83,7 +83,7 @@ export default function ProjectCard({ title, status, description, stack, imageUr
               target="_blank"
               rel="noreferrer"
               whileHover={{ scale: 1.03 }}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-2 text-sm font-semibold text-white outline-none shadow-[0_0_20px_rgba(37,99,235,0.3)] transition hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] hover:from-blue-500 hover:to-sky-400"
+              className="premium-button-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold outline-none transition-all duration-200 ease-out"
             >
               Live Demo <ExternalLink size={15} />
             </motion.a>
@@ -94,7 +94,7 @@ export default function ProjectCard({ title, status, description, stack, imageUr
               target="_blank"
               rel="noreferrer"
               whileHover={{ scale: 1.03 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10"
+              className="premium-button-secondary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out"
             >
               GitHub <Github size={15} />
             </motion.a>

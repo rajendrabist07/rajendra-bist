@@ -1,7 +1,7 @@
 export const PERSONAL = {
   name: 'Rajendra Bist',
-  role: 'Backend Developer & AI Systems Engineer',
-  tagline: 'Backend developer from Nepal building scalable APIs, database-driven products, RAG pipelines, and production AI integrations.',
+  role: 'Full-Stack Developer | Backend-Focused Engineering & Production AI Systems',
+  tagline: 'Full-stack developer from Nepal building typed React interfaces, scalable APIs, database-driven products, RAG pipelines, and production AI integrations.',
   location: 'Nepal',
   email: 'rajendrabist396@gmail.com',
   github: 'https://github.com/rajendrabist07',
@@ -15,11 +15,6 @@ export const FEATURED_LINKS = {
 }
 
 export const EDUCATION = [
-  {
-    school: 'Indira Gandhi National Open University',
-    degree: 'Bachelor of Technology (B.Tech)',
-    timeframe: 'Ongoing',
-  },
   {
     school: 'Vcare Technical Institute',
     degree: 'Full-Stack Web Development Training',
@@ -39,20 +34,20 @@ export const CREDENTIALS = [
     topics: ['Node.js & Express.js', 'React & Next.js', 'PostgreSQL & MongoDB', 'REST APIs & WebSockets', 'System Design'],
   },
   {
-    institution: 'Computer Science & Engineering',
-    title: 'Bachelor of Technology (B.Tech) in CS',
-    credentialType: 'Undergraduate Degree in Computer Science',
-    timeframe: 'In Progress',
-    status: 'In Progress' as const,
+    institution: 'Project-Based Engineering Practice',
+    title: 'Continuous Learning',
+    credentialType: 'Applied Self-Directed Learning',
+    timeframe: 'Ongoing',
+    status: 'Ongoing' as const,
     description:
-      'Theoretical foundations and systems engineering coursework covering algorithms, operating systems, networking, database architecture, and software principles.',
-    topics: ['Data Structures & Algorithms', 'Database Management Systems', 'Computer Networks', 'Operating Systems', 'Software Engineering'],
+      'Skills developed by building and shipping production-focused projects such as DevGuard AI, EduMethod AI, and SocraticAI, with learning driven by real product constraints rather than formal coursework.',
+    topics: ['Production Projects', 'API Contracts', 'Frontend State', 'Database Design', 'AI Integration'],
   },
 ]
 
 export const EXPERIENCE = [
   {
-    role: 'Independent Backend & AI Systems Developer',
+    role: 'Independent Full-Stack & AI Systems Developer',
     company: 'Project-Based Engineering',
     timeframe: '2024 - Present',
     location: 'Remote, Nepal',
@@ -112,6 +107,8 @@ export const PROJECTS = [
     imageUrl: '/images/edumethod-ai-card.svg',
     liveUrl: 'https://edumethod-ai.vercel.app',
     githubUrl: 'https://github.com/rajendrabist07/edumethod-ai',
+    frontendImplementation:
+      'Built the learning workspace around authenticated Next.js/React flows that connect upload, memory, verification, and spaced-repetition states to typed backend responses.',
   },
   {
     title: 'DevGuard AI',
@@ -121,6 +118,8 @@ export const PROJECTS = [
     imageUrl: '/images/devguard-ai-card.svg',
     liveUrl: 'https://dev-guard-ai.vercel.app/',
     githubUrl: 'https://github.com/rajendrabist07/dev-guard-ai',
+    frontendImplementation:
+      'Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.',
   },
   {
     title: 'SocraticAI',
@@ -130,5 +129,7 @@ export const PROJECTS = [
     imageUrl: '/images/socratic-ai-card.svg',
     liveUrl: FEATURED_LINKS.socraticAi,
     githubUrl: 'https://github.com/rajendrabist07/socratic-ai.git',
+    frontendImplementation:
+      'Shaped the chat interface around saved learning sessions and guided-question pacing so the UI reinforces Socratic learning instead of direct answer delivery.',
   },
 ]

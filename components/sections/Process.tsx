@@ -66,10 +66,10 @@ export default function Process() {
               <motion.article
                 key={step.title}
                 variants={itemVariants}
-                className="surface-panel relative overflow-hidden rounded-3xl p-6"
+                className="surface-panel group relative overflow-hidden rounded-3xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover]"
               >
                 <p className="text-sm text-slate-500">0{index + 1}</p>
-                <div className="mt-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-300">
+                <div className="mt-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(224,185,166,0.10)] text-[--accent-primary] transition-all duration-200 ease-out group-hover:bg-[rgba(224,185,166,0.16)]">
                   <Icon size={20} />
                 </div>
                 <h3 className="mt-6 text-lg font-semibold text-white">{step.title}</h3>

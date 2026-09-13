@@ -63,16 +63,19 @@ export default function About() {
           className="mt-12 space-y-6 text-base leading-relaxed text-slate-300 sm:text-lg sm:leading-8"
         >
           <motion.p variants={itemVariants}>
-            I&apos;m a backend developer and systems engineer based in Nepal working primarily with Node.js, TypeScript, and PostgreSQL. I don&apos;t build superficial demo projects — I design systems from first principles to handle real users, high concurrency, and real-world failure modes.
+            I&apos;m a full-stack developer and systems engineer based in Nepal working primarily with React, Next.js, Node.js, TypeScript, and PostgreSQL. My strongest depth is backend architecture, but I build the frontend flows that make those systems usable, inspectable, and reliable for real users.
           </motion.p>
           <motion.p variants={itemVariants}>
             My engineering strategy is systems-first: establish rigid database schemas, enforce schema validation, and define fault-tolerant state boundaries before writing client-facing flows. I&apos;ve shipped production architectures including autonomous PR review agents with AST static verification, persistent cognitive learning engines, and vector similarity search with automated CI/CD pipelines.
           </motion.p>
           <motion.p variants={itemVariants}>
+            On the frontend, I work from the contract back to the component: authenticated Next.js flows for EduMethod AI, traceable review dashboards for DevGuard AI, and paced chat/session interfaces for SocraticAI. I keep client state tied to typed backend responses, design screens around the user&apos;s next decision, and treat accessibility, loading states, and mobile behavior as part of the engineering work.
+          </motion.p>
+          <motion.p variants={itemVariants}>
             In modern AI engineering, I bridge probabilistic LLMs with deterministic software rigor — implementing self-hosted pgvector embeddings, grounded RAG retrieval pipelines, and multi-model fallback routers that eliminate hallucinations and guarantee uptime under strict rate limits.
           </motion.p>
           <motion.p variants={itemVariants}>
-            Formally grounded in Computer Science fundamentals with continuous applied engineering depth. Open to backend engineering, distributed systems, and AI infrastructure roles onsite in Nepal or remote worldwide.
+            Continuously deepening fundamentals through project-based engineering practice. Open to full-stack, backend-focused, distributed systems, and AI infrastructure roles onsite in Nepal or remote worldwide.
           </motion.p>
         </motion.div>
 
@@ -99,9 +102,9 @@ export default function About() {
               <motion.article
                 key={item.title}
                 variants={itemVariants}
-                className="surface-panel rounded-2xl p-5 transition-all duration-200 hover:border-sky-400/40 hover:bg-white/[0.04]"
+                className="surface-panel rounded-2xl p-5 transition-all duration-200 ease-out hover:border-[--border-hover] hover:bg-white/[0.04] hover:-translate-y-1"
               >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(224,185,166,0.10)] text-[--accent-primary]">
                   <Icon size={20} />
                 </span>
                 <h3 className="mt-4 text-base font-semibold text-white">{item.title}</h3>

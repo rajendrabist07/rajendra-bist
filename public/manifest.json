@@ -1,12 +1,12 @@
 {
-  "name": "Rajendra Bist - Backend Developer & AI Systems Engineer",
+  "name": "Rajendra Bist - Full-Stack Developer",
   "short_name": "Rajendra Bist",
-  "description": "Backend developer and AI systems engineer from Nepal building scalable APIs, database-driven products, RAG pipelines, and full-stack applications.",
+  "description": "Full-stack developer based in Nepal and available for remote work worldwide, building React interfaces, scalable APIs, RAG pipelines, and production AI systems.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#06080d",
-  "theme_color": "#38bdf8",
+  "background_color": "#080806",
+  "theme_color": "#e0b9a6",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -14,6 +14,18 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "categories": ["productivity", "portfolio"],

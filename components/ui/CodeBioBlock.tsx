@@ -4,50 +4,50 @@ import { useState } from "react";
 import { Check, Copy, Terminal } from "lucide-react";
 
 const codeString = `const rajendra = {
-  role: "Backend & Systems Engineer",
+  role: "Full-Stack Developer",
   location: "Nepal",
   timezone: "UTC+5:45",
   open: true,
   architecture: ["Distributed Systems", "PostgreSQL", "Node.js", "TypeScript"],
   ai_systems: ["RAG Pipelines", "pgvector", "Tool-Calling Agents", "LLM Fallbacks"],
-  mindset: "Data integrity and failure modes first, UI second"
+  mindset: "Product clarity, data integrity, and failure modes first"
 }`;
 
 const codeRows = [
   <>
-    <span className="text-indigo-400">const</span>{" "}
+    <span className="text-[--accent-primary]">const</span>{" "}
     <span className="text-slate-100">rajendra</span> = {"{"}
   </>,
   <>
-    <span className="text-sky-300">role</span>:{" "}
-    <span className="text-cyan-300">&quot;Backend &amp; Systems Engineer&quot;</span>,
+    <span className="text-[--accent-secondary]">role</span>:{" "}
+    <span className="text-[--accent-cool]">&quot;Full-Stack Developer&quot;</span>,
   </>,
   <>
-    <span className="text-sky-300">location</span>:{" "}
-    <span className="text-cyan-300">&quot;Nepal&quot;</span>,
+    <span className="text-[--accent-secondary]">location</span>:{" "}
+    <span className="text-[--accent-cool]">&quot;Nepal&quot;</span>,
   </>,
   <>
-    <span className="text-sky-300">timezone</span>:{" "}
-    <span className="text-cyan-300">&quot;UTC+5:45&quot;</span>,
+    <span className="text-[--accent-secondary]">timezone</span>:{" "}
+    <span className="text-[--accent-cool]">&quot;UTC+5:45&quot;</span>,
   </>,
   <>
-    <span className="text-sky-300">open</span>: <span className="text-indigo-300">true</span>,
+    <span className="text-[--accent-secondary]">open</span>: <span className="text-[--success]">true</span>,
   </>,
   <>
-    <span className="text-sky-300">architecture</span>: [
-    <span className="text-cyan-300">&quot;Distributed Systems&quot;</span>,{" "}
-    <span className="text-cyan-300">&quot;PostgreSQL&quot;</span>,{" "}
-    <span className="text-cyan-300">&quot;Node.js&quot;</span>],
+    <span className="text-[--accent-secondary]">architecture</span>: [
+    <span className="text-[--accent-cool]">&quot;Distributed Systems&quot;</span>,{" "}
+    <span className="text-[--accent-cool]">&quot;PostgreSQL&quot;</span>,{" "}
+    <span className="text-[--accent-cool]">&quot;Node.js&quot;</span>],
   </>,
   <>
-    <span className="text-sky-300">ai_systems</span>: [
-    <span className="text-cyan-300">&quot;RAG Pipelines&quot;</span>,{" "}
-    <span className="text-cyan-300">&quot;pgvector&quot;</span>,{" "}
-    <span className="text-cyan-300">&quot;Tool-Calling Agents&quot;</span>],
+    <span className="text-[--accent-secondary]">ai_systems</span>: [
+    <span className="text-[--accent-cool]">&quot;RAG Pipelines&quot;</span>,{" "}
+    <span className="text-[--accent-cool]">&quot;pgvector&quot;</span>,{" "}
+    <span className="text-[--accent-cool]">&quot;Tool-Calling Agents&quot;</span>],
   </>,
   <>
-    <span className="text-sky-300">mindset</span>:{" "}
-    <span className="text-cyan-300">&quot;Data integrity and failure modes first, UI second&quot;</span>
+    <span className="text-[--accent-secondary]">mindset</span>:{" "}
+    <span className="text-[--accent-cool]">&quot;Product clarity, data integrity, and failure modes first&quot;</span>
   </>,
   <>{"}"}</>,
 ];
@@ -64,24 +64,24 @@ export default function CodeBioBlock() {
   };
 
   return (
-    <div className="code-card overflow-hidden rounded-[1.45rem] font-mono text-xs sm:text-sm shadow-2xl transition-all duration-200 hover:border-sky-400/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.12)]">
+    <div className="code-card overflow-hidden rounded-[1.45rem] font-mono text-xs sm:text-sm shadow-2xl transition-all duration-200 ease-out hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(224,185,166,0.10)]">
       <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.025] px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-[#ff5f56]/80" />
-          <span className="h-3 w-3 rounded-full bg-[#ffbd2e]/80" />
-          <span className="h-3 w-3 rounded-full bg-[#27c93f]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#e0b9a6]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#e0c49d]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#bfe2d8]/80" />
           <span className="ml-2 inline-flex items-center gap-1.5 text-[11px] text-slate-400">
-            <Terminal size={12} className="text-sky-400" />
+            <Terminal size={12} className="text-[--accent-primary]" />
             rajendra.config.ts
           </span>
         </div>
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-1 rounded px-2 py-0.5 text-[11px] text-slate-400 transition-all duration-200 hover:bg-white/10 hover:text-slate-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          className="flex items-center gap-1 rounded px-2 py-0.5 text-[11px] text-slate-400 transition-all duration-200 ease-out hover:bg-white/10 hover:text-slate-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary]"
           title="Copy config"
         >
-          {copied ? <Check size={12} className="text-sky-400" /> : <Copy size={12} />}
+          {copied ? <Check size={12} className="text-[--accent-primary]" /> : <Copy size={12} />}
           <span>{copied ? "Copied" : "Copy"}</span>
         </button>
       </div>

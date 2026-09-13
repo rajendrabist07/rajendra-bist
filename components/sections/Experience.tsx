@@ -38,20 +38,20 @@ export default function Experience() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           variants={containerVariants}
-          className="relative ml-3 border-l-2 border-sky-500/20 pl-6 sm:ml-6 sm:pl-10 space-y-12"
+          className="relative ml-3 border-l-2 border-[rgba(224,185,166,0.18)] pl-6 sm:ml-6 sm:pl-10 space-y-12"
         >
           {EXPERIENCE.map((exp, index) => (
             <motion.div key={index} variants={itemVariants} className="relative group">
               {/* Timeline Indicator Dot */}
-              <span className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-sky-400/80 bg-[#06080d] shadow-[0_0_12px_rgba(56,189,248,0.5)]">
-                <span className="h-2 w-2 rounded-full bg-sky-400" />
+              <span className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[rgba(224,185,166,0.72)] bg-[--bg-primary] shadow-[0_0_12px_rgba(224,185,166,0.34)]">
+                <span className="h-2 w-2 rounded-full bg-[--accent-primary]" />
               </span>
 
               {/* Experience Card */}
-              <article className="surface-panel rounded-3xl p-6 sm:p-8 shadow-glow border border-white/10 transition-all duration-200 hover:border-sky-400/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.12)]">
+              <article className="surface-panel rounded-3xl p-6 sm:p-8 shadow-glow transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(224,185,166,0.10)]">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-300 mb-3">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(224,185,166,0.24)] bg-[rgba(224,185,166,0.10)] px-3 py-1 text-xs font-semibold text-[--accent-primary] mb-3">
                       <Briefcase size={13} />
                       {exp.company}
                     </div>
@@ -62,7 +62,7 @@ export default function Experience() {
 
                   <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-400">
                     <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-1">
-                      <Calendar size={14} className="text-sky-400" />
+                      <Calendar size={14} className="text-[--accent-primary]" />
                       {exp.timeframe}
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-1">
@@ -80,7 +80,7 @@ export default function Experience() {
                 <div className="mt-5 space-y-2">
                   {exp.achievements.map((item, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-400">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-sky-400" />
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[--accent-primary]" />
                       <span>{item}</span>
                     </div>
                   ))}

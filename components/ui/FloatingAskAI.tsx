@@ -13,12 +13,12 @@ export default function FloatingAskAI() {
     <button
       type="button"
       onClick={openChat}
-      className="fixed top-20 right-6 sm:top-22 sm:right-10 md:top-24 md:right-12 z-50 inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-[#0c1017]/90 px-4 py-2 text-xs font-semibold text-sky-200 shadow-[0_0_25px_rgba(56,189,248,0.25)] backdrop-blur-xl transition-all duration-200 hover:border-sky-300 hover:bg-sky-500/20 hover:text-white hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080d]"
+      className="premium-button-secondary fixed top-20 right-6 sm:top-22 sm:right-10 md:top-24 md:right-12 z-50 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold shadow-[0_18px_46px_rgba(0,0,0,0.32)] backdrop-blur-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] focus-visible:ring-offset-2 focus-visible:ring-offset-[--bg-primary]"
       aria-label="Ask AI Agent"
     >
-      <Sparkles size={14} className="text-sky-300 animate-pulse" />
+      <Sparkles size={14} className="text-[--accent-primary] animate-pulse" />
       <span>Ask AI</span>
-      <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-mono text-sky-300">
+      <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-mono text-[--accent-secondary]">
         ⌘K
       </span>
     </button>

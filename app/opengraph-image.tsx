@@ -18,9 +18,9 @@ export default function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#06080d',
+          backgroundColor: '#080806',
           backgroundImage:
-            'radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.18), transparent 60%), radial-gradient(circle at 90% 90%, rgba(37, 99, 235, 0.15), transparent 50%)',
+            'radial-gradient(circle at 18% 12%, rgba(232, 243, 242, 0.16), transparent 38%), radial-gradient(circle at 76% 22%, rgba(224, 185, 166, 0.20), transparent 42%), radial-gradient(circle at 86% 92%, rgba(183, 154, 130, 0.18), transparent 42%)',
           padding: '60px',
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
@@ -31,22 +31,21 @@ export default function Image() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#0c1017',
-            border: '2px solid #38bdf8',
+            background: 'linear-gradient(135deg, #15110e, #211a15)',
+            border: '1.5px solid rgba(224, 185, 166, 0.58)',
             borderRadius: '16px',
             padding: '8px 24px',
             marginBottom: '24px',
-            boxShadow: '0 0 25px rgba(56, 189, 248, 0.3)',
+            boxShadow: '0 18px 48px rgba(0, 0, 0, 0.34)',
           }}
         >
-          <span style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff' }}>R</span>
-          <span style={{ fontSize: '28px', fontWeight: 900, color: '#38bdf8' }}>B</span>
-          <span style={{ fontSize: '28px', fontWeight: 900, color: '#38bdf8', marginLeft: '2px' }}>.</span>
+          <span style={{ fontSize: '28px', fontWeight: 850, color: '#fffaf3' }}>R</span>
+          <span style={{ fontSize: '28px', fontWeight: 850, color: '#e0b9a6', marginLeft: '2px' }}>B</span>
           <span
             style={{
               fontSize: '16px',
               fontWeight: 600,
-              color: '#94a3b8',
+              color: '#9d9084',
               marginLeft: '14px',
               letterSpacing: '2px',
             }}
@@ -60,7 +59,7 @@ export default function Image() {
           style={{
             fontSize: '68px',
             fontWeight: 900,
-            color: '#f8fafc',
+            color: '#fffaf3',
             letterSpacing: '-2px',
             textAlign: 'center',
             lineHeight: 1.1,
@@ -74,27 +73,27 @@ export default function Image() {
           style={{
             fontSize: '34px',
             fontWeight: 700,
-            color: '#38bdf8',
+            color: '#e0b9a6',
             marginTop: '12px',
             textAlign: 'center',
             letterSpacing: '-0.5px',
           }}
         >
-          Backend Developer &amp; AI Systems Engineer
+          Full-Stack Developer &amp; AI Systems Engineer
         </div>
 
         {/* Tagline */}
         <div
           style={{
             fontSize: '20px',
-            color: '#94a3b8',
+            color: '#d8ccc0',
             marginTop: '16px',
             textAlign: 'center',
             maxWidth: '850px',
             lineHeight: 1.5,
           }}
         >
-          Building scalable APIs, database-driven products, RAG pipelines, and production AI integrations.
+          Building typed React interfaces, scalable APIs, RAG pipelines, and production AI integrations.
         </div>
 
         {/* Tech Stack Pills */}
@@ -120,13 +119,13 @@ export default function Image() {
             <div
               key={tech}
               style={{
-                backgroundColor: 'rgba(56, 189, 248, 0.08)',
-                border: '1px solid rgba(56, 189, 248, 0.25)',
+                backgroundColor: 'rgba(255, 250, 243, 0.05)',
+                border: '1px solid rgba(224, 185, 166, 0.22)',
                 borderRadius: '9999px',
                 padding: '6px 16px',
                 fontSize: '14px',
                 fontWeight: 600,
-                color: '#e2e8f0',
+                color: '#e8ddd2',
               }}
             >
               {tech}

@@ -2,10 +2,10 @@ export const SITE_URL = "https://www.bistrajendra.com.np";
 
 export const SITE_NAME = "Rajendra Bist Portfolio";
 
-export const SITE_TITLE = "Rajendra Bist - Backend Developer & AI Systems Engineer in Nepal";
+export const SITE_TITLE = "Rajendra Bist - Full-Stack Developer for Remote AI Systems";
 
 export const SITE_DESCRIPTION =
-  "Rajendra Bist is a backend developer and AI systems engineer from Nepal building scalable APIs, database-driven products, RAG pipelines, and production-ready full-stack applications.";
+  "Rajendra Bist is a full-stack developer based in Nepal and available for remote work worldwide, building typed React interfaces, scalable APIs, RAG pipelines, and production AI systems.";
 
 export const SITE_KEYWORDS = [
   "Rajendra Bist",
@@ -15,6 +15,14 @@ export const SITE_KEYWORDS = [
   "Backend Developer Nepal",
   "AI Systems Engineer Nepal",
   "Full-Stack Developer Nepal",
+  "Full-Stack Developer",
+  "Remote Full-Stack Engineer",
+  "Full-Stack Developer for Hire",
+  "Node.js Full-Stack Developer",
+  "Next.js Full-Stack Engineer",
+  "AI Integration Engineer",
+  "Remote Software Engineer",
+  "Backend-Focused Full-Stack Developer",
   "Node.js Developer Nepal",
   "Next.js Developer Nepal",
   "TypeScript Developer",

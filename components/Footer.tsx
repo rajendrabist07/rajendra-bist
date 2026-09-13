@@ -20,18 +20,18 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/10 py-16">
-      <div className="star-field opacity-40" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(224,185,166,0.10),transparent_42%)]" />
       <Container className="relative">
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
-            <a href="#home" className="text-2xl font-black tracking-normal text-white">
-              RB<span className="text-sky-400">.</span>
+            <a href="#home" className="text-2xl font-black tracking-normal text-white transition-colors duration-200 ease-out hover:text-[--accent-primary]">
+              RB<span className="text-[--accent-primary]">.</span>
             </a>
             <p className="mt-5 max-w-sm leading-7 text-slate-500">
-              Backend developer in Nepal building scalable APIs, RAG pipelines, and AI-integrated products.
+              Full-stack developer in Nepal building typed interfaces, scalable APIs, RAG pipelines, and AI-integrated products.
             </p>
-            <p className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-sky-300">
-              <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />
+            <p className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[--accent-primary]">
+              <span className="h-2.5 w-2.5 rounded-full bg-[--accent-primary]" />
               Open to Work
             </p>
           </div>
@@ -40,7 +40,7 @@ export default function Footer() {
             <h2 className="text-sm font-semibold text-white">Explore</h2>
             <div className="mt-5 flex flex-col gap-3">
               {explore.map(([label, href]) => (
-                <a key={label} href={href} className="w-fit text-slate-500 transition hover:text-white">
+                <a key={label} href={href} className="w-fit text-slate-500 transition-colors duration-200 ease-out hover:text-white">
                   {label}
                 </a>
               ))}
@@ -49,7 +49,7 @@ export default function Footer() {
 
           <div>
             <h2 className="text-sm font-semibold text-white">Get in touch</h2>
-            <a href={`mailto:${PERSONAL.email}`} className="mt-5 block break-words text-slate-500 transition hover:text-white">
+            <a href={`mailto:${PERSONAL.email}`} className="mt-5 block break-words text-slate-500 transition-colors duration-200 ease-out hover:text-white">
               {PERSONAL.email}
             </a>
             <p className="mt-3 text-slate-600">UTC+5:45</p>
@@ -61,7 +61,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label as string}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition-all duration-200 hover:border-sky-400/50 hover:bg-sky-500/10 hover:text-sky-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+                  className="premium-button-secondary inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 transition-all duration-200 ease-out hover:text-[--accent-primary] hover:scale-105 hover:shadow-[0_0_15px_rgba(224,185,166,0.22)]"
                 >
                   <Icon size={18} />
                 </a>
@@ -75,7 +75,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-4">
             <span>Built with Next.js</span>
             <span>Deployed on Vercel</span>
-            <a href="#home" className="inline-flex items-center gap-1 transition hover:text-white">
+            <a href="#home" className="inline-flex items-center gap-1 transition-colors duration-200 ease-out hover:text-white">
               Back to top <ArrowUp size={14} />
             </a>
           </div>

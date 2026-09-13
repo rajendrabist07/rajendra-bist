@@ -27,6 +27,8 @@ const CASE_STUDIES = [
       "Empirical tool-calling review loop that executes AST linters and vulnerability scanners before synthesizing 1-click GitHub PR review comments.",
     keyDecision:
       "Engineered a 3-tier fallback model router (Groq Llama 3.3 ➡️ Gemini 2.5 Flash ➡️ Deterministic AST rules) guaranteeing review uptime resilience under strict rate limits.",
+    frontendImplementation:
+      "Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.",
     metrics: [
       { value: "3-Tier", label: "Failover Router" },
       { value: "5 Max", label: "Agentic Loop Cap" },
@@ -64,6 +66,8 @@ const CASE_STUDIES = [
       "End-to-end cognitive workspace pairing long-term student memory profiles in Supabase with pgvector document grounding and an independent verification audit layer.",
     keyDecision:
       "Chose self-hosted pgvector inside PostgreSQL over external vector databases to eliminate cold starts and keep user data and vector embeddings in a single atomic transaction.",
+    frontendImplementation:
+      "Built the learning workspace around authenticated Next.js/React flows that connect upload, memory, verification, and spaced-repetition states to typed backend responses.",
     metrics: [
       { value: "pgvector", label: "Syllabus Grounding" },
       { value: "SM-2", label: "Spaced Repetition" },
@@ -99,6 +103,8 @@ const CASE_STUDIES = [
       "Constrained LLM agent that enforces strict negative prompt boundaries and locked temperature (0.4–0.6) to guide students through Socratic step-by-step reasoning.",
     keyDecision:
       "Implemented persistent session storage in MongoDB Atlas with structured feedback loops rather than stateless chat sessions.",
+    frontendImplementation:
+      "Shaped the chat interface around saved learning sessions and guided-question pacing so the UI reinforces Socratic learning instead of direct answer delivery.",
     metrics: [
       { value: "Zero-Direct", label: "Solution Masking" },
       { value: "0.4–0.6", label: "Locked Temperature" },
@@ -115,22 +121,22 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0c1017] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+      <div className="overflow-hidden rounded-2xl border border-[--border] bg-[#15110e] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
         {/* Window Titlebar with View Switcher */}
         <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-rose-500/80" />
-            <span className="h-3 w-3 rounded-full bg-amber-500/80" />
-            <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
+            <span className="h-3 w-3 rounded-full bg-[#e0b9a6]/80" />
+            <span className="h-3 w-3 rounded-full bg-[#e0c49d]/80" />
+            <span className="h-3 w-3 rounded-full bg-[#bfe2d8]/80" />
           </div>
 
-          <div className="flex items-center rounded-lg border border-white/10 bg-black/40 p-0.5">
+          <div className="flex items-center rounded-lg border border-[--border] bg-black/35 p-0.5">
             <button
               type="button"
               onClick={() => setActiveView("preview")}
-              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] ${
                 activeView === "preview"
-                  ? "bg-sky-500/20 text-sky-300 shadow"
+                  ? "bg-[rgba(224,185,166,0.16)] text-[--accent-primary] shadow"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -140,9 +146,9 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             <button
               type="button"
               onClick={() => setActiveView("architecture")}
-              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] ${
                 activeView === "architecture"
-                  ? "bg-sky-500/20 text-sky-300 shadow"
+                  ? "bg-[rgba(224,185,166,0.16)] text-[--accent-primary] shadow"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -162,7 +168,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="relative aspect-video w-full overflow-hidden bg-[#06080d]"
+                className="relative aspect-video w-full overflow-hidden bg-[--bg-primary]"
               >
                 <Image
                   src={project.image}
@@ -181,7 +187,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
                 transition={{ duration: 0.2 }}
                 className="flex items-center justify-center p-6 font-mono text-xs leading-relaxed text-slate-300"
               >
-                <pre className="overflow-x-auto whitespace-pre text-sky-300 font-mono">
+                <pre className="overflow-x-auto whitespace-pre text-[--accent-secondary] font-mono">
                   {project.terminalContent}
                 </pre>
               </motion.div>
@@ -197,7 +203,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             href={project.liveUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080d]"
+            className="premium-button-primary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] focus-visible:ring-offset-2 focus-visible:ring-offset-[--bg-primary]"
           >
             Live Demo <ExternalLink size={15} />
           </a>
@@ -207,7 +213,7 @@ function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }
             href={project.githubUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06080d]"
+            className="premium-button-secondary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] focus-visible:ring-offset-2 focus-visible:ring-offset-[--bg-primary]"
           >
             GitHub <Github size={15} />
           </a>
@@ -238,7 +244,7 @@ export default function Projects() {
 
               {/* Right Column: Case Study Narrative */}
               <div className="flex flex-col">
-                <span className="text-xs font-bold tracking-widest uppercase text-sky-400">
+                <span className="text-xs font-bold tracking-widest uppercase text-[--accent-primary]">
                   {project.tag}
                 </span>
 
@@ -266,12 +272,20 @@ export default function Projects() {
                 </div>
 
                 {/* Key Decision Card */}
-                <div className="mt-6 rounded-xl border border-sky-500/30 bg-sky-500/[0.05] p-4 text-xs leading-relaxed text-slate-300">
-                  <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-sky-300">
-                    <Zap size={14} className="text-sky-400" />
+                <div className="mt-6 rounded-xl border border-[rgba(224,185,166,0.28)] bg-[rgba(224,185,166,0.065)] p-4 text-xs leading-relaxed text-slate-300">
+                  <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[--accent-primary]">
+                    <Zap size={14} className="text-[--accent-primary]" />
                     <span>Key Decision</span>
                   </div>
                   <p className="mt-2">{project.keyDecision}</p>
+                </div>
+
+                <div className="mt-3 rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 text-xs leading-relaxed text-slate-300">
+                  <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-slate-300">
+                    <Sparkles size={14} className="text-[--accent-primary]" />
+                    <span>Frontend Implementation</span>
+                  </div>
+                  <p className="mt-2">{project.frontendImplementation}</p>
                 </div>
 
                 {/* Metrics Grid */}
@@ -296,7 +310,7 @@ export default function Projects() {
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-medium text-slate-300"
+                      className="premium-chip rounded-lg px-2.5 py-1 text-xs font-medium"
                     >
                       {tech}
                     </span>

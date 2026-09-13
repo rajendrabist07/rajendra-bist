@@ -1,16 +1,40 @@
 <svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="960" height="600" rx="36" fill="#0A0C12"/>
-  <rect x="1" y="1" width="958" height="598" rx="35" stroke="#283040"/>
-  <circle cx="740" cy="92" r="170" fill="#38BDF8" fill-opacity=".1"/>
-  <circle cx="218" cy="500" r="190" fill="#6366F1" fill-opacity=".1"/>
-  <path d="M242 172h290c96 0 174 78 174 174v82H416c-96 0-174-78-174-174v-82Z" fill="#111827" stroke="#263244" stroke-width="2"/>
-  <path d="M318 243c70-34 137-31 199 8 53-42 101-47 145-16v156c-50-25-99-20-145 14-65-40-132-43-199-9V243Z" stroke="#38BDF8" stroke-width="16" stroke-linejoin="round"/>
-  <path d="M517 252v153" stroke="#818CF8" stroke-width="10" stroke-linecap="round"/>
-  <path d="M354 338l56-51 51 44 84-78 47 38" stroke="#60A5FA" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M592 291l1-80 76 19" stroke="#60A5FA" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-  <g fill="#64748B">
-    <circle cx="184" cy="120" r="5"/><circle cx="792" cy="428" r="4"/><circle cx="142" cy="410" r="3"/><circle cx="826" cy="190" r="3"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#080806"/>
+      <stop offset=".52" stop-color="#15110e"/>
+      <stop offset="1" stop-color="#211a15"/>
+    </linearGradient>
+    <linearGradient id="pastel" x1="120" y1="88" x2="840" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e8d8cd"/>
+      <stop offset=".2" stop-color="#fff3e5"/>
+      <stop offset=".4" stop-color="#f8d8de"/>
+      <stop offset=".6" stop-color="#d9eceb"/>
+      <stop offset=".8" stop-color="#c8dce6"/>
+      <stop offset="1" stop-color="#98bdc9"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="960" height="600" rx="36" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="957" height="597" rx="34.5" stroke="#e0b9a6" stroke-opacity=".24" stroke-width="3"/>
+  <rect x="120" y="74" width="720" height="28" rx="14" fill="url(#pastel)" opacity=".95"/>
+  <circle cx="750" cy="190" r="180" fill="#d9eceb" fill-opacity=".12" filter="url(#glow)"/>
+  <circle cx="210" cy="492" r="178" fill="#e0b9a6" fill-opacity=".12" filter="url(#glow)"/>
+  <text x="72" y="168" fill="#fffaf3" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="800">EduMethod AI</text>
+  <text x="72" y="210" fill="#d8ccc0" font-family="Inter, Arial, sans-serif" font-size="20">RAG learning engine with memory</text>
+  <path d="M250 226h296c90 0 164 74 164 164v74H414c-90 0-164-74-164-164v-74Z" fill="#181411" stroke="#e8ddd2" stroke-opacity=".18" stroke-width="3"/>
+  <path d="M326 289c70-34 136-31 198 8 54-42 102-47 146-16v150c-51-25-100-19-146 15-65-40-131-43-198-9V289Z" stroke="#e0b9a6" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M524 298v148" stroke="#e8f3f2" stroke-opacity=".70" stroke-width="9" stroke-linecap="round"/>
+  <path d="M362 380l56-51 51 44 84-78 47 38" stroke="#98bdc9" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M600 333l1-78 74 18" stroke="#98bdc9" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#e8ddd2" fill-opacity=".45">
+    <circle cx="176" cy="270" r="5"/>
+    <circle cx="812" cy="428" r="4"/>
+    <circle cx="144" cy="424" r="3"/>
+    <circle cx="824" cy="238" r="3"/>
   </g>
-  <text x="64" y="84" fill="#E5E7EB" font-family="Inter, Arial" font-size="34" font-weight="700">EduMethod AI</text>
-  <text x="64" y="125" fill="#64748B" font-family="Inter, Arial" font-size="18">RAG learning engine</text>
+  <rect x="72" y="464" width="286" height="48" rx="14" fill="#fffaf3" fill-opacity=".055" stroke="#e0b9a6" stroke-opacity=".20"/>
+  <text x="96" y="495" fill="#e8ddd2" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="650">pgvector - SM-2 - Verification</text>
 </svg>

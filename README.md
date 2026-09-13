@@ -8,7 +8,7 @@
 [![Google Gemini API](https://img.shields.io/badge/Google_Gemini-2.5_Flash-8E75B2?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![Vercel Deployed](https://img.shields.io/badge/Vercel-Production-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://www.bistrajendra.com.np)
 
-> Production-grade personal portfolio and interactive AI systems engineering platform representing **Rajendra Bist** — Backend Developer & AI Systems Engineer based in Nepal. Built with a systems-first mindset: strict schema validation, database-level integrity, multi-tier streaming LLM orchestration, Schema.org JSON-LD search entity grounding, and WCAG AA accessible UI design.
+> Production-grade personal portfolio and interactive AI systems engineering platform representing **Rajendra Bist** — Full-Stack Developer with backend-focused AI systems depth, based in Nepal and available for remote work worldwide. Built with a systems-first mindset: strict schema validation, database-level integrity, multi-tier streaming LLM orchestration, Schema.org JSON-LD search entity grounding, and WCAG AA accessible UI design.
 
 🔗 **Live Production Site**: [https://www.bistrajendra.com.np](https://www.bistrajendra.com.np)  
 📂 **GitHub Repository**: [https://github.com/rajendrabist07/rajendra-bist](https://github.com/rajendrabist07/rajendra-bist)
@@ -63,7 +63,7 @@ graph TD
 
 ### 4. 🗂️ Engineering Timeline & Credentials
 - **Vertical Experience Timeline**: Chronological career trajectory highlighting backend scaling, API engineering, and real-time infrastructure.
-- **Dedicated Credentials Section**: Verifiable technical credentials featuring Full-Stack Web Development Training (*Vcare Technical Institute*) and B.Tech in Computer Science (*IGNOU*).
+- **Dedicated Credentials Section**: Verifiable technical credentials featuring Full-Stack Web Development Training (*Vcare Technical Institute*) plus honest project-based continuous learning.
 
 ---
 

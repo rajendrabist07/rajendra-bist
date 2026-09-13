@@ -99,9 +99,9 @@ export default function Skills() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative rounded-md px-3 py-2 text-xs font-semibold tracking-wider transition-colors duration-200 cursor-pointer sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
+                className={`relative rounded-md px-3 py-2 text-xs font-semibold tracking-wider transition-colors duration-200 ease-out cursor-pointer sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] ${
                   isActive
-                    ? "text-sky-400 font-bold"
+                    ? "text-[--accent-primary] font-bold"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -109,7 +109,7 @@ export default function Skills() {
                 {isActive && (
                   <motion.div
                     layoutId="activeTabIndicator"
-                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.8)]"
+                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[--accent-primary] shadow-[0_0_12px_rgba(224,185,166,0.72)]"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -134,14 +134,14 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.92 }}
                   transition={{ duration: 0.2 }}
-                  className="group relative flex items-center justify-between gap-2.5 rounded-xl border border-white/[0.08] bg-[#0c1017]/80 px-4 py-3.5 backdrop-blur-sm transition-all duration-200 hover:border-sky-400/50 hover:bg-white/[0.04] hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+                  className="group premium-chip relative flex items-center justify-between gap-2.5 rounded-xl px-4 py-3.5 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(224,185,166,0.10)]"
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
                     <Icon
                       size={17}
-                      className="shrink-0 text-slate-400 transition-colors duration-200 group-hover:text-sky-400"
+                      className="shrink-0 text-slate-400 transition-colors duration-200 ease-out group-hover:text-[--accent-primary]"
                     />
-                    <span className="truncate text-xs font-medium text-slate-200 transition-colors duration-200 group-hover:text-white sm:text-sm">
+                    <span className="truncate text-xs font-medium text-slate-200 transition-colors duration-200 ease-out group-hover:text-white sm:text-sm">
                       {tool.name}
                     </span>
                   </div>
@@ -150,8 +150,8 @@ export default function Skills() {
                     <span
                       className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${
                         tool.badge === "CORE"
-                          ? "bg-sky-500/20 text-sky-300 border border-sky-400/30"
-                          : "bg-amber-500/15 text-amber-300 border border-amber-400/30"
+                          ? "bg-[rgba(191,226,216,0.12)] text-[--success] border border-[rgba(191,226,216,0.24)]"
+                          : "bg-[rgba(224,196,157,0.14)] text-[--warning] border border-[rgba(224,196,157,0.26)]"
                       }`}
                     >
                       {tool.badge}

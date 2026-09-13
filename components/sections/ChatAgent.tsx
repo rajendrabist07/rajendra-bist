@@ -38,18 +38,18 @@ function CodeBlock({ language, code }: { language: string; code: string }) {
     <div className="my-4 overflow-hidden rounded-xl border border-white/[0.08] bg-black/40 font-mono text-[13px] shadow-inner">
       <div className="flex items-center justify-between bg-white/[0.02] px-4 py-2 text-xs text-slate-400 border-b border-white/[0.06]">
         <div className="flex items-center gap-1.5 font-medium text-slate-300">
-          <Terminal size={13} className="text-indigo-400" />
+          <Terminal size={13} className="text-[--accent-primary]" />
           <span className="uppercase tracking-wider">{language || 'code'}</span>
         </div>
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1 rounded-md bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition hover:bg-white/[0.08] hover:text-white active:scale-95 cursor-pointer"
+          className="inline-flex items-center gap-1 rounded-md bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-all duration-200 ease-out hover:bg-white/[0.08] hover:text-white active:scale-95 cursor-pointer"
         >
           {copied ? (
             <>
-              <Check size={11} className="text-sky-400" />
-              <span className="text-sky-400">Copied!</span>
+              <Check size={11} className="text-[--accent-primary]" />
+              <span className="text-[--accent-primary]">Copied!</span>
             </>
           ) : (
             <>
@@ -79,7 +79,7 @@ function parseInline(text: string): React.ReactNode[] {
     }
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
-        <code key={index} className="mx-0.5 rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-xs text-indigo-300">
+        <code key={index} className="mx-0.5 rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-xs text-[--accent-primary]">
           {part.slice(1, -1)}
         </code>
       )
@@ -129,7 +129,7 @@ function MarkdownRenderer({ content }: { content: string }) {
               }
               if (trimmedLine.startsWith('#')) {
                 return (
-                  <h2 key={lineIdx} className="text-lg font-bold text-indigo-200 mt-6 mb-3 tracking-tight">
+                  <h2 key={lineIdx} className="text-lg font-bold text-[--accent-secondary] mt-6 mb-3 tracking-tight">
                     {parseInline(trimmedLine.slice(1).trim())}
                   </h2>
                 )
@@ -139,7 +139,7 @@ function MarkdownRenderer({ content }: { content: string }) {
               if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
                 return (
                   <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-300">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[--accent-primary] shadow-[0_0_8px_rgba(224,185,166,0.45)]" />
                     <span className="text-sm leading-relaxed flex-1">
                       {parseInline(trimmedLine.slice(2).trim())}
                     </span>
@@ -152,7 +152,7 @@ function MarkdownRenderer({ content }: { content: string }) {
               if (numMatch) {
                 return (
                   <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-300">
-                    <span className="font-mono text-xs font-semibold text-indigo-400 mt-0.5 shrink-0">
+                    <span className="font-mono text-xs font-semibold text-[--accent-primary] mt-0.5 shrink-0">
                       {numMatch[1]}.
                     </span>
                     <span className="text-sm leading-relaxed flex-1">
@@ -425,19 +425,19 @@ export default function ChatAgent() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 15, scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-              className="pointer-events-auto relative flex h-[700px] max-h-[85vh] w-full max-w-[640px] flex-col rounded-3xl border border-white/[0.08] bg-[#09090f]/95 shadow-[0_35px_100px_rgba(0,0,0,0.8)] backdrop-blur-2xl overflow-hidden"
+              className="surface-panel pointer-events-auto relative flex h-[700px] max-h-[85vh] w-full max-w-[640px] flex-col rounded-3xl shadow-[0_35px_100px_rgba(0,0,0,0.58)] backdrop-blur-2xl overflow-hidden"
             >
               {/* Header */}
               <div className="flex items-center justify-between border-b border-white/[0.06] bg-white/[0.02] px-5 py-4">
                 <div className="flex items-center gap-3">
-                  <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md">
+                  <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl premium-button-primary shadow-md">
                     <Bot size={18} />
-                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#09090f] bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[--bg-primary] bg-[--success] shadow-[0_0_8px_rgba(191,226,216,0.72)]" />
                   </span>
                   <div>
                     <div className="flex items-center gap-1.5">
                       <p className="text-sm font-semibold text-white">RB Assistant</p>
-                      <span className="rounded-full bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-medium text-indigo-300 border border-indigo-400/20">Active</span>
+                      <span className="rounded-full bg-[rgba(191,226,216,0.10)] px-1.5 py-0.5 text-[10px] font-medium text-[--success] border border-[rgba(191,226,216,0.22)]">Active</span>
                     </div>
                     <p className="text-xs text-slate-400">Ask about Rajendra&apos;s architecture & projects</p>
                   </div>
@@ -448,7 +448,7 @@ export default function ChatAgent() {
                     <button
                       type="button"
                       onClick={handleClearHistory}
-                      className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white cursor-pointer"
+                      className="rounded-full p-2 text-slate-400 transition-all duration-200 ease-out hover:bg-white/5 hover:text-white cursor-pointer"
                       title="Reset Conversation"
                       aria-label="Reset Conversation"
                     >
@@ -458,7 +458,7 @@ export default function ChatAgent() {
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    className="rounded-full p-2 text-slate-400 transition hover:bg-white/5 hover:text-white cursor-pointer"
+                    className="rounded-full p-2 text-slate-400 transition-all duration-200 ease-out hover:bg-white/5 hover:text-white cursor-pointer"
                     aria-label="Close chat"
                   >
                     <X size={18} />
@@ -471,9 +471,9 @@ export default function ChatAgent() {
                 {messages.length === 0 ? (
                   <div className="flex flex-col h-full items-center justify-center text-center space-y-6 py-6 px-4">
                     {/* Empty state welcome card */}
-                    <div className="rounded-2xl border border-indigo-500/15 bg-gradient-to-b from-indigo-500/[0.06] to-transparent p-6 max-w-sm w-full">
-                      <div className="flex flex-col items-center gap-3 text-indigo-300 mb-4">
-                        <div className="p-3 rounded-xl bg-indigo-500/10 inline-flex">
+                    <div className="rounded-2xl border border-[rgba(224,185,166,0.18)] bg-gradient-to-b from-[rgba(224,185,166,0.08)] to-transparent p-6 max-w-sm w-full">
+                      <div className="flex flex-col items-center gap-3 text-[--accent-primary] mb-4">
+                        <div className="p-3 rounded-xl bg-[rgba(224,185,166,0.10)] inline-flex">
                           <Sparkles size={24} />
                         </div>
                         <p className="text-base font-bold tracking-tight">Systems-first Assistant</p>
@@ -483,15 +483,15 @@ export default function ChatAgent() {
                       </p>
                       <ul className="mt-4 space-y-2 text-sm text-slate-400 inline-block text-left w-fit mx-auto">
                         <li className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
                           His flagship platform <strong>EduMethod AI</strong>
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
                           Autonomous <strong>DevGuard AI</strong> agent loop
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
                           SocraticAI learning mechanics
                         </li>
                       </ul>
@@ -505,7 +505,7 @@ export default function ChatAgent() {
                             key={question}
                             type="button"
                             onClick={() => sendMessage(question)}
-                            className="text-center rounded-xl border border-white/[0.04] bg-white/[0.02] px-4 py-3 text-xs text-slate-300 transition duration-200 hover:border-indigo-500/30 hover:bg-white/[0.06] hover:text-white cursor-pointer"
+                            className="premium-chip text-center rounded-xl px-4 py-3 text-xs transition-all duration-200 ease-out cursor-pointer"
                           >
                             {question}
                           </button>
@@ -520,7 +520,7 @@ export default function ChatAgent() {
                       className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       {message.role !== 'user' && (
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-950 border border-indigo-500/20 text-indigo-300 text-xs mt-1">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(224,185,166,0.10)] border border-[rgba(224,185,166,0.20)] text-[--accent-primary] text-xs mt-1">
                           <Bot size={14} />
                         </span>
                       )}
@@ -529,7 +529,7 @@ export default function ChatAgent() {
                         <div
                           className={`rounded-2xl px-5 py-3.5 shadow-md ${
                             message.role === 'user'
-                              ? 'bg-gradient-to-br from-indigo-600 to-indigo-700 text-white rounded-tr-none'
+                              ? 'premium-button-primary rounded-tr-none'
                               : 'bg-white/[0.03] border border-white/[0.05] text-slate-200 rounded-tl-none'
                           }`}
                         >
@@ -556,12 +556,12 @@ export default function ChatAgent() {
                             <button
                               type="button"
                               onClick={() => handleCopyMessage(message.id, message.content)}
-                              className="transition hover:text-slate-300 active:scale-95 cursor-pointer"
+                              className="transition-all duration-200 ease-out hover:text-slate-300 active:scale-95 cursor-pointer"
                               title="Copy response"
                               aria-label="Copy response"
                             >
                               {copiedMsgId === message.id ? (
-                                <Check size={13} className="text-sky-400" />
+                                <Check size={13} className="text-[--accent-primary]" />
                               ) : (
                                 <Copy size={13} />
                               )}
@@ -571,8 +571,8 @@ export default function ChatAgent() {
                             <button
                               type="button"
                               onClick={() => handleReadAloud(message.id, message.content)}
-                              className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
-                                speakingMsgId === message.id ? 'text-indigo-400 animate-pulse' : ''
+                              className={`transition-all duration-200 ease-out hover:text-slate-300 active:scale-95 cursor-pointer ${
+                                speakingMsgId === message.id ? 'text-[--accent-primary] animate-pulse' : ''
                               }`}
                               title={speakingMsgId === message.id ? "Stop reading" : "Read aloud"}
                               aria-label={speakingMsgId === message.id ? "Stop reading" : "Read aloud"}
@@ -584,8 +584,8 @@ export default function ChatAgent() {
                             <button
                               type="button"
                               onClick={() => handleToggleRating(message.id, 'like')}
-                              className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
-                                ratings[message.id] === 'like' ? 'text-sky-400 fill-sky-400/20' : ''
+                              className={`transition-all duration-200 ease-out hover:text-slate-300 active:scale-95 cursor-pointer ${
+                                ratings[message.id] === 'like' ? 'text-[--success] fill-[rgba(191,226,216,0.20)]' : ''
                               }`}
                               title="Like response"
                               aria-label="Like response"
@@ -597,7 +597,7 @@ export default function ChatAgent() {
                             <button
                               type="button"
                               onClick={() => handleToggleRating(message.id, 'dislike')}
-                              className={`transition hover:text-slate-300 active:scale-95 cursor-pointer ${
+                              className={`transition-all duration-200 ease-out hover:text-slate-300 active:scale-95 cursor-pointer ${
                                 ratings[message.id] === 'dislike' ? 'text-rose-400 fill-rose-400/20' : ''
                               }`}
                               title="Dislike response"
@@ -610,7 +610,7 @@ export default function ChatAgent() {
                             <button
                               type="button"
                               onClick={() => handleRedo(message.id)}
-                              className="transition hover:text-slate-300 active:scale-95 cursor-pointer"
+                              className="transition-all duration-200 ease-out hover:text-slate-300 active:scale-95 cursor-pointer"
                               title="Regenerate response"
                               aria-label="Regenerate response"
                               disabled={isLoading}
@@ -622,7 +622,7 @@ export default function ChatAgent() {
                       </div>
 
                       {message.role === 'user' && (
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-600/20 border border-indigo-500/10 text-indigo-200 text-xs mt-1">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(224,185,166,0.14)] border border-[rgba(224,185,166,0.20)] text-[--accent-primary] text-xs mt-1">
                           <User size={14} />
                         </span>
                       )}
@@ -641,19 +641,19 @@ export default function ChatAgent() {
               )}
 
               {/* Input Bar Form */}
-              <form onSubmit={handleSubmit} className="border-t border-white/[0.06] bg-[#0c0c14] p-4 sm:p-5 flex items-center gap-3">
+              <form onSubmit={handleSubmit} className="border-t border-white/[0.06] bg-black/[0.18] p-4 sm:p-5 flex items-center gap-3">
                 <div className="relative flex-1 flex items-center">
                   <input
                     value={inputValue}
                     onChange={event => setInputValue(event.target.value)}
                     placeholder="Ask about Rajendra's engineering philosophy..."
-                    className="w-full rounded-2xl border border-white/[0.06] bg-[#07070c]/60 py-4 pl-5 pr-14 text-[15px] text-slate-100 placeholder-slate-500 outline-none transition focus:border-indigo-500/40 focus:bg-[#07070c]/90 focus:ring-1 focus:ring-indigo-500/20 disabled:opacity-50"
+                    className="w-full rounded-2xl border border-[--border] bg-white/[0.035] py-4 pl-5 pr-14 text-[15px] text-slate-100 placeholder-slate-500 outline-none transition-all duration-200 ease-out focus:border-[--accent-primary] focus:bg-white/[0.055] focus:ring-1 focus:ring-[rgba(224,185,166,0.22)] disabled:opacity-50"
                     disabled={isLoading}
                   />
                   <button
                     type="submit"
                     disabled={isLoading || !inputValue.trim()}
-                    className="absolute right-2.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white transition hover:bg-indigo-500 hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed disabled:bg-white/[0.04] disabled:text-slate-500 shadow-sm"
+                    className="premium-button-primary absolute right-2.5 inline-flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95 disabled:hover:scale-100 disabled:cursor-not-allowed disabled:bg-white/[0.04] disabled:text-slate-500 shadow-sm"
                   >
                     <Send size={16} className="-ml-0.5" />
                   </button>

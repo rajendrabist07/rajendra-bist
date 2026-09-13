@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
+    languages: {
+      'en-US': '/',
+    },
   },
   applicationName: SITE_NAME,
   category: 'portfolio',
@@ -60,7 +63,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Rajendra Bist - Backend Developer and AI Systems Engineer Portfolio Preview',
+        alt: 'Rajendra Bist - Full-Stack Developer and AI Systems Engineer Portfolio Preview',
         type: 'image/png',
       },
     ],
@@ -76,9 +79,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
     shortcut: '/favicon.svg',
   },
   authors: [{ name: PERSONAL.name, url: PERSONAL.github }],
@@ -87,7 +91,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#06080d',
+  themeColor: '#080806',
 };
 
 const personId = `${SITE_URL}/#rajendra-bist`;
@@ -101,12 +105,21 @@ const jsonLdGraph = {
       '@type': 'Person',
       '@id': personId,
       name: PERSONAL.name,
-      alternateName: ['Rajendra', 'Rajendra Bist Backend Developer', 'Rajendra Bist Nepal'],
+      alternateName: ['Rajendra', 'Rajendra Bist Full-Stack Developer', 'Rajendra Bist Nepal'],
       url: SITE_URL,
       mainEntityOfPage: webPageId,
       image: `${SITE_URL}/images/rajendra-bist.jpeg`,
       jobTitle: PERSONAL.role,
       description: SITE_DESCRIPTION,
+      seeks: {
+        '@type': 'Demand',
+        name: 'Remote full-stack, backend-focused, and AI systems engineering roles',
+        description: 'Available from Nepal for remote software engineering work worldwide.',
+        areaServed: {
+          '@type': 'Place',
+          name: 'Worldwide',
+        },
+      },
       email: `mailto:${PERSONAL.email}`,
       sameAs: [
         PERSONAL.github,
@@ -125,15 +138,6 @@ const jsonLdGraph = {
           recognizedBy: {
             '@type': 'EducationalOrganization',
             name: 'Vcare Technical Institute',
-          },
-        },
-        {
-          '@type': 'EducationalOccupationalCredential',
-          name: 'Bachelor of Technology (B.Tech)',
-          credentialCategory: 'Undergraduate Degree',
-          recognizedBy: {
-            '@type': 'CollegeOrUniversity',
-            name: 'Indira Gandhi National Open University',
           },
         },
       ],
@@ -221,7 +225,7 @@ const jsonLdGraph = {
           name: 'Who is Rajendra Bist?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Rajendra Bist is a backend developer and AI systems engineer from Nepal building scalable APIs, database-driven products, RAG pipelines, LLM integrations, and full-stack applications.',
+            text: 'Rajendra Bist is a full-stack developer based in Nepal and available for remote work worldwide, building typed React interfaces, scalable APIs, database-driven products, RAG pipelines, LLM integrations, and production AI systems.',
           },
         },
         {
@@ -229,7 +233,7 @@ const jsonLdGraph = {
           name: 'What does Rajendra Bist specialize in?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Rajendra specializes in Node.js, Next.js, TypeScript, MongoDB, PostgreSQL, Supabase pgvector, RAG pipelines, LLM integration, REST APIs, and production-ready AI workflows.',
+            text: 'Rajendra specializes in full-stack TypeScript engineering with React, Next.js, Node.js, MongoDB, PostgreSQL, Supabase pgvector, RAG pipelines, LLM integration, REST APIs, and production-ready AI workflows.',
           },
         },
       ],
@@ -242,7 +246,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="author" content={PERSONAL.name} />
-        <meta name="classification" content="Portfolio, Software Engineering, Backend Development, AI Systems" />
+        <meta name="classification" content="Portfolio, Software Engineering, Full-Stack Development, Backend Development, AI Systems, Remote Software Engineer" />
         <meta name="format-detection" content="telephone=no" />
         <link rel="manifest" href="/manifest.json" />
         <script

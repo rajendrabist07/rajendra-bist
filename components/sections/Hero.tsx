@@ -8,7 +8,8 @@ import { PERSONAL } from "@/lib/portfolio-data";
 import Container from "@/components/ui/Container";
 
 const ROLES = [
-  "Backend Developer & AI Systems Engineer",
+  "Full-Stack Developer | Backend-Focused AI Systems",
+  "Typed React Interfaces & Production APIs",
   "Building Scalable APIs & RAG Pipelines",
   "LLM Integrations & Vector Embeddings",
   "Autonomous Tool-Calling AI Systems",
@@ -70,14 +71,14 @@ export default function Hero() {
             variants={heroVariants}
             transition={itemTransition}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)] animate-pulse" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(191,226,216,0.22)] bg-[rgba(191,226,216,0.10)] px-3 py-1 text-xs font-medium text-[--success]">
+              <span className="h-2 w-2 rounded-full bg-[--success] shadow-[0_0_10px_rgba(191,226,216,0.72)] animate-pulse" />
               Available for Work
             </div>
 
             <h1 className="mt-5 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.05]">
               Rajendra<br />
-              B<span className="text-sky-400">IST</span>
+              B<span className="text-[--accent-primary]">IST</span>
             </h1>
           </motion.div>
 
@@ -89,9 +90,9 @@ export default function Hero() {
             transition={{ ...itemTransition, delay: 0.15 }}
             className="mt-3 flex min-h-[32px] items-center justify-center md:justify-start"
           >
-            <p className="text-base font-semibold text-sky-400 sm:text-lg">
+            <p className="text-base font-semibold text-[--accent-primary] sm:text-lg">
               <span>{currentText}</span>
-              <span className="ml-0.5 inline-block w-2 animate-pulse text-sky-300 font-normal">|</span>
+              <span className="ml-0.5 inline-block w-2 animate-pulse text-[--accent-secondary] font-normal">|</span>
             </p>
           </motion.div>
 
@@ -102,7 +103,7 @@ export default function Hero() {
             transition={{ ...itemTransition, delay: 0.3 }}
             className="mt-3 max-w-lg text-sm leading-relaxed text-slate-300 sm:text-base"
           >
-            Production backend systems built with Node.js, TypeScript, and PostgreSQL — deployed on cloud infrastructure, used by real people. Currently deepening my work in AI engineering & RAG architectures.
+            Production full-stack systems built with React, Next.js, Node.js, TypeScript, and PostgreSQL — typed interfaces, reliable API contracts, and AI workflows deployed for real users.
           </motion.p>
 
           {/* Action Buttons */}
@@ -115,16 +116,16 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="inline-flex min-h-11 items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.35)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(56,189,248,0.5)] hover:scale-[1.02] active:scale-[0.98]"
+              className="premium-button-primary inline-flex min-h-11 items-center justify-center rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
             >
               View Projects
             </a>
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-sky-400/60 hover:bg-sky-500/10 hover:scale-[1.02] active:scale-[0.98]"
+              className="premium-button-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Download size={15} className="text-sky-300" />
+              <Download size={15} className="text-[--accent-primary]" />
               Download CV
             </a>
           </motion.div>
@@ -150,7 +151,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="text-slate-400 transition-colors duration-200 hover:text-sky-300 hover:scale-110 active:scale-95"
+                  className="text-[--text-muted] transition-all duration-200 ease-out hover:text-[--accent-primary] hover:scale-105 active:scale-95"
                 >
                   <Icon size={20} />
                 </a>
@@ -172,14 +173,14 @@ export default function Hero() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="relative w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[330px]"
           >
-            {/* Glowing Blue Ambient Halo */}
-            <div className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.4),rgba(37,99,235,0.2)_45%,transparent_70%)] blur-xl" />
+            {/* Warm neutral ambient halo */}
+            <div className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(224,185,166,0.30),rgba(232,243,242,0.12)_45%,transparent_70%)] blur-xl" />
 
-            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-sky-400/80 bg-[#0c1017] p-1.5 shadow-[0_0_60px_rgba(56,189,248,0.3)]">
-              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#0c1017]">
+            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-[rgba(224,185,166,0.72)] bg-[#15110e] p-1.5 shadow-[0_0_60px_rgba(224,185,166,0.18)]">
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#15110e]">
                 <Image
                   src="/images/rajendra-bist.jpeg"
-                  alt="Rajendra Bist - Backend Developer from Nepal profile photo"
+                  alt="Rajendra Bist - Full-Stack Developer from Nepal profile photo"
                   fill
                   priority
                   sizes="(min-width: 1024px) 340px, 75vw"
@@ -194,7 +195,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div className="mx-auto mt-8 flex flex-col items-center gap-1 text-slate-500">
         <span className="text-[10px] font-semibold tracking-widest uppercase text-slate-400">Scroll</span>
-        <ArrowDown size={13} className="animate-bounce text-sky-400" />
+        <ArrowDown size={13} className="animate-bounce text-[--accent-primary]" />
       </div>
     </section>
   );

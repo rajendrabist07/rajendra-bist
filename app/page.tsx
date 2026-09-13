@@ -11,13 +11,13 @@ import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import StarryBackground from "@/components/ui/StarryBackground";
+import PremiumBackground from "@/components/ui/PremiumBackground";
 import FloatingAskAI from "@/components/ui/FloatingAskAI";
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#06080d] text-white selection:bg-sky-500 selection:text-white">
-      <StarryBackground />
+    <div className="relative min-h-screen bg-[--bg-primary] text-[--text-primary] selection:bg-[--accent-primary] selection:text-[#15110e]">
+      <PremiumBackground />
       <FloatingAskAI />
       <Navbar />
       <main className="relative z-10">
