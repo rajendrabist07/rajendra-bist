@@ -303,6 +303,30 @@ pre,
   box-shadow: 0 26px 80px rgba(0, 0, 0, 0.42);
 }
 
+.code-card {
+  color: #edf7f5;
+}
+
+.code-card [class*="accent-primary"] {
+  color: #9ed8e0 !important;
+}
+
+.code-card [class*="accent-secondary"] {
+  color: #f0c6a9 !important;
+}
+
+.code-card [class*="accent-cool"] {
+  color: #bfe2d8 !important;
+}
+
+.code-card [class*="success"] {
+  color: #9ed4bd !important;
+}
+
+.project-architecture {
+  color: #edf7f5 !important;
+}
+
 .project-card {
   background:
     linear-gradient(
@@ -545,6 +569,30 @@ main > section:target::before {
 [data-theme="light"] .project-card,
 [data-theme="light"] .code-card {
   box-shadow: 0 22px 70px rgba(78, 58, 45, 0.1);
+}
+
+[data-theme="light"] .code-card {
+  color: #233338;
+}
+
+[data-theme="light"] .code-card [class*="accent-primary"] {
+  color: #176b82 !important;
+}
+
+[data-theme="light"] .code-card [class*="accent-secondary"] {
+  color: #7d4d37 !important;
+}
+
+[data-theme="light"] .code-card [class*="accent-cool"] {
+  color: #256c58 !important;
+}
+
+[data-theme="light"] .code-card [class*="success"] {
+  color: #2c765e !important;
+}
+
+[data-theme="light"] .project-architecture {
+  color: #233338 !important;
 }
 
 [data-theme="light"] .project-card,

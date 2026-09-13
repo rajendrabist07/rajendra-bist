@@ -200,7 +200,7 @@ function ProjectVisualCard({
                 transition={{ duration: 0.2 }}
                 className="flex items-center justify-center p-6 font-mono text-xs leading-relaxed text-slate-300"
               >
-                <pre className="overflow-x-auto whitespace-pre text-[--accent-secondary] font-mono">
+                <pre className="project-architecture overflow-x-auto whitespace-pre text-[--accent-secondary] font-mono">
                   {project.terminalContent}
                 </pre>
               </motion.div>
