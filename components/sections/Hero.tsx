@@ -26,7 +26,9 @@ const itemTransition = { duration: 0.5 };
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState(shouldReduceMotion ? ROLES[0] : "");
+  const [currentText, setCurrentText] = useState(
+    shouldReduceMotion ? ROLES[0] : "",
+  );
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function Hero() {
         setCurrentText(
           isDeleting
             ? fullText.substring(0, currentText.length - 1)
-            : fullText.substring(0, currentText.length + 1)
+            : fullText.substring(0, currentText.length + 1),
         );
       }, speed);
     }
@@ -62,7 +64,10 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-28 pb-10 lg:pt-32"
     >
-      <Container as="div" className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <Container
+        as="div"
+        className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]"
+      >
         {/* Left: Text & Bio Content */}
         <div className="text-center md:text-left">
           <motion.div
@@ -77,8 +82,8 @@ export default function Hero() {
             </div>
 
             <h1 className="mt-5 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.05]">
-              Rajendra<br />
-              B<span className="text-[--accent-primary]">IST</span>
+              Rajendra
+              <br />B<span className="text-[--accent-primary]">IST</span>
             </h1>
           </motion.div>
 
@@ -92,7 +97,9 @@ export default function Hero() {
           >
             <p className="text-base font-semibold text-[--accent-primary] sm:text-lg">
               <span>{currentText}</span>
-              <span className="ml-0.5 inline-block w-2 animate-pulse text-[--accent-secondary] font-normal">|</span>
+              <span className="ml-0.5 inline-block w-2 animate-pulse text-[--accent-secondary] font-normal">
+                |
+              </span>
             </p>
           </motion.div>
 
@@ -103,7 +110,9 @@ export default function Hero() {
             transition={{ ...itemTransition, delay: 0.3 }}
             className="mt-3 max-w-lg text-sm leading-relaxed text-slate-300 sm:text-base"
           >
-            Production full-stack systems built with React, Next.js, Node.js, TypeScript, and PostgreSQL — typed interfaces, reliable API contracts, and AI workflows deployed for real users.
+            Production full-stack systems built with React, Next.js, Node.js,
+            TypeScript, and PostgreSQL — typed interfaces, reliable API
+            contracts, and AI workflows deployed for real users.
           </motion.p>
 
           {/* Action Buttons */}
@@ -176,8 +185,8 @@ export default function Hero() {
             {/* Warm neutral ambient halo */}
             <div className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(224,185,166,0.30),rgba(232,243,242,0.12)_45%,transparent_70%)] blur-xl" />
 
-            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-[rgba(224,185,166,0.72)] bg-[#15110e] p-1.5 shadow-[0_0_60px_rgba(224,185,166,0.18)]">
-              <div className="relative h-full w-full overflow-hidden rounded-full bg-[#15110e]">
+            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-[--accent-primary] bg-[--bg-code] p-1.5 shadow-[0_0_60px_rgba(152,189,201,0.18)]">
+              <div className="relative h-full w-full overflow-hidden rounded-full bg-[--bg-code]">
                 <Image
                   src="/images/rajendra-bist.jpeg"
                   alt="Rajendra Bist - Full-Stack Developer from Nepal profile photo"
@@ -194,8 +203,13 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="mx-auto mt-8 flex flex-col items-center gap-1 text-slate-500">
-        <span className="text-[10px] font-semibold tracking-widest uppercase text-slate-400">Scroll</span>
-        <ArrowDown size={13} className="animate-bounce text-[--accent-primary]" />
+        <span className="text-[10px] font-semibold tracking-widest uppercase text-slate-400">
+          Scroll
+        </span>
+        <ArrowDown
+          size={13}
+          className="animate-bounce text-[--accent-primary]"
+        />
       </div>
     </section>
   );

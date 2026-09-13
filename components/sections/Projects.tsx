@@ -110,18 +110,31 @@ const CASE_STUDIES = [
       { value: "0.4–0.6", label: "Locked Temperature" },
       { value: "MongoDB", label: "Session Retention" },
     ],
-    stack: ["Next.js 15", "Gemini API", "MongoDB", "Node.js", "TypeScript", "Tailwind CSS"],
+    stack: [
+      "Next.js 15",
+      "Gemini API",
+      "MongoDB",
+      "Node.js",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
     liveUrl: "https://socratic-ai-tau.vercel.app/",
     githubUrl: "https://github.com/rajendrabist07/socratic-ai.git",
   },
 ];
 
-function ProjectVisualCard({ project }: { project: typeof CASE_STUDIES[number] }) {
-  const [activeView, setActiveView] = useState<"preview" | "architecture">("preview");
+function ProjectVisualCard({
+  project,
+}: {
+  project: (typeof CASE_STUDIES)[number];
+}) {
+  const [activeView, setActiveView] = useState<"preview" | "architecture">(
+    "preview",
+  );
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="overflow-hidden rounded-2xl border border-[--border] bg-[#15110e] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+      <div className="overflow-hidden rounded-2xl border border-[--border] bg-[--bg-code] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
         {/* Window Titlebar with View Switcher */}
         <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
           <div className="flex items-center gap-2">
@@ -260,14 +273,18 @@ export default function Projects() {
                     <span className="font-semibold uppercase tracking-wider text-xs text-slate-400">
                       The Problem
                     </span>
-                    <p className="mt-1 italic text-slate-300">&ldquo;{project.problem}&rdquo;</p>
+                    <p className="mt-1 italic text-slate-300">
+                      &ldquo;{project.problem}&rdquo;
+                    </p>
                   </div>
 
                   <div>
                     <span className="font-semibold uppercase tracking-wider text-xs text-slate-400">
                       The Solution
                     </span>
-                    <p className="mt-1 italic text-slate-300">&ldquo;{project.solution}&rdquo;</p>
+                    <p className="mt-1 italic text-slate-300">
+                      &ldquo;{project.solution}&rdquo;
+                    </p>
                   </div>
                 </div>
 

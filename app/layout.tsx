@@ -91,8 +91,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#080806',
+  themeColor: '#98bdc9',
 };
+
+const themeInitScript = `
+(() => {
+  try {
+    const storedTheme = window.localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.dataset.theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : systemTheme;
+  } catch {
+    document.documentElement.dataset.theme = 'dark';
+  }
+})();
+`;
 
 const personId = `${SITE_URL}/#rajendra-bist`;
 const websiteId = `${SITE_URL}/#website`;
@@ -245,6 +257,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <meta name="author" content={PERSONAL.name} />
         <meta name="classification" content="Portfolio, Software Engineering, Full-Stack Development, Backend Development, AI Systems, Remote Software Engineer" />
         <meta name="format-detection" content="telephone=no" />

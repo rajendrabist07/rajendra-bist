@@ -25,12 +25,12 @@ export default function Icon() {
           fontWeight: 800,
           fontFamily: 'system-ui, -apple-system, sans-serif',
           borderRadius: '8px',
-          border: '1.5px solid rgba(224, 185, 166, 0.9)',
-          boxShadow: '0 0 8px rgba(224, 185, 166, 0.24)',
+          border: '1.5px solid rgba(152, 189, 201, 0.9)',
+          boxShadow: '0 0 8px rgba(152, 189, 201, 0.24)',
         }}
       >
         <span style={{ color: '#ffffff' }}>R</span>
-        <span style={{ color: '#e0b9a6', marginLeft: 1 }}>B</span>
+        <span style={{ color: '#98bdc9', marginLeft: 1 }}>B</span>
       </div>
     ),
     {
