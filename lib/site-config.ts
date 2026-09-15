@@ -2,10 +2,10 @@ export const SITE_URL = "https://www.bistrajendra.com.np";
 
 export const SITE_NAME = "Rajendra Bist Portfolio";
 
-export const SITE_TITLE = "Rajendra Bist - Full-Stack Developer for Remote AI Systems";
+export const SITE_TITLE = "Full-Stack Developer & Backend Engineer | Rajendra Bist";
 
 export const SITE_DESCRIPTION =
-  "Rajendra Bist is a full-stack developer based in Nepal and available for remote work worldwide, building typed React interfaces, scalable APIs, RAG pipelines, and production AI systems.";
+  "Rajendra Bist is a full-stack engineer building production systems with Next.js, Node.js, and AI agents. Open to remote full-stack and backend roles worldwide.";
 
 export const SITE_KEYWORDS = [
   "Rajendra Bist",

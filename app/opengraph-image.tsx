@@ -79,7 +79,7 @@ export default function Image() {
             letterSpacing: '-0.5px',
           }}
         >
-          Full-Stack Developer &amp; AI Systems Engineer
+          Full-Stack Developer &amp; Backend Engineer
         </div>
 
         {/* Tagline */}
