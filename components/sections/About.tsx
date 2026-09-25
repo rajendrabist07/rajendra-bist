@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Blocks, BrainCircuit, Database, Network, ShieldCheck, Cpu } from 'lucide-react';
+import { Blocks, BrainCircuit, Database, Network } from 'lucide-react';
 import SectionHeader from '@/components/ui/SectionHeader';
+import CodeBioBlock from '@/components/ui/CodeBioBlock';
 import Container from '@/components/ui/Container';
 
 const containerVariants = {
@@ -60,8 +61,19 @@ export default function About() {
         <SectionHeader
           eyebrow="01 // ARCHITECTURE & PHILOSOPHY"
           title="Engineering Systems with Rigor"
-          description="Proof of competence through verifiable systems, strict typing, and fault-tolerant architecture."
+          description="Representing engineering identity through structured schemas, strict typing, and fault-tolerant pipelines."
         />
+
+        {/* rajendra.config.ts as Opening Element of About */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55 }}
+          className="mt-8 mb-12 max-w-4xl"
+        >
+          <CodeBioBlock />
+        </motion.div>
 
         {/* Systems Narrative */}
         <motion.div
@@ -69,7 +81,7 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
-          className="mt-8 space-y-5 text-base leading-relaxed text-[--text-secondary] sm:text-lg sm:leading-8"
+          className="space-y-5 text-base leading-relaxed text-[--text-secondary] sm:text-lg sm:leading-8"
         >
           <motion.p variants={itemVariants}>
             I&apos;m a full-stack and backend systems engineer based in Nepal working primarily with{' '}
