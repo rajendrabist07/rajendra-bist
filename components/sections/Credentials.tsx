@@ -46,19 +46,19 @@ export default function Credentials() {
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className="surface-panel relative flex flex-col justify-between rounded-3xl p-6 sm:p-8 shadow-glow transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(224,185,166,0.10)]"
+                className="surface-panel relative flex flex-col justify-between rounded-3xl p-6 sm:p-8 shadow-glow transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(1,138,190,0.14)]"
               >
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(224,185,166,0.10)] text-[--accent-primary]">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(1,138,190,0.12)] text-[--accent-primary]">
                       {isCompleted ? <Award size={22} /> : <BookOpen size={22} />}
                     </span>
 
                     <span
                       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold border ${
                         isCompleted
-                          ? "bg-[rgba(191,226,216,0.10)] text-[--success] border-[rgba(191,226,216,0.22)]"
-                          : "bg-[rgba(224,185,166,0.10)] text-[--accent-primary] border-[rgba(224,185,166,0.24)]"
+                          ? "bg-[rgba(56,189,248,0.12)] text-[--success] border-[rgba(56,189,248,0.25)]"
+                          : "bg-[rgba(1,138,190,0.12)] text-[--accent-primary] border-[rgba(1,138,190,0.25)]"
                       }`}
                     >
                       {isCompleted ? <CheckCircle2 size={13} /> : <Clock size={13} />}

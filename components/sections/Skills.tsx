@@ -109,7 +109,7 @@ export default function Skills() {
                 {isActive && (
                   <motion.div
                     layoutId="activeTabIndicator"
-                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[--accent-primary] shadow-[0_0_12px_rgba(224,185,166,0.72)]"
+                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[--accent-primary] shadow-[0_0_12px_rgba(1,138,190,0.75)]"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -134,7 +134,7 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.92 }}
                   transition={{ duration: 0.2 }}
-                  className="group premium-chip relative flex items-center justify-between gap-2.5 rounded-xl px-4 py-3.5 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(224,185,166,0.10)]"
+                  className="group premium-chip relative flex items-center justify-between gap-2.5 rounded-xl px-4 py-3.5 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(1,138,190,0.15)]"
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
                     <Icon
@@ -150,8 +150,8 @@ export default function Skills() {
                     <span
                       className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${
                         tool.badge === "CORE"
-                          ? "bg-[rgba(191,226,216,0.12)] text-[--success] border border-[rgba(191,226,216,0.24)]"
-                          : "bg-[rgba(224,196,157,0.14)] text-[--warning] border border-[rgba(224,196,157,0.26)]"
+                          ? "bg-[rgba(56,189,248,0.14)] text-[--success] border border-[rgba(56,189,248,0.28)]"
+                          : "bg-[rgba(1,138,190,0.18)] text-sky-200 border border-[rgba(1,138,190,0.3)]"
                       }`}
                     >
                       {tool.badge}

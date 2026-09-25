@@ -3,8 +3,8 @@ type StatusBadgeProps = {
 }
 
 const badgeStyles = {
-  Live: 'bg-[rgba(191,226,216,0.12)] text-[--success] border border-[rgba(191,226,216,0.22)]',
-  'In Development': 'bg-[rgba(224,185,166,0.12)] text-[--accent-primary] border border-[rgba(224,185,166,0.24)]',
+  Live: 'bg-[rgba(56,189,248,0.12)] text-[--success] border border-[rgba(56,189,248,0.25)]',
+  'In Development': 'bg-[rgba(1,138,190,0.14)] text-[--accent-primary] border border-[rgba(1,138,190,0.28)]',
 }
 
 export default function StatusBadge({ status }: StatusBadgeProps) {

@@ -40,7 +40,7 @@ export default function Contact() {
       }
 
       setStatus('success')
-      setFeedback('Message saved. Rajendra can review it from the portfolio database.')
+      setFeedback('Message sent successfully! Rajendra will get back to you soon.')
       setForm({ name: '', email: '', message: '' })
     } catch (error) {
       setStatus('error')
@@ -58,8 +58,8 @@ export default function Contact() {
           <p className="mt-3 text-sm text-slate-400 sm:text-base">
             Remote worldwide · Onsite Nepal · UTC+5:45
           </p>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[rgba(191,226,216,0.22)] bg-[rgba(191,226,216,0.10)] px-4 py-1.5 text-xs font-medium text-[--success]">
-            <span className="h-2 w-2 rounded-full bg-[--success] shadow-[0_0_12px_rgba(191,226,216,0.72)] animate-pulse" />
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[rgba(56,189,248,0.25)] bg-[rgba(1,138,190,0.12)] px-4 py-1.5 text-xs font-medium text-[--success]">
+            <span className="h-2 w-2 rounded-full bg-[--success] shadow-[0_0_12px_rgba(56,189,248,0.72)] animate-pulse" />
             Available for new roles
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function Contact() {
                   name="name"
                   value={form.name}
                   onChange={event => updateField('name', event.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-[--border] bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 ease-out placeholder:text-slate-600 focus:border-[--accent-primary] focus:ring-2 focus:ring-[rgba(224,185,166,0.20)]"
+                  className="mt-1.5 w-full rounded-xl border border-[--border] bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 ease-out placeholder:text-slate-600 focus:border-[--accent-primary] focus:ring-2 focus:ring-[rgba(1,138,190,0.25)]"
                   placeholder="Your name"
                   required
                 />
@@ -89,7 +89,7 @@ export default function Contact() {
                   value={form.email}
                   onChange={event => updateField('email', event.target.value)}
                   type="email"
-                  className="mt-1.5 w-full rounded-xl border border-[--border] bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 ease-out placeholder:text-slate-600 focus:border-[--accent-primary] focus:ring-2 focus:ring-[rgba(224,185,166,0.20)]"
+                  className="mt-1.5 w-full rounded-xl border border-[--border] bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 ease-out placeholder:text-slate-600 focus:border-[--accent-primary] focus:ring-2 focus:ring-[rgba(1,138,190,0.25)]"
                   placeholder="you@company.com"
                   required
                 />
@@ -101,7 +101,7 @@ export default function Contact() {
                   name="message"
                   value={form.message}
                   onChange={event => updateField('message', event.target.value)}
-                  className="mt-1.5 min-h-[140px] w-full resize-none rounded-xl border border-[--border] bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 ease-out placeholder:text-slate-600 focus:border-[--accent-primary] focus:ring-2 focus:ring-[rgba(224,185,166,0.20)]"
+                  className="mt-1.5 min-h-[140px] w-full resize-none rounded-xl border border-[--border] bg-white/[0.03] px-4 py-3.5 text-sm text-slate-100 outline-none transition-all duration-200 ease-out placeholder:text-slate-600 focus:border-[--accent-primary] focus:ring-2 focus:ring-[rgba(1,138,190,0.25)]"
                   placeholder="Tell me about the role or project..."
                   required
                 />
@@ -116,7 +116,7 @@ export default function Contact() {
               {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
             {feedback ? (
-              <p className={`mt-3 flex items-center gap-2 text-xs ${status === 'success' ? 'text-[--success]' : 'text-[#e0b9a6]'}`}>
+              <p className={`mt-3 flex items-center gap-2 text-xs ${status === 'success' ? 'text-[--success]' : 'text-sky-400'}`}>
                 {status === 'success' ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
                 {feedback}
               </p>
@@ -137,7 +137,7 @@ export default function Contact() {
                     rel="noreferrer"
                     className="surface-panel group flex items-center gap-4 rounded-xl p-4 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[--border-hover] hover:bg-white/[0.04]"
                   >
-                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[rgba(224,185,166,0.10)] text-[--accent-primary] transition-colors duration-200 ease-out group-hover:bg-[rgba(224,185,166,0.18)] group-hover:text-white">
+                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[rgba(1,138,190,0.12)] text-[--accent-primary] transition-colors duration-200 ease-out group-hover:bg-[rgba(1,138,190,0.22)] group-hover:text-white">
                       <Icon size={18} />
                     </span>
                     <div className="min-w-0">

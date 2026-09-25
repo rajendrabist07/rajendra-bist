@@ -104,7 +104,7 @@ export default function About() {
                 variants={itemVariants}
                 className="surface-panel rounded-2xl p-5 transition-all duration-200 ease-out hover:border-[--border-hover] hover:bg-white/[0.04] hover:-translate-y-1"
               >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(224,185,166,0.10)] text-[--accent-primary]">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(1,138,190,0.12)] text-[--accent-primary]">
                   <Icon size={20} />
                 </span>
                 <h3 className="mt-4 text-base font-semibold text-white">{item.title}</h3>

@@ -38,20 +38,20 @@ export default function Experience() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           variants={containerVariants}
-          className="relative ml-3 border-l-2 border-[rgba(224,185,166,0.18)] pl-6 sm:ml-6 sm:pl-10 space-y-12"
+          className="relative ml-3 border-l-2 border-[rgba(1,138,190,0.25)] pl-6 sm:ml-6 sm:pl-10 space-y-12"
         >
           {EXPERIENCE.map((exp, index) => (
             <motion.div key={index} variants={itemVariants} className="relative group">
               {/* Timeline Indicator Dot */}
-              <span className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[rgba(224,185,166,0.72)] bg-[--bg-primary] shadow-[0_0_12px_rgba(224,185,166,0.34)]">
+              <span className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[rgba(1,138,190,0.75)] bg-[--bg-primary] shadow-[0_0_12px_rgba(1,138,190,0.35)]">
                 <span className="h-2 w-2 rounded-full bg-[--accent-primary]" />
               </span>
 
               {/* Experience Card */}
-              <article className="surface-panel rounded-3xl p-6 sm:p-8 shadow-glow transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(224,185,166,0.10)]">
+              <article className="surface-panel rounded-3xl p-6 sm:p-8 shadow-glow transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(1,138,190,0.14)]">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(224,185,166,0.24)] bg-[rgba(224,185,166,0.10)] px-3 py-1 text-xs font-semibold text-[--accent-primary] mb-3">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(1,138,190,0.3)] bg-[rgba(1,138,190,0.12)] px-3 py-1 text-xs font-semibold text-[--accent-primary] mb-3">
                       <Briefcase size={13} />
                       {exp.company}
                     </div>

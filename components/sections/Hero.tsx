@@ -76,8 +76,8 @@ export default function Hero() {
             variants={heroVariants}
             transition={itemTransition}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(191,226,216,0.22)] bg-[rgba(191,226,216,0.10)] px-3 py-1 text-xs font-medium text-[--success]">
-              <span className="h-2 w-2 rounded-full bg-[--success] shadow-[0_0_10px_rgba(191,226,216,0.72)] animate-pulse" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(56,189,248,0.25)] bg-[rgba(1,138,190,0.12)] px-3 py-1 text-xs font-medium text-[--success]">
+              <span className="h-2 w-2 rounded-full bg-[--success] shadow-[0_0_10px_rgba(56,189,248,0.72)] animate-pulse" />
               Available for Work
             </div>
 
@@ -182,10 +182,10 @@ export default function Hero() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="relative w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[330px]"
           >
-            {/* Warm neutral ambient halo */}
-            <div className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(224,185,166,0.30),rgba(232,243,242,0.12)_45%,transparent_70%)] blur-xl" />
+            {/* Oceanic ambient halo */}
+            <div className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(1,138,190,0.35),rgba(2,69,122,0.2)_45%,transparent_70%)] blur-xl" />
 
-            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-[--accent-primary] bg-[--bg-code] p-1.5 shadow-[0_0_60px_rgba(152,189,201,0.18)]">
+            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-[--accent-primary] bg-[--bg-code] p-1.5 shadow-[0_0_60px_rgba(1,138,190,0.28)]">
               <div className="relative h-full w-full overflow-hidden rounded-full bg-[--bg-code]">
                 <Image
                   src="/images/rajendra-bist.jpeg"

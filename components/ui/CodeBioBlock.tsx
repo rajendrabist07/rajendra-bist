@@ -64,12 +64,12 @@ export default function CodeBioBlock() {
   };
 
   return (
-    <div className="code-card overflow-hidden rounded-[1.45rem] font-mono text-xs sm:text-sm shadow-2xl transition-all duration-200 ease-out hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(224,185,166,0.10)]">
+    <div className="code-card overflow-hidden rounded-[1.45rem] font-mono text-xs sm:text-sm shadow-2xl transition-all duration-200 ease-out hover:border-[--border-hover] hover:shadow-[0_24px_80px_rgba(1,138,190,0.14)]">
       <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.025] px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-[#e0b9a6]/80" />
-          <span className="h-3 w-3 rounded-full bg-[#e0c49d]/80" />
-          <span className="h-3 w-3 rounded-full bg-[#bfe2d8]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#018abe]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#97cadb]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#38bdf8]/80" />
           <span className="ml-2 inline-flex items-center gap-1.5 text-[11px] text-slate-400">
             <Terminal size={12} className="text-[--accent-primary]" />
             rajendra.config.ts

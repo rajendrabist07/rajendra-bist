@@ -20,7 +20,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/10 py-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(224,185,166,0.10),transparent_42%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(1,138,190,0.12),transparent_45%)]" />
       <Container className="relative">
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
@@ -61,7 +61,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label as string}
-                  className="premium-button-secondary inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 transition-all duration-200 ease-out hover:text-[--accent-primary] hover:scale-105 hover:shadow-[0_0_15px_rgba(224,185,166,0.22)]"
+                  className="premium-button-secondary inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 transition-all duration-200 ease-out hover:text-[--accent-primary] hover:scale-105 hover:shadow-[0_0_15px_rgba(1,138,190,0.25)]"
                 >
                   <Icon size={18} />
                 </a>

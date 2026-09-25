@@ -138,9 +138,9 @@ function ProjectVisualCard({
         {/* Window Titlebar with View Switcher */}
         <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.02] px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#e0b9a6]/80" />
-            <span className="h-3 w-3 rounded-full bg-[#e0c49d]/80" />
-            <span className="h-3 w-3 rounded-full bg-[#bfe2d8]/80" />
+            <span className="h-3 w-3 rounded-full bg-[#018abe]/80" />
+            <span className="h-3 w-3 rounded-full bg-[#97cadb]/80" />
+            <span className="h-3 w-3 rounded-full bg-[#38bdf8]/80" />
           </div>
 
           <div className="flex items-center rounded-lg border border-[--border] bg-black/35 p-0.5">
@@ -149,7 +149,7 @@ function ProjectVisualCard({
               onClick={() => setActiveView("preview")}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] ${
                 activeView === "preview"
-                  ? "bg-[rgba(224,185,166,0.16)] text-[--accent-primary] shadow"
+                  ? "bg-[rgba(1,138,190,0.22)] text-white shadow"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -161,7 +161,7 @@ function ProjectVisualCard({
               onClick={() => setActiveView("architecture")}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 ease-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] ${
                 activeView === "architecture"
-                  ? "bg-[rgba(224,185,166,0.16)] text-[--accent-primary] shadow"
+                  ? "bg-[rgba(1,138,190,0.22)] text-white shadow"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -289,7 +289,7 @@ export default function Projects() {
                 </div>
 
                 {/* Key Decision Card */}
-                <div className="mt-6 rounded-xl border border-[rgba(224,185,166,0.28)] bg-[rgba(224,185,166,0.065)] p-4 text-xs leading-relaxed text-slate-300">
+                <div className="mt-6 rounded-xl border border-[rgba(1,138,190,0.32)] bg-[rgba(2,69,122,0.18)] p-4 text-xs leading-relaxed text-slate-300">
                   <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[--accent-primary]">
                     <Zap size={14} className="text-[--accent-primary]" />
                     <span>Key Decision</span>

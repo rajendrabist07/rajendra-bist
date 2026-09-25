@@ -139,7 +139,7 @@ function MarkdownRenderer({ content }: { content: string }) {
               if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
                 return (
                   <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-300">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[--accent-primary] shadow-[0_0_8px_rgba(224,185,166,0.45)]" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[--accent-primary] shadow-[0_0_8px_rgba(1,138,190,0.6)]" />
                     <span className="text-sm leading-relaxed flex-1">
                       {parseInline(trimmedLine.slice(2).trim())}
                     </span>
@@ -432,12 +432,12 @@ export default function ChatAgent() {
                 <div className="flex items-center gap-3">
                   <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl premium-button-primary shadow-md">
                     <Bot size={18} />
-                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[--bg-primary] bg-[--success] shadow-[0_0_8px_rgba(191,226,216,0.72)]" />
+                    <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[--bg-primary] bg-[--success] shadow-[0_0_8px_rgba(56,189,248,0.72)]" />
                   </span>
                   <div>
                     <div className="flex items-center gap-1.5">
                       <p className="text-sm font-semibold text-white">RB Assistant</p>
-                      <span className="rounded-full bg-[rgba(191,226,216,0.10)] px-1.5 py-0.5 text-[10px] font-medium text-[--success] border border-[rgba(191,226,216,0.22)]">Active</span>
+                      <span className="rounded-full bg-[rgba(56,189,248,0.12)] px-1.5 py-0.5 text-[10px] font-medium text-[--success] border border-[rgba(56,189,248,0.25)]">Active</span>
                     </div>
                     <p className="text-xs text-slate-400">Ask about Rajendra&apos;s architecture & projects</p>
                   </div>
@@ -471,9 +471,9 @@ export default function ChatAgent() {
                 {messages.length === 0 ? (
                   <div className="flex flex-col h-full items-center justify-center text-center space-y-6 py-6 px-4">
                     {/* Empty state welcome card */}
-                    <div className="rounded-2xl border border-[rgba(224,185,166,0.18)] bg-gradient-to-b from-[rgba(224,185,166,0.08)] to-transparent p-6 max-w-sm w-full">
+                    <div className="rounded-2xl border border-[rgba(1,138,190,0.3)] bg-gradient-to-b from-[rgba(2,69,122,0.18)] to-transparent p-6 max-w-sm w-full">
                       <div className="flex flex-col items-center gap-3 text-[--accent-primary] mb-4">
-                        <div className="p-3 rounded-xl bg-[rgba(224,185,166,0.10)] inline-flex">
+                        <div className="p-3 rounded-xl bg-[rgba(1,138,190,0.14)] inline-flex">
                           <Sparkles size={24} />
                         </div>
                         <p className="text-base font-bold tracking-tight">Systems-first Assistant</p>
@@ -520,7 +520,7 @@ export default function ChatAgent() {
                       className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       {message.role !== 'user' && (
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(224,185,166,0.10)] border border-[rgba(224,185,166,0.20)] text-[--accent-primary] text-xs mt-1">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(1,138,190,0.12)] border border-[rgba(1,138,190,0.25)] text-[--accent-primary] text-xs mt-1">
                           <Bot size={14} />
                         </span>
                       )}
@@ -585,7 +585,7 @@ export default function ChatAgent() {
                               type="button"
                               onClick={() => handleToggleRating(message.id, 'like')}
                               className={`transition-all duration-200 ease-out hover:text-slate-300 active:scale-95 cursor-pointer ${
-                                ratings[message.id] === 'like' ? 'text-[--success] fill-[rgba(191,226,216,0.20)]' : ''
+                                ratings[message.id] === 'like' ? 'text-[--success] fill-[rgba(56,189,248,0.25)]' : ''
                               }`}
                               title="Like response"
                               aria-label="Like response"
@@ -622,7 +622,7 @@ export default function ChatAgent() {
                       </div>
 
                       {message.role === 'user' && (
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(224,185,166,0.14)] border border-[rgba(224,185,166,0.20)] text-[--accent-primary] text-xs mt-1">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgba(1,138,190,0.18)] border border-[rgba(1,138,190,0.28)] text-[--accent-primary] text-xs mt-1">
                           <User size={14} />
                         </span>
                       )}
@@ -647,7 +647,7 @@ export default function ChatAgent() {
                     value={inputValue}
                     onChange={event => setInputValue(event.target.value)}
                     placeholder="Ask about Rajendra's engineering philosophy..."
-                    className="w-full rounded-2xl border border-[--border] bg-white/[0.035] py-4 pl-5 pr-14 text-[15px] text-slate-100 placeholder-slate-500 outline-none transition-all duration-200 ease-out focus:border-[--accent-primary] focus:bg-white/[0.055] focus:ring-1 focus:ring-[rgba(224,185,166,0.22)] disabled:opacity-50"
+                    className="w-full rounded-2xl border border-[--border] bg-white/[0.035] py-4 pl-5 pr-14 text-[15px] text-slate-100 placeholder-slate-500 outline-none transition-all duration-200 ease-out focus:border-[--accent-primary] focus:bg-white/[0.055] focus:ring-1 focus:ring-[rgba(1,138,190,0.25)] disabled:opacity-50"
                     disabled={isLoading}
                   />
                   <button
