@@ -1,156 +1,122 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
-import Image from "next/image";
-import { PERSONAL } from "@/lib/portfolio-data";
-import Container from "@/components/ui/Container";
+import React, { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles, Terminal, Activity } from 'lucide-react';
+import Image from 'next/image';
+import { PERSONAL } from '@/lib/portfolio-data';
+import Container from '@/components/ui/Container';
+import CodeBioBlock from '@/components/ui/CodeBioBlock';
+import LiveSystemStatus from '@/components/ui/LiveSystemStatus';
 
-const ROLES = [
-  "Full-Stack Developer | Backend-Focused AI Systems",
-  "Typed React Interfaces & Production APIs",
-  "Building Scalable APIs & RAG Pipelines",
-  "LLM Integrations & Vector Embeddings",
-  "Autonomous Tool-Calling AI Systems",
-  "Designing Fault-Tolerant Architectures",
+const SYSTEMS_SHIPPED = [
+  'Distributed Backend APIs',
+  'RAG Pipelines & pgvector',
+  'AST PR Review Agents',
+  'Realtime LLM Workflows',
+  'High-Throughput Node.js Microservices',
 ];
-
-const heroVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const itemTransition = { duration: 0.5 };
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState(
-    shouldReduceMotion ? ROLES[0] : "",
-  );
+  const [systemIdx, setSystemIdx] = useState(0);
+  const [currentText, setCurrentText] = useState(shouldReduceMotion ? SYSTEMS_SHIPPED[0] : '');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (shouldReduceMotion) {
-      setCurrentText(ROLES[0]);
+      setCurrentText(SYSTEMS_SHIPPED[0]);
       return;
     }
 
-    const fullText = ROLES[roleIndex];
+    const fullText = SYSTEMS_SHIPPED[systemIdx];
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting && currentText === fullText) {
-      timeout = setTimeout(() => setIsDeleting(true), 2200);
-    } else if (isDeleting && currentText === "") {
+      timeout = setTimeout(() => setIsDeleting(true), 2400);
+    } else if (isDeleting && currentText === '') {
       setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+      setSystemIdx((prev) => (prev + 1) % SYSTEMS_SHIPPED.length);
     } else {
-      const speed = isDeleting ? 30 : 65;
+      const speed = isDeleting ? 25 : 55;
       timeout = setTimeout(() => {
         setCurrentText(
           isDeleting
             ? fullText.substring(0, currentText.length - 1)
-            : fullText.substring(0, currentText.length + 1),
+            : fullText.substring(0, currentText.length + 1)
         );
       }, speed);
     }
 
     return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, roleIndex, shouldReduceMotion]);
+  }, [currentText, isDeleting, systemIdx, shouldReduceMotion]);
 
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-28 pb-10 lg:pt-32"
+      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-24 pb-12 lg:pt-28"
     >
-      <Container
-        as="div"
-        className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]"
-      >
-        {/* Left: Text & Bio Content */}
-        <div className="text-center md:text-left">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={heroVariants}
-            transition={itemTransition}
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(56,189,248,0.25)] bg-[rgba(1,138,190,0.12)] px-3 py-1 text-xs font-medium text-[--success]">
-              <span className="h-2 w-2 rounded-full bg-[--success] shadow-[0_0_10px_rgba(56,189,248,0.72)] animate-pulse" />
-              Available for Work
+      <Container as="div" className="relative grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        {/* Left Column: Heading, Telemetry, Narrative, CTAs */}
+        <div className="text-center lg:text-left">
+          {/* Top Status Badges Row */}
+          <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+            {/* Live Availability Badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-3.5 py-1.5 font-mono text-xs font-medium text-[--accent-cool]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[--accent-cool] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[--accent-cool]" />
+              </span>
+              AVAILABLE FOR ROLES
             </div>
 
-            <h1 className="mt-5 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.05]">
-              Rajendra
-              <br />B<span className="text-[--accent-primary]">IST</span>
-            </h1>
-          </motion.div>
+            <LiveSystemStatus relativeTime="Active today" repoName="rajendra-bist" isRecent={true} />
+          </div>
 
-          {/* Typewriter Dynamic Role Display */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={heroVariants}
-            transition={{ ...itemTransition, delay: 0.15 }}
-            className="mt-3 flex min-h-[32px] items-center justify-center md:justify-start"
-          >
-            <p className="text-base font-semibold text-[--accent-primary] sm:text-lg">
-              <span>{currentText}</span>
-              <span className="ml-0.5 inline-block w-2 animate-pulse text-[--accent-secondary] font-normal">
-                |
-              </span>
-            </p>
-          </motion.div>
+          {/* Giant Display Name */}
+          <h1 className="fluid-hero mt-5 font-black uppercase tracking-tight text-[--text-primary]">
+            Rajendra <span className="text-[--accent-warm]">Bist</span>
+          </h1>
 
-          <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={heroVariants}
-            transition={{ ...itemTransition, delay: 0.3 }}
-            className="mt-3 max-w-lg text-sm leading-relaxed text-slate-300 sm:text-base"
-          >
-            Production full-stack systems built with React, Next.js, Node.js,
-            TypeScript, and PostgreSQL — typed interfaces, reliable API
-            contracts, and AI workflows deployed for real users.
-          </motion.p>
+          {/* Systems I've Shipped Ticker */}
+          <div className="mt-3 flex min-h-[32px] items-center justify-center lg:justify-start font-mono text-sm sm:text-base text-[--accent-warm]">
+            <span className="text-[--text-tertiary] mr-2">&gt; systems:</span>
+            <span className="font-semibold text-[--text-primary]">{currentText}</span>
+            <span className="ml-0.5 inline-block w-2 bg-[--accent-warm] animate-cursor-blink font-normal">
+              _
+            </span>
+          </div>
 
-          {/* Action Buttons */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={heroVariants}
-            transition={{ ...itemTransition, delay: 0.45 }}
-            className="mt-7 flex flex-wrap items-center justify-center gap-3.5 md:justify-start"
-          >
+          {/* Systems-First Engineering Narrative */}
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[--text-secondary] sm:text-base">
+            Full-stack &amp; backend software engineer building typed React interfaces, high-throughput
+            Node.js APIs, RAG pipelines, and autonomous AI systems deployed for real users.
+          </p>
+
+          {/* Action CTAs */}
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5 lg:justify-start font-mono text-xs">
             <a
               href="#projects"
-              className="premium-button-primary inline-flex min-h-11 items-center justify-center rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
+              className="premium-button-primary inline-flex min-h-11 items-center justify-center rounded-xl px-6 py-2.5 font-semibold transition-all duration-200"
             >
               View Projects
             </a>
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="premium-button-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
+              className="premium-button-secondary inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-semibold transition-all duration-200"
             >
-              <Download size={15} className="text-[--accent-primary]" />
-              Download CV
+              <Download size={14} className="text-[--accent-warm]" />
+              Download Resume
             </a>
-          </motion.div>
+          </div>
 
-          {/* Social Icons Row */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={heroVariants}
-            transition={{ ...itemTransition, delay: 0.6 }}
-            className="mt-6 flex items-center justify-center gap-4 md:justify-start"
-          >
+          {/* Social Links Row */}
+          <div className="mt-6 flex items-center justify-center gap-4 lg:justify-start text-[--text-secondary]">
             {[
-              { href: PERSONAL.github, icon: Github, label: "GitHub" },
-              { href: PERSONAL.linkedin, icon: Linkedin, label: "LinkedIn" },
-              { href: `mailto:${PERSONAL.email}`, icon: Mail, label: "Email" },
+              { href: PERSONAL.github, icon: Github, label: 'GitHub' },
+              { href: PERSONAL.linkedin, icon: Linkedin, label: 'LinkedIn' },
+              { href: `mailto:${PERSONAL.email}`, icon: Mail, label: 'Email' },
             ].map((item) => {
               const Icon = item.icon;
               return (
@@ -160,56 +126,49 @@ export default function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="text-[--text-muted] transition-all duration-200 ease-out hover:text-[--accent-primary] hover:scale-105 active:scale-95"
+                  className="rounded-lg border border-[--border-subtle] bg-[--bg-surface-2] p-2 transition-all duration-200 hover:border-[--border-strong] hover:text-[--accent-warm]"
                 >
-                  <Icon size={20} />
+                  <Icon size={17} />
                 </a>
               );
             })}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Right: Floating Circular Profile Photo with Animated Glowing Border */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={heroVariants}
-          transition={{ ...itemTransition, delay: 0.35 }}
-          className="relative flex justify-center lg:justify-end"
-        >
-          <motion.div
-            animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[330px]"
-          >
-            {/* Oceanic ambient halo */}
-            <div className="absolute -inset-4 rounded-full bg-[radial-gradient(circle,rgba(1,138,190,0.35),rgba(2,69,122,0.2)_45%,transparent_70%)] blur-xl" />
+        {/* Right Column: rajendra.config.ts Visual Centerpiece + Profile Badge */}
+        <div className="relative flex flex-col gap-4">
+          <CodeBioBlock />
 
-            <div className="relative aspect-square overflow-hidden rounded-full border-2 border-[--accent-primary] bg-[--bg-code] p-1.5 shadow-[0_0_60px_rgba(1,138,190,0.28)]">
-              <div className="relative h-full w-full overflow-hidden rounded-full bg-[--bg-code]">
+          {/* Compact Profile Micro-strip */}
+          <div className="flex items-center justify-between rounded-xl border border-[--border-subtle] bg-[--bg-surface] p-3 font-mono text-xs text-[--text-secondary]">
+            <div className="flex items-center gap-3">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full border border-[--accent-warm]">
                 <Image
                   src="/images/rajendra-bist.jpeg"
-                  alt="Rajendra Bist - Full-Stack Developer from Nepal profile photo"
+                  alt="Rajendra Bist"
                   fill
-                  priority
-                  sizes="(min-width: 1024px) 340px, 75vw"
+                  sizes="40px"
                   className="object-cover object-[50%_18%]"
                 />
               </div>
+              <div>
+                <p className="font-semibold text-[--text-primary]">Rajendra Bist</p>
+                <p className="text-[11px] text-[--text-tertiary]">Full-Stack &amp; AI Systems</p>
+              </div>
             </div>
-          </motion.div>
-        </motion.div>
+
+            <div className="flex items-center gap-1 text-[11px] text-[--accent-cool]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[--accent-cool] animate-pulse" />
+              <span>ONLINE</span>
+            </div>
+          </div>
+        </div>
       </Container>
 
-      {/* Scroll indicator */}
-      <div className="mx-auto mt-8 flex flex-col items-center gap-1 text-slate-500">
-        <span className="text-[10px] font-semibold tracking-widest uppercase text-slate-400">
-          Scroll
-        </span>
-        <ArrowDown
-          size={13}
-          className="animate-bounce text-[--accent-primary]"
-        />
+      {/* Subtle Scroll Indicator */}
+      <div className="mx-auto mt-8 flex flex-col items-center gap-1 text-[--text-tertiary] font-mono text-[10px]">
+        <span className="tracking-widest uppercase">01 // EXPLORE SYSTEMS</span>
+        <ArrowDown size={12} className="animate-bounce text-[--accent-warm]" />
       </div>
     </section>
   );

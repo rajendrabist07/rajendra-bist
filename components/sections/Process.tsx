@@ -1,29 +1,38 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Code2, Database, Rocket, Search } from "lucide-react";
-import SectionHeader from "@/components/ui/SectionHeader";
-import Container from "@/components/ui/Container";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Code2, Database, Rocket, Search, ArrowRight } from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Container from '@/components/ui/Container';
 
 const steps = [
   {
-    title: "Understand",
-    description: "Analyze constraints, define state flows, and establish core data-handling requirements before writing code.",
+    step: '01',
+    title: 'Understand',
+    tag: 'CONSTRAINTS & SCOPE',
+    description: 'Map data flows, failure modes, rate limits, and latency budgets before writing code.',
     icon: Search,
   },
   {
-    title: "Design",
-    description: "Architect database schemas, detail JSON API contracts, and draft resilient failure-recovery states.",
+    step: '02',
+    title: 'Design',
+    tag: 'SCHEMA & CONTRACTS',
+    description: 'Model database schemas, establish strict JSON schema contracts, and architect fallback routers.',
     icon: Database,
   },
   {
-    title: "Build",
-    description: "Implement clean vertical slices, ensuring component modularity on the frontend and strict data validation on the backend.",
+    step: '03',
+    title: 'Build',
+    tag: 'TYPESAFE EXECUTION',
+    description: 'Develop vertical slices with full TypeScript type-safety, robust validation, and clean state handling.',
     icon: Code2,
   },
   {
-    title: "Deploy",
-    description: "Validate production builds, secure environment variables, and release continuously via automated Vercel pipelines.",
+    step: '04',
+    title: 'Deploy',
+    tag: 'CI/CD & MONITORING',
+    description: 'Continuous deployment with edge caching, automated build validation, and uptime telemetry.',
     icon: Rocket,
   },
 ];
@@ -33,32 +42,37 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.1,
       delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55 },
+    transition: { duration: 0.5 },
   },
 };
 
 export default function Process() {
   return (
-    <section id="process" className="py-20 md:py-28">
+    <section id="process" className="py-20 md:py-28 border-t border-[--border-subtle]">
       <Container>
-        <SectionHeader subtitle="Process" title="How I Build Products" />
+        <SectionHeader
+          eyebrow="04 // ENGINEERING PROCESS"
+          title="How I Architect & Ship Systems"
+          description="A deterministic 4-stage development pipeline designed to prevent regressions and guarantee production reliability."
+        />
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
-          className="grid gap-4 md:grid-cols-4"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -66,14 +80,25 @@ export default function Process() {
               <motion.article
                 key={step.title}
                 variants={itemVariants}
-                className="surface-panel group relative overflow-hidden rounded-3xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-[--border-hover]"
+                className="surface-panel group relative overflow-hidden rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[--border-strong]"
               >
-                <p className="text-sm text-slate-500">0{index + 1}</p>
-                <div className="mt-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(1,138,190,0.12)] text-[--accent-primary] transition-all duration-200 ease-out group-hover:bg-[rgba(1,138,190,0.22)]">
-                  <Icon size={20} />
+                <div className="flex items-center justify-between font-mono text-xs text-[--text-tertiary]">
+                  <span className="font-bold text-[--accent-warm]">{step.step}</span>
+                  <span className="rounded border border-[--border-subtle] bg-[--bg-surface-2] px-2 py-0.5 text-[9px] text-[--accent-cool]">
+                    {step.tag}
+                  </span>
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-white">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{step.description}</p>
+
+                <div className="mt-5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-colors group-hover:border-[--accent-warm]">
+                  <Icon size={19} />
+                </div>
+
+                <h3 className="mt-4 font-mono text-base font-bold text-[--text-primary] tracking-tight">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-[--text-secondary]">
+                  {step.description}
+                </p>
               </motion.article>
             );
           })}

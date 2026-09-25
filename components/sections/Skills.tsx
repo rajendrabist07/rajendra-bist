@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+'use client';
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Binary,
   Bot,
@@ -15,83 +17,86 @@ import {
   ShieldCheck,
   Workflow,
   Zap,
-} from "lucide-react";
-import SectionHeader from "@/components/ui/SectionHeader";
-import Container from "@/components/ui/Container";
+  type LucideIcon,
+} from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Container from '@/components/ui/Container';
 
 interface ToolItem {
   name: string;
-  category: "backend" | "databases" | "devops" | "frontend" | "aiml";
-  badge?: "LEARNING" | "CORE";
-  icon: any;
+  category: 'backend' | 'databases' | 'devops' | 'frontend' | 'aiml';
+  badge: 'CORE' | 'EXPLORING';
+  icon: LucideIcon;
 }
 
 const ALL_TOOLS: ToolItem[] = [
-  // Backend
-  { name: "Node.js", category: "backend", icon: Server },
-  { name: "Express.js", category: "backend", icon: Server },
-  { name: "TypeScript", category: "backend", icon: Code2 },
-  { name: "REST APIs", category: "backend", icon: Network },
-  { name: "Socket.io", category: "backend", icon: Zap },
-  { name: "Zod Schema", category: "backend", icon: ShieldCheck },
-  { name: "JWT Auth", category: "backend", icon: ShieldCheck },
+  // Backend Core
+  { name: 'Node.js', category: 'backend', badge: 'CORE', icon: Server },
+  { name: 'TypeScript', category: 'backend', badge: 'CORE', icon: Code2 },
+  { name: 'Express.js', category: 'backend', badge: 'CORE', icon: Server },
+  { name: 'REST APIs', category: 'backend', badge: 'CORE', icon: Network },
+  { name: 'Zod Validation', category: 'backend', badge: 'CORE', icon: ShieldCheck },
+  { name: 'JWT Security', category: 'backend', badge: 'CORE', icon: ShieldCheck },
+  { name: 'WebSockets', category: 'backend', badge: 'CORE', icon: Zap },
 
-  // Databases
-  { name: "PostgreSQL", category: "databases", icon: Database },
-  { name: "MongoDB", category: "databases", icon: Database },
-  { name: "Redis", category: "databases", icon: Database },
-  { name: "Supabase", category: "databases", icon: Database },
-  { name: "Mongoose", category: "databases", icon: Database },
-  { name: "PGVector", category: "databases", badge: "CORE", icon: Database },
+  // Databases Core
+  { name: 'PostgreSQL', category: 'databases', badge: 'CORE', icon: Database },
+  { name: 'MongoDB Atlas', category: 'databases', badge: 'CORE', icon: Database },
+  { name: 'Supabase pgvector', category: 'databases', badge: 'CORE', icon: Database },
+  { name: 'Mongoose ORM', category: 'databases', badge: 'CORE', icon: Database },
+  { name: 'Upstash Redis', category: 'databases', badge: 'CORE', icon: Database },
 
   // DevOps & Cloud
-  { name: "Docker", category: "devops", icon: Cloud },
-  { name: "Git / GitHub", category: "devops", icon: GitBranch },
-  { name: "GitHub Actions", category: "devops", icon: Workflow },
-  { name: "Vercel", category: "devops", icon: Cloud },
-  { name: "Railway", category: "devops", icon: Cloud },
-  { name: "Linux", category: "devops", icon: Cpu },
+  { name: 'Docker', category: 'devops', badge: 'CORE', icon: Cloud },
+  { name: 'Git & GitHub', category: 'devops', badge: 'CORE', icon: GitBranch },
+  { name: 'GitHub Actions CI/CD', category: 'devops', badge: 'CORE', icon: Workflow },
+  { name: 'Vercel Edge', category: 'devops', badge: 'CORE', icon: Cloud },
+  { name: 'Linux / Bash', category: 'devops', badge: 'CORE', icon: Cpu },
 
   // Frontend
-  { name: "Next.js 15", category: "frontend", icon: Layers },
-  { name: "React 19", category: "frontend", icon: Code2 },
-  { name: "Tailwind CSS v4", category: "frontend", icon: Zap },
-  { name: "Framer Motion", category: "frontend", icon: Zap },
+  { name: 'Next.js 15 (App Router)', category: 'frontend', badge: 'CORE', icon: Layers },
+  { name: 'React 19', category: 'frontend', badge: 'CORE', icon: Code2 },
+  { name: 'Tailwind CSS v4', category: 'frontend', badge: 'CORE', icon: Zap },
+  { name: 'Framer Motion', category: 'frontend', badge: 'CORE', icon: Zap },
 
-  // AI & ML
-  { name: "RAG Pipelines", category: "aiml", badge: "CORE", icon: BrainCircuit },
-  { name: "LLM Integration", category: "aiml", badge: "CORE", icon: Bot },
-  { name: "Google Gemini API", category: "aiml", badge: "CORE", icon: Bot },
-  { name: "Groq Model Router", category: "aiml", badge: "CORE", icon: Zap },
-  { name: "LangChain.js", category: "aiml", badge: "LEARNING", icon: Binary },
-  { name: "Vector Embeddings", category: "aiml", badge: "LEARNING", icon: BrainCircuit },
-  { name: "LLM-as-Judge", category: "aiml", badge: "LEARNING", icon: ShieldCheck },
+  // AI & Systems
+  { name: 'RAG Pipelines', category: 'aiml', badge: 'CORE', icon: BrainCircuit },
+  { name: 'Google Gemini 2.5', category: 'aiml', badge: 'CORE', icon: Bot },
+  { name: 'Groq LLM Engine', category: 'aiml', badge: 'CORE', icon: Zap },
+  { name: 'Tool-Calling Agents', category: 'aiml', badge: 'CORE', icon: Bot },
+  { name: 'Vector Embeddings', category: 'aiml', badge: 'CORE', icon: BrainCircuit },
+  { name: 'LangChain.js', category: 'aiml', badge: 'EXPLORING', icon: Binary },
+  { name: 'LLM-as-Judge Evals', category: 'aiml', badge: 'EXPLORING', icon: ShieldCheck },
 ];
 
 const TABS = [
-  { id: "all", label: "ALL" },
-  { id: "backend", label: "BACKEND" },
-  { id: "databases", label: "DATABASES" },
-  { id: "devops", label: "DEVOPS" },
-  { id: "frontend", label: "FRONTEND" },
-  { id: "aiml", label: "AI / ML (Learning)" },
+  { id: 'all', label: 'ALL' },
+  { id: 'backend', label: 'BACKEND' },
+  { id: 'databases', label: 'DATABASES' },
+  { id: 'devops', label: 'DEVOPS & CLOUD' },
+  { id: 'frontend', label: 'FRONTEND' },
+  { id: 'aiml', label: 'AI & VECTOR' },
 ] as const;
 
 export default function Skills() {
-  const [activeTab, setActiveTab] = useState<string>("all");
+  const [activeTab, setActiveTab] = useState<string>('all');
 
   const filteredTools =
-    activeTab === "all"
+    activeTab === 'all'
       ? ALL_TOOLS
       : ALL_TOOLS.filter((t) => t.category === activeTab);
 
   return (
-    <section id="skills" className="py-20 md:py-28">
+    <section id="skills" className="py-20 md:py-28 border-t border-[--border-subtle]">
       <Container>
-        <SectionHeader subtitle="Tech Stack" title="Technical Arsenal" />
+        <SectionHeader
+          eyebrow="02 // TECH ARSENAL"
+          title="Production Stack & Tooling"
+          description="Technologies verified through real-world deployment, typed contracts, and measurable throughput."
+        />
 
         {/* Filter Tabs */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-2 border-b border-white/10 pb-4 sm:gap-6 md:justify-start">
+        <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-[--border-subtle] pb-4 font-mono text-xs">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -99,18 +104,18 @@ export default function Skills() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative rounded-md px-3 py-2 text-xs font-semibold tracking-wider transition-colors duration-200 ease-out cursor-pointer sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] ${
+                className={`relative rounded-md px-3 py-1.5 font-semibold transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] ${
                   isActive
-                    ? "text-[--accent-primary] font-bold"
-                    : "text-slate-400 hover:text-white"
+                    ? 'text-[--accent-warm]'
+                    : 'text-[--text-secondary] hover:text-[--text-primary]'
                 }`}
               >
                 {tab.label}
                 {isActive && (
                   <motion.div
-                    layoutId="activeTabIndicator"
-                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[--accent-primary] shadow-[0_0_12px_rgba(1,138,190,0.75)]"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    layoutId="activeSkillTab"
+                    className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[--accent-warm] shadow-[0_0_10px_var(--accent-warm)]"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
               </button>
@@ -121,42 +126,46 @@ export default function Skills() {
         {/* Tools Grid */}
         <motion.div
           layout
-          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 font-mono text-xs"
         >
           <AnimatePresence mode="popLayout">
             {filteredTools.map((tool) => {
               const Icon = tool.icon;
+              const isCore = tool.badge === 'CORE';
+
               return (
                 <motion.div
                   key={tool.name}
                   layout
-                  initial={{ opacity: 0, scale: 0.92 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.92 }}
-                  transition={{ duration: 0.2 }}
-                  className="group premium-chip relative flex items-center justify-between gap-2.5 rounded-xl px-4 py-3.5 backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(1,138,190,0.15)]"
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.18 }}
+                  className={`group relative flex items-center justify-between gap-2 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-0.5 ${
+                    isCore
+                      ? 'border border-[--border-strong] bg-[--bg-surface-2] text-[--text-primary] hover:border-[--accent-warm]'
+                      : 'border border-dashed border-[--border-subtle] bg-[--bg-surface] text-[--text-secondary] hover:border-[--border-strong]'
+                  }`}
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
                     <Icon
-                      size={17}
-                      className="shrink-0 text-slate-400 transition-colors duration-200 ease-out group-hover:text-[--accent-primary]"
+                      size={16}
+                      className={`shrink-0 transition-colors group-hover:text-[--accent-warm] ${
+                        isCore ? 'text-[--accent-warm]' : 'text-[--text-tertiary]'
+                      }`}
                     />
-                    <span className="truncate text-xs font-medium text-slate-200 transition-colors duration-200 ease-out group-hover:text-white sm:text-sm">
-                      {tool.name}
-                    </span>
+                    <span className="truncate font-medium">{tool.name}</span>
                   </div>
 
-                  {tool.badge && (
-                    <span
-                      className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${
-                        tool.badge === "CORE"
-                          ? "bg-[rgba(56,189,248,0.14)] text-[--success] border border-[rgba(56,189,248,0.28)]"
-                          : "bg-[rgba(1,138,190,0.18)] text-sky-200 border border-[rgba(1,138,190,0.3)]"
-                      }`}
-                    >
-                      {tool.badge}
-                    </span>
-                  )}
+                  <span
+                    className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${
+                      isCore
+                        ? 'border border-[--accent-cool-dim] bg-[--accent-cool-dim] text-[--accent-cool]'
+                        : 'border border-[--border-subtle] bg-[--bg-surface] text-[--text-tertiary]'
+                    }`}
+                  >
+                    {tool.badge}
+                  </span>
                 </motion.div>
               );
             })}

@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import { Sparkles } from "lucide-react";
+import React from 'react';
+import { Bot } from 'lucide-react';
 
 export default function FloatingAskAI() {
   const openChat = () => {
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("open-chat-widget"));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('open-chat-widget'));
     }
   };
 
@@ -13,12 +14,12 @@ export default function FloatingAskAI() {
     <button
       type="button"
       onClick={openChat}
-      className="premium-button-secondary fixed top-20 right-6 sm:top-22 sm:right-10 md:top-24 md:right-12 z-50 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold shadow-[0_18px_46px_rgba(0,0,0,0.32)] backdrop-blur-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-primary] focus-visible:ring-offset-2 focus-visible:ring-offset-[--bg-primary]"
-      aria-label="Ask AI Agent"
+      className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-4 py-2.5 font-mono text-xs font-semibold text-[--text-primary] shadow-2xl backdrop-blur-xl transition-all duration-200 hover:border-[--accent-warm] hover:scale-105 active:scale-95 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm]"
+      aria-label="Ask AI Assistant"
     >
-      <Sparkles size={14} className="text-[--accent-primary] animate-pulse" />
-      <span>Ask AI</span>
-      <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-mono text-[--accent-secondary]">
+      <Bot size={15} className="text-[--accent-cool] animate-pulse" />
+      <span>AI Assistant</span>
+      <span className="rounded border border-[--border-subtle] bg-[--bg-surface] px-1.5 py-0.5 text-[10px] text-[--text-tertiary]">
         ⌘K
       </span>
     </button>
