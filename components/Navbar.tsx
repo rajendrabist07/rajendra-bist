@@ -1,44 +1,51 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import type { MouseEvent } from 'react';
-import { Terminal, Download, Menu, X, Command } from 'lucide-react';
-import { PERSONAL } from '@/lib/portfolio-data';
-import Container from '@/components/ui/Container';
+import React, { useState } from "react";
+import type { MouseEvent } from "react";
+import { Terminal, Download, Menu, X, Command } from "lucide-react";
+import { PERSONAL } from "@/lib/portfolio-data";
+import Container from "@/components/ui/Container";
 
 const navItems = [
-  { id: '01', label: 'About', href: '#about' },
-  { id: '02', label: 'Stack', href: '#skills' },
-  { id: '03', label: 'Projects', href: '#projects' },
-  { id: '04', label: 'Process', href: '#process' },
-  { id: '05', label: 'Experience', href: '#experience' },
-  { id: '06', label: 'Contact', href: '#contact' },
+  { id: "01", label: "About", href: "#about" },
+  { id: "02", label: "Stack", href: "#skills" },
+  { id: "03", label: "Projects", href: "#projects" },
+  { id: "04", label: "Case Studies", href: "/projects" },
+  { id: "05", label: "Notes", href: "/blog" },
+  { id: "06", label: "Process", href: "#process" },
+  { id: "07", label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const handleAnchorClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-    if (!href.startsWith('#')) return;
-    event.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-    setOpen(false);
-  };
+  const handleAnchorClick =
+    (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+      if (!href.startsWith("#")) return;
+      event.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+      setOpen(false);
+    };
 
   const triggerCmdk = () => {
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "k", metaKey: true }),
+    );
   };
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-[--border-subtle] bg-[--bg-void]/85 backdrop-blur-xl">
-      <Container as="div" className="flex items-center justify-between gap-4 py-3.5">
+      <Container
+        as="div"
+        className="flex items-center justify-between gap-4 py-3.5"
+      >
         {/* Brand Monogram */}
         <a
           href="#home"
-          onClick={handleAnchorClick('#home')}
+          onClick={handleAnchorClick("#home")}
           className="flex items-center gap-2 font-mono text-sm font-bold tracking-tight text-[--text-primary] transition-colors duration-200 hover:text-[--accent-warm] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] rounded px-1"
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-[--border-strong] bg-[--bg-surface-2] text-[--accent-warm]">
@@ -60,7 +67,7 @@ export default function Navbar() {
             >
               <span className="text-[--text-tertiary] transition-colors group-hover:text-[--accent-warm]">
                 {item.id}
-              </span>{' '}
+              </span>{" "}
               <span>{item.label}</span>
             </a>
           ))}
@@ -108,7 +115,10 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {open && (
-        <div id="mobile-nav-menu" className="border-t border-[--border-subtle] bg-[--bg-void] px-6 py-5 lg:hidden font-mono text-sm">
+        <div
+          id="mobile-nav-menu"
+          className="border-t border-[--border-subtle] bg-[--bg-void] px-6 py-5 lg:hidden font-mono text-sm"
+        >
           <div className="flex flex-col gap-3">
             {navItems.map((item) => (
               <a

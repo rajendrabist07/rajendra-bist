@@ -1,45 +1,34 @@
 import { NextRequest } from 'next/server'
 import { connectToDatabase } from '@/lib/mongodb'
 import ContactMessage from '@/models/ContactMessage'
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-const WINDOW_MS = 60 * 60 * 1000 // 1 hour
-const MAX_CONTACT_PER_WINDOW = 5
-const contactRateLimitMap = new Map<string, { count: number; resetAt: number }>()
+import { contactRequestSchema } from '@/lib/api-schemas'
+import { getServerEnv } from '@/lib/env'
+import { checkRateLimit } from '@/lib/rate-limit'
 
 function getClientIp(req: NextRequest) {
   return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
 }
 
-function checkContactRateLimit(ip: string) {
-  const now = Date.now()
-  const existing = contactRateLimitMap.get(ip)
-
-  if (!existing || existing.resetAt < now) {
-    contactRateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS })
-    return true
-  }
-
-  if (existing.count >= MAX_CONTACT_PER_WINDOW) {
-    return false
-  }
-
-  contactRateLimitMap.set(ip, {
-    count: existing.count + 1,
-    resetAt: existing.resetAt,
-  })
-  return true
+function escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;',
+  })[character] as string)
 }
 
 export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req)
 
-    if (!checkContactRateLimit(ip)) {
+    const rateLimit = await checkRateLimit('contact', ip, 5, '1 h')
+
+    if (!rateLimit.success) {
       return Response.json(
         { error: 'Rate limit exceeded. Please wait before sending another message.' },
-        { status: 429 }
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((rateLimit.reset - Date.now()) / 1000)) } },
       )
     }
 
@@ -51,24 +40,21 @@ export async function POST(req: NextRequest) {
       return Response.json({ ok: true, message: 'Message received.' })
     }
 
-    const name = typeof body?.name === 'string' ? body.name.trim() : ''
-    const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''
-    const message = typeof body?.message === 'string' ? body.message.trim() : ''
+    const parsed = contactRequestSchema.safeParse(body)
 
-    if (!name || !emailPattern.test(email) || !message) {
+    if (!parsed.success) {
       return Response.json({ error: 'Please provide a valid name, email, and message.' }, { status: 400 })
     }
 
-    if (name.length > 120 || email.length > 180 || message.length > 3000) {
-      return Response.json({ error: 'Message details are too long.' }, { status: 400 })
-    }
+    const { name, email, message } = parsed.data
+    const env = getServerEnv()
 
     let emailSent = false
     let dbSaved = false
 
     // 1. Try sending email notification via Resend if RESEND_API_KEY is configured
-    const resendApiKey = process.env.RESEND_API_KEY
-    const notificationRecipient = process.env.CONTACT_NOTIFICATION_EMAIL || 'bistrajendra07@gmail.com'
+    const resendApiKey = env.RESEND_API_KEY
+    const notificationRecipient = env.CONTACT_NOTIFICATION_EMAIL || 'bistrajendra07@gmail.com'
 
     if (resendApiKey) {
       try {
@@ -79,7 +65,7 @@ export async function POST(req: NextRequest) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            from: process.env.RESEND_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>',
+            from: env.RESEND_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>',
             to: [notificationRecipient],
             reply_to: email,
             subject: `🚀 New Portfolio Message from ${name}`,
@@ -87,13 +73,13 @@ export async function POST(req: NextRequest) {
               <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #000c1e; color: #d6e8ee; padding: 28px; border-radius: 12px; border: 1px solid #02457a;">
                 <h2 style="color: #018abe; margin-top: 0; font-size: 20px;">New Message from Portfolio</h2>
                 <div style="background: rgba(2, 69, 122, 0.3); padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #018abe;">
-                  <p style="margin: 0 0 8px 0;"><strong>Sender Name:</strong> ${name}</p>
-                  <p style="margin: 0 0 8px 0;"><strong>Sender Email:</strong> <a href="mailto:${email}" style="color: #38bdf8;">${email}</a></p>
+                  <p style="margin: 0 0 8px 0;"><strong>Sender Name:</strong> ${escapeHtml(name)}</p>
+                  <p style="margin: 0 0 8px 0;"><strong>Sender Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #38bdf8;">${escapeHtml(email)}</a></p>
                   <p style="margin: 0;"><strong>Sent At:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })} (Nepal Time)</p>
                 </div>
                 <h3 style="color: #97cadb; font-size: 15px; margin-bottom: 8px;">Message Content:</h3>
                 <div style="background: #01142e; padding: 16px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; color: #f0f7fb; border: 1px solid rgba(1, 138, 190, 0.2);">
-${message}
+${escapeHtml(message)}
                 </div>
                 <p style="margin-top: 24px; font-size: 12px; color: #94a3b8; text-align: center;">
                   Delivered securely from Rajendra Bist Portfolio (bistrajendra.com.np)
@@ -116,7 +102,7 @@ ${message}
 
     // 2. Save message record to MongoDB
     try {
-      if (process.env.MONGODB_URI) {
+      if (env.MONGODB_URI) {
         await connectToDatabase()
         await ContactMessage.create({ name, email, message })
         dbSaved = true

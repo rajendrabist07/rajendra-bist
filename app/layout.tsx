@@ -1,29 +1,28 @@
-import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google';
-import '../styles/globals.css';
-import { Providers } from './providers';
-import { PERSONAL, PROJECTS, SKILLS } from '@/lib/portfolio-data';
-import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL } from '@/lib/site-config';
+import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import "../styles/globals.css";
+import { Providers } from "./providers";
+import { PERSONAL, PROJECTS, SKILLS } from "@/lib/portfolio-data";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site-config";
 
 const displayFont = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-display',
-  weight: ['500', '600', '700', '800'],
-  display: 'swap',
-});
-
-const sansFont = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["500", "600", "700", "800"],
+  display: "swap",
 });
 
 const monoFont = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  weight: ['400', '500', '600'],
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -35,22 +34,22 @@ export const metadata: Metadata = {
   keywords: SITE_KEYWORDS,
   metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'en-US': '/',
+      "en-US": "/",
     },
   },
   applicationName: SITE_NAME,
-  category: 'portfolio',
+  category: "portfolio",
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-snippet': -1,
-      'max-image-preview': 'large',
-      'max-video-preview': -1,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
     },
   },
   openGraph: {
@@ -60,30 +59,32 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     images: [
       {
-        url: '/og-image.png',
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: 'Rajendra Bist - Full-Stack Developer and AI Systems Engineer Portfolio Preview',
-        type: 'image/png',
+        alt: "Rajendra Bist - Full-Stack Developer and AI Systems Engineer Portfolio Preview",
+        type: "image/png",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ['/og-image.png'],
+    images: ["/opengraph-image"],
   },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-    shortcut: '/favicon.svg',
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.svg",
   },
   authors: [{ name: PERSONAL.name, url: PERSONAL.github }],
   creator: PERSONAL.name,
@@ -91,7 +92,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#050608',
+  themeColor: "#050608",
 };
 
 const themeInitScript = `
@@ -111,163 +112,164 @@ const websiteId = `${SITE_URL}/#website`;
 const webPageId = `${SITE_URL}/#webpage`;
 
 const jsonLdGraph = {
-  '@context': 'https://schema.org',
-  '@graph': [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'Person',
-      '@id': personId,
+      "@type": "Person",
+      "@id": personId,
       name: PERSONAL.name,
-      alternateName: ['Rajendra', 'Rajendra Bist Full-Stack Developer', 'Rajendra Bist Nepal'],
+      alternateName: [
+        "Rajendra",
+        "Rajendra Bist Full-Stack Developer",
+        "Rajendra Bist Nepal",
+      ],
       url: SITE_URL,
       mainEntityOfPage: webPageId,
-      image: `${SITE_URL}/images/rajendra-bist.jpeg`,
+      image: `${SITE_URL}/rajendra.jpeg`,
       jobTitle: PERSONAL.role,
       description: SITE_DESCRIPTION,
       seeks: {
-        '@type': 'Demand',
-        name: 'Remote full-stack, backend-focused, and AI systems engineering roles',
-        description: 'Available from Nepal for remote software engineering work worldwide.',
+        "@type": "Demand",
+        name: "Remote full-stack, backend-focused, and AI systems engineering roles",
+        description:
+          "Available from Nepal for remote software engineering work worldwide.",
         areaServed: {
-          '@type': 'Place',
-          name: 'Worldwide',
+          "@type": "Place",
+          name: "Worldwide",
         },
       },
       email: `mailto:${PERSONAL.email}`,
-      sameAs: [
-        PERSONAL.github,
-        PERSONAL.linkedin,
-        PERSONAL.facebook,
-      ],
+      sameAs: [PERSONAL.github, PERSONAL.linkedin, PERSONAL.facebook],
       knowsAbout: [
-        'React 19',
-        'Next.js 15',
-        'TypeScript',
-        'JavaScript',
-        'Tailwind CSS v4',
-        'Node.js',
-        'Express.js',
-        'REST APIs',
-        'PostgreSQL',
-        'Supabase',
-        'pgvector',
-        'MongoDB Atlas',
-        'Upstash Redis',
-        'RAG Pipelines',
-        'LLM Agent Tool Calling',
-        'Groq API',
-        'Gemini API',
-        'System Design',
-        'WebSockets',
+        "React 18.3",
+        "Next.js 15",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS v4",
+        "Node.js",
+        "Express.js",
+        "REST APIs",
+        "PostgreSQL",
+        "Supabase",
+        "pgvector",
+        "MongoDB Atlas",
+        "Upstash Redis",
+        "RAG Pipelines",
+        "LLM Agent Tool Calling",
+        "Groq API",
+        "Gemini API",
+        "System Design",
+        "WebSockets",
         ...SITE_KEYWORDS,
       ],
       alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'Vcare Technical Institute',
+        "@type": "EducationalOrganization",
+        name: "Vcare Technical Institute",
       },
       hasCredential: [
         {
-          '@type': 'EducationalOccupationalCredential',
-          name: 'Full-Stack Web Development Training',
-          credentialCategory: 'Professional Engineering Training',
+          "@type": "EducationalOccupationalCredential",
+          name: "Full-Stack Web Development Training",
+          credentialCategory: "Professional Engineering Training",
           recognizedBy: {
-            '@type': 'EducationalOrganization',
-            name: 'Vcare Technical Institute',
+            "@type": "EducationalOrganization",
+            name: "Vcare Technical Institute",
           },
         },
       ],
       address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'NP',
-        addressRegion: 'Nepal',
+        "@type": "PostalAddress",
+        addressCountry: "NP",
+        addressRegion: "Nepal",
       },
     },
     {
-      '@type': 'WebSite',
-      '@id': websiteId,
+      "@type": "WebSite",
+      "@id": websiteId,
       name: SITE_NAME,
-      alternateName: ['Rajendra Bist Portfolio', 'bistrajendra.com.np'],
+      alternateName: ["Rajendra Bist Portfolio", "bistrajendra.com.np"],
       url: SITE_URL,
       description: SITE_DESCRIPTION,
-      inLanguage: 'en',
+      inLanguage: "en",
       publisher: {
-        '@id': personId,
+        "@id": personId,
       },
     },
     {
-      '@type': 'ProfilePage',
-      '@id': webPageId,
+      "@type": "ProfilePage",
+      "@id": webPageId,
       name: SITE_TITLE,
       url: SITE_URL,
       description: SITE_DESCRIPTION,
       isPartOf: {
-        '@id': websiteId,
+        "@id": websiteId,
       },
       about: {
-        '@id': personId,
+        "@id": personId,
       },
       mainEntity: {
-        '@id': personId,
+        "@id": personId,
       },
       primaryImageOfPage: {
-        '@type': 'ImageObject',
-        url: `${SITE_URL}/images/rajendra-bist.jpeg`,
+        "@type": "ImageObject",
+        url: `${SITE_URL}/rajendra.jpeg`,
       },
       breadcrumb: {
-        '@id': `${SITE_URL}/#breadcrumb`,
+        "@id": `${SITE_URL}/#breadcrumb`,
       },
     },
     {
-      '@type': 'BreadcrumbList',
-      '@id': `${SITE_URL}/#breadcrumb`,
+      "@type": "BreadcrumbList",
+      "@id": `${SITE_URL}/#breadcrumb`,
       itemListElement: [
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 1,
-          name: 'Home',
+          name: "Home",
           item: SITE_URL,
         },
       ],
     },
     {
-      '@type': 'ItemList',
-      '@id': `${SITE_URL}/#featured-projects`,
-      name: 'Featured software engineering projects by Rajendra Bist',
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/#featured-projects`,
+      name: "Featured software engineering projects by Rajendra Bist",
       itemListElement: PROJECTS.map((project, index) => ({
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: index + 1,
         item: {
-          '@type': 'SoftwareApplication',
+          "@type": "SoftwareApplication",
           name: project.title,
           description: project.description,
-          applicationCategory: 'WebApplication',
-          operatingSystem: 'Web',
+          applicationCategory: "WebApplication",
+          operatingSystem: "Web",
           url: project.liveUrl,
           codeRepository: project.githubUrl,
           creator: {
-            '@id': personId,
+            "@id": personId,
           },
-          keywords: project.stack.join(', '),
+          keywords: project.stack.join(", "),
         },
       })),
     },
     {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}/#faq`,
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
       mainEntity: [
         {
-          '@type': 'Question',
-          name: 'Who is Rajendra Bist?',
+          "@type": "Question",
+          name: "Who is Rajendra Bist?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Rajendra Bist is a full-stack developer based in Nepal and available for remote work worldwide, building typed React interfaces, scalable APIs, database-driven products, RAG pipelines, LLM integrations, and production AI systems.',
+            "@type": "Answer",
+            text: "Rajendra Bist is a full-stack developer based in Nepal building typed React interfaces, scalable APIs, database-driven products, RAG pipelines, LLM integrations, and AI systems.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'What does Rajendra Bist specialize in?',
+          "@type": "Question",
+          name: "What does Rajendra Bist specialize in?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Rajendra specializes in full-stack TypeScript engineering with React, Next.js, Node.js, MongoDB, PostgreSQL, Supabase pgvector, RAG pipelines, LLM integration, REST APIs, and production-ready AI workflows.',
+            "@type": "Answer",
+            text: "Rajendra specializes in full-stack TypeScript engineering with React, Next.js, Node.js, MongoDB, PostgreSQL, Supabase pgvector, RAG pipelines, LLM integration, REST APIs, and production-ready AI workflows.",
           },
         },
       ],
@@ -275,13 +277,20 @@ const jsonLdGraph = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <meta name="author" content={PERSONAL.name} />
-        <meta name="classification" content="Portfolio, Software Engineering, Full-Stack Development, Backend Development, AI Systems, Remote Software Engineer" />
+        <meta
+          name="classification"
+          content="Portfolio, Software Engineering, Full-Stack Development, Backend Development, AI Systems, Remote Software Engineer"
+        />
         <meta name="format-detection" content="telephone=no" />
         <link rel="manifest" href="/manifest.json" />
         <script
@@ -289,7 +298,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
-      <body className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable} bg-[--bg-primary] text-[--text-primary] antialiased`}>
+      <body
+        className={`${displayFont.variable} ${monoFont.variable} bg-[--bg-primary] text-[--text-primary] antialiased`}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

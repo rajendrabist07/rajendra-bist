@@ -1,38 +1,42 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code2, Database, Rocket, Search, ArrowRight } from 'lucide-react';
-import SectionHeader from '@/components/ui/SectionHeader';
-import Container from '@/components/ui/Container';
+import React from "react";
+import { motion } from "framer-motion";
+import { Code2, Database, Rocket, Search, ArrowRight } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Container from "@/components/ui/Container";
 
 const steps = [
   {
-    step: '01',
-    title: 'Understand',
-    tag: 'CONSTRAINTS & SCOPE',
-    description: 'Map data flows, failure modes, rate limits, and latency budgets before writing code.',
+    step: "01",
+    title: "Understand",
+    tag: "CONSTRAINTS & SCOPE",
+    description:
+      "Map data flows, failure modes, rate limits, and latency budgets before writing code.",
     icon: Search,
   },
   {
-    step: '02',
-    title: 'Design',
-    tag: 'SCHEMA & CONTRACTS',
-    description: 'Model database schemas, establish strict JSON schema contracts, and architect fallback routers.',
+    step: "02",
+    title: "Design",
+    tag: "SCHEMA & CONTRACTS",
+    description:
+      "Model database schemas, establish strict JSON schema contracts, and architect fallback routers.",
     icon: Database,
   },
   {
-    step: '03',
-    title: 'Build',
-    tag: 'TYPESAFE EXECUTION',
-    description: 'Develop vertical slices with full TypeScript type-safety, robust validation, and clean state handling.',
+    step: "03",
+    title: "Build",
+    tag: "TYPESAFE EXECUTION",
+    description:
+      "Develop vertical slices with full TypeScript type-safety, robust validation, and clean state handling.",
     icon: Code2,
   },
   {
-    step: '04',
-    title: 'Deploy',
-    tag: 'CI/CD & MONITORING',
-    description: 'Continuous deployment with edge caching, automated build validation, and uptime telemetry.',
+    step: "04",
+    title: "Deploy",
+    tag: "CI/CD & MONITORING",
+    description:
+      "Continuous deployment with edge caching, automated build validation, and uptime telemetry.",
     icon: Rocket,
   },
 ];
@@ -59,12 +63,15 @@ const itemVariants = {
 
 export default function Process() {
   return (
-    <section id="process" className="py-20 md:py-28 border-t border-[--border-subtle]">
+    <section
+      id="process"
+      className="py-20 md:py-28 border-t border-[--border-subtle]"
+    >
       <Container>
         <SectionHeader
           eyebrow="04 // ENGINEERING PROCESS"
           title="How I Architect & Ship Systems"
-          description="A deterministic 4-stage development pipeline designed to prevent regressions and guarantee production reliability."
+          description="A four-stage delivery process that makes assumptions explicit, validates behavior, and keeps failure modes visible."
         />
 
         <motion.div
@@ -83,7 +90,9 @@ export default function Process() {
                 className="surface-panel group relative overflow-hidden rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[--border-strong]"
               >
                 <div className="flex items-center justify-between font-mono text-xs text-[--text-tertiary]">
-                  <span className="font-bold text-[--accent-warm]">{step.step}</span>
+                  <span className="font-bold text-[--accent-warm]">
+                    {step.step}
+                  </span>
                   <span className="rounded border border-[--border-subtle] bg-[--bg-surface-2] px-2 py-0.5 text-[9px] text-[--accent-cool]">
                     {step.tag}
                   </span>

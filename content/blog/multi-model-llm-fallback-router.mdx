@@ -1,0 +1,24 @@
+# Designing a multi-model LLM fallback router
+
+A fallback router should make provider failure explicit. It should not imply that one model can guarantee correctness or availability by itself.
+
+## Define the provider contract
+
+Each provider attempt should have a bounded timeout, a normalized response shape, and an error category that the router can reason about. Rate limits, authentication failures, invalid responses, and transient network errors should not all be treated as the same event.
+
+## Keep the fallback path bounded
+
+An ordered provider list is easy to inspect:
+
+```text
+primary provider -> secondary provider -> deterministic fallback -> explicit failure
+```
+
+The router should cap attempts, preserve useful diagnostics, and return a response that identifies degraded behavior when that matters to the caller. Observability belongs around the boundary, not buried inside a prompt.
+
+## What to test
+
+- The primary provider succeeds without invoking a fallback.
+- A rate limit moves execution to the next provider.
+- Invalid provider output is rejected before it reaches the user.
+- Every provider fails and the caller receives a safe, explicit error.

@@ -3,38 +3,12 @@ import { NextRequest } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { PORTFOLIO_CONTEXT } from "@/lib/portfolio-context";
 import ChatMessage from "@/models/ChatMessage";
-
-const WINDOW_MS = 60 * 60 * 1000;
-const MAX_REQUESTS_PER_WINDOW = 30;
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-
-type ClientHistoryItem = {
-  role: string;
-  content: string;
-};
+import { chatRequestSchema } from "@/lib/api-schemas";
+import { getServerEnv } from "@/lib/env";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 function getClientIp(req: NextRequest) {
   return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-}
-
-function checkRateLimit(ip: string) {
-  const now = Date.now();
-  const existing = rateLimitMap.get(ip);
-
-  if (!existing || existing.resetAt < now) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return true;
-  }
-
-  if (existing.count >= MAX_REQUESTS_PER_WINDOW) {
-    return false;
-  }
-
-  rateLimitMap.set(ip, {
-    count: existing.count + 1,
-    resetAt: existing.resetAt,
-  });
-  return true;
 }
 
 export async function POST(req: NextRequest) {
@@ -45,40 +19,43 @@ export async function POST(req: NextRequest) {
   } | null = null;
 
   try {
-    if (!process.env.GEMINI_API_KEY) {
+    const env = getServerEnv();
+
+    if (!env.GEMINI_API_KEY) {
       return Response.json({ error: "AI service not configured" }, { status: 500 });
     }
 
     const ip = getClientIp(req);
 
-    if (!checkRateLimit(ip)) {
+    const rateLimit = await checkRateLimit("chat", ip, 30, "1 h");
+
+    if (!rateLimit.success) {
       return Response.json(
         { error: "Rate limit exceeded. Please try again later." },
-        { status: 429 },
+        { status: 429, headers: { "Retry-After": String(Math.ceil((rateLimit.reset - Date.now()) / 1000)) } },
       );
     }
 
     const body = await req.json().catch(() => null);
-    const message = typeof body?.message === "string" ? body.message.trim() : "";
-    const history = Array.isArray(body?.history) ? body.history.slice(-20) : [];
-    const sessionId = typeof body?.sessionId === "string" && body.sessionId.trim()
-      ? body.sessionId.trim().slice(0, 120)
-      : crypto.randomUUID();
+    const parsed = chatRequestSchema.safeParse(body);
 
-    parsedBody = { message, history, sessionId };
-
-    if (!message || message.length > 1000) {
+    if (!parsed.success) {
       return Response.json({ error: "Invalid request" }, { status: 400 });
     }
 
+    const message = parsed.data.message;
+    const history = parsed.data.history;
+    const sessionId = parsed.data.sessionId || crypto.randomUUID();
+
+    parsedBody = { message, history, sessionId };
+
     const geminiHistory = history
-      .filter((item: ClientHistoryItem) => typeof item?.content === "string" && item.content.trim())
-      .map((item: ClientHistoryItem) => ({
+      .map((item) => ({
         role: item.role === "assistant" ? "model" : "user",
         parts: [{ text: item.content.slice(0, 2000) }],
       }));
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
       systemInstruction: PORTFOLIO_CONTEXT,
@@ -113,17 +90,11 @@ export async function POST(req: NextRequest) {
               }
             }
 
-            void connectToDatabase()
-              .then(() =>
-                ChatMessage.create({
-                  sessionId,
-                  userMessage: message,
-                  aiResponse: fullResponse,
-                }),
-              )
-              .catch(() => {
-                /** Non-critical logging failure */
-              });
+            if (env.MONGODB_URI) {
+              void connectToDatabase()
+                .then(() => ChatMessage.create({ sessionId, userMessage: message, aiResponse: fullResponse }))
+                .catch((loggingError) => console.warn("Chat transcript logging failed", loggingError));
+            }
           } catch {
             controller.enqueue(encoder.encode("[Error: Could not get response]"));
           } finally {
@@ -159,7 +130,7 @@ export async function POST(req: NextRequest) {
           ? "Gemini API key is not valid. Please update GEMINI_API_KEY in .env.local."
           : isModelError
             ? "Gemini model is not available for this API key. Please use a supported Gemini model."
-          : "AI service could not respond right now. Please try again shortly.",
+            : "AI service could not respond right now. Please try again shortly.",
       },
       { status: 502 },
     );

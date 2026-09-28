@@ -1,19 +1,29 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, ExternalLink, Eye, Github, Sparkles, Zap, Activity, Cpu } from 'lucide-react';
-import Image from 'next/image';
-import SectionHeader from '@/components/ui/SectionHeader';
-import Container from '@/components/ui/Container';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Code2,
+  ExternalLink,
+  Eye,
+  Github,
+  Sparkles,
+  Zap,
+  Activity,
+  Cpu,
+} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Container from "@/components/ui/Container";
 
 const CASE_STUDIES = [
   {
-    tag: 'PRODUCTION SYSTEM • 2026',
-    title: 'DevGuard AI',
-    tagline: 'Autonomous PR Security & Code Review Agent',
-    image: '/images/devguard-ai-card.svg',
-    lighthouse: '99/100 Perf • 0.8s LCP',
+    tag: "PRODUCTION SYSTEM • 2026",
+    title: "DevGuard AI",
+    tagline: "Autonomous PR Security & Code Review Agent",
+    image: "/images/devguard-ai-card.svg",
     terminalContent: `PR Webhook → [AST Static Linter]
               ↓
          [OSV.dev CVE Scanner]
@@ -22,62 +32,158 @@ const CASE_STUDIES = [
               ↓
          [3-Tier LLM Fallback] → Verified PR Patch`,
     architectureSvg: (
-      <svg viewBox="0 0 440 200" className="w-full h-auto text-[--text-secondary] font-mono text-[10px]">
+      <svg
+        viewBox="0 0 440 200"
+        className="w-full h-auto text-[--text-secondary] font-mono text-[10px]"
+      >
         {/* Nodes */}
-        <rect x="15" y="20" width="105" height="34" rx="6" fill="#10131A" stroke="#FF7A33" strokeWidth="1.5" />
-        <text x="67" y="41" fill="#EDEFF2" textAnchor="middle" fontWeight="bold">PR Webhook</text>
+        <rect
+          x="15"
+          y="20"
+          width="105"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="67"
+          y="41"
+          fill="#EDEFF2"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          PR Webhook
+        </text>
 
-        <rect x="165" y="20" width="110" height="34" rx="6" fill="#10131A" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-        <text x="220" y="41" fill="#EDEFF2" textAnchor="middle">AST Parser</text>
+        <rect
+          x="165"
+          y="20"
+          width="110"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="rgba(255,255,255,0.15)"
+          strokeWidth="1"
+        />
+        <text x="220" y="41" fill="#EDEFF2" textAnchor="middle">
+          AST Parser
+        </text>
 
-        <rect x="320" y="20" width="105" height="34" rx="6" fill="#10131A" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-        <text x="372" y="41" fill="#EDEFF2" textAnchor="middle">CVE Scanner</text>
+        <rect
+          x="320"
+          y="20"
+          width="105"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="rgba(255,255,255,0.15)"
+          strokeWidth="1"
+        />
+        <text x="372" y="41" fill="#EDEFF2" textAnchor="middle">
+          CVE Scanner
+        </text>
 
-        <rect x="80" y="120" width="125" height="34" rx="6" fill="#10131A" stroke="#34D8B0" strokeWidth="1.5" />
-        <text x="142" y="141" fill="#34D8B0" textAnchor="middle" fontWeight="bold">3-Tier LLM Router</text>
+        <rect
+          x="80"
+          y="120"
+          width="125"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+        />
+        <text
+          x="142"
+          y="141"
+          fill="#34D8B0"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          3-Tier LLM Router
+        </text>
 
-        <rect x="250" y="120" width="120" height="34" rx="6" fill="#10131A" stroke="#FF7A33" strokeWidth="1.5" />
-        <text x="310" y="141" fill="#FF7A33" textAnchor="middle" fontWeight="bold">GitHub Comment</text>
+        <rect
+          x="250"
+          y="120"
+          width="120"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="310"
+          y="141"
+          fill="#FF7A33"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          GitHub Comment
+        </text>
 
         {/* Connecting Animated Paths */}
-        <path d="M 120 37 L 165 37" stroke="#FF7A33" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
-        <path d="M 275 37 L 320 37" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
-        <path d="M 372 54 L 372 90 L 142 90 L 142 120" stroke="#34D8B0" strokeWidth="1.5" strokeDasharray="5 3" />
-        <path d="M 205 137 L 250 137" stroke="#FF7A33" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
+        <path
+          d="M 120 37 L 165 37"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
+        <path
+          d="M 275 37 L 320 37"
+          stroke="rgba(255,255,255,0.3)"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M 372 54 L 372 90 L 142 90 L 142 120"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+          strokeDasharray="5 3"
+        />
+        <path
+          d="M 205 137 L 250 137"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
       </svg>
     ),
     problem:
-      'Most AI PR reviewers hallucinate syntax and miss security vulnerabilities because they lack runtime static analysis and test validation.',
+      "Most AI PR reviewers hallucinate syntax and miss security vulnerabilities because they lack runtime static analysis and test validation.",
     solution:
-      'Empirical tool-calling review loop that executes AST linters and vulnerability scanners before synthesizing 1-click GitHub PR review comments.',
+      "Empirical tool-calling review loop that executes AST linters and vulnerability scanners before synthesizing 1-click GitHub PR review comments.",
     keyDecision:
-      'Engineered a 3-tier fallback model router (Groq Llama 3.3 ➡️ Gemini 2.5 Flash ➡️ Deterministic AST rules) guaranteeing review uptime resilience under strict rate limits.',
+      "Engineered a three-path model router (Groq Llama 3.3, Gemini 2.5 Flash, and deterministic AST rules) so provider failures have an explicit fallback path.",
     frontendImplementation:
-      'Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.',
+      "Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.",
     metrics: [
-      { value: '3-Tier', label: 'Failover Router' },
-      { value: '5 Max', label: 'Agentic Loop Cap' },
-      { value: 'AST-Verified', label: 'Syntax Assurance' },
+      { value: "3-Tier", label: "Failover Router" },
+      { value: "5 Max", label: "Agentic Loop Cap" },
+      { value: "AST-Verified", label: "Syntax Assurance" },
     ],
     stack: [
-      'Next.js 15',
-      'React 19',
-      'TypeScript',
-      'Tailwind v4',
-      'Supabase',
-      'Groq 70B',
-      'Gemini 2.5',
-      'GitHub App API',
+      "Next.js 15",
+      "React 18.3",
+      "TypeScript",
+      "Tailwind v4",
+      "Supabase",
+      "Groq 70B",
+      "Gemini 2.5",
+      "GitHub App API",
     ],
-    liveUrl: 'https://dev-guard-ai.vercel.app/',
-    githubUrl: 'https://github.com/rajendrabist07/dev-guard-ai',
+    liveUrl: "https://dev-guard-ai.vercel.app/",
+    githubUrl: "https://github.com/rajendrabist07/dev-guard-ai",
   },
   {
-    tag: 'PRODUCTION SYSTEM • 2026',
-    title: 'EduMethod AI',
-    tagline: 'Cognitive EdTech Platform With Persistent Memory & pgvector RAG',
-    image: '/images/edumethod-ai-card.svg',
-    lighthouse: '98/100 Perf • 0.9s LCP',
+    tag: "PRODUCTION SYSTEM • 2026",
+    title: "EduMethod AI",
+    tagline: "Cognitive EdTech Platform With Persistent Memory & pgvector RAG",
+    image: "/images/edumethod-ai-card.svg",
     terminalContent: `Syllabus Upload → [pgvector Embeddings]
                     ↓
                [Persistent Student Memory]
@@ -86,135 +192,319 @@ const CASE_STUDIES = [
                     ↓
                [SM-2 Spaced Repetition] → Mastery`,
     architectureSvg: (
-      <svg viewBox="0 0 440 200" className="w-full h-auto text-[--text-secondary] font-mono text-[10px]">
-        <rect x="15" y="20" width="115" height="34" rx="6" fill="#10131A" stroke="#FF7A33" strokeWidth="1.5" />
-        <text x="72" y="41" fill="#EDEFF2" textAnchor="middle" fontWeight="bold">Syllabus PDF</text>
+      <svg
+        viewBox="0 0 440 200"
+        className="w-full h-auto text-[--text-secondary] font-mono text-[10px]"
+      >
+        <rect
+          x="15"
+          y="20"
+          width="115"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="72"
+          y="41"
+          fill="#EDEFF2"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          Syllabus PDF
+        </text>
 
-        <rect x="175" y="20" width="110" height="34" rx="6" fill="#10131A" stroke="#34D8B0" strokeWidth="1.5" />
-        <text x="230" y="41" fill="#34D8B0" textAnchor="middle">pgvector Store</text>
+        <rect
+          x="175"
+          y="20"
+          width="110"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+        />
+        <text x="230" y="41" fill="#34D8B0" textAnchor="middle">
+          pgvector Store
+        </text>
 
-        <rect x="325" y="20" width="100" height="34" rx="6" fill="#10131A" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-        <text x="375" y="41" fill="#EDEFF2" textAnchor="middle">Memory Log</text>
+        <rect
+          x="325"
+          y="20"
+          width="100"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="rgba(255,255,255,0.15)"
+          strokeWidth="1"
+        />
+        <text x="375" y="41" fill="#EDEFF2" textAnchor="middle">
+          Memory Log
+        </text>
 
-        <rect x="80" y="120" width="125" height="34" rx="6" fill="#10131A" stroke="#34D8B0" strokeWidth="1.5" />
-        <text x="142" y="141" fill="#34D8B0" textAnchor="middle" fontWeight="bold">SM-2 Algorithm</text>
+        <rect
+          x="80"
+          y="120"
+          width="125"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+        />
+        <text
+          x="142"
+          y="141"
+          fill="#34D8B0"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          SM-2 Algorithm
+        </text>
 
-        <rect x="250" y="120" width="120" height="34" rx="6" fill="#10131A" stroke="#FF7A33" strokeWidth="1.5" />
-        <text x="310" y="141" fill="#FF7A33" textAnchor="middle" fontWeight="bold">Grounded Output</text>
+        <rect
+          x="250"
+          y="120"
+          width="120"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="310"
+          y="141"
+          fill="#FF7A33"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          Grounded Output
+        </text>
 
-        <path d="M 130 37 L 175 37" stroke="#34D8B0" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
-        <path d="M 285 37 L 325 37" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
-        <path d="M 375 54 L 375 90 L 142 90 L 142 120" stroke="#34D8B0" strokeWidth="1.5" strokeDasharray="5 3" />
-        <path d="M 205 137 L 250 137" stroke="#FF7A33" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
+        <path
+          d="M 130 37 L 175 37"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
+        <path
+          d="M 285 37 L 325 37"
+          stroke="rgba(255,255,255,0.3)"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M 375 54 L 375 90 L 142 90 L 142 120"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+          strokeDasharray="5 3"
+        />
+        <path
+          d="M 205 137 L 250 137"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
       </svg>
     ),
     problem:
-      'Generic AI chatbots forget student weak areas between sessions and hallucinate answers on complex syllabus materials without grounding.',
+      "Generic AI chatbots forget student weak areas between sessions and hallucinate answers on complex syllabus materials without grounding.",
     solution:
-      'End-to-end cognitive workspace pairing long-term student memory profiles in Supabase with pgvector document grounding and an independent verification audit layer.',
+      "End-to-end cognitive workspace pairing long-term student memory profiles in Supabase with pgvector document grounding and an independent verification audit layer.",
     keyDecision:
-      'Chose self-hosted pgvector inside PostgreSQL over external vector databases to eliminate cold starts and keep user data and vector embeddings in a single atomic transaction.',
+      "Chose self-hosted pgvector inside PostgreSQL over external vector databases to eliminate cold starts and keep user data and vector embeddings in a single atomic transaction.",
     frontendImplementation:
-      'Built the learning workspace around authenticated Next.js/React flows that connect upload, memory, verification, and spaced-repetition states to typed backend responses.',
+      "Built the learning workspace around authenticated Next.js/React flows that connect upload, memory, verification, and spaced-repetition states to typed backend responses.",
     metrics: [
-      { value: 'pgvector', label: 'Syllabus Grounding' },
-      { value: 'SM-2', label: 'Spaced Repetition' },
-      { value: '7 Engines', label: 'Cognitive Core' },
+      { value: "pgvector", label: "Syllabus Grounding" },
+      { value: "SM-2", label: "Spaced Repetition" },
+      { value: "7 Engines", label: "Cognitive Core" },
     ],
     stack: [
-      'Next.js 15',
-      'React 19',
-      'TypeScript',
-      'Clerk Auth',
-      'Supabase (pgvector)',
-      'Upstash Redis',
-      'Groq Router',
-      'Gemini 2.5',
+      "Next.js 15",
+      "React 18.3",
+      "TypeScript",
+      "Clerk Auth",
+      "Supabase (pgvector)",
+      "Upstash Redis",
+      "Groq Router",
+      "Gemini 2.5",
     ],
-    liveUrl: 'https://edumethod-ai.vercel.app',
-    githubUrl: 'https://github.com/rajendrabist07/edumethod-ai',
+    liveUrl: "https://edumethod-ai.vercel.app",
+    githubUrl: "https://github.com/rajendrabist07/edumethod-ai",
   },
   {
-    tag: 'PRODUCTION SYSTEM • 2026',
-    title: 'SocraticAI',
-    tagline: 'Guided Reasoning & Cognitive Questioning Assistant',
-    image: '/images/socratic-ai-card.svg',
-    lighthouse: '99/100 Perf • 0.7s LCP',
+    tag: "PRODUCTION SYSTEM • 2026",
+    title: "SocraticAI",
+    tagline: "Guided Reasoning & Cognitive Questioning Assistant",
+    image: "/images/socratic-ai-card.svg",
     terminalContent: `Student Query → [Negative Constraint Filter]
                     ↓
                [Step-by-Step Reasoning Coach]
                     ↓
                [MongoDB Session Persistence]`,
     architectureSvg: (
-      <svg viewBox="0 0 440 200" className="w-full h-auto text-[--text-secondary] font-mono text-[10px]">
-        <rect x="20" y="20" width="110" height="34" rx="6" fill="#10131A" stroke="#FF7A33" strokeWidth="1.5" />
-        <text x="75" y="41" fill="#EDEFF2" textAnchor="middle" fontWeight="bold">Student Query</text>
+      <svg
+        viewBox="0 0 440 200"
+        className="w-full h-auto text-[--text-secondary] font-mono text-[10px]"
+      >
+        <rect
+          x="20"
+          y="20"
+          width="110"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="75"
+          y="41"
+          fill="#EDEFF2"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          Student Query
+        </text>
 
-        <rect x="170" y="20" width="120" height="34" rx="6" fill="#10131A" stroke="#34D8B0" strokeWidth="1.5" />
-        <text x="230" y="41" fill="#34D8B0" textAnchor="middle">Negative Mask</text>
+        <rect
+          x="170"
+          y="20"
+          width="120"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+        />
+        <text x="230" y="41" fill="#34D8B0" textAnchor="middle">
+          Negative Mask
+        </text>
 
-        <rect x="170" y="120" width="120" height="34" rx="6" fill="#10131A" stroke="#FF7A33" strokeWidth="1.5" />
-        <text x="230" y="141" fill="#FF7A33" textAnchor="middle" fontWeight="bold">Socratic Guide</text>
+        <rect
+          x="170"
+          y="120"
+          width="120"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="230"
+          y="141"
+          fill="#FF7A33"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          Socratic Guide
+        </text>
 
-        <rect x="320" y="120" width="105" height="34" rx="6" fill="#10131A" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-        <text x="372" y="141" fill="#EDEFF2" textAnchor="middle">MongoDB Log</text>
+        <rect
+          x="320"
+          y="120"
+          width="105"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="rgba(255,255,255,0.15)"
+          strokeWidth="1"
+        />
+        <text x="372" y="141" fill="#EDEFF2" textAnchor="middle">
+          MongoDB Log
+        </text>
 
-        <path d="M 130 37 L 170 37" stroke="#FF7A33" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
-        <path d="M 230 54 L 230 120" stroke="#34D8B0" strokeWidth="1.5" strokeDasharray="5 3" />
-        <path d="M 290 137 L 320 137" stroke="#FF7A33" strokeWidth="1.5" strokeDasharray="4 4" className="animate-pulse" />
+        <path
+          d="M 130 37 L 170 37"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
+        <path
+          d="M 230 54 L 230 120"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+          strokeDasharray="5 3"
+        />
+        <path
+          d="M 290 137 L 320 137"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
       </svg>
     ),
     problem:
-      'Students use AI to copy direct answers instead of learning core problem-solving intuition and deep conceptual reasoning.',
+      "Students use AI to copy direct answers instead of learning core problem-solving intuition and deep conceptual reasoning.",
     solution:
-      'Constrained LLM agent that enforces strict negative prompt boundaries and locked temperature (0.4–0.6) to guide students through Socratic step-by-step reasoning.',
+      "Constrained LLM agent that enforces strict negative prompt boundaries and locked temperature (0.4–0.6) to guide students through Socratic step-by-step reasoning.",
     keyDecision:
-      'Implemented persistent session storage in MongoDB Atlas with structured feedback loops rather than stateless chat sessions.',
+      "Implemented persistent session storage in MongoDB Atlas with structured feedback loops rather than stateless chat sessions.",
     frontendImplementation:
-      'Shaped the chat interface around saved learning sessions and guided-question pacing so the UI reinforces Socratic learning instead of direct answer delivery.',
+      "Shaped the chat interface around saved learning sessions and guided-question pacing so the UI reinforces Socratic learning instead of direct answer delivery.",
     metrics: [
-      { value: 'Zero-Direct', label: 'Solution Masking' },
-      { value: '0.4–0.6', label: 'Locked Temperature' },
-      { value: 'MongoDB', label: 'Session Retention' },
+      { value: "Guided", label: "Learning flow" },
+      { value: "0.4–0.6", label: "Locked Temperature" },
+      { value: "MongoDB", label: "Session Retention" },
     ],
     stack: [
-      'Next.js 15',
-      'Gemini API',
-      'MongoDB',
-      'Node.js',
-      'TypeScript',
-      'Tailwind CSS',
+      "Next.js 15",
+      "Gemini API",
+      "MongoDB",
+      "Node.js",
+      "TypeScript",
+      "Tailwind CSS",
     ],
-    liveUrl: 'https://socratic-ai-tau.vercel.app/',
-    githubUrl: 'https://github.com/rajendrabist07/socratic-ai.git',
+    liveUrl: "https://socratic-ai-tau.vercel.app/",
+    githubUrl: "https://github.com/rajendrabist07/socratic-ai.git",
   },
 ];
 
-function ProjectVisualCard({ project }: { project: (typeof CASE_STUDIES)[number] }) {
-  const [activeView, setActiveView] = useState<'preview' | 'architecture'>('preview');
+const CASE_STUDY_SLUGS: Record<string, string> = {
+  "DevGuard AI": "devguard-ai",
+  "EduMethod AI": "edumethod-ai",
+  SocraticAI: "socratic-ai",
+};
+
+function ProjectVisualCard({
+  project,
+}: {
+  project: (typeof CASE_STUDIES)[number];
+}) {
+  const [activeView, setActiveView] = useState<"preview" | "architecture">(
+    "preview",
+  );
 
   return (
     <div className="flex flex-col gap-4">
       <div className="overflow-hidden rounded-2xl border border-[--border-strong] bg-[--bg-surface-2] shadow-2xl">
-        {/* Titlebar with Tab Switcher & Lighthouse Badge */}
+        {/* Titlebar with tab switcher */}
         <div className="flex items-center justify-between border-b border-[--border-subtle] bg-[--bg-surface] px-4 py-3 font-mono text-xs">
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[#FF5D5D]/80" />
             <span className="h-3 w-3 rounded-full bg-[#FF7A33]/80" />
             <span className="h-3 w-3 rounded-full bg-[#34D8B0]/80" />
             <span className="ml-2 text-[11px] text-[--accent-cool] hidden sm:inline-block">
-              {project.lighthouse}
+              Live build / architecture notes
             </span>
           </div>
 
           <div className="flex items-center rounded-lg border border-[--border-subtle] bg-[--bg-surface-2] p-0.5">
             <button
               type="button"
-              onClick={() => setActiveView('preview')}
+              onClick={() => setActiveView("preview")}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] ${
-                activeView === 'preview'
-                  ? 'bg-[--accent-warm] text-[#050608] shadow'
-                  : 'text-[--text-secondary] hover:text-[--text-primary]'
+                activeView === "preview"
+                  ? "bg-[--accent-warm] text-[#050608] shadow"
+                  : "text-[--text-secondary] hover:text-[--text-primary]"
               }`}
             >
               <Eye size={12} />
@@ -222,11 +512,11 @@ function ProjectVisualCard({ project }: { project: (typeof CASE_STUDIES)[number]
             </button>
             <button
               type="button"
-              onClick={() => setActiveView('architecture')}
+              onClick={() => setActiveView("architecture")}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] ${
-                activeView === 'architecture'
-                  ? 'bg-[--accent-warm] text-[#050608] shadow'
-                  : 'text-[--text-secondary] hover:text-[--text-primary]'
+                activeView === "architecture"
+                  ? "bg-[--accent-warm] text-[#050608] shadow"
+                  : "text-[--text-secondary] hover:text-[--text-primary]"
               }`}
             >
               <Code2 size={12} />
@@ -238,7 +528,7 @@ function ProjectVisualCard({ project }: { project: (typeof CASE_STUDIES)[number]
         {/* Visual Content Box */}
         <div className="relative min-h-[260px] sm:min-h-[300px]">
           <AnimatePresence mode="wait">
-            {activeView === 'preview' ? (
+            {activeView === "preview" ? (
               <motion.div
                 key="preview"
                 initial={{ opacity: 0 }}
@@ -276,6 +566,12 @@ function ProjectVisualCard({ project }: { project: (typeof CASE_STUDIES)[number]
 
       {/* Action Buttons */}
       <div className="flex flex-wrap gap-3 font-mono text-xs">
+        <Link
+          href={`/projects/${CASE_STUDY_SLUGS[project.title]}`}
+          className="premium-button-secondary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm]"
+        >
+          Case Study <ArrowUpRight size={14} />
+        </Link>
         {project.liveUrl && (
           <a
             href={project.liveUrl}
@@ -303,7 +599,10 @@ function ProjectVisualCard({ project }: { project: (typeof CASE_STUDIES)[number]
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 md:py-28 border-t border-[--border-subtle]">
+    <section
+      id="projects"
+      className="py-20 md:py-28 border-t border-[--border-subtle]"
+    >
       <Container>
         <SectionHeader
           eyebrow="03 // FEATURED PROJECTS"
@@ -364,7 +663,9 @@ export default function Projects() {
                     <Zap size={14} className="text-[--accent-warm]" />
                     <span>Key Architectural Decision</span>
                   </div>
-                  <p className="mt-2 text-[--text-primary]">{project.keyDecision}</p>
+                  <p className="mt-2 text-[--text-primary]">
+                    {project.keyDecision}
+                  </p>
                 </div>
 
                 {/* Frontend Implementation */}

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Blocks, BrainCircuit, Database, Network } from 'lucide-react';
-import SectionHeader from '@/components/ui/SectionHeader';
-import CodeBioBlock from '@/components/ui/CodeBioBlock';
-import Container from '@/components/ui/Container';
+import React from "react";
+import { motion } from "framer-motion";
+import { Blocks, BrainCircuit, Database, Network } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import CodeBioBlock from "@/components/ui/CodeBioBlock";
+import Container from "@/components/ui/Container";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,34 +29,41 @@ const itemVariants = {
 
 const strengths = [
   {
-    title: 'Systems-First Architecture',
-    description: 'Establish strict database schemas, API contracts, and failure boundaries prior to client execution.',
+    title: "Systems-First Architecture",
+    description:
+      "Establish strict database schemas, API contracts, and failure boundaries prior to client execution.",
     icon: Network,
-    badge: 'ARCHITECTURE',
+    badge: "ARCHITECTURE",
   },
   {
-    title: 'Contract-Driven Full-Stack',
-    description: 'Bridge complex client state with typed backend endpoints, ensuring zero runtime data mismatch.',
+    title: "Contract-Driven Full-Stack",
+    description:
+      "Bridge complex client state with typed backend endpoints and make data-shape failures easier to detect.",
     icon: Blocks,
-    badge: 'TYPESAFE',
+    badge: "TYPESAFE",
   },
   {
-    title: 'High-Throughput Backend',
-    description: 'Architecting secure authentications, rate limiting, MongoDB & PostgreSQL transactions, and caching.',
+    title: "High-Throughput Backend",
+    description:
+      "Architecting secure authentications, rate limiting, MongoDB & PostgreSQL transactions, and caching.",
     icon: Database,
-    badge: 'PERFORMANCE',
+    badge: "PERFORMANCE",
   },
   {
-    title: 'Deterministic AI Guardrails',
-    description: 'Grounded RAG retrieval pipelines and multi-tier LLM fallback routers that eliminate hallucinations.',
+    title: "Deterministic AI Guardrails",
+    description:
+      "Grounded retrieval pipelines and multi-tier LLM fallback routers that bound failure and preserve context.",
     icon: BrainCircuit,
-    badge: 'RELIABILITY',
+    badge: "RELIABILITY",
   },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-28 border-t border-[--border-subtle]">
+    <section
+      id="about"
+      className="py-20 md:py-28 border-t border-[--border-subtle]"
+    >
       <Container>
         <SectionHeader
           eyebrow="01 // ARCHITECTURE & PHILOSOPHY"
@@ -84,15 +91,31 @@ export default function About() {
           className="space-y-5 text-base leading-relaxed text-[--text-secondary] sm:text-lg sm:leading-8"
         >
           <motion.p variants={itemVariants}>
-            I&apos;m a full-stack and backend systems engineer based in Nepal working primarily with{' '}
-            <span className="text-[--text-primary] font-medium">React, Next.js 15, Node.js, TypeScript, and PostgreSQL</span>.
-            My primary strength is backend architecture, but I build the inspectable, responsive frontend flows that make those systems reliable for real users.
+            I&apos;m a full-stack and backend systems engineer based in Nepal
+            working primarily with{" "}
+            <span className="text-[--text-primary] font-medium">
+              React, Next.js 15, Node.js, TypeScript, and PostgreSQL
+            </span>
+            . My primary strength is backend architecture, but I build the
+            inspectable, responsive frontend flows that make those systems
+            reliable for real users.
           </motion.p>
           <motion.p variants={itemVariants}>
-            My engineering strategy is <span className="text-[--accent-warm] font-semibold">systems-first</span>: define rigid database models, enforce schema validation, and architect fallback paths before writing UI code. I&apos;ve shipped production systems including AST static analysis review agents, vector similarity search with pgvector, and resilient multi-model LLM streaming pipelines.
+            My engineering strategy is{" "}
+            <span className="text-[--accent-warm] font-semibold">
+              systems-first
+            </span>
+            : define rigid database models, enforce schema validation, and
+            architect fallback paths before writing UI code. I&apos;ve shipped
+            production systems including AST static analysis review agents,
+            vector similarity search with pgvector, and resilient multi-model
+            LLM streaming pipelines.
           </motion.p>
           <motion.p variants={itemVariants}>
-            In modern AI engineering, I bridge probabilistic LLMs with deterministic software rigor — implementing grounded RAG pipelines, schema guardrails, and automated token budgets that guarantee zero hallucination across mission-critical workflows.
+            In AI engineering, I pair probabilistic models with software
+            controls: grounded retrieval, schema guardrails, bounded outputs,
+            and explicit fallback behavior that makes failure visible and
+            testable.
           </motion.p>
         </motion.div>
 
@@ -120,8 +143,12 @@ export default function About() {
                     {item.badge}
                   </span>
                 </div>
-                <h3 className="mt-4 font-mono text-sm font-bold text-[--text-primary] tracking-tight">{item.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-[--text-secondary]">{item.description}</p>
+                <h3 className="mt-4 font-mono text-sm font-bold text-[--text-primary] tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-[--text-secondary]">
+                  {item.description}
+                </p>
               </motion.article>
             );
           })}

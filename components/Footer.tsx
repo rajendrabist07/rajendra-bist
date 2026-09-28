@@ -1,25 +1,24 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { ArrowUp, Github, Linkedin, Mail, Facebook, ShieldCheck, Zap, Activity } from 'lucide-react';
-import { PERSONAL } from '@/lib/portfolio-data';
-import Container from '@/components/ui/Container';
-import LiveSystemStatus from '@/components/ui/LiveSystemStatus';
+import React from "react";
+import { ArrowUp, Github, Linkedin, Mail, Facebook } from "lucide-react";
+import { PERSONAL } from "@/lib/portfolio-data";
+import Container from "@/components/ui/Container";
 
 const explore = [
-  ['01 // About', '#about'],
-  ['02 // Stack', '#skills'],
-  ['03 // Projects', '#projects'],
-  ['04 // Process', '#process'],
-  ['05 // Experience', '#experience'],
-  ['06 // Contact', '#contact'],
+  ["01 // About", "#about"],
+  ["02 // Stack", "#skills"],
+  ["03 // Projects", "#projects"],
+  ["04 // Process", "#process"],
+  ["05 // Experience", "#experience"],
+  ["06 // Contact", "#contact"],
 ];
 
 const socials = [
-  [Github, PERSONAL.github, 'GitHub'],
-  [Linkedin, PERSONAL.linkedin, 'LinkedIn'],
-  [Facebook, PERSONAL.facebook, 'Facebook'],
-  [Mail, `mailto:${PERSONAL.email}`, 'Email'],
+  [Github, PERSONAL.github, "GitHub"],
+  [Linkedin, PERSONAL.linkedin, "LinkedIn"],
+  [Facebook, PERSONAL.facebook, "Facebook"],
+  [Mail, `mailto:${PERSONAL.email}`, "Email"],
 ];
 
 export default function Footer() {
@@ -34,15 +33,15 @@ export default function Footer() {
               className="font-mono text-xl font-bold tracking-tight text-[--text-primary] transition-colors duration-200 hover:text-[--accent-warm]"
             >
               RB<span className="text-[--accent-warm]">.</span>
-              <span className="ml-2 text-xs font-normal text-[--text-tertiary]">/ rajendra.dev</span>
+              <span className="ml-2 text-xs font-normal text-[--text-tertiary]">
+                / rajendra.dev
+              </span>
             </a>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-[--text-secondary]">
-              Full-stack &amp; backend systems engineer in Nepal architecting typed React interfaces, high-throughput APIs, and deterministic AI pipelines.
+              Full-stack &amp; backend systems engineer in Nepal architecting
+              typed React interfaces, high-throughput APIs, and deterministic AI
+              pipelines.
             </p>
-
-            <div className="mt-5">
-              <LiveSystemStatus relativeTime="Active today" repoName="rajendra-bist" isRecent={true} />
-            </div>
           </div>
 
           {/* Col 2: Navigation Map */}
@@ -91,29 +90,6 @@ export default function Footer() {
                   <Icon size={16} />
                 </a>
               ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Real Metrics & Engineering Rigor Strip */}
-        <div className="mt-12 rounded-xl border border-[--border-subtle] bg-[--bg-surface-2] p-4 text-[11px] text-[--text-secondary]">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="inline-flex items-center gap-1.5 text-[--accent-cool]">
-                <Zap size={13} />
-                <span>Lighthouse 99+ Perf</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-[--text-primary]">
-                <ShieldCheck size={13} className="text-[--accent-warm]" />
-                <span>A11y 100 • SEO 100 • Best Practices 100</span>
-              </span>
-              <span className="text-[--text-tertiary] hidden sm:inline-block">
-                Core Web Vitals: LCP &lt; 0.9s • CLS 0.00
-              </span>
-            </div>
-
-            <div className="text-[--text-tertiary]">
-              Next.js 15 • ISR Revalidate: 3600s
             </div>
           </div>
         </div>

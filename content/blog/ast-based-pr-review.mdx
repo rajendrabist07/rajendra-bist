@@ -1,0 +1,15 @@
+# Why AST evidence belongs in AI-assisted code review
+
+Language models are useful at explaining code, but explanation is not the same as evidence. An AST-based check can establish facts about syntax and selected patterns before a model writes review prose.
+
+## Separate collection from interpretation
+
+The static-analysis step should produce structured findings with file locations, rule identifiers, and severity. The model can then summarize those findings, suggest a fix, or ask for more context without inventing the initial observation.
+
+## Bound the workflow
+
+A review agent needs limits on tool iterations, repository scope, output size, and provider retries. Those limits make failure visible and prevent one malformed event from becoming an unbounded background job.
+
+## Evidence is not certainty
+
+AST checks do not prove runtime correctness, and a model summary can still be wrong. The honest contract is narrower: collect repeatable signals first, preserve their provenance, and present uncertainty where the tools cannot decide.

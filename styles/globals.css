@@ -3,24 +3,24 @@
 :root {
   /* Terminal Noir Design System (Master Token Spec) */
   --bg-void: #050608;
-  --bg-surface: #0B0D11;
-  --bg-surface-2: #10131A;
+  --bg-surface: #0b0d11;
+  --bg-surface-2: #10131a;
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-strong: rgba(255, 255, 255, 0.14);
 
   /* Text Hierarchy */
-  --text-primary: #EDEFF2;
-  --text-secondary: #8E97A3;
-  --text-tertiary: #5A6270;
+  --text-primary: #edeff2;
+  --text-secondary: #8e97a3;
+  --text-tertiary: #5a6270;
 
-  /* Signature Accent Duo */
-  --accent-warm: #FF7A33; /* Molten amber — CTAs, interactive links, active tabs */
+  /* Single accent with semantic aliases for existing status styles */
+  --accent-warm: #ff7a33; /* Molten amber — CTAs, interactive links, active tabs */
   --accent-warm-dim: rgba(255, 122, 51, 0.14);
-  --accent-cool: #34D8B0; /* Signal teal — status, uptime dot, live telemetry */
-  --accent-cool-dim: rgba(52, 216, 176, 0.14);
+  --accent-cool: var(--accent-warm);
+  --accent-cool-dim: var(--accent-warm-dim);
 
   /* Semantic Mappings */
-  --danger: #FF5D5D;
+  --danger: #ff5d5d;
   --bg-primary: var(--bg-void);
   --bg-elevated: var(--bg-surface-2);
   --bg-code: var(--bg-surface-2);
@@ -32,28 +32,29 @@
   --text-muted: var(--text-tertiary);
   --success: var(--accent-cool);
   --warning: var(--accent-warm);
-  --gradient: linear-gradient(135deg, #FF7A33 0%, #FF9A62 45%, #34D8B0 100%);
+  --gradient: linear-gradient(135deg, #ff7a33 0%, #ff9a62 45%, #34d8b0 100%);
 
   /* Fluid Clamp Typography Scale */
-  --text-hero: clamp(2.75rem, 7vw + 0.5rem, 5.5rem);
-  --text-h2: clamp(1.85rem, 3.2vw + 0.5rem, 2.75rem);
-  --text-h3: clamp(1.2rem, 1.8vw + 0.3rem, 1.65rem);
-  --text-body: clamp(0.95rem, 0.3vw + 0.85rem, 1.0625rem);
-  --text-small: clamp(0.75rem, 0.2vw + 0.7rem, 0.875rem);
+  --text-hero: 5.5rem;
+  --text-h2: 2.75rem;
+  --text-h3: 1.65rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --font-sans: var(--font-display);
 }
 
 [data-theme="light"] {
   --bg-void: #050608;
-  --bg-surface: #0B0D11;
-  --bg-surface-2: #10131A;
+  --bg-surface: #0b0d11;
+  --bg-surface-2: #10131a;
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-strong: rgba(255, 255, 255, 0.14);
-  --text-primary: #EDEFF2;
-  --text-secondary: #8E97A3;
-  --text-tertiary: #5A6270;
-  --accent-warm: #FF7A33;
+  --text-primary: #edeff2;
+  --text-secondary: #8e97a3;
+  --text-tertiary: #5a6270;
+  --accent-warm: #ff7a33;
   --accent-warm-dim: rgba(255, 122, 51, 0.14);
-  --accent-cool: #34D8B0;
+  --accent-cool: #34d8b0;
   --accent-cool-dim: rgba(52, 216, 176, 0.14);
   --bg-primary: var(--bg-void);
 }
@@ -68,7 +69,14 @@ html {
 body {
   background: var(--bg-void);
   color: var(--text-primary);
-  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    var(--font-sans),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   margin: 0;
   overflow-x: hidden;
   line-height: 1.6;
@@ -81,13 +89,26 @@ body {
 }
 
 /* Typography Hierarchy */
-h1, h2, h3, h4, h5, h6, .font-display {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   letter-spacing: -0.02em;
 }
 
-code, kbd, samp, pre, .font-mono, [data-mono="true"] {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+code,
+kbd,
+samp,
+pre,
+.font-mono,
+[data-mono="true"] {
+  font-family:
+    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 }
 
 ::selection {
@@ -96,7 +117,8 @@ code, kbd, samp, pre, .font-mono, [data-mono="true"] {
 }
 
 /* Lenis Smooth Scroll Recommended Base */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -155,20 +177,40 @@ html.lenis, html.lenis body {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(circle at 18% 15%, rgba(255, 122, 51, 0.09) 0%, transparent 42%),
-    radial-gradient(circle at 82% 75%, rgba(52, 216, 176, 0.075) 0%, transparent 46%),
-    radial-gradient(circle at 50% 50%, rgba(16, 19, 26, 0.7) 0%, transparent 70%),
-    linear-gradient(180deg, #050608 0%, #080A0E 50%, #050608 100%);
+    radial-gradient(
+      circle at 18% 15%,
+      rgba(255, 122, 51, 0.09) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 82% 75%,
+      rgba(52, 216, 176, 0.075) 0%,
+      transparent 46%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(16, 19, 26, 0.7) 0%,
+      transparent 70%
+    ),
+    linear-gradient(180deg, #050608 0%, #080a0e 50%, #050608 100%);
 }
 
 /* Animations */
 @keyframes terminal-cursor-blink {
-  0%, 49%, 100% { opacity: 1; }
-  50%, 99% { opacity: 0; }
+  0%,
+  49%,
+  100% {
+    opacity: 1;
+  }
+  50%,
+  99% {
+    opacity: 0;
+  }
 }
 
 @keyframes signal-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
     box-shadow: 0 0 0 0 rgba(52, 216, 176, 0.6);
@@ -181,8 +223,12 @@ html.lenis, html.lenis body {
 }
 
 @keyframes path-draw {
-  from { stroke-dashoffset: 600; }
-  to { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 600;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .animate-cursor-blink {
@@ -228,7 +274,10 @@ html.lenis, html.lenis body {
   border: 1px solid var(--border-subtle);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .surface-panel:hover {
@@ -252,13 +301,17 @@ html.lenis, html.lenis body {
   color: #050608;
   font-weight: 600;
   border: 1px solid rgba(255, 122, 51, 0.4);
-  box-shadow: 0 10px 30px rgba(255, 122, 51, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 10px 30px rgba(255, 122, 51, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .premium-button-primary:hover {
-  background: #FF8F52;
-  box-shadow: 0 14px 40px rgba(255, 122, 51, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: #ff8f52;
+  box-shadow:
+    0 14px 40px rgba(255, 122, 51, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transform: translateY(-1px);
 }
 
@@ -298,7 +351,9 @@ html.lenis, html.lenis body {
   background: var(--bg-surface);
   border: 1px solid var(--border-strong);
   border-radius: 1rem;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.85), 0 0 0 1px var(--border-subtle);
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.85),
+    0 0 0 1px var(--border-subtle);
   overflow: hidden;
   font-family: var(--font-mono), monospace;
 }
@@ -359,7 +414,9 @@ html.lenis, html.lenis body {
 
 /* Respect prefers-reduced-motion Globally */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

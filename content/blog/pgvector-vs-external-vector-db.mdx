@@ -1,0 +1,17 @@
+# pgvector versus an external vector database
+
+Choosing a vector store is an application-boundary decision, not only a retrieval benchmark decision.
+
+## Start with the transaction boundary
+
+When learner records, source documents, embeddings, and verification state share a PostgreSQL data model, pgvector keeps those writes close to the same consistency boundary. That can simplify authorization, migrations, backups, and operational ownership.
+
+An external vector service can still be appropriate when retrieval scale, tenancy, or specialized indexing needs justify another system. The trade-off is an additional network boundary and another lifecycle to operate.
+
+## A practical decision table
+
+- Prefer pgvector when relational joins and atomic updates are central to the workflow.
+- Prefer a dedicated service when vector retrieval is independently scaled and operationally isolated.
+- Measure recall, latency, index build time, and total operating cost with representative data before deciding.
+
+The useful question is not which product is universally faster. It is which boundary makes the rest of the product easier to keep correct.

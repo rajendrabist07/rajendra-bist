@@ -42,7 +42,7 @@ Adapt response depth to question complexity:
 ========================
 TECHNICAL ARSENAL & SKILLS
 ========================
-- **Frontend & UI**: Next.js 15 (App Router, Server Components, Edge Runtimes), React 19, TypeScript, Tailwind CSS v4, Framer Motion.
+- **Frontend & UI**: Next.js 15 (App Router, Server Components, Edge Runtimes), React 18.3, TypeScript, Tailwind CSS v4, Framer Motion.
 - **Backend & APIs**: Node.js, Express.js, Typed REST APIs, Socket.io (WebSockets), Zod Schema Validation, JWT Authentication, Octokit GitHub API, Rate Limiting & Honeypots.
 - **Databases & Vector Storage**: PostgreSQL, Supabase (with pgvector), MongoDB (Atlas & Mongoose ODM), Redis (Upstash).
 - **AI / LLMs & Agentic Systems**: Google Gemini 2.5 Flash, Groq Model Router (Llama 3.3 70B, Qwen 2.5), RAG Pipelines, Tool-Calling Agent Loops, Negative Prompt Constraints & Low-Entropy Temperature Tuning (0.4–0.6), LangChain.js.
@@ -55,10 +55,10 @@ PRODUCTION PROJECTS
 ### 1. DevGuard AI (Autonomous PR Security & Code Review Agent)
 - **Problem**: Traditional AI review bots hallucinate syntax, miss security CVEs, crash on rate limits, and provide vague text rather than deterministic, actionable fixes.
 - **Solution**: Autonomous GitHub App that turns LLMs into intelligent orchestrators invoking diagnostic tools to collect verified empirical evidence before generating 1-click inline PR patches.
-- **Architecture & Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v4, Supabase Postgres, Octokit GitHub API, Groq Llama 3.3 70B, Gemini 2.5 Flash.
+- **Architecture & Stack**: Next.js 15, React 18.3, TypeScript, Tailwind CSS v4, Supabase Postgres, Octokit GitHub API, Groq Llama 3.3 70B, Gemini 2.5 Flash.
 - **Key Engineering Decisions**:
   * **Empirical Tool-Calling Loop**: Autonomous agent loop capped at 5 iterations. Invokes an AST Static Linter (detecting SQLi, XSS, unhandled promise rejections), OSV.dev CVE Scanner, and Vitest test runner.
-  * **3-Tier Failover Router**: Primary Groq Llama 3.3 70B ➡️ Gemini 2.5 Flash ➡️ Deterministic Engine, guaranteeing review uptime during rate limits.
+  * **3-Tier Failover Router**: Primary Groq Llama 3.3 70B ➡️ Gemini 2.5 Flash ➡️ Deterministic Engine, providing an explicit fallback path during provider limits.
   * **Webhook Security**: HMAC-SHA256 signature verification (X-Hub-Signature-256) on incoming GitHub webhooks.
   * **Metrics**: 3-Tier Failover Router | 5 Max Agentic Loop Cap | AST-Verified Syntax Assurance.
   * **Links**: [Live Demo](https://dev-guard-ai.vercel.app/) | [GitHub](https://github.com/rajendrabist07/dev-guard-ai)
@@ -66,7 +66,7 @@ PRODUCTION PROJECTS
 ### 2. EduMethod AI (Cognitive EdTech Platform With Persistent Memory & pgvector RAG)
 - **Problem**: Standard AI chatbots forget student weak areas between sessions and hallucinate answers on complex syllabus materials without grounding.
 - **Solution**: End-to-end cognitive workspace pairing long-term student memory profiles in Supabase with pgvector document grounding and an independent verification audit layer.
-- **Architecture & Stack**: Next.js 15, React 19, TypeScript, Clerk Auth, Supabase (PostgreSQL + pgvector), Upstash Redis, Groq Router, Gemini 2.5 Flash.
+- **Architecture & Stack**: Next.js 15, React 18.3, TypeScript, Clerk Auth, Supabase (PostgreSQL + pgvector), Upstash Redis, Groq Router, Gemini 2.5 Flash.
 - **Key Engineering Decisions**:
   * **pgvector inside Postgres**: Chose Supabase pgvector over external vector DBs (like Pinecone) to eliminate cold starts, avoid network hops, and keep user data and vector embeddings in a single atomic transaction.
   * **Multi-Modal OCR & Vision**: Utilizes Gemini 2.5 Flash vision extraction to linearize multi-column PDF/photo syllabus layouts into structured JSON.
@@ -81,7 +81,7 @@ PRODUCTION PROJECTS
 - **Key Engineering Decisions**:
   * **Prompt Boundary Locking**: Strict negative constraints ("NEVER provide the direct solution") with low-entropy temperature locking (0.4–0.6).
   * **Stateful Sessions**: Multi-turn session persistence in MongoDB Atlas.
-  * **Metrics**: Zero-Direct Solution Masking | 0.4–0.6 Locked Temperature | MongoDB Session Retention.
+  * **Implementation details**: Guided-response constraints | 0.4–0.6 temperature range | MongoDB session retention.
   * **Links**: [Live Demo](https://socratic-ai-tau.vercel.app/) | [GitHub](https://github.com/rajendrabist07/socratic-ai.git)
 
 ========================

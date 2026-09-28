@@ -1,12 +1,12 @@
 {
   "name": "Rajendra Bist - Full-Stack Developer",
   "short_name": "Rajendra Bist",
-  "description": "Full-stack developer based in Nepal and available for remote work worldwide, building React interfaces, scalable APIs, RAG pipelines, and production AI systems.",
+  "description": "Backend-first full-stack and AI systems engineering portfolio by Rajendra Bist.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#080806",
-  "theme_color": "#98bdc9",
+  "theme_color": "#FF7A33",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -31,7 +31,7 @@
   "categories": ["productivity", "portfolio"],
   "screenshots": [
     {
-      "src": "/og-image.png",
+      "src": "/opengraph-image",
       "sizes": "1200x630",
       "type": "image/png"
     }

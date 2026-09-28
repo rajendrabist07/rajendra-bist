@@ -25,7 +25,7 @@ function getRelativeTimeString(date: Date): string {
  */
 export async function getGitHubStatus(): Promise<GitHubActivity> {
   const username = 'rajendrabist07';
-  
+
   try {
     const res = await fetch(`https://api.github.com/users/${username}/events/public`, {
       next: { revalidate: 3600 }, // 1 hour ISR revalidation
@@ -55,15 +55,15 @@ export async function getGitHubStatus(): Promise<GitHubActivity> {
       };
     }
   } catch (err) {
-    // Non-blocking fallback: ensures zero UI disruption on GitHub API outage
+    // Keep the fallback explicit so an API outage is not presented as recent activity.
     console.warn('GitHub activity fetch fallback activated:', err instanceof Error ? err.message : err);
   }
 
   return {
-    lastCommitTime: new Date().toISOString(),
-    relativeTime: 'Active today',
-    isRecent: true,
+    lastCommitTime: null,
+    relativeTime: 'Activity unavailable',
+    isRecent: false,
     repoName: 'rajendra-bist',
-    status: 'active',
+    status: 'fallback',
   };
 }

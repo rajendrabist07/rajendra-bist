@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { GitCommit, Activity } from 'lucide-react';
+import React from "react";
+import { GitCommit, Activity } from "lucide-react";
 
 interface LiveSystemStatusProps {
   relativeTime?: string;
@@ -10,9 +10,9 @@ interface LiveSystemStatusProps {
 }
 
 export default function LiveSystemStatus({
-  relativeTime = 'Active today',
-  repoName = 'rajendra-bist',
-  isRecent = true,
+  relativeTime = "Activity unavailable",
+  repoName = "rajendra-bist",
+  isRecent = false,
 }: LiveSystemStatusProps) {
   return (
     <div

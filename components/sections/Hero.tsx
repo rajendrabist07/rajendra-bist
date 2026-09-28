@@ -1,25 +1,27 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDown, Download, Github, Linkedin, Mail } from 'lucide-react';
-import Image from 'next/image';
-import { PERSONAL } from '@/lib/portfolio-data';
-import Container from '@/components/ui/Container';
-import LiveSystemStatus from '@/components/ui/LiveSystemStatus';
+import React, { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
+import { PERSONAL } from "@/lib/portfolio-data";
+import Container from "@/components/ui/Container";
+import LiveSystemStatus from "@/components/ui/LiveSystemStatus";
 
 const TYPED_ROLES = [
-  'Full-Stack Developer & Backend Systems',
-  'Building Resilient APIs & RAG Pipelines',
-  'LLM Integrations & Vector Embeddings (pgvector)',
-  'Autonomous AST PR Review Agents & Tooling',
-  'Designing Fault-Tolerant Distributed Architectures',
+  "Full-Stack Developer & Backend Systems",
+  "Building Resilient APIs & RAG Pipelines",
+  "LLM Integrations & Vector Embeddings (pgvector)",
+  "Autonomous AST PR Review Agents & Tooling",
+  "Designing Fault-Tolerant Distributed Architectures",
 ];
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState(shouldReduceMotion ? TYPED_ROLES[0] : '');
+  const [currentText, setCurrentText] = useState(
+    shouldReduceMotion ? TYPED_ROLES[0] : "",
+  );
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Hero() {
 
     if (!isDeleting && currentText === fullText) {
       timeout = setTimeout(() => setIsDeleting(true), 2400);
-    } else if (isDeleting && currentText === '') {
+    } else if (isDeleting && currentText === "") {
       setIsDeleting(false);
       setRoleIndex((prev) => (prev + 1) % TYPED_ROLES.length);
     } else {
@@ -42,7 +44,7 @@ export default function Hero() {
         setCurrentText(
           isDeleting
             ? fullText.substring(0, currentText.length - 1)
-            : fullText.substring(0, currentText.length + 1)
+            : fullText.substring(0, currentText.length + 1),
         );
       }, speed);
     }
@@ -55,22 +57,12 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-24 pb-12 lg:pt-32"
     >
-      <Container as="div" className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <Container
+        as="div"
+        className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]"
+      >
         {/* Left Column: Telemetry, Big Name, Typewriter Role, Narrative, CTAs */}
         <div className="relative z-10 text-center lg:text-left">
-          {/* Consolidated Telemetry Row */}
-          <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-3.5 py-1.5 font-mono text-xs text-[--text-secondary] backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[--accent-cool] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[--accent-cool]" />
-              </span>
-              <span className="text-[--text-primary] font-medium">Available for roles</span>
-              <span className="text-[--text-tertiary]">•</span>
-              <span className="text-[--accent-cool]">Active on GitHub</span>
-            </div>
-          </div>
-
           {/* Big Bold Name (Paileko Style with High Contrast) */}
           <h1 className="fluid-hero mt-5 font-black uppercase tracking-tight text-[--text-primary]">
             Rajendra <br className="hidden sm:inline" />
@@ -80,14 +72,17 @@ export default function Hero() {
           {/* Dynamic Typewriter Role Display with Cursor */}
           <div className="mt-3 flex min-h-[34px] items-center justify-center lg:justify-start font-mono text-sm sm:text-base md:text-lg text-[--accent-warm]">
             <span className="text-[--text-tertiary] mr-2">&gt;</span>
-            <span className="font-semibold text-[--text-primary]">{currentText}</span>
+            <span className="font-semibold text-[--text-primary]">
+              {currentText}
+            </span>
             <span className="ml-1 inline-block w-2.5 h-4 bg-[--accent-warm] animate-cursor-blink font-normal" />
           </div>
 
           {/* Punchy Systems-First Narrative */}
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-[--text-secondary] sm:text-base md:text-lg">
-            Full-stack &amp; backend software engineer based in Nepal architecting typed React interfaces,
-            high-throughput APIs, RAG pipelines, and autonomous AI systems deployed for real users.
+            Full-stack &amp; backend software engineer based in Nepal
+            architecting typed React interfaces, high-throughput APIs, RAG
+            pipelines, and autonomous AI systems deployed for real users.
           </p>
 
           {/* Action Buttons: Solid Accent-Warm vs Ghost Outline */}
@@ -111,9 +106,9 @@ export default function Hero() {
           {/* Monospace Socials Row */}
           <div className="mt-6 flex items-center justify-center gap-4 lg:justify-start text-[--text-secondary]">
             {[
-              { href: PERSONAL.github, icon: Github, label: 'GitHub' },
-              { href: PERSONAL.linkedin, icon: Linkedin, label: 'LinkedIn' },
-              { href: `mailto:${PERSONAL.email}`, icon: Mail, label: 'Email' },
+              { href: PERSONAL.github, icon: Github, label: "GitHub" },
+              { href: PERSONAL.linkedin, icon: Linkedin, label: "LinkedIn" },
+              { href: `mailto:${PERSONAL.email}`, icon: Mail, label: "Email" },
             ].map((item) => {
               const Icon = item.icon;
               return (
@@ -144,14 +139,15 @@ export default function Hero() {
             <div
               className="absolute -inset-4 pointer-events-none opacity-25 blur-3xl"
               style={{
-                background: 'radial-gradient(circle at 60% 40%, #FF7A33 0%, #34D8B0 35%, transparent 70%)',
+                background:
+                  "radial-gradient(circle at 60% 40%, #FF7A33 0%, #34D8B0 35%, transparent 70%)",
               }}
             />
 
             {/* Sharp Natural Portrait with Seamless Edge Vignette */}
             <div className="relative h-full w-full overflow-hidden rounded-3xl border border-[--border-strong] bg-[#050608] shadow-2xl">
               <Image
-                src="/images/rajendra-bist.jpeg"
+                src="/rajendra.jpeg"
                 alt="Rajendra Bist - Full-Stack & Backend Systems Engineer"
                 fill
                 priority
@@ -176,13 +172,16 @@ export default function Hero() {
               <div
                 className="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
                 style={{
-                  background: 'radial-gradient(circle at 80% 20%, #FF7A33 0%, transparent 55%)',
+                  background:
+                    "radial-gradient(circle at 80% 20%, #FF7A33 0%, transparent 55%)",
                 }}
               />
 
               {/* Floating Monospace Status Badge */}
               <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl border border-[--border-subtle] bg-[#050608]/90 px-3.5 py-2 font-mono text-xs text-[--text-secondary] backdrop-blur-md">
-                <span className="font-semibold text-[--text-primary]">Rajendra Bist</span>
+                <span className="font-semibold text-[--text-primary]">
+                  Rajendra Bist
+                </span>
                 <span className="text-[--accent-cool] flex items-center gap-1.5 font-medium">
                   <span className="h-2 w-2 rounded-full bg-[--accent-cool] animate-pulse" />
                   ONLINE [UTC+5:45]
