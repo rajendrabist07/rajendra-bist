@@ -22,7 +22,10 @@ export async function POST(req: NextRequest) {
     const env = getServerEnv();
 
     if (!env.GEMINI_API_KEY) {
-      return Response.json({ error: "AI service not configured" }, { status: 500 });
+      return Response.json(
+        { error: "AI Assistant is currently in offline mode (GEMINI_API_KEY unconfigured). Please reach out directly to Rajendra at rajendrabist396@gmail.com." },
+        { status: 503 }
+      );
     }
 
     const ip = getClientIp(req);
