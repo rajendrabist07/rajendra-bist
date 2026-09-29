@@ -4,3 +4,7 @@ node_modules
 .DS_Store
 dist
 .vscode
+.lighthouseci
+test-results
+playwright-report
+*.tsbuildinfo

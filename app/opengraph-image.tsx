@@ -18,9 +18,9 @@ export default function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#000c1e',
+          backgroundColor: '#050608',
           backgroundImage:
-            'radial-gradient(circle at 18% 12%, rgba(1, 138, 190, 0.25), transparent 40%), radial-gradient(circle at 76% 22%, rgba(2, 69, 122, 0.35), transparent 45%), radial-gradient(circle at 86% 92%, rgba(56, 189, 248, 0.20), transparent 42%)',
+            'radial-gradient(circle at 18% 12%, rgba(255, 122, 51, 0.15), transparent 40%), radial-gradient(circle at 76% 22%, rgba(255, 255, 255, 0.04), transparent 45%), radial-gradient(circle at 86% 92%, rgba(255, 122, 51, 0.12), transparent 42%)',
           padding: '60px',
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
@@ -31,21 +31,21 @@ export default function Image() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'linear-gradient(135deg, #001b48, #02457a)',
-            border: '1.5px solid rgba(1, 138, 190, 0.65)',
+            background: 'linear-gradient(135deg, #10131a, #050608)',
+            border: '1.5px solid rgba(255, 122, 51, 0.5)',
             borderRadius: '16px',
             padding: '8px 24px',
             marginBottom: '24px',
-            boxShadow: '0 18px 48px rgba(0, 12, 30, 0.5)',
+            boxShadow: '0 18px 48px rgba(0, 0, 0, 0.6)',
           }}
         >
-          <span style={{ fontSize: '28px', fontWeight: 850, color: '#f0f7fb' }}>R</span>
-          <span style={{ fontSize: '28px', fontWeight: 850, color: '#018abe', marginLeft: '2px' }}>B</span>
+          <span style={{ fontSize: '28px', fontWeight: 850, color: '#edeff2' }}>R</span>
+          <span style={{ fontSize: '28px', fontWeight: 850, color: '#ff7a33', marginLeft: '2px' }}>B</span>
           <span
             style={{
               fontSize: '16px',
               fontWeight: 600,
-              color: '#97cadb',
+              color: '#8e97a3',
               marginLeft: '14px',
               letterSpacing: '2px',
             }}
@@ -59,7 +59,7 @@ export default function Image() {
           style={{
             fontSize: '68px',
             fontWeight: 900,
-            color: '#f0f7fb',
+            color: '#edeff2',
             letterSpacing: '-2px',
             textAlign: 'center',
             lineHeight: 1.1,
@@ -68,32 +68,32 @@ export default function Image() {
           Rajendra Bist
         </div>
 
-        {/* Role with Oceanic Electric Blue */}
+        {/* Role with Molten Amber */}
         <div
           style={{
             fontSize: '34px',
             fontWeight: 700,
-            color: '#018abe',
+            color: '#ff7a33',
             marginTop: '12px',
             textAlign: 'center',
             letterSpacing: '-0.5px',
           }}
         >
-          Full-Stack Developer &amp; Backend Engineer
+          Backend-First Full-Stack &amp; AI Systems Engineer
         </div>
 
         {/* Tagline */}
         <div
           style={{
             fontSize: '20px',
-            color: '#d6e8ee',
+            color: '#8e97a3',
             marginTop: '16px',
             textAlign: 'center',
             maxWidth: '850px',
             lineHeight: 1.5,
           }}
         >
-          Building typed React interfaces, scalable APIs, RAG pipelines, and production AI integrations.
+          Designing and shipping production-oriented full-stack products with typed contracts, database integrity, and bounded AI integrations.
         </div>
 
         {/* Tech Stack Pills */}
@@ -119,13 +119,13 @@ export default function Image() {
             <div
               key={tech}
               style={{
-                backgroundColor: 'rgba(2, 69, 122, 0.25)',
-                border: '1px solid rgba(1, 138, 190, 0.35)',
+                backgroundColor: '#10131a',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: '9999px',
                 padding: '6px 16px',
                 fontSize: '14px',
                 fontWeight: 600,
-                color: '#d6e8ee',
+                color: '#edeff2',
               }}
             >
               {tech}
