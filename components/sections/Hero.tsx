@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
@@ -19,38 +19,16 @@ const TYPED_ROLES = [
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState(
-    shouldReduceMotion ? TYPED_ROLES[0] : "",
-  );
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      setCurrentText(TYPED_ROLES[0]);
-      return;
-    }
+    if (shouldReduceMotion) return;
 
-    const fullText = TYPED_ROLES[roleIndex];
-    let timeout: NodeJS.Timeout;
-
-    if (!isDeleting && currentText === fullText) {
-      timeout = setTimeout(() => setIsDeleting(true), 2400);
-    } else if (isDeleting && currentText === "") {
-      setIsDeleting(false);
+    const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % TYPED_ROLES.length);
-    } else {
-      const speed = isDeleting ? 25 : 55;
-      timeout = setTimeout(() => {
-        setCurrentText(
-          isDeleting
-            ? fullText.substring(0, currentText.length - 1)
-            : fullText.substring(0, currentText.length + 1),
-        );
-      }, speed);
-    }
+    }, 3500);
 
-    return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, roleIndex, shouldReduceMotion]);
+    return () => clearInterval(interval);
+  }, [shouldReduceMotion]);
 
   return (
     <section
@@ -69,13 +47,24 @@ export default function Hero() {
             <span className="text-[--accent-warm]">Bist</span>
           </h1>
 
-          {/* Dynamic Typewriter Role Display with Cursor */}
+          {/* Dynamic Systems Role Display with Cursor */}
           <div className="mt-3 flex min-h-[34px] items-center justify-center lg:justify-start font-mono text-sm sm:text-base md:text-lg text-[--accent-warm]">
-            <span className="text-[--text-tertiary] mr-2">&gt;</span>
-            <span className="font-semibold text-[--text-primary]">
-              {currentText}
+            <span className="text-[--text-tertiary] mr-2 select-none">&gt;</span>
+            <span className="relative inline-flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={roleIndex}
+                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -4 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="font-semibold text-[--text-primary]"
+                >
+                  {TYPED_ROLES[roleIndex]}
+                </motion.span>
+              </AnimatePresence>
+              <span className="ml-1.5 inline-block w-2.5 h-4 bg-[--accent-warm] animate-cursor-blink font-normal" />
             </span>
-            <span className="ml-1 inline-block w-2.5 h-4 bg-[--accent-warm] animate-cursor-blink font-normal" />
           </div>
 
           {/* Punchy Systems-First Narrative */}
