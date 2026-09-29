@@ -68,21 +68,24 @@ export async function POST(req: NextRequest) {
             from: env.RESEND_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>',
             to: [notificationRecipient],
             reply_to: email,
-            subject: `🚀 New Portfolio Message from ${name}`,
+            subject: `[rajendra.dev] New Message from ${name}`,
             html: `
-              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #000c1e; color: #d6e8ee; padding: 28px; border-radius: 12px; border: 1px solid #02457a;">
-                <h2 style="color: #018abe; margin-top: 0; font-size: 20px;">New Message from Portfolio</h2>
-                <div style="background: rgba(2, 69, 122, 0.3); padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #018abe;">
-                  <p style="margin: 0 0 8px 0;"><strong>Sender Name:</strong> ${escapeHtml(name)}</p>
-                  <p style="margin: 0 0 8px 0;"><strong>Sender Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #38bdf8;">${escapeHtml(email)}</a></p>
-                  <p style="margin: 0;"><strong>Sent At:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })} (Nepal Time)</p>
+              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; max-width: 600px; margin: 0 auto; background: #050608; color: #edeff2; padding: 28px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                  <span style="font-weight: 800; font-size: 18px; color: #ff7a33; letter-spacing: -0.5px;">RB &bull; rajendra.dev</span>
                 </div>
-                <h3 style="color: #97cadb; font-size: 15px; margin-bottom: 8px;">Message Content:</h3>
-                <div style="background: #01142e; padding: 16px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; color: #f0f7fb; border: 1px solid rgba(1, 138, 190, 0.2);">
+                <h2 style="color: #edeff2; margin-top: 0; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">New Contact Submission</h2>
+                <div style="background: #10131a; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06);">
+                  <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Sender:</strong> ${escapeHtml(name)}</p>
+                  <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #ff7a33;">${escapeHtml(email)}</a></p>
+                  <p style="margin: 0; font-size: 12px; color: #8e97a3;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })} (Nepal Time)</p>
+                </div>
+                <h3 style="color: #8e97a3; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Message Content:</h3>
+                <div style="background: #0b0d11; padding: 16px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; color: #edeff2; border: 1px solid rgba(255, 122, 51, 0.2); font-size: 14px;">
 ${escapeHtml(message)}
                 </div>
-                <p style="margin-top: 24px; font-size: 12px; color: #94a3b8; text-align: center;">
-                  Delivered securely from Rajendra Bist Portfolio (bistrajendra.com.np)
+                <p style="margin-top: 24px; font-size: 11px; color: #5a6270; text-align: center;">
+                  Delivered securely from Rajendra Bist Portfolio &bull; bistrajendra.com.np
                 </p>
               </div>
             `,
@@ -111,14 +114,22 @@ ${escapeHtml(message)}
       console.warn('MongoDB save warning:', err)
     }
 
-    // If neither service is configured, log warning in server logs
+    // Honest delivery check: If neither service is configured / connected, reject with 503 instead of false success
     if (!emailSent && !dbSaved) {
       console.log(`[Contact Form Fallback] Message received from ${name} (${email}): ${message}`)
+      return Response.json(
+        {
+          ok: false,
+          error: 'Live message forwarding is currently offline. Please send your email directly to rajendrabist396@gmail.com.',
+          delivered: { email: false, db: false },
+        },
+        { status: 503 }
+      )
     }
 
     return Response.json({
       ok: true,
-      message: 'Message sent successfully.',
+      message: 'Message delivered successfully.',
       delivered: { email: emailSent, db: dbSaved },
     })
   } catch (error) {

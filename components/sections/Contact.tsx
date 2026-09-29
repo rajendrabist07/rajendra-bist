@@ -27,7 +27,7 @@ const links = [
     label: "LinkedIn",
     href: PERSONAL.linkedin,
     icon: Linkedin,
-    value: "linkedin.com/in/bistrajendra07",
+    value: "linkedin.com/in/rajendra-bist-169926370",
   },
   {
     label: "GitHub",
@@ -39,7 +39,7 @@ const links = [
     label: "Facebook",
     href: PERSONAL.facebook,
     icon: Facebook,
-    value: "facebook.com/bistrajendra07",
+    value: "facebook.com/rajendra.bist.302275",
   },
 ];
 
