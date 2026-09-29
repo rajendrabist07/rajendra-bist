@@ -25,7 +25,31 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[--bg-void] py-16 font-mono text-xs text-[--text-secondary]">
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container className="relative">
+
+      {/* Full-Width Dual Ambient Glows */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(circle at 10% 30%, rgba(255, 122, 51, 0.045) 0%, transparent 55%),
+            radial-gradient(circle at 90% 70%, rgba(52, 216, 176, 0.035) 0%, transparent 55%)
+          `,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle Matrix Texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at center, rgba(255,255,255,0.7) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+        aria-hidden="true"
+      />
+
+      <Container className="relative z-10">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.8fr_1fr]">
           {/* Col 1: Identity & Telemetry */}
           <div>
@@ -86,7 +110,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label as string}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[--border-subtle] bg-[--bg-surface-2] text-[--text-secondary] transition-all duration-200 hover:border-[--border-strong] hover:text-[--accent-warm]"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-[--text-secondary] transition-all duration-200 hover:border-[--accent-warm]/40 hover:text-[--accent-warm] hover:scale-105 active:scale-95"
                 >
                   <Icon size={16} />
                 </a>
@@ -95,8 +119,11 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Soft Divider above Copyright */}
+        <div className="divider-gradient my-8" />
+
         {/* Copyright & Back to Top */}
-        <div className="mt-8 flex flex-col gap-4 border-t border-[--border-subtle] pt-6 text-[11px] text-[--text-tertiary] md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 text-[11px] text-[--text-tertiary] md:flex-row md:items-center md:justify-between">
           <p>© 2026 Rajendra Bist. Production Systems Portfolio.</p>
           <div className="flex items-center gap-6">
             <span>Kathmandu, Nepal</span>

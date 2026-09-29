@@ -64,7 +64,7 @@ export const EXPERIENCE = [
     role: 'Full-Stack Web Development Trainee',
     company: 'Vcare Technical Institute',
     timeframe: 'Completed 2025',
-    location: 'Nepal',
+    location: 'India',
     description:
       'Completed practical full-stack engineering training focused on frontend delivery, backend API design, database modeling, authentication flows, and deployment patterns.',
     achievements: [

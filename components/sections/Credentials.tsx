@@ -95,7 +95,7 @@ export default function Credentials() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-5 border-t border-[--border-subtle]">
+                <div className="mt-6 pt-5 border-t border-white/[0.06]">
                   <p className="font-mono text-[11px] font-semibold text-[--text-tertiary] mb-2.5 uppercase tracking-wider">
                     Core Focus &amp; Topics
                   </p>

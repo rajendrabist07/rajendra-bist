@@ -94,7 +94,7 @@ export default function Experience() {
                 </div>
 
                 {/* Stack Tag Pills */}
-                <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-[--border-subtle]">
+                <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06]">
                   {exp.stack.map((tech) => (
                     <span
                       key={tech}
