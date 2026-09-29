@@ -144,10 +144,22 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative py-24 md:py-32"
+      className="relative overflow-hidden py-24 md:py-32 section-tone-void"
     >
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">02</div>
+
+      {/* Subtle Matrix Dot Backdrop */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at center, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="02 // TECH ARSENAL"
           title="Production Stack & Tooling"
@@ -200,10 +212,10 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.18 }}
-                  className={`group relative flex items-center justify-between gap-2 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-0.5 ${
+                  className={`group relative flex items-center justify-between gap-2 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-1 ${
                     isCore
-                      ? "border border-[--border-strong] bg-[--bg-surface-2] text-[--text-primary] hover:border-[--accent-warm]"
-                      : "border border-dashed border-[--border-subtle] bg-[--bg-surface] text-[--text-secondary] hover:border-[--border-strong]"
+                      ? "border border-[--border-strong] bg-[--bg-surface-2]/90 text-[--text-primary] hover:border-[--accent-warm]/50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                      : "border border-dashed border-[--border-subtle] bg-[--bg-surface]/80 text-[--text-secondary] hover:border-white/[0.2] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
                   }`}
                 >
                   <div className="flex min-w-0 items-center gap-2.5">

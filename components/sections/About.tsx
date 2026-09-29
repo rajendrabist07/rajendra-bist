@@ -62,10 +62,11 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-24 md:py-32"
+      className="relative overflow-hidden py-24 md:py-32 section-tone-alt"
     >
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">01</div>
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="01 // ARCHITECTURE & PHILOSOPHY"
           title="Engineering Systems with Rigor"
@@ -134,10 +135,11 @@ export default function About() {
               <motion.article
                 key={item.title}
                 variants={itemVariants}
-                className="surface-panel group rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[--border-strong]"
+                className="surface-panel group relative overflow-hidden rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-white/[0.2] hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]"
               >
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[--accent-warm]/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-colors group-hover:border-[--accent-warm]">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-all group-hover:border-[--accent-warm]/40 group-hover:scale-105">
                     <Icon size={19} />
                   </span>
                   <span className="rounded border border-[--border-subtle] bg-[--bg-surface-2] px-2 py-0.5 font-mono text-[10px] text-[--accent-cool]">

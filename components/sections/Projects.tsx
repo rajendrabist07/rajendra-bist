@@ -601,17 +601,19 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative py-24 md:py-32"
+      className="relative overflow-hidden py-24 md:py-32 section-tone-alt"
     >
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">03</div>
+
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="03 // FEATURED PROJECTS"
           title="Production Systems & Case Studies"
           description="Real-world architectures structured around Problem, Solution, Key Decision, and Frontend Implementation."
         />
 
-        <div className="mt-14 space-y-24">
+        <div className="mt-12 space-y-20 md:space-y-24">
           {CASE_STUDIES.map((project, index) => (
             <motion.article
               key={project.title}
@@ -659,7 +661,7 @@ export default function Projects() {
                 </div>
 
                 {/* Key Decision Callout Card */}
-                <div className="mt-5 rounded-xl border border-[--border-strong] bg-[--bg-surface-2] p-4 text-xs leading-relaxed text-[--text-secondary]">
+                <div className="mt-5 rounded-xl border border-[--border-strong] bg-[--bg-surface-2] p-4 text-xs leading-relaxed text-[--text-secondary] transition-all duration-200 hover:border-white/[0.2] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)]">
                   <div className="flex items-center gap-1.5 font-mono font-bold uppercase tracking-wider text-[--accent-warm]">
                     <Zap size={14} className="text-[--accent-warm]" />
                     <span>Key Architectural Decision</span>
@@ -670,7 +672,7 @@ export default function Projects() {
                 </div>
 
                 {/* Frontend Implementation */}
-                <div className="mt-3 rounded-xl border border-[--border-subtle] bg-[--bg-surface] p-4 text-xs leading-relaxed text-[--text-secondary]">
+                <div className="mt-3 rounded-xl border border-[--border-subtle] bg-[--bg-surface] p-4 text-xs leading-relaxed text-[--text-secondary] transition-all duration-200 hover:border-white/[0.18] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)]">
                   <div className="flex items-center gap-1.5 font-mono font-bold uppercase tracking-wider text-[--accent-cool]">
                     <Sparkles size={14} className="text-[--accent-cool]" />
                     <span>Frontend Implementation</span>
@@ -678,29 +680,29 @@ export default function Projects() {
                   <p className="mt-2">{project.frontendImplementation}</p>
                 </div>
 
-                {/* Metrics Grid */}
+                {/* Metrics Grid (Stat Cards with Accent Gradient Line) */}
                 <div className="mt-5 grid grid-cols-3 gap-2.5 font-mono">
                   {project.metrics.map((metric) => (
                     <div
                       key={metric.label}
-                      className="rounded-xl border border-[--border-subtle] bg-[--bg-surface-2] p-3 text-center"
+                      className="stat-card"
                     >
                       <p className="text-sm font-bold text-[--text-primary] sm:text-base">
                         {metric.value}
                       </p>
-                      <p className="mt-0.5 text-[10px] text-[--text-tertiary]">
+                      <p className="mt-0.5 text-[10px] text-[--text-tertiary] uppercase tracking-wider">
                         {metric.label}
                       </p>
                     </div>
                   ))}
                 </div>
 
-                {/* Tech Stack Chips */}
-                <div className="mt-5 flex flex-wrap gap-1.5 font-mono text-xs">
+                {/* Tech Stack Tag Pills */}
+                <div className="mt-5 flex flex-wrap gap-1.5">
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-md border border-[--border-subtle] bg-[--bg-surface-2] px-2.5 py-1 text-[11px] text-[--text-secondary]"
+                      className="tag-pill"
                     >
                       {tech}
                     </span>

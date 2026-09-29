@@ -29,9 +29,11 @@ const itemVariants = {
 
 export default function Credentials() {
   return (
-    <section id="credentials" className="relative py-24 md:py-32">
+    <section id="credentials" className="relative overflow-hidden py-24 md:py-32 section-tone-void">
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">06</div>
+
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="06 // CREDENTIALS & TRAINING"
           title="Education & Verified Training"
@@ -51,11 +53,11 @@ export default function Credentials() {
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className="surface-panel relative flex flex-col justify-between rounded-2xl p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[--border-strong]"
+                className="surface-panel relative flex flex-col justify-between rounded-2xl p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-white/[0.2] hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]"
               >
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-4 font-mono text-xs">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm]">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-all group-hover:scale-105">
                       {isCompleted ? <Award size={20} /> : <BookOpen size={20} />}
                     </span>
 
@@ -97,11 +99,11 @@ export default function Credentials() {
                   <p className="font-mono text-[11px] font-semibold text-[--text-tertiary] mb-2.5 uppercase tracking-wider">
                     Core Focus &amp; Topics
                   </p>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-xs">
+                  <div className="flex flex-wrap gap-1.5">
                     {item.topics.map((topic) => (
                       <span
                         key={topic}
-                        className="rounded-md border border-[--border-subtle] bg-[--bg-surface-2] px-2.5 py-1 text-[11px] text-[--text-secondary]"
+                        className="tag-pill"
                       >
                         {topic}
                       </span>

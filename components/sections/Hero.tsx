@@ -33,11 +33,22 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-24 pb-12 lg:pt-32"
+      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden pt-24 pb-12 lg:pt-32 section-tone-void"
     >
+      {/* Subtle Hero Technical Dot Grid Texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at center, rgba(255,255,255,0.7) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+        aria-hidden="true"
+      />
+
       <Container
         as="div"
-        className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]"
+        className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]"
       >
         {/* Left Column: Telemetry, Big Name, Typewriter Role, Narrative, CTAs */}
         <div className="relative z-10 text-center lg:text-left">

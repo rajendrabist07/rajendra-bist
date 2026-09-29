@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { BLOG_POSTS } from "@/lib/blog";
 
@@ -11,6 +12,13 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-[--bg-void] py-32 text-[--text-primary]">
       <Container>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent-warm] mb-6"
+        >
+          <ArrowLeft size={14} />
+          Back to Overview
+        </Link>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent-warm]">
           Notes // Engineering
         </p>

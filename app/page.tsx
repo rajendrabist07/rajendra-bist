@@ -3,6 +3,7 @@ import BootSequence from "@/components/ui/BootSequence";
 import CustomCursor from "@/components/ui/CustomCursor";
 import CommandPalette from "@/components/ui/CommandPalette";
 import PremiumBackground from "@/components/ui/PremiumBackground";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 import FloatingAskAI from "@/components/ui/FloatingAskAI";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
@@ -19,7 +20,10 @@ import ChatAgent from "@/components/sections/ChatAgent";
 export default function HomePage() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[--bg-void] text-[--text-primary] selection:bg-[--accent-warm] selection:text-[#050608]">
+      <div className="relative min-h-screen bg-[--bg-void] text-[--text-primary]">
+        {/* Top Viewport Scroll Progress Bar */}
+        <ScrollProgress />
+
         {/* Boot Sequence Loader */}
         <BootSequence />
 

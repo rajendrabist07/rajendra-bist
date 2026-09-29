@@ -94,10 +94,12 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative overflow-hidden py-24 md:py-32 section-tone-alt"
     >
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">07</div>
+
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="07 // CONTACT & INQUIRIES"
           title="Initiate a Collaboration"

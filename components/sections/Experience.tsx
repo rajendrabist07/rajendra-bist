@@ -29,9 +29,11 @@ const itemVariants = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-24 md:py-32">
+    <section id="experience" className="relative overflow-hidden py-24 md:py-32 section-tone-alt">
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">05</div>
+
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="05 // EXPERIENCE & TIMELINE"
           title="Work & Systems Timeline"
@@ -53,7 +55,7 @@ export default function Experience() {
               </span>
 
               {/* Experience Card */}
-              <article className="surface-panel rounded-2xl p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-[--border-strong]">
+              <article className="surface-panel rounded-2xl p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-white/[0.2] hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <div className="inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-3 py-1 font-mono text-xs font-semibold text-[--accent-warm] mb-3">
@@ -91,12 +93,12 @@ export default function Experience() {
                   ))}
                 </div>
 
-                {/* Stack Chips */}
-                <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-[--border-subtle] font-mono text-xs">
+                {/* Stack Tag Pills */}
+                <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-[--border-subtle]">
                   {exp.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-md border border-[--border-subtle] bg-[--bg-surface-2] px-2.5 py-1 text-[11px] text-[--text-secondary]"
+                      className="tag-pill"
                     >
                       {tech}
                     </span>

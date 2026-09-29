@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
 
@@ -29,6 +31,13 @@ export default async function CaseStudyPage({
   return (
     <main className="min-h-screen bg-[--bg-void] py-32 text-[--text-primary]">
       <Container className="max-w-4xl">
+        <Link
+          href="/#projects"
+          className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent-warm] mb-6"
+        >
+          <ArrowLeft size={14} />
+          Back to Systems
+        </Link>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent-warm]">
           Case study // {study.slug}
         </p>

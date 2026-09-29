@@ -65,10 +65,12 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="relative py-24 md:py-32"
+      className="relative overflow-hidden py-24 md:py-32 section-tone-void"
     >
       <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <Container>
+      <div className="section-watermark" aria-hidden="true">04</div>
+
+      <Container className="relative z-10">
         <SectionHeader
           eyebrow="04 // ENGINEERING PROCESS"
           title="How I Architect & Ship Systems"
@@ -82,14 +84,15 @@ export default function Process() {
           variants={containerVariants}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {steps.map((step, index) => {
+          {steps.map((step) => {
             const Icon = step.icon;
             return (
               <motion.article
                 key={step.title}
                 variants={itemVariants}
-                className="surface-panel group relative overflow-hidden rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[--border-strong]"
+                className="surface-panel group relative overflow-hidden rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-white/[0.2] hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]"
               >
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[--accent-warm]/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="flex items-center justify-between font-mono text-xs text-[--text-tertiary]">
                   <span className="font-bold text-[--accent-warm]">
                     {step.step}
@@ -99,7 +102,7 @@ export default function Process() {
                   </span>
                 </div>
 
-                <div className="mt-5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-colors group-hover:border-[--accent-warm]">
+                <div className="mt-5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-all group-hover:border-[--accent-warm]/40 group-hover:scale-105">
                   <Icon size={19} />
                 </div>
 

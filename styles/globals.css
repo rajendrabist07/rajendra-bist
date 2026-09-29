@@ -112,8 +112,8 @@ pre,
 }
 
 ::selection {
-  background: var(--accent-warm);
-  color: #050608;
+  background: rgba(255, 122, 51, 0.28);
+  color: #ffffff;
 }
 
 /* Lenis Smooth Scroll Recommended Base */
@@ -158,7 +158,7 @@ html.lenis body {
   background: var(--accent-warm);
 }
 
-/* Background Noise Overlay (SVG Turbulence) */
+/* Background Noise Overlay (SVG Turbulence - Tiled, GPU Cheap) */
 .terminal-noise-overlay {
   position: fixed;
   inset: 0;
@@ -166,8 +166,78 @@ html.lenis body {
   height: 100vh;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.028;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ambient Drifting Glow Orbs */
+@keyframes ambient-drift-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(45px, 30px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-25px, 60px, 0) scale(0.96);
+  }
+}
+
+@keyframes ambient-drift-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-40px, -45px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(30px, -25px, 0) scale(0.94);
+  }
+}
+
+.ambient-orb-1 {
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 122, 51, 0.065) 0%, rgba(255, 122, 51, 0.015) 50%, transparent 70%);
+  filter: blur(80px);
+  will-change: transform;
+  animation: ambient-drift-1 26s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+  pointer-events: none;
+}
+
+.ambient-orb-2 {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52, 216, 176, 0.05) 0%, rgba(56, 189, 248, 0.015) 50%, transparent 70%);
+  filter: blur(90px);
+  will-change: transform;
+  animation: ambient-drift-2 30s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .ambient-orb-1 {
+    width: 320px;
+    height: 320px;
+    filter: blur(45px);
+    opacity: 0.55;
+    animation: none;
+  }
+  .ambient-orb-2 {
+    width: 340px;
+    height: 340px;
+    filter: blur(45px);
+    opacity: 0.55;
+    animation: none;
+  }
 }
 
 /* Fixed Radial Gradient Mesh */
@@ -179,20 +249,20 @@ html.lenis body {
   background:
     radial-gradient(
       circle at 18% 15%,
-      rgba(255, 122, 51, 0.09) 0%,
+      rgba(255, 122, 51, 0.07) 0%,
       transparent 42%
     ),
     radial-gradient(
       circle at 82% 75%,
-      rgba(52, 216, 176, 0.075) 0%,
+      rgba(52, 216, 176, 0.055) 0%,
       transparent 46%
     ),
     radial-gradient(
       circle at 50% 50%,
-      rgba(16, 19, 26, 0.7) 0%,
+      rgba(16, 19, 26, 0.65) 0%,
       transparent 70%
     ),
-    linear-gradient(180deg, #050608 0%, #080a0e 50%, #050608 100%);
+    linear-gradient(180deg, #050608 0%, #070911 50%, #050608 100%);
 }
 
 /* Animations */
@@ -222,12 +292,12 @@ html.lenis body {
   }
 }
 
-@keyframes path-draw {
-  from {
-    stroke-dashoffset: 600;
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
-  to {
-    stroke-dashoffset: 0;
+  100% {
+    background-position: 200% 0;
   }
 }
 
@@ -237,6 +307,17 @@ html.lenis body {
 
 .animate-signal-pulse {
   animation: signal-pulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.image-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite linear;
 }
 
 /* Fluid Typography Utilities */
@@ -395,6 +476,80 @@ html.lenis body {
   border: 1px dashed var(--border-subtle);
   color: var(--text-secondary);
   font-family: var(--font-mono), monospace;
+}
+
+/* Stat Cards (High-Hierarchy Metric Blocks with Accent Gradient Header) */
+.stat-card {
+  position: relative;
+  background: rgba(16, 19, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  padding: 0.85rem 0.75rem;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.4);
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-warm) 50%, transparent 100%);
+  opacity: 0.85;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 122, 51, 0.35);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 16px -2px rgba(255, 122, 51, 0.15);
+}
+
+/* Tag Pills (Low-Hierarchy Metadata Tags) */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tag-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+/* Section Background Tone Shifts & Ambient Watermarks */
+.section-tone-void {
+  background-color: #050608;
+}
+
+.section-tone-alt {
+  background-color: #070911;
+}
+
+.section-watermark {
+  position: absolute;
+  right: 3%;
+  top: 6%;
+  font-family: var(--font-mono), monospace;
+  font-weight: 900;
+  font-size: clamp(6rem, 14vw, 13rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.015);
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Command Palette cmdk Styles */
