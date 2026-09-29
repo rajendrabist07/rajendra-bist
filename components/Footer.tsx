@@ -23,7 +23,8 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-[--border-subtle] bg-[--bg-void] py-16 font-mono text-xs text-[--text-secondary]">
+    <footer className="relative overflow-hidden bg-[--bg-void] py-16 font-mono text-xs text-[--text-secondary]">
+      <div className="divider-gradient absolute top-0 left-0 right-0" />
       <Container className="relative">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.8fr_1fr]">
           {/* Col 1: Identity & Telemetry */}

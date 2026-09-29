@@ -29,7 +29,8 @@ const itemVariants = {
 
 export default function Credentials() {
   return (
-    <section id="credentials" className="py-20 md:py-28 border-t border-[--border-subtle]">
+    <section id="credentials" className="relative py-24 md:py-32">
+      <div className="divider-gradient absolute top-0 left-0 right-0" />
       <Container>
         <SectionHeader
           eyebrow="06 // CREDENTIALS & TRAINING"

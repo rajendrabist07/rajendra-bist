@@ -94,8 +94,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-20 md:py-28 border-t border-[--border-subtle]"
+      className="relative overflow-hidden py-24 md:py-32"
     >
+      <div className="divider-gradient absolute top-0 left-0 right-0" />
       <Container>
         <SectionHeader
           eyebrow="07 // CONTACT & INQUIRIES"

@@ -144,8 +144,9 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 md:py-28 border-t border-[--border-subtle]"
+      className="relative py-24 md:py-32"
     >
+      <div className="divider-gradient absolute top-0 left-0 right-0" />
       <Container>
         <SectionHeader
           eyebrow="02 // TECH ARSENAL"

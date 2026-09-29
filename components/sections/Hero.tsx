@@ -42,40 +42,42 @@ export default function Hero() {
         {/* Left Column: Telemetry, Big Name, Typewriter Role, Narrative, CTAs */}
         <div className="relative z-10 text-center lg:text-left">
           {/* Big Bold Name (Paileko Style with High Contrast) */}
-          <h1 className="fluid-hero mt-5 font-black uppercase tracking-tight text-[--text-primary]">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-black uppercase tracking-tight text-[--text-primary] leading-[1.04]">
             Rajendra <br className="hidden sm:inline" />
             <span className="text-[--accent-warm]">Bist</span>
           </h1>
 
-          {/* Dynamic Systems Role Display with Cursor */}
-          <div className="mt-3 flex min-h-[34px] items-center justify-center lg:justify-start font-mono text-sm sm:text-base md:text-lg text-[--accent-warm]">
-            <span className="text-[--text-tertiary] mr-2 select-none">&gt;</span>
-            <span className="relative inline-flex items-center">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={roleIndex}
-                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -4 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="font-semibold text-[--text-primary]"
-                >
-                  {TYPED_ROLES[roleIndex]}
-                </motion.span>
-              </AnimatePresence>
-              <span className="ml-1.5 inline-block w-2.5 h-4 bg-[--accent-warm] animate-cursor-blink font-normal" />
-            </span>
+          {/* Dynamic Systems Role Display with Terminal Pill & Cursor */}
+          <div className="mt-4 flex min-h-[38px] items-center justify-center lg:justify-start">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 font-mono text-xs sm:text-sm text-[--accent-warm] backdrop-blur-md shadow-sm">
+              <span className="text-[--text-tertiary] select-none font-bold">&gt;</span>
+              <span className="relative inline-flex items-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={roleIndex}
+                    initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 3 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -3 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="font-medium text-[--text-primary]"
+                  >
+                    {TYPED_ROLES[roleIndex]}
+                  </motion.span>
+                </AnimatePresence>
+                <span className="ml-1.5 inline-block w-2 h-3.5 bg-[--accent-warm] animate-cursor-blink font-normal" />
+              </span>
+            </div>
           </div>
 
           {/* Punchy Systems-First Narrative */}
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[--text-secondary] sm:text-base md:text-lg">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-[--text-secondary] sm:text-base md:text-lg">
             Full-stack &amp; backend software engineer based in Nepal
             architecting typed React interfaces, high-throughput APIs, RAG
             pipelines, and autonomous AI systems deployed for real users.
           </p>
 
           {/* Action Buttons: Solid Accent-Warm vs Ghost Outline */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5 lg:justify-start font-mono text-xs">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 lg:justify-start font-mono text-xs">
             <a
               href="#projects"
               className="premium-button-primary inline-flex min-h-12 items-center justify-center rounded-xl px-7 py-3 font-semibold transition-all duration-200"
@@ -93,7 +95,7 @@ export default function Hero() {
           </div>
 
           {/* Monospace Socials Row */}
-          <div className="mt-6 flex items-center justify-center gap-4 lg:justify-start text-[--text-secondary]">
+          <div className="mt-6 flex items-center justify-center gap-3 lg:justify-start text-[--text-secondary]">
             {[
               { href: PERSONAL.github, icon: Github, label: "GitHub" },
               { href: PERSONAL.linkedin, icon: Linkedin, label: "LinkedIn" },
@@ -107,7 +109,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.label}
-                  className="rounded-lg border border-[--border-subtle] bg-[--bg-surface-2] p-2.5 transition-all duration-200 hover:border-[--border-strong] hover:text-[--accent-warm] hover:scale-105 active:scale-95"
+                  className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-2.5 transition-all duration-200 hover:border-white/[0.2] hover:bg-white/[0.06] hover:text-[--accent-warm] hover:scale-105 active:scale-95 shadow-sm"
                 >
                   <Icon size={17} />
                 </a>
@@ -116,65 +118,67 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Natural Cinematic Portrait Blending Seamlessly into Dark Void */}
+        {/* Right Column: Natural Cinematic Portrait with Sleek Ambient Glow */}
         <div className="relative flex justify-center lg:justify-end">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full max-w-[320px] sm:max-w-[370px] lg:max-w-[400px] aspect-[4/5]"
           >
             {/* Soft Ambient Radial Halo */}
             <div
-              className="absolute -inset-4 pointer-events-none opacity-25 blur-3xl"
+              className="absolute -inset-4 pointer-events-none opacity-20 blur-3xl"
               style={{
                 background:
-                  "radial-gradient(circle at 60% 40%, #FF7A33 0%, #34D8B0 35%, transparent 70%)",
+                  "radial-gradient(circle at 60% 40%, #FF7A33 0%, #34D8B0 40%, transparent 70%)",
               }}
             />
 
-            {/* Sharp Natural Portrait with Seamless Edge Vignette */}
-            <div className="relative h-full w-full overflow-hidden rounded-3xl border border-[--border-strong] bg-[#050608] shadow-2xl">
-              <Image
-                src="/rajendra.jpeg"
-                alt="Rajendra Bist - Full-Stack & Backend Systems Engineer"
-                fill
-                priority
-                sizes="(min-width: 1024px) 400px, 85vw"
-                className="object-cover object-[50%_18%] filter contrast-[108%] brightness-[96%]"
-              />
+            {/* Gradient Border Wrap */}
+            <div className="relative h-full w-full rounded-3xl p-[1px] bg-gradient-to-b from-white/[0.18] via-white/[0.06] to-white/[0.02] shadow-2xl">
+              <div className="relative h-full w-full overflow-hidden rounded-[23px] bg-[#050608]">
+                <Image
+                  src="/rajendra.jpeg"
+                  alt="Rajendra Bist - Full-Stack & Backend Systems Engineer"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 400px, 85vw"
+                  className="object-cover object-[50%_18%] filter contrast-[108%] brightness-[96%]"
+                />
 
-              {/* Natural Dark Vignette Bleed (fades photo edges smoothly into #050608) */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `
-                    radial-gradient(circle at 50% 28%, transparent 45%, #050608 94%),
-                    linear-gradient(to top, #050608 0%, rgba(5,6,8,0.6) 24%, transparent 52%),
-                    linear-gradient(to right, #050608 0%, transparent 16%),
-                    linear-gradient(to left, #050608 0%, transparent 16%)
-                  `,
-                }}
-              />
+                {/* Natural Dark Vignette Bleed (fades photo edges smoothly into #050608) */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `
+                      radial-gradient(circle at 50% 28%, transparent 45%, #050608 94%),
+                      linear-gradient(to top, #050608 0%, rgba(5,6,8,0.6) 24%, transparent 52%),
+                      linear-gradient(to right, #050608 0%, transparent 16%),
+                      linear-gradient(to left, #050608 0%, transparent 16%)
+                    `,
+                  }}
+                />
 
-              {/* Subtle Warm Rim Light Overlay */}
-              <div
-                className="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
-                style={{
-                  background:
-                    "radial-gradient(circle at 80% 20%, #FF7A33 0%, transparent 55%)",
-                }}
-              />
+                {/* Subtle Warm Rim Light Overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 80% 20%, #FF7A33 0%, transparent 55%)",
+                  }}
+                />
 
-              {/* Floating Monospace Status Badge */}
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl border border-[--border-subtle] bg-[#050608]/90 px-3.5 py-2 font-mono text-xs text-[--text-secondary] backdrop-blur-md">
-                <span className="font-semibold text-[--text-primary]">
-                  Rajendra Bist
-                </span>
-                <span className="text-[--accent-cool] flex items-center gap-1.5 font-medium">
-                  <span className="h-2 w-2 rounded-full bg-[--accent-cool] animate-pulse" />
-                  ONLINE [UTC+5:45]
-                </span>
+                {/* Floating Monospace Status Badge */}
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#050608]/85 px-3.5 py-2 font-mono text-xs text-[--text-secondary] backdrop-blur-md">
+                  <span className="font-semibold text-[--text-primary]">
+                    Rajendra Bist
+                  </span>
+                  <span className="text-[--accent-warm] flex items-center gap-1.5 font-medium">
+                    <span className="h-2 w-2 rounded-full bg-[--accent-warm] animate-pulse" />
+                    ONLINE [UTC+5:45]
+                  </span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -182,7 +186,7 @@ export default function Hero() {
       </Container>
 
       {/* Subtle Scroll Indicator */}
-      <div className="mx-auto mt-8 flex flex-col items-center gap-1 font-mono text-[10px] text-[--text-tertiary]">
+      <div className="mx-auto mt-10 flex flex-col items-center gap-1 font-mono text-[10px] text-[--text-tertiary]">
         <span className="tracking-widest uppercase">01 // EXPLORE SYSTEMS</span>
         <ArrowDown size={12} className="animate-bounce text-[--accent-warm]" />
       </div>

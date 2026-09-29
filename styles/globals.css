@@ -268,31 +268,82 @@ html.lenis body {
   line-height: 1.5;
 }
 
+/* 3-Tier Elevation System (Linear / Vercel Grade) */
+.elevation-0 {
+  background: var(--bg-void);
+}
+
+.elevation-1 {
+  background: var(--bg-surface);
+  box-shadow:
+    0 12px 36px -4px rgba(0, 0, 0, 0.65),
+    0 0 0 1px var(--border-subtle);
+}
+
+.elevation-2 {
+  background: var(--bg-surface-2);
+  box-shadow:
+    0 24px 64px -12px rgba(0, 0, 0, 0.85),
+    0 0 0 1px var(--border-strong);
+}
+
 /* Card & Surface Panels */
 .surface-panel {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(11, 13, 17, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 12px 40px -8px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition:
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .surface-panel:hover {
-  border-color: var(--border-strong);
+  border-color: rgba(255, 122, 51, 0.3);
+  box-shadow:
+    0 20px 50px -10px rgba(0, 0, 0, 0.85),
+    0 0 30px -4px rgba(255, 122, 51, 0.12),
+    0 0 0 1px rgba(255, 122, 51, 0.2);
 }
 
 .surface-panel-nested {
-  background: var(--bg-surface-2);
-  border: 1px solid var(--border-subtle);
+  background: rgba(16, 19, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .code-card {
-  background: var(--bg-surface-2);
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  background: #0d0f15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Gradient Dividers */
+.divider-gradient {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+}
+
+.divider-ambient {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 122, 51, 0.25) 50%,
+    transparent 100%
+  );
 }
 
 /* Terminal Buttons */
@@ -300,33 +351,35 @@ html.lenis body {
   background: var(--accent-warm);
   color: #050608;
   font-weight: 600;
-  border: 1px solid rgba(255, 122, 51, 0.4);
+  border: 1px solid rgba(255, 122, 51, 0.5);
   box-shadow:
-    0 10px 30px rgba(255, 122, 51, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 10px 28px -4px rgba(255, 122, 51, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .premium-button-primary:hover {
-  background: #ff8f52;
+  background: #ff8e50;
   box-shadow:
-    0 14px 40px rgba(255, 122, 51, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transform: translateY(-1px);
+    0 16px 36px -4px rgba(255, 122, 51, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .premium-button-secondary {
-  background: var(--bg-surface-2);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .premium-button-secondary:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border-strong);
+  background: rgba(255, 122, 51, 0.08);
+  border-color: rgba(255, 122, 51, 0.4);
   color: #ffffff;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
 }
 
 /* Monospace System Chips */
