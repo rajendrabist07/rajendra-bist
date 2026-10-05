@@ -339,14 +339,13 @@ const CASE_STUDIES = [
   },
   {
     tag: "PRODUCTION SYSTEM • 2026",
-    title: "SocraticAI",
-    tagline: "Guided Reasoning & Cognitive Questioning Assistant",
-    image: "/images/socratic-ai-card.svg",
-    terminalContent: `Student Query → [Negative Constraint Filter]
-                    ↓
-               [Step-by-Step Reasoning Coach]
-                    ↓
-               [MongoDB Session Persistence]`,
+    title: "Chronicle",
+    tagline:
+      "Publishing Platform With Verified Accounts & Schema-Guarded AI Writing Tools",
+    image: "/images/chronicle-card.svg",
+    terminalContent: `Next.js (Vercel) → [REST / JWT Auth] → Express API (Render)
+                             ↓
+     [Gemini 2.5 JSON Mode] → [Zod Schema Guard] → [Prisma / Postgres]`,
     architectureSvg: (
       <svg
         viewBox="0 0 440 200"
@@ -369,27 +368,27 @@ const CASE_STUDIES = [
           textAnchor="middle"
           fontWeight="bold"
         >
-          Student Query
+          Next.js Client
         </text>
 
         <rect
-          x="170"
+          x="165"
           y="20"
-          width="120"
+          width="125"
           height="34"
           rx="6"
           fill="#10131A"
           stroke="#34D8B0"
           strokeWidth="1.5"
         />
-        <text x="230" y="41" fill="#34D8B0" textAnchor="middle">
-          Negative Mask
+        <text x="227" y="41" fill="#34D8B0" textAnchor="middle">
+          Express + Prisma
         </text>
 
         <rect
-          x="170"
+          x="165"
           y="120"
-          width="120"
+          width="125"
           height="34"
           rx="6"
           fill="#10131A"
@@ -397,44 +396,44 @@ const CASE_STUDIES = [
           strokeWidth="1.5"
         />
         <text
-          x="230"
+          x="227"
           y="141"
           fill="#FF7A33"
           textAnchor="middle"
           fontWeight="bold"
         >
-          Socratic Guide
+          Gemini JSON Mode
         </text>
 
         <rect
-          x="320"
+          x="315"
           y="120"
-          width="105"
+          width="110"
           height="34"
           rx="6"
           fill="#10131A"
           stroke="rgba(255,255,255,0.15)"
           strokeWidth="1"
         />
-        <text x="372" y="141" fill="#EDEFF2" textAnchor="middle">
-          MongoDB Log
+        <text x="370" y="141" fill="#EDEFF2" textAnchor="middle">
+          Zod Schema Guard
         </text>
 
         <path
-          d="M 130 37 L 170 37"
+          d="M 130 37 L 165 37"
           stroke="#FF7A33"
           strokeWidth="1.5"
           strokeDasharray="4 4"
           className="animate-pulse"
         />
         <path
-          d="M 230 54 L 230 120"
+          d="M 227 54 L 227 120"
           stroke="#34D8B0"
           strokeWidth="1.5"
           strokeDasharray="5 3"
         />
         <path
-          d="M 290 137 L 320 137"
+          d="M 290 137 L 315 137"
           stroke="#FF7A33"
           strokeWidth="1.5"
           strokeDasharray="4 4"
@@ -443,35 +442,38 @@ const CASE_STUDIES = [
       </svg>
     ),
     problem:
-      "Students use AI to copy direct answers instead of learning core problem-solving intuition and deep conceptual reasoning.",
+      "Publishing apps with AI features usually trust model output blindly and skip the operational basics: verified accounts, transactional email, crawlable rendering, and migration-safe deploys.",
     solution:
-      "Constrained LLM agent that enforces strict negative prompt boundaries and locked temperature (0.4–0.6) to guide students through Socratic step-by-step reasoning.",
+      "Two-service platform (Next.js on Vercel, Express/Prisma/PostgreSQL on Render) with server-rendered public pages, email-verified accounts, and Gemini tools whose structured output is schema-validated before it reaches the editor.",
     keyDecision:
-      "Implemented persistent session storage in MongoDB Atlas with structured feedback loops rather than stateless chat sessions.",
+      "Treated the LLM as an untrusted dependency: JSON-mode requests, Zod-validated output, normalized tags, hard timeouts, and a single uniform failure path so provider errors never leak to users.",
     frontendImplementation:
-      "Shaped the chat interface around saved learning sessions and guided-question pacing so the UI reinforces Socratic learning instead of direct answer delivery.",
+      "Server-rendered public reading pages with ISR, per-page metadata and dynamic social cards, plus a client-side writer workspace with markdown preview, draft autosave, and AI assist panels on a tokenized dark/light design system.",
     metrics: [
-      { value: "Guided", label: "Learning flow" },
-      { value: "0.4–0.6", label: "Locked Temperature" },
-      { value: "MongoDB", label: "Session Retention" },
+      { value: "Zod-Guarded", label: "AI Output Contract" },
+      { value: "SSR + ISR", label: "Public Reading Surface" },
+      { value: "CI-Gated", label: "Tests on Every Push" },
     ],
     stack: [
       "Next.js 15",
-      "Gemini API",
-      "MongoDB",
-      "Node.js",
       "TypeScript",
-      "Tailwind CSS",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Gemini 2.5",
+      "Brevo Email",
+      "Vitest",
+      "GitHub Actions",
     ],
-    liveUrl: "https://socratic-ai-tau.vercel.app/",
-    githubUrl: "https://github.com/rajendrabist07/socratic-ai.git",
+    liveUrl: "https://chronicle-platform.vercel.app/",
+    githubUrl: "https://github.com/rajendrabist07/chronicle.git",
   },
 ];
 
 const CASE_STUDY_SLUGS: Record<string, string> = {
   "DevGuard AI": "devguard-ai",
   "EduMethod AI": "edumethod-ai",
-  SocraticAI: "socratic-ai",
+  Chronicle: "chronicle",
 };
 
 function ProjectVisualCard({

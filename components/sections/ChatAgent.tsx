@@ -480,7 +480,7 @@ export default function ChatAgent() {
                         </li>
                         <li className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
-                          SocraticAI learning mechanics
+                          <strong>Chronicle</strong> publishing architecture
                         </li>
                       </ul>
                     </div>

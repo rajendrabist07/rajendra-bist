@@ -74,21 +74,22 @@ PRODUCTION PROJECTS
   * **Metrics**: pgvector Syllabus Grounding | SM-2 Spaced Repetition | 7 Cognitive Modules/Engines.
   * **Links**: [Live Demo](https://edumethod-ai.vercel.app) | [GitHub](https://github.com/rajendrabist07/edumethod-ai)
 
-### 3. SocraticAI (Guided Reasoning & Cognitive Questioning Assistant)
-- **Problem**: Students copy direct AI answers instead of learning problem-solving intuition and deep conceptual reasoning.
-- **Solution**: Constrained LLM agent that enforces strict negative prompt boundaries and locked temperature (0.4–0.6) to guide students through step-by-step Socratic questioning.
-- **Architecture & Stack**: Next.js 15, Node.js, Gemini API, MongoDB Atlas, TypeScript, Tailwind CSS.
+### 3. Chronicle (Publishing Platform With Verified Accounts & Schema-Guarded AI Writing Tools)
+- **Problem**: Publishing apps with AI features usually trust model output blindly and skip the operational basics: verified accounts, transactional email, crawlable rendering, and migration-safe deploys.
+- **Solution**: Two-service platform (Next.js on Vercel, Express/Prisma/PostgreSQL on Render) with server-rendered public pages, email-verified accounts, and Gemini tools whose structured output is schema-validated before it reaches the editor.
+- **Architecture & Stack**: Next.js 15, TypeScript, Express, Prisma, PostgreSQL, Gemini 2.5, Brevo Email, Vitest, GitHub Actions.
 - **Key Engineering Decisions**:
-  * **Prompt Boundary Locking**: Strict negative constraints ("NEVER provide the direct solution") with low-entropy temperature locking (0.4–0.6).
-  * **Stateful Sessions**: Multi-turn session persistence in MongoDB Atlas.
-  * **Implementation details**: Guided-response constraints | 0.4–0.6 temperature range | MongoDB session retention.
-  * **Links**: [Live Demo](https://socratic-ai-tau.vercel.app/) | [GitHub](https://github.com/rajendrabist07/socratic-ai.git)
+  * **LLM as Untrusted Dependency**: JSON-mode requests, Zod-validated output, normalized tags, hard timeouts, and a single uniform failure path so provider errors never leak to users.
+  * **SSR + ISR Public Surface**: Server-rendered public reading pages with ISR, per-page metadata, dynamic social cards, and crawlable HTML.
+  * **Client Writer Workspace**: Draft autosave, markdown preview, AI assist panels on a tokenized dark/light design system.
+  * **Metrics**: Zod-Guarded AI Output Contract | SSR + ISR Public Reading Surface | CI-Gated Tests on Every Push.
+  * **Links**: [Live Demo](https://chronicle-platform.vercel.app/) | [GitHub](https://github.com/rajendrabist07/chronicle.git)
 
 ========================
 EXPERIENCE & CREDENTIALS
 ========================
 - **Independent Full-Stack & AI Systems Developer (2024 - Present)**:
-  * Designing and shipping production-oriented products (DevGuard AI, EduMethod AI, SocraticAI) with backend-first architecture, database integrity, and robust AI integrations.
+  * Designing and shipping production-oriented products (DevGuard AI, EduMethod AI, Chronicle) with backend-first architecture, database integrity, and robust AI integrations.
 - **Full-Stack Web Development Trainee — Vcare Technical Institute (Completed 2025)**:
   * Practical engineering training in full-stack web architecture, REST APIs, database modeling, and deployment discipline.
 - **Continuous Learning & Engineering Roadmap**:

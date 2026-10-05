@@ -17,7 +17,7 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     const titles = PROJECTS.map((p) => p.title)
     expect(titles).toContain('EduMethod AI')
     expect(titles).toContain('DevGuard AI')
-    expect(titles).toContain('SocraticAI')
+    expect(titles).toContain('Chronicle')
 
     for (const project of PROJECTS) {
       expect(project.liveUrl).toBeTruthy()
@@ -31,7 +31,7 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     expect(CASE_STUDIES.length).toBe(3)
     expect(getCaseStudy('devguard-ai')?.title).toBe('DevGuard AI')
     expect(getCaseStudy('edumethod-ai')?.title).toBe('EduMethod AI')
-    expect(getCaseStudy('socratic-ai')?.title).toBe('SocraticAI')
+    expect(getCaseStudy('chronicle')?.title).toBe('Chronicle')
     expect(getCaseStudy('non-existent')).toBeUndefined()
 
     for (const study of CASE_STUDIES) {

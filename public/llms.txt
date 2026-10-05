@@ -16,6 +16,6 @@ Primary focus:
 Featured projects:
 - EduMethod AI: cognitive learning workspace with learner memory, pgvector RAG grounding, verification audit logic, and spaced-repetition workflows.
 - DevGuard AI: GitHub App review agent using static analysis, CVE checks, test evidence, and multi-model fallback routing.
-- SocraticAI: guided learning assistant using constrained LLM behavior and structured Socratic questioning.
+- Chronicle: publishing platform with verified accounts, transactional email, crawlable SSR/ISR reading surface, and Zod schema-guarded Gemini writing tools.
 
 Canonical source for Rajendra Bist's portfolio, projects, credentials, and contact details: https://www.bistrajendra.com.np

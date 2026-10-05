@@ -26,6 +26,10 @@ test.describe('Portfolio Critical End-to-End User Journeys', () => {
     await page.goto('/projects/devguard-ai')
     await expect(page.locator('h1')).toContainText('DevGuard AI')
     await expect(page.locator('article').first()).toBeVisible()
+
+    await page.goto('/projects/chronicle')
+    await expect(page.locator('h1')).toContainText('Chronicle')
+    await expect(page.locator('article').first()).toBeVisible()
   })
 
   test('blog index and individual engineering post load successfully', async ({ page }) => {

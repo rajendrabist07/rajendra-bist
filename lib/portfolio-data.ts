@@ -11,7 +11,7 @@ export const PERSONAL = {
 }
 
 export const FEATURED_LINKS = {
-  socraticAi: 'https://socratic-ai-tau.vercel.app/',
+  chronicle: 'https://chronicle-platform.vercel.app/',
 }
 
 export const EDUCATION = [
@@ -40,7 +40,7 @@ export const CREDENTIALS = [
     timeframe: 'Ongoing',
     status: 'Ongoing' as const,
     description:
-      'Skills developed by building and shipping production-focused projects such as DevGuard AI, EduMethod AI, and SocraticAI, with learning driven by real product constraints rather than formal coursework.',
+      'Skills developed by building and shipping production-focused projects such as DevGuard AI, EduMethod AI, and Chronicle, with learning driven by real product constraints rather than formal coursework.',
     topics: ['Production Projects', 'API Contracts', 'Frontend State', 'Database Design', 'AI Integration'],
   },
 ]
@@ -56,9 +56,9 @@ export const EXPERIENCE = [
     achievements: [
       'Built EduMethod AI with learner memory, pgvector RAG grounding, independent verification logic, and spaced-repetition workflows.',
       'Engineered DevGuard AI as a GitHub App review agent using static analysis, CVE checks, test evidence, and multi-model fallback routing.',
-      'Developed SocraticAI with constrained LLM behavior, saved learning sessions, and structured guided-question flows.',
+      'Built Chronicle, a two-service publishing platform with schema-validated Gemini tooling, email-verified accounts, server-rendered public pages, and CI-gated, free-tier-safe deployments.',
     ],
-    stack: ['Node.js', 'Next.js', 'TypeScript', 'PostgreSQL', 'Supabase', 'MongoDB', 'Groq', 'Gemini API'],
+    stack: ['Node.js', 'Next.js', 'TypeScript', 'Express', 'Prisma', 'PostgreSQL', 'Supabase', 'MongoDB', 'Gemini API'],
   },
   {
     role: 'Full-Stack Web Development Trainee',
@@ -82,15 +82,15 @@ export const SKILLS = [
   },
   {
     category: 'Backend',
-    items: ['Node.js', 'Express.js', 'REST APIs', 'Socket.io', 'Zod'],
+    items: ['Node.js', 'Express.js', 'REST APIs', 'Prisma ORM', 'Zod', 'Vitest'],
   },
   {
     category: 'Database',
-    items: ['MongoDB', 'Mongoose', 'PostgreSQL', 'Supabase'],
+    items: ['PostgreSQL', 'Supabase', 'MongoDB', 'Mongoose', 'Prisma'],
   },
   {
     category: 'Tools & DevOps',
-    items: ['Git', 'GitHub', 'Vercel', 'Railway', 'Docker', 'Clerk'],
+    items: ['Git', 'GitHub Actions', 'Vercel', 'Render', 'Docker', 'Brevo Email API'],
   },
   {
     category: 'AI & APIs',
@@ -122,14 +122,14 @@ export const PROJECTS = [
       'Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.',
   },
   {
-    title: 'SocraticAI',
+    title: 'Chronicle',
     status: 'Live' as const,
-    description: 'Guided learning assistant that uses constrained LLM behavior, saved sessions, and Socratic questioning flows.',
-    stack: ['Next.js', 'Gemini API', 'MongoDB', 'Node.js', 'Tailwind CSS'],
-    imageUrl: '/images/socratic-ai-card.svg',
-    liveUrl: FEATURED_LINKS.socraticAi,
-    githubUrl: 'https://github.com/rajendrabist07/socratic-ai.git',
+    description: 'Two-service technical publishing platform with server-rendered public pages, email-verified accounts, and schema-guarded Gemini AI writing tools.',
+    stack: ['Next.js 15', 'TypeScript', 'Express', 'Prisma', 'PostgreSQL', 'Gemini 2.5', 'Brevo Email', 'Vitest', 'GitHub Actions'],
+    imageUrl: '/images/chronicle-card.svg',
+    liveUrl: FEATURED_LINKS.chronicle,
+    githubUrl: 'https://github.com/rajendrabist07/chronicle.git',
     frontendImplementation:
-      'Shaped the chat interface around saved learning sessions and guided-question pacing so the UI reinforces Socratic learning instead of direct answer delivery.',
+      'Server-rendered public reading pages with ISR, per-page metadata and dynamic social cards, plus a client-side writer workspace with markdown preview, draft autosave, and AI assist panels on a tokenized dark/light design system.',
   },
 ]

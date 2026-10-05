@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/projects/socratic-ai',
+        destination: '/projects/chronicle',
+        permanent: true,
+      },
+      {
         source: '/:path*',
         has: [
           {

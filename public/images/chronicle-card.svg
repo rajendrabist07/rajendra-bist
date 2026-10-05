@@ -1,0 +1,75 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#080806"/>
+      <stop offset=".52" stop-color="#12141a"/>
+      <stop offset="1" stop-color="#1a1e28"/>
+    </linearGradient>
+    <linearGradient id="topGradient" x1="120" y1="74" x2="840" y2="74" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7A33"/>
+      <stop offset=".3" stop-color="#FFA472"/>
+      <stop offset=".6" stop-color="#34D8B0"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <filter id="ambientGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+
+  <!-- Panel Background & Border -->
+  <rect width="960" height="600" rx="36" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="957" height="597" rx="34.5" stroke="#FF7A33" stroke-opacity=".28" stroke-width="3"/>
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="780" cy="180" r="160" fill="#34D8B0" fill-opacity=".12" filter="url(#ambientGlow)"/>
+  <circle cx="200" cy="480" r="180" fill="#FF7A33" fill-opacity=".10" filter="url(#ambientGlow)"/>
+
+  <!-- Top Accent Gradient Bar -->
+  <rect x="120" y="74" width="720" height="24" rx="12" fill="url(#topGradient)" opacity=".90"/>
+
+  <!-- Header Typography -->
+  <text x="72" y="162" fill="#EDEFF2" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" letter-spacing="-0.02em">Chronicle</text>
+  <text x="72" y="204" fill="#8E97A3" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="500">Trust-first technical publishing platform</text>
+
+  <!-- Central Visual Diagram: Article Card -> Quiz Card -> Shield/Check Badge -->
+  <g transform="translate(180, 240)">
+    <!-- Article Card -->
+    <rect x="0" y="20" width="160" height="150" rx="16" fill="#10131A" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+    <rect x="20" y="44" width="80" height="10" rx="5" fill="#FF7A33"/>
+    <rect x="20" y="66" width="120" height="6" rx="3" fill="#8E97A3" fill-opacity=".6"/>
+    <rect x="20" y="80" width="100" height="6" rx="3" fill="#8E97A3" fill-opacity=".4"/>
+    <rect x="20" y="94" width="110" height="6" rx="3" fill="#8E97A3" fill-opacity=".4"/>
+    <rect x="20" y="118" width="55" height="18" rx="6" fill="rgba(255,122,51,0.15)" stroke="#FF7A33" stroke-width="1"/>
+    <text x="47" y="131" fill="#FF7A33" font-family="ui-monospace, monospace" font-size="9" font-weight="700" text-anchor="middle">SSR READ</text>
+
+    <!-- Connector Curve 1 -->
+    <path d="M160 95 C 190 95, 200 65, 230 65" stroke="#34D8B0" stroke-width="3" stroke-dasharray="6 4"/>
+    <circle cx="230" cy="65" r="4" fill="#34D8B0"/>
+
+    <!-- Schema Guard / Zod Verification Node -->
+    <rect x="230" y="20" width="160" height="150" rx="16" fill="#10131A" stroke="#34D8B0" stroke-width="2"/>
+    <rect x="250" y="44" width="90" height="10" rx="5" fill="#34D8B0"/>
+    <text x="250" y="76" fill="#EDEFF2" font-family="ui-monospace, monospace" font-size="11" font-weight="600">Gemini 2.5</text>
+    <text x="250" y="94" fill="#8E97A3" font-family="ui-monospace, monospace" font-size="10">JSON Mode</text>
+    <text x="250" y="110" fill="#34D8B0" font-family="ui-monospace, monospace" font-size="10">Zod Contract</text>
+    <rect x="250" y="124" width="120" height="18" rx="6" fill="rgba(52,216,176,0.15)" stroke="#34D8B0" stroke-width="1"/>
+    <text x="310" y="137" fill="#34D8B0" font-family="ui-monospace, monospace" font-size="9" font-weight="700" text-anchor="middle">SCHEMA GUARDED</text>
+
+    <!-- Connector Curve 2 -->
+    <path d="M390 95 C 420 95, 430 115, 460 115" stroke="#FF7A33" stroke-width="3" stroke-dasharray="6 4"/>
+    <circle cx="460" cy="115" r="4" fill="#FF7A33"/>
+
+    <!-- Production Deployment Node / Brevo + Prisma -->
+    <rect x="460" y="20" width="160" height="150" rx="16" fill="#10131A" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+    <rect x="480" y="44" width="70" height="10" rx="5" fill="#38BDF8"/>
+    <text x="480" y="76" fill="#EDEFF2" font-family="ui-monospace, monospace" font-size="11" font-weight="600">Prisma / Postgres</text>
+    <text x="480" y="94" fill="#8E97A3" font-family="ui-monospace, monospace" font-size="10">Brevo Email API</text>
+    <text x="480" y="110" fill="#8E97A3" font-family="ui-monospace, monospace" font-size="10">CI-Gated Build</text>
+    <rect x="480" y="124" width="120" height="18" rx="6" fill="rgba(56,189,248,0.15)" stroke="#38BDF8" stroke-width="1"/>
+    <text x="540" y="137" fill="#38BDF8" font-family="ui-monospace, monospace" font-size="9" font-weight="700" text-anchor="middle">VERIFIED ACCOUNTS</text>
+  </g>
+
+  <!-- Bottom Chip -->
+  <rect x="72" y="480" width="310" height="48" rx="14" fill="#fffaf3" fill-opacity=".05" stroke="#FF7A33" stroke-opacity=".25"/>
+  <text x="96" y="511" fill="#EDEFF2" font-family="ui-monospace, monospace" font-size="15" font-weight="600">Writing · Review · Grounding</text>
+</svg>

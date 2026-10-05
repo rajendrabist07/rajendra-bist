@@ -82,7 +82,7 @@ export default function CommandPalette() {
               </Command.Item>
               <Command.Item onSelect={() => navigateTo('#projects')}>
                 <FolderGit2 size={15} className="text-[--accent-warm]" />
-                <span>03 // Featured Projects (DevGuard, EduMethod, SocraticAI)</span>
+                <span>03 // Featured Projects (DevGuard, EduMethod, Chronicle)</span>
               </Command.Item>
               <Command.Item onSelect={() => navigateTo('#process')}>
                 <Workflow size={15} className="text-[--accent-warm]" />
