@@ -93,14 +93,15 @@ export default function About() {
           className="space-y-5 text-base leading-relaxed text-[--text-secondary] sm:text-lg sm:leading-8"
         >
           <motion.p variants={itemVariants}>
-            I&apos;m a full-stack and backend systems engineer based in Nepal
+            I&apos;m a full-stack developer and backend engineer based in{" "}
+            <span className="text-[--text-primary] font-medium">New Delhi, India</span>{" "}
             working primarily with{" "}
             <span className="text-[--text-primary] font-medium">
-              React, Next.js 15, Node.js, TypeScript, and PostgreSQL
+              Node.js, TypeScript, PostgreSQL, Express, and Next.js 15
             </span>
-            . My primary strength is backend architecture, but I build the
-            inspectable, responsive frontend flows that make those systems
-            reliable for real users.
+            . Originally from Nepal, I am 100% legally authorized to live and work across India
+            without visa sponsorship or a work permit under the 1950 Indo-Nepal Treaty of Peace and Friendship,
+            and am actively available for roles in Delhi NCR or remote.
           </motion.p>
           <motion.p variants={itemVariants}>
             My engineering strategy is{" "}

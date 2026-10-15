@@ -96,7 +96,7 @@ export default function BootSequence() {
           </div>
 
           <div className="border-t border-white/5 pt-4 text-[11px] text-[#5A6270]">
-            <span>PORTFOLIO SYSTEM / KATHMANDU, NEPAL (UTC+5:45)</span>
+            <span>PORTFOLIO SYSTEM / NEW DELHI, INDIA (UTC+5:30)</span>
           </div>
         </motion.div>
       )}

@@ -11,6 +11,8 @@ import {
   AlertCircle,
   Download,
   ArrowUpRight,
+  Phone,
+  MapPin,
 } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PERSONAL } from "@/lib/portfolio-data";
@@ -18,10 +20,22 @@ import Container from "@/components/ui/Container";
 
 const links = [
   {
+    label: "Phone / Direct Line",
+    href: `tel:${PERSONAL.phone.replace(/\s+/g, '')}`,
+    icon: Phone,
+    value: PERSONAL.phone,
+  },
+  {
     label: "Email",
     href: `mailto:${PERSONAL.email}`,
     icon: Mail,
     value: PERSONAL.email,
+  },
+  {
+    label: "Location / Work Auth",
+    href: "#contact",
+    icon: MapPin,
+    value: "New Delhi, India (Delhi NCR & Remote)",
   },
   {
     label: "LinkedIn",
@@ -34,12 +48,6 @@ const links = [
     href: PERSONAL.github,
     icon: Github,
     value: "github.com/rajendrabist07",
-  },
-  {
-    label: "Facebook",
-    href: PERSONAL.facebook,
-    icon: Facebook,
-    value: "facebook.com/rajendra.bist.302275",
   },
 ];
 

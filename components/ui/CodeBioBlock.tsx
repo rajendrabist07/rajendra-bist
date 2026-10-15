@@ -5,12 +5,12 @@ import { Check, Copy, Terminal } from "lucide-react";
 
 const codeString = `export const engineer = {
   name: "Rajendra Bist",
-  role: "Full-Stack & Backend Systems Engineer",
-  location: "Kathmandu, Nepal [UTC+5:45]",
-  focus: "Backend-first full-stack and AI systems engineering",
-  core_stack: ["TypeScript", "Next.js 15", "Node.js", "PostgreSQL", "MongoDB"],
-  ai_systems: ["RAG Pipelines", "Supabase pgvector", "Tool-Calling Agents", "Gemini 2.5"],
-  philosophy: "Data integrity, typed contracts, and failure modes first"
+  role: "Full-Stack Developer & Backend Engineer",
+  location: "New Delhi, India [Open to Delhi NCR / Remote]",
+  focus: "Schema design, REST APIs, tenant isolation & production systems",
+  core_stack: ["TypeScript", "Node.js", "PostgreSQL", "Next.js 15", "Express"],
+  current_project: "Sovereign — Multi-Tenant B2B SaaS on PostgreSQL RLS",
+  philosophy: "Schema integrity, typed contracts, and failure modes first"
 };`;
 
 const codeRows = [
@@ -26,44 +26,42 @@ const codeRows = [
   <>
     <span className="text-[--text-secondary]">role</span>:{" "}
     <span className="text-[--accent-cool]">
-      &quot;Full-Stack &amp; Backend Systems Engineer&quot;
+      &quot;Full-Stack Developer &amp; Backend Engineer&quot;
     </span>
     ,
   </>,
   <>
     <span className="text-[--text-secondary]">location</span>:{" "}
     <span className="text-[--text-primary]">
-      &quot;Kathmandu, Nepal [UTC+5:45]&quot;
+      &quot;New Delhi, India [Open to Delhi NCR / Remote]&quot;
     </span>
     ,
   </>,
   <>
     <span className="text-[--text-secondary]">focus</span>:{" "}
     <span className="text-[--accent-cool]">
-      &quot;Backend-first full-stack and AI systems engineering&quot;
+      &quot;Schema design, REST APIs, tenant isolation &amp; production systems&quot;
     </span>
     ,
   </>,
   <>
     <span className="text-[--text-secondary]">core_stack</span>: [
     <span className="text-[--accent-warm]">&quot;TypeScript&quot;</span>,{" "}
-    <span className="text-[--accent-warm]">&quot;Next.js 15&quot;</span>,{" "}
     <span className="text-[--accent-warm]">&quot;Node.js&quot;</span>,{" "}
-    <span className="text-[--accent-warm]">&quot;PostgreSQL&quot;</span>],
+    <span className="text-[--accent-warm]">&quot;PostgreSQL&quot;</span>,{" "}
+    <span className="text-[--accent-warm]">&quot;Next.js 15&quot;</span>],
   </>,
   <>
-    <span className="text-[--text-secondary]">ai_systems</span>: [
-    <span className="text-[--accent-cool]">&quot;RAG Pipelines&quot;</span>,{" "}
-    <span className="text-[--accent-cool]">&quot;pgvector&quot;</span>,{" "}
+    <span className="text-[--text-secondary]">current_project</span>:{" "}
     <span className="text-[--accent-cool]">
-      &quot;Tool-Calling Agents&quot;
+      &quot;Sovereign — Multi-Tenant B2B SaaS (PostgreSQL RLS)&quot;
     </span>
-    ],
+    ,
   </>,
   <>
     <span className="text-[--text-secondary]">philosophy</span>:{" "}
     <span className="text-[--text-tertiary]">
-      &quot;Data integrity, typed contracts, and failure modes first&quot;
+      &quot;Schema integrity, typed contracts, and failure modes first&quot;
     </span>
   </>,
   <>{"};"}</>,

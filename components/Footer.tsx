@@ -63,9 +63,9 @@ export default function Footer() {
               </span>
             </a>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-[--text-secondary]">
-              Full-stack &amp; backend systems engineer in Nepal architecting
-              typed React interfaces, high-throughput APIs, and deterministic AI
-              pipelines.
+              Full-stack developer &amp; backend engineer based in New Delhi, India
+              architecting typed React interfaces, high-throughput APIs, and
+              production AI pipelines.
             </p>
           </div>
 
@@ -99,7 +99,7 @@ export default function Footer() {
               {PERSONAL.email}
             </a>
             <p className="mt-2 text-[11px] text-[--text-tertiary]">
-              Kathmandu, Nepal • UTC+5:45 (Remote Worldwide)
+              New Delhi, India • Open to Delhi NCR &amp; Remote
             </p>
 
             <div className="mt-5 flex gap-2.5">
@@ -126,7 +126,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4 text-[11px] text-[--text-tertiary] md:flex-row md:items-center md:justify-between">
           <p>© 2026 Rajendra Bist. Production Systems Portfolio.</p>
           <div className="flex items-center gap-6">
-            <span>Kathmandu, Nepal</span>
+            <span>New Delhi, India</span>
             <a
               href="#home"
               className="inline-flex items-center gap-1 text-[--text-secondary] transition-colors hover:text-[--accent-warm]"

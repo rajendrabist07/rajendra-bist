@@ -20,6 +20,161 @@ import Container from "@/components/ui/Container";
 
 const CASE_STUDIES = [
   {
+    tag: "IN DEVELOPMENT • 2026",
+    title: "Sovereign",
+    tagline: "Multi-Tenant B2B SaaS for Autonomous AI Workflow Agents",
+    image: "/images/sovereign-card.svg",
+    terminalContent: `Next.js Client (Turborepo) → [PostgreSQL RLS Boundary]
+                              ↓
+      [Inngest Workflow Engine] → [Human-in-the-Loop Review]
+                              ↓
+      [Tool-Calling Agent Loop] → [Zod Output Verification]`,
+    architectureSvg: (
+      <svg
+        viewBox="0 0 440 200"
+        className="w-full h-auto text-[--text-secondary] font-mono text-[10px]"
+      >
+        <rect
+          x="15"
+          y="20"
+          width="115"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#38BDF8"
+          strokeWidth="1.5"
+        />
+        <text
+          x="72"
+          y="41"
+          fill="#EDEFF2"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          Turborepo App
+        </text>
+
+        <rect
+          x="165"
+          y="20"
+          width="120"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+        />
+        <text x="225" y="41" fill="#34D8B0" textAnchor="middle">
+          Inngest Engine
+        </text>
+
+        <rect
+          x="320"
+          y="20"
+          width="105"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="rgba(255,255,255,0.15)"
+          strokeWidth="1"
+        />
+        <text x="372" y="41" fill="#EDEFF2" textAnchor="middle">
+          Human Review
+        </text>
+
+        <rect
+          x="80"
+          y="120"
+          width="125"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+        />
+        <text
+          x="142"
+          y="141"
+          fill="#FF7A33"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          PostgreSQL (RLS)
+        </text>
+
+        <rect
+          x="250"
+          y="120"
+          width="125"
+          height="34"
+          rx="6"
+          fill="#10131A"
+          stroke="#38BDF8"
+          strokeWidth="1.5"
+        />
+        <text
+          x="312"
+          y="141"
+          fill="#38BDF8"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          Zod Tool Loop
+        </text>
+
+        <path
+          d="M 130 37 L 165 37"
+          stroke="#38BDF8"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
+        <path
+          d="M 285 37 L 320 37"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M 372 54 L 372 90 L 142 90 L 142 120"
+          stroke="#34D8B0"
+          strokeWidth="1.5"
+          strokeDasharray="5 3"
+        />
+        <path
+          d="M 205 137 L 250 137"
+          stroke="#FF7A33"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          className="animate-pulse"
+        />
+      </svg>
+    ),
+    problem:
+      "Multi-tenant AI SaaS platforms often rely on leaky application-level tenant filters and fragile, stateless LLM executions that fail silently or leak confidential data across organizational boundaries.",
+    solution:
+      "Architecting a backend-heavy, multi-tenant platform in a Turborepo monorepo with PostgreSQL Row-Level Security, Inngest durable workflows, human-in-the-loop approvals, and schema-guarded tool loops.",
+    keyDecision:
+      "Enforced tenant isolation at the database layer via PostgreSQL Row-Level Security (RLS) and orchestrated durable, resumable step executions with Inngest.",
+    frontendImplementation:
+      "Architected organization workspace in a Turborepo monorepo featuring human-in-the-loop agent review queues, audit logs, and tenant isolation dashboards.",
+    metrics: [
+      { value: "Postgres RLS", label: "DB Tenant Isolation" },
+      { value: "Inngest", label: "Durable Runs" },
+      { value: "Zod-Guarded", label: "Agent Tool Loop" },
+    ],
+    stack: [
+      "TypeScript",
+      "Turborepo",
+      "PostgreSQL (RLS)",
+      "Inngest",
+      "Zod",
+      "Node.js",
+      "Next.js 15",
+    ],
+    liveUrl: "https://github.com/rajendrabist07/sovereign",
+    githubUrl: "https://github.com/rajendrabist07/sovereign",
+  },
+  {
     tag: "PRODUCTION SYSTEM • 2026",
     title: "DevGuard AI",
     tagline: "Autonomous PR Security & Code Review Agent",
@@ -471,6 +626,7 @@ const CASE_STUDIES = [
 ];
 
 const CASE_STUDY_SLUGS: Record<string, string> = {
+  Sovereign: "sovereign",
   "DevGuard AI": "devguard-ai",
   "EduMethod AI": "edumethod-ai",
   Chronicle: "chronicle",

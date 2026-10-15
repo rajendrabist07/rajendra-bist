@@ -121,22 +121,35 @@ const jsonLdGraph = {
       alternateName: [
         "Rajendra",
         "Rajendra Bist Full-Stack Developer",
-        "Rajendra Bist Nepal",
+        "Rajendra Bist Backend Engineer",
+        "Rajendra Bist Delhi NCR",
+        "Rajendra Bist India",
       ],
       url: SITE_URL,
       mainEntityOfPage: webPageId,
       image: `${SITE_URL}/rajendra.jpeg`,
       jobTitle: PERSONAL.role,
       description: SITE_DESCRIPTION,
+      telephone: "+91-8700918036",
       seeks: {
         "@type": "Demand",
-        name: "Remote full-stack, backend-focused, and AI systems engineering roles",
+        name: "Full-Stack Developer & Backend Engineering Roles in Delhi NCR & Remote",
         description:
-          "Available from Nepal for remote software engineering work worldwide.",
-        areaServed: {
-          "@type": "Place",
-          name: "Worldwide",
-        },
+          "Based in New Delhi, India. Nepali national with complete legal authorization to work across India under the 1950 Indo-Nepal Treaty (no visa sponsorship or work permit required). Open to Delhi NCR and remote engineering roles.",
+        areaServed: [
+          {
+            "@type": "Place",
+            name: "Delhi NCR, India",
+          },
+          {
+            "@type": "Place",
+            name: "India",
+          },
+          {
+            "@type": "Place",
+            name: "Worldwide (Remote)",
+          },
+        ],
       },
       email: `mailto:${PERSONAL.email}`,
       sameAs: [PERSONAL.github, PERSONAL.linkedin, PERSONAL.facebook],
@@ -150,8 +163,11 @@ const jsonLdGraph = {
         "Express.js",
         "REST APIs",
         "PostgreSQL",
+        "PostgreSQL Row-Level Security (RLS)",
         "Supabase",
         "pgvector",
+        "Inngest Durable Workflows",
+        "Turborepo Monorepos",
         "MongoDB Atlas",
         "Upstash Redis",
         "RAG Pipelines",
@@ -162,14 +178,20 @@ const jsonLdGraph = {
         "WebSockets",
         ...SITE_KEYWORDS,
       ],
-      alumniOf: {
-        "@type": "EducationalOrganization",
-        name: "Vcare Technical Institute",
-      },
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "Vcare Technical Institute",
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Kailali Multiple Campus",
+        },
+      ],
       hasCredential: [
         {
           "@type": "EducationalOccupationalCredential",
-          name: "Full-Stack Web Development Training",
+          name: "Diploma in IT (Full-Stack Web Development)",
           credentialCategory: "Professional Engineering Training",
           recognizedBy: {
             "@type": "EducationalOrganization",
@@ -179,8 +201,9 @@ const jsonLdGraph = {
       ],
       address: {
         "@type": "PostalAddress",
-        addressCountry: "NP",
-        addressRegion: "Nepal",
+        addressLocality: "New Delhi",
+        addressRegion: "Delhi NCR",
+        addressCountry: "IN",
       },
     },
     {
@@ -261,7 +284,7 @@ const jsonLdGraph = {
           name: "Who is Rajendra Bist?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Rajendra Bist is a full-stack developer based in Nepal building typed React interfaces, scalable APIs, database-driven products, RAG pipelines, LLM integrations, and AI systems.",
+            text: "Rajendra Bist is a backend-focused full-stack developer (Node.js, TypeScript, PostgreSQL) based in New Delhi, India. Originally from Nepal, he is legally authorized to work across India under the 1950 Indo-Nepal Treaty without visa sponsorship or a work permit. He designs and ships complete applications end to end: schema design, REST APIs, authentication, tenant isolation, and production deployments.",
           },
         },
         {
@@ -269,7 +292,7 @@ const jsonLdGraph = {
           name: "What does Rajendra Bist specialize in?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Rajendra specializes in full-stack TypeScript engineering with React, Next.js, Node.js, MongoDB, PostgreSQL, Supabase pgvector, RAG pipelines, LLM integration, REST APIs, and production-ready AI workflows.",
+            text: "Rajendra specializes in full-stack and backend systems engineering: Node.js, Express.js, PostgreSQL (Row-Level Security, pgvector), Next.js 15 (App Router, ISR), Inngest durable workflows, Prisma ORM, Zod validation, and schema-guarded AI agent loops.",
           },
         },
       ],

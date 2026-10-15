@@ -15,9 +15,9 @@ type Message = {
 const QUICK_QUESTIONS = [
   'What projects has Rajendra built?',
   "What's his tech stack?",
-  'Tell me about DevGuard AI',
-  'Tell me about EduMethod AI',
-  'Is he open to work?',
+  'Tell me about Sovereign (Postgres RLS)',
+  'Tell me about Chronicle',
+  'Is he open to work in Delhi NCR / remote?',
 ]
 
 // Custom CodeBlock Component with Copy Functionality
@@ -472,15 +472,15 @@ export default function ChatAgent() {
                       <ul className="mt-4 space-y-2 text-sm text-slate-400 inline-block text-left w-fit mx-auto">
                         <li className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
-                          His flagship platform <strong>EduMethod AI</strong>
+                          Multi-tenant <strong>Sovereign</strong> B2B SaaS on Postgres RLS
                         </li>
                         <li className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
-                          Autonomous <strong>DevGuard AI</strong> agent loop
+                          Two-service <strong>Chronicle</strong> publishing platform
                         </li>
                         <li className="flex items-center gap-2">
                           <span className="h-1.5 w-1.5 rounded-full bg-[--accent-primary]" />
-                          <strong>Chronicle</strong> publishing architecture
+                          Autonomous <strong>DevGuard AI</strong> agent review loop
                         </li>
                       </ul>
                     </div>

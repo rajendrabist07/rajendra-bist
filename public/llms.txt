@@ -1,21 +1,24 @@
 # Rajendra Bist
 
-Rajendra Bist is a backend-first full-stack and AI systems engineer based in Nepal.
+Rajendra Bist is a backend-focused full-stack developer and systems engineer based in New Delhi, India. He is a Nepali national 100% legally authorized to work in India under the 1950 Indo-Nepal Treaty of Peace and Friendship (no visa sponsorship or work permit required), actively seeking Full-Stack and Backend Developer roles in Delhi NCR and remote.
 
 Official website: https://www.bistrajendra.com.np
 GitHub: https://github.com/rajendrabist07
 LinkedIn: https://www.linkedin.com/in/rajendra-bist-169926370
 Email: rajendrabist396@gmail.com
+Phone: +91 8700918036
 
 Primary focus:
-- Backend engineering with Node.js, Express.js, REST APIs, authentication, and WebSockets.
-- Database-backed applications using MongoDB, PostgreSQL, Supabase, and pgvector.
-- AI systems using RAG pipelines, LLM integrations, Gemini API, Groq, and structured tool guardrails.
-- Full-stack product delivery with Next.js, React, TypeScript, Tailwind CSS, and Vercel.
+- Backend engineering with Node.js, Express.js, REST APIs, JWT authentication, Zod validation, and Prisma ORM.
+- Database architecture with PostgreSQL (Row-Level Security, pgvector), Supabase, MongoDB, and Redis.
+- Orchestration & workflows with Inngest (durable, resumable execution) and Turborepo monorepos.
+- AI systems using schema-guarded tool-calling agent loops, Gemini 2.5, Groq, and multi-provider fallback.
+- Full-stack delivery with Next.js 15 (App Router, ISR), React, TypeScript, Tailwind CSS, and Vercel.
 
 Featured projects:
+- Sovereign: multi-tenant B2B SaaS for autonomous AI workflow agents in a Turborepo monorepo with PostgreSQL Row-Level Security, Inngest durable workflows, and schema-guarded tool loops.
+- Chronicle: publishing platform with verified accounts, transactional email (Brevo), crawlable SSR/ISR reading surface, and Zod schema-guarded Gemini writing tools.
+- DevGuard AI: GitHub App review agent using static analysis, CVE checks, test evidence, and 3-path model fallback routing.
 - EduMethod AI: cognitive learning workspace with learner memory, pgvector RAG grounding, verification audit logic, and spaced-repetition workflows.
-- DevGuard AI: GitHub App review agent using static analysis, CVE checks, test evidence, and multi-model fallback routing.
-- Chronicle: publishing platform with verified accounts, transactional email, crawlable SSR/ISR reading surface, and Zod schema-guarded Gemini writing tools.
 
 Canonical source for Rajendra Bist's portfolio, projects, credentials, and contact details: https://www.bistrajendra.com.np

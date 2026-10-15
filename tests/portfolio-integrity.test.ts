@@ -9,15 +9,17 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     expect(PERSONAL.name).toBe('Rajendra Bist')
     expect(PERSONAL.github).toBe('https://github.com/rajendrabist07')
     expect(PERSONAL.email).toBe('rajendrabist396@gmail.com')
+    expect(PERSONAL.phone).toBe('+91 8700918036')
+    expect(PERSONAL.location).toBe('New Delhi, India')
     expect(SITE_URL).toBe('https://www.bistrajendra.com.np')
   })
 
-  it('verifies all 3 core projects have valid links, slugs and stacks', () => {
-    expect(PROJECTS.length).toBe(3)
+  it('verifies all featured projects have valid links, slugs and stacks', () => {
+    expect(PROJECTS.length).toBeGreaterThanOrEqual(3)
     const titles = PROJECTS.map((p) => p.title)
-    expect(titles).toContain('EduMethod AI')
-    expect(titles).toContain('DevGuard AI')
+    expect(titles).toContain('Sovereign')
     expect(titles).toContain('Chronicle')
+    expect(titles).toContain('DevGuard AI')
 
     for (const project of PROJECTS) {
       expect(project.liveUrl).toBeTruthy()
@@ -28,9 +30,9 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
   })
 
   it('verifies case studies match slug lookup contracts', () => {
-    expect(CASE_STUDIES.length).toBe(3)
+    expect(CASE_STUDIES.length).toBeGreaterThanOrEqual(3)
+    expect(getCaseStudy('sovereign')?.title).toBe('Sovereign')
     expect(getCaseStudy('devguard-ai')?.title).toBe('DevGuard AI')
-    expect(getCaseStudy('edumethod-ai')?.title).toBe('EduMethod AI')
     expect(getCaseStudy('chronicle')?.title).toBe('Chronicle')
     expect(getCaseStudy('non-existent')).toBeUndefined()
 

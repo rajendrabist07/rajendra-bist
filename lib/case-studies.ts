@@ -38,6 +38,19 @@ export const CASE_STUDIES = [
     result: 'A production-grade, two-service publishing platform deployed across Vercel and Render with verified accounts, crawlable SEO, and schema-guarded AI assistance.',
     lessons: 'Backend reliability and strict boundary validation matter more than raw prompt complexity when building production software.',
   },
+  {
+    slug: 'sovereign',
+    title: 'Sovereign',
+    summary: 'A multi-tenant B2B SaaS in a Turborepo monorepo where organizations define autonomous AI workflow agents with PostgreSQL Row-Level Security and Inngest.',
+    problem: 'Multi-tenant AI SaaS platforms often rely on leaky application-level tenant filters and fragile, stateless LLM executions that fail silently or leak confidential data across organizational boundaries.',
+    constraints: ['Tenant isolation must be mathematically guaranteed at the database layer with PostgreSQL RLS.', 'Agent workflows must be durable, resumable, and support human-in-the-loop approvals before high-risk actions.', 'LLM tool outputs must be schema-validated before modifying persistent state.'],
+    architecture: 'Next.js Client -> Turborepo Monorepo -> Inngest Durable Workflow Engine -> PostgreSQL (RLS) -> Zod Schema Guard -> Tool-Calling Agent Loop',
+    dataModel: 'Organizations, tenant memberships, agent configurations, workflow runs, step logs, tool invocations, and audit trails isolated via tenant_id and PostgreSQL Row-Level Security policies.',
+    decisions: ['Enforce tenant isolation via PostgreSQL Row-Level Security (RLS) at the database layer rather than relying on application queries.', 'Orchestrate agent workflows with Inngest for durable, resumable, and idempotent multi-step executions with human-in-the-loop approvals.', 'Treat the LLM as an untrusted dependency with JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt-injection tag defenses.'],
+    failureModes: ['Cross-tenant queries are blocked at the database engine level by active RLS session policies.', 'Malformed LLM responses fail fast via Zod schemas and trigger deterministic fallback paths.', 'High-risk agent actions pause execution safely until explicitly approved by an organization human operator.'],
+    result: 'An enterprise-grade multi-tenant architecture delivering verifiable database-level tenant isolation, durable execution, and schema-guarded AI agency.',
+    lessons: 'True multi-tenancy belongs at the database schema layer, not in application WHERE clauses where an engineer slip creates a catastrophic data leak.',
+  },
 ] as const
 
 export function getCaseStudy(slug: string) {

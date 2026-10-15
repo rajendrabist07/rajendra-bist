@@ -9,11 +9,12 @@ import Container from "@/components/ui/Container";
 import LiveSystemStatus from "@/components/ui/LiveSystemStatus";
 
 const TYPED_ROLES = [
-  "Full-Stack Developer & Backend Systems",
-  "Building Resilient APIs & RAG Pipelines",
-  "LLM Integrations & Vector Embeddings (pgvector)",
-  "Autonomous AST PR Review Agents & Tooling",
-  "Designing Fault-Tolerant Distributed Architectures",
+  "Full-Stack Developer & Backend Engineer",
+  "Node.js, TypeScript, PostgreSQL & Next.js 15",
+  "Schema Design, REST APIs & Tenant Isolation",
+  "Sovereign: Multi-Tenant B2B SaaS on Postgres RLS",
+  "Chronicle: Two-Service Platform & Zod AI Guards",
+  "DevGuard AI: Autonomous AST PR Review Agent",
 ];
 
 export default function Hero() {
@@ -82,9 +83,10 @@ export default function Hero() {
 
           {/* Punchy Systems-First Narrative */}
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-[--text-secondary] sm:text-base md:text-lg">
-            Full-stack &amp; backend software engineer based in Nepal
-            architecting typed React interfaces, high-throughput APIs, RAG
-            pipelines, and autonomous AI systems deployed for real users.
+            Backend-focused full-stack developer (Node.js, TypeScript, PostgreSQL)
+            designing and shipping complete applications end to end: schema design,
+            REST APIs, authentication, tenant isolation, and deployment.
+            Open to roles in Delhi NCR and remote.
           </p>
 
           {/* Action Buttons: Solid Accent-Warm vs Ghost Outline */}

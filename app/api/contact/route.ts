@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
                 <div style="background: #10131a; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06);">
                   <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Sender:</strong> ${escapeHtml(name)}</p>
                   <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #ff7a33;">${escapeHtml(email)}</a></p>
-                  <p style="margin: 0; font-size: 12px; color: #8e97a3;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })} (Nepal Time)</p>
+                  <p style="margin: 0; font-size: 12px; color: #8e97a3;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })} (IST)</p>
                 </div>
                 <h3 style="color: #8e97a3; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Message Content:</h3>
                 <div style="background: #0b0d11; padding: 16px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; color: #edeff2; border: 1px solid rgba(255, 122, 51, 0.2); font-size: 14px;">
