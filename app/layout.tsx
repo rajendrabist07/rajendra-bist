@@ -127,7 +127,7 @@ const jsonLdGraph = {
       ],
       url: SITE_URL,
       mainEntityOfPage: webPageId,
-      image: `${SITE_URL}/rajendra.jpeg`,
+      image: `${SITE_URL}/images/Rajendra-Bist.png`,
       jobTitle: PERSONAL.role,
       description: SITE_DESCRIPTION,
       telephone: "+91-8700918036",
@@ -235,7 +235,7 @@ const jsonLdGraph = {
       },
       primaryImageOfPage: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/rajendra.jpeg`,
+        url: `${SITE_URL}/images/Rajendra-Bist.png`,
       },
       breadcrumb: {
         "@id": `${SITE_URL}/#breadcrumb`,

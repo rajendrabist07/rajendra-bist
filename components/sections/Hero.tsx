@@ -152,12 +152,12 @@ export default function Hero() {
             <div className="relative h-full w-full rounded-3xl p-[1px] bg-gradient-to-b from-white/[0.18] via-white/[0.06] to-white/[0.02] shadow-2xl">
               <div className="relative h-full w-full overflow-hidden rounded-[23px] bg-[#050608]">
                 <Image
-                  src="/rajendra.jpeg"
-                  alt="Rajendra Bist - Full-Stack & Backend Systems Engineer"
+                  src="/images/Rajendra-Bist.png"
+                  alt="Rajendra Bist - Full-Stack Developer & Backend Engineer"
                   fill
                   priority
                   sizes="(min-width: 1024px) 400px, 85vw"
-                  className="object-cover object-[50%_18%] filter contrast-[108%] brightness-[96%]"
+                  className="object-cover object-[50%_20%] filter contrast-[106%] brightness-[98%]"
                 />
 
                 {/* Natural Dark Vignette Bleed (fades photo edges smoothly into #050608) */}
@@ -165,7 +165,7 @@ export default function Hero() {
                   className="absolute inset-0 pointer-events-none"
                   style={{
                     background: `
-                      radial-gradient(circle at 50% 28%, transparent 45%, #050608 94%),
+                      radial-gradient(circle at 50% 36%, transparent 45%, #050608 94%),
                       linear-gradient(to top, #050608 0%, rgba(5,6,8,0.6) 24%, transparent 52%),
                       linear-gradient(to right, #050608 0%, transparent 16%),
                       linear-gradient(to left, #050608 0%, transparent 16%)
