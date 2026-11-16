@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         type: "image/png",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050608",
+  themeColor: "#07080a",
 };
 
 const themeInitScript = `

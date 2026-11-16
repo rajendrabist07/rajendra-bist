@@ -1,62 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  /* Terminal Noir Design System (Master Token Spec) */
-  --bg-void: #050608;
-  --bg-surface: #0b0d11;
-  --bg-surface-2: #10131a;
+  /* Apple Polish × Terminal DNA Token Spec */
+  --bg-0: #07080a;
+  --bg-1: #0e1013;
+  --bg-2: #15181c;
+  --bg-3: #1c2025;
+  --bg-void: var(--bg-0);
+  --bg-surface: var(--bg-1);
+  --bg-surface-2: var(--bg-2);
   --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.12);
 
-  /* Text Hierarchy */
-  --text-primary: #edeff2;
-  --text-secondary: #8e97a3;
-  --text-tertiary: #5a6270;
+  /* Text Hierarchy — WCAG AA verified (>= 4.5:1 against dark surfaces) */
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #8e8e93;
 
-  /* Single accent with semantic aliases for existing status styles */
-  --accent-warm: #ff7a33; /* Molten amber — CTAs, interactive links, active tabs */
-  --accent-warm-dim: rgba(255, 122, 51, 0.14);
-  --accent-cool: var(--accent-warm);
+  /* Accent & Status Colors */
+  --accent-warm: #ff7a33; /* Molten amber — CTAs, focus ring, key links */
+  --accent-warm-dim: rgba(255, 122, 51, 0.12);
+  --accent-cool: #ff7a33;
   --accent-cool-dim: var(--accent-warm-dim);
+  --status-live: #34d8b0; /* Live indicator dot */
 
   /* Semantic Mappings */
   --danger: #ff5d5d;
-  --bg-primary: var(--bg-void);
-  --bg-elevated: var(--bg-surface-2);
-  --bg-code: var(--bg-surface-2);
+  --bg-primary: var(--bg-0);
+  --bg-elevated: var(--bg-2);
+  --bg-code: var(--bg-2);
   --border: var(--border-subtle);
   --border-hover: var(--border-strong);
   --accent-primary: var(--accent-warm);
   --accent-secondary: var(--accent-cool);
-  --accent-glow: rgba(255, 122, 51, 0.28);
+  --accent-glow: rgba(255, 122, 51, 0.22);
   --text-muted: var(--text-tertiary);
-  --success: var(--accent-cool);
+  --success: var(--status-live);
   --warning: var(--accent-warm);
-  --gradient: linear-gradient(135deg, #ff7a33 0%, #ff9a62 45%, #34d8b0 100%);
+
+  /* Hierarchy Radii */
+  --radius-control: 8px;
+  --radius-card: 16px;
+  --radius-feature: 24px;
+  --radius-pill: 9999px;
 
   /* Fluid Clamp Typography Scale */
-  --text-hero: 5.5rem;
-  --text-h2: 2.75rem;
-  --text-h3: 1.65rem;
+  --text-hero: 5.25rem;
+  --text-h2: 2.5rem;
+  --text-h3: 1.5rem;
   --text-body: 1rem;
   --text-small: 0.875rem;
   --font-sans: var(--font-display);
-}
-
-[data-theme="light"] {
-  --bg-void: #050608;
-  --bg-surface: #0b0d11;
-  --bg-surface-2: #10131a;
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.14);
-  --text-primary: #edeff2;
-  --text-secondary: #8e97a3;
-  --text-tertiary: #5a6270;
-  --accent-warm: #ff7a33;
-  --accent-warm-dim: rgba(255, 122, 51, 0.14);
-  --accent-cool: #34d8b0;
-  --accent-cool-dim: rgba(52, 216, 176, 0.14);
-  --bg-primary: var(--bg-void);
 }
 
 html {

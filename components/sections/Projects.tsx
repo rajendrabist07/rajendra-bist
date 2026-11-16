@@ -779,7 +779,11 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.55, delay: index * 0.1 }}
-              className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start"
+              className={`grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start transition-all duration-300 ${
+                index === 0
+                  ? "rounded-3xl border border-white/[0.12] bg-[--bg-surface]/80 p-6 sm:p-10 shadow-2xl backdrop-blur-sm"
+                  : "pt-6 border-t border-white/[0.04]"
+              }`}
             >
               {/* Left Column: Visual Card with Architecture Draw-In */}
               <ProjectVisualCard project={project} />
