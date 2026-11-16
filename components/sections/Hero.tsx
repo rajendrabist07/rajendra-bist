@@ -20,6 +20,7 @@ const TYPED_ROLES = [
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
+  const [time, setTime] = useState<string>('');
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -30,6 +31,19 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    const fmt = new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+    const tick = () => setTime(fmt.format(new Date()));
+    tick();
+    const id = setInterval(tick, 30_000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section
@@ -189,7 +203,7 @@ export default function Hero() {
                   </span>
                   <span className="text-[--accent-warm] flex items-center gap-1.5 font-medium">
                     <span className="h-2 w-2 rounded-full bg-[--accent-warm] animate-pulse" />
-                    ONLINE [UTC+5:45]
+                    New Delhi · {time || ''} IST
                   </span>
                 </div>
               </div>

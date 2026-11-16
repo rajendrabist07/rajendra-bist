@@ -5,7 +5,6 @@ import { Providers } from "./providers";
 import { PERSONAL, PROJECTS, SKILLS } from "@/lib/portfolio-data";
 import {
   SITE_DESCRIPTION,
-  SITE_KEYWORDS,
   SITE_NAME,
   SITE_TITLE,
   SITE_URL,
@@ -31,7 +30,6 @@ export const metadata: Metadata = {
     template: `%s | ${PERSONAL.name}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: SITE_KEYWORDS,
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
@@ -152,7 +150,7 @@ const jsonLdGraph = {
         ],
       },
       email: `mailto:${PERSONAL.email}`,
-      sameAs: [PERSONAL.github, PERSONAL.linkedin, PERSONAL.facebook],
+      sameAs: [PERSONAL.github, PERSONAL.linkedin],
       knowsAbout: [
         "React 18.3",
         "Next.js 15",
@@ -176,7 +174,6 @@ const jsonLdGraph = {
         "Gemini API",
         "System Design",
         "WebSockets",
-        ...SITE_KEYWORDS,
       ],
       alumniOf: [
         {
