@@ -83,7 +83,7 @@ export default function Contact() {
       const data = await response.json().catch(() => null);
 
       if (!response.ok) {
-        throw new Error(data?.error || "Could not send message right now.");
+        throw new Error(data?.message || data?.error || "Could not send message right now.");
       }
 
       setStatus("success");
@@ -204,6 +204,8 @@ export default function Contact() {
 
             {feedback && (
               <p
+                role="status"
+                aria-live="polite"
                 className={`mt-3 flex items-center gap-2 font-mono text-xs ${
                   status === "success"
                     ? "text-[--accent-cool]"

@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     if (!rateLimit.success) {
       return Response.json(
-        { error: 'Rate limit exceeded. Please wait before sending another message.' },
+        { ok: false, code: 'RATE_LIMITED', message: 'Rate limit exceeded. Please wait before sending another message.' },
         { status: 429, headers: { 'Retry-After': String(Math.ceil((rateLimit.reset - Date.now()) / 1000)) } },
       )
     }
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     const parsed = contactRequestSchema.safeParse(body)
 
     if (!parsed.success) {
-      return Response.json({ error: 'Please provide a valid name, email, and message.' }, { status: 400 })
+      return Response.json({ ok: false, code: 'VALIDATION_FAILED', message: 'Please provide a valid name, email, and message (min 20 characters).' }, { status: 400 })
     }
 
     const { name, email, message } = parsed.data
@@ -120,7 +120,8 @@ ${escapeHtml(message)}
       return Response.json(
         {
           ok: false,
-          error: 'Live message forwarding is currently offline. Please send your email directly to rajendrabist396@gmail.com.',
+          code: 'SERVICE_UNAVAILABLE',
+          message: 'Live message forwarding is currently offline. Please send your email directly to rajendrabist396@gmail.com.',
           delivered: { email: false, db: false },
         },
         { status: 503 }
@@ -139,6 +140,6 @@ ${escapeHtml(message)}
       hasResendKey: Boolean(process.env.RESEND_API_KEY),
     })
 
-    return Response.json({ error: 'Could not send message right now.' }, { status: 500 })
+    return Response.json({ ok: false, code: 'INTERNAL_ERROR', message: 'Could not send message right now.' }, { status: 500 })
   }
 }

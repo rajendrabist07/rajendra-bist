@@ -12,7 +12,7 @@ export {
   SKILLS,
   PROJECTS,
   SITE_CONFIG,
-} from '@/content/facts'
+} from '../content/facts'
 
 export const FEATURED_LINKS = {
   chronicle: 'https://chronicle-platform.vercel.app/',
