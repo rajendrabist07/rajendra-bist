@@ -1,6 +1,4 @@
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
-import BootSequence from "@/components/ui/BootSequence";
-import CustomCursor from "@/components/ui/CustomCursor";
 import CommandPalette from "@/components/ui/CommandPalette";
 import PremiumBackground from "@/components/ui/PremiumBackground";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -23,12 +21,6 @@ export default function HomePage() {
       <div className="relative min-h-screen bg-[--bg-void] text-[--text-primary]">
         {/* Top Viewport Scroll Progress Bar */}
         <ScrollProgress />
-
-        {/* Boot Sequence Loader */}
-        <BootSequence />
-
-        {/* Custom Interactive Cursor (fine-pointer only) */}
-        <CustomCursor />
 
         {/* ⌘K Command Palette */}
         <CommandPalette />

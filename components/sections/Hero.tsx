@@ -1,42 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL } from "@/lib/portfolio-data";
 import Container from "@/components/ui/Container";
-import LiveSystemStatus from "@/components/ui/LiveSystemStatus";
-
-const TYPED_ROLES = [
-  "Full-Stack Developer & Backend Engineer",
-  "Node.js, TypeScript, PostgreSQL & Next.js 15",
-  "Schema Design, REST APIs & Tenant Isolation",
-  "Sovereign: Multi-Tenant B2B SaaS on Postgres RLS",
-  "Chronicle: Two-Service Platform & Zod AI Guards",
-  "DevGuard AI: Autonomous AST PR Review Agent",
-];
 
 export default function Hero() {
-  const shouldReduceMotion = useReducedMotion();
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [time, setTime] = useState<string>('');
+  const [time, setTime] = useState<string>("");
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
-
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % TYPED_ROLES.length);
-    }, 3500);
-
-    return () => clearInterval(interval);
-  }, [shouldReduceMotion]);
-
-  useEffect(() => {
-    const fmt = new Intl.DateTimeFormat('en-IN', {
-      timeZone: 'Asia/Kolkata',
-      hour: '2-digit',
-      minute: '2-digit',
+    const fmt = new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: false,
     });
     const tick = () => setTime(fmt.format(new Date()));
@@ -65,45 +43,26 @@ export default function Hero() {
         as="div"
         className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]"
       >
-        {/* Left Column: Telemetry, Big Name, Typewriter Role, Narrative, CTAs */}
+        {/* Left Column: Availability chip, Big Name, Punchy Pitch, CTAs */}
         <div className="relative z-10 text-center lg:text-left">
-          {/* Big Bold Name (Paileko Style with High Contrast) */}
+          {/* Availability Status Chip */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-1.5 font-mono text-xs text-[--text-secondary] backdrop-blur-md shadow-sm mb-4">
+            <span className="h-2 w-2 rounded-full bg-[#34D8B0] animate-pulse" />
+            <span>Available · 15-day notice · Delhi NCR / remote</span>
+          </div>
+
+          {/* Big Bold Name */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-black uppercase tracking-tight text-[--text-primary] leading-[1.04]">
             Rajendra <br className="hidden sm:inline" />
             <span className="text-[--accent-warm]">Bist</span>
           </h1>
 
-          {/* Dynamic Systems Role Display with Terminal Pill & Cursor */}
-          <div className="mt-4 flex min-h-[38px] items-center justify-center lg:justify-start">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 font-mono text-xs sm:text-sm text-[--accent-warm] backdrop-blur-md shadow-sm">
-              <span className="text-[--text-tertiary] select-none font-bold">&gt;</span>
-              <span className="relative inline-flex items-center">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={roleIndex}
-                    initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 3 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="font-medium text-[--text-primary]"
-                  >
-                    {TYPED_ROLES[roleIndex]}
-                  </motion.span>
-                </AnimatePresence>
-                <span className="ml-1.5 inline-block w-2 h-3.5 bg-[--accent-warm] animate-cursor-blink font-normal" />
-              </span>
-            </div>
-          </div>
-
-          {/* Punchy Systems-First Narrative */}
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-[--text-secondary] sm:text-base md:text-lg">
-            Backend-focused full-stack developer (Node.js, TypeScript, PostgreSQL)
-            designing and shipping complete applications end to end: schema design,
-            REST APIs, authentication, tenant isolation, and deployment.
-            Open to roles in Delhi NCR and remote.
+          {/* Clear, High-Impact Plain-Language Pitch */}
+          <p className="mt-5 max-w-xl text-base sm:text-lg md:text-xl font-normal leading-relaxed text-[--text-secondary]">
+            Full-stack developer who ships complete apps: Next.js, Node.js, PostgreSQL — from schema design to deployment.
           </p>
 
-          {/* Action Buttons: Solid Accent-Warm vs Ghost Outline */}
+          {/* Action Buttons */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 lg:justify-start font-mono text-xs">
             <a
               href="#projects"
@@ -117,11 +76,11 @@ export default function Hero() {
               className="premium-button-secondary inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200 hover:border-[--accent-warm]"
             >
               <Download size={14} className="text-[--accent-warm]" />
-              Download CV
+              Download Resume
             </a>
           </div>
 
-          {/* Monospace Socials Row */}
+          {/* Socials Row */}
           <div className="mt-6 flex items-center justify-center gap-3 lg:justify-start text-[--text-secondary]">
             {[
               { href: PERSONAL.github, icon: Github, label: "GitHub" },
@@ -145,7 +104,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Natural Cinematic Portrait with Sleek Ambient Glow */}
+        {/* Right Column: Natural Cinematic Portrait */}
         <div className="relative flex justify-center lg:justify-end">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
@@ -153,7 +112,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full max-w-[320px] sm:max-w-[370px] lg:max-w-[400px] aspect-[4/5]"
           >
-            {/* Soft Ambient Radial Halo */}
+            {/* Ambient Radial Halo */}
             <div
               className="absolute -inset-4 pointer-events-none opacity-20 blur-3xl"
               style={{
@@ -174,7 +133,7 @@ export default function Hero() {
                   className="object-cover object-[50%_20%] filter contrast-[106%] brightness-[98%]"
                 />
 
-                {/* Natural Dark Vignette Bleed (fades photo edges smoothly into #050608) */}
+                {/* Vignette Bleed */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
@@ -187,15 +146,6 @@ export default function Hero() {
                   }}
                 />
 
-                {/* Subtle Warm Rim Light Overlay */}
-                <div
-                  className="absolute inset-0 pointer-events-none opacity-10 mix-blend-screen"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 80% 20%, #FF7A33 0%, transparent 55%)",
-                  }}
-                />
-
                 {/* Floating Monospace Status Badge */}
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#050608]/85 px-3.5 py-2 font-mono text-xs text-[--text-secondary] backdrop-blur-md">
                   <span className="font-semibold text-[--text-primary]">
@@ -203,7 +153,7 @@ export default function Hero() {
                   </span>
                   <span className="text-[--accent-warm] flex items-center gap-1.5 font-medium">
                     <span className="h-2 w-2 rounded-full bg-[--accent-warm] animate-pulse" />
-                    New Delhi · {time || ''} IST
+                    New Delhi · {time || ""} IST
                   </span>
                 </div>
               </div>
@@ -214,8 +164,9 @@ export default function Hero() {
 
       {/* Subtle Scroll Indicator */}
       <div className="mx-auto mt-10 flex flex-col items-center gap-1 font-mono text-[10px] text-[--text-tertiary]">
-        <span className="tracking-widest uppercase">01 // EXPLORE SYSTEMS</span>
-        <ArrowDown size={12} className="animate-bounce text-[--accent-warm]" />
+        <a href="#projects" aria-label="Scroll to selected work">
+          <ArrowDown size={14} className="animate-bounce text-[--accent-warm]" />
+        </a>
       </div>
     </section>
   );
