@@ -53,10 +53,13 @@ export default function CommandPalette() {
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Command palette and quick actions"
       className="fixed inset-0 z-50 flex items-start justify-center bg-black/75 p-4 pt-[15vh] backdrop-blur-md"
       onClick={() => setOpen(false)}
     >
-      <div onClick={(e) => e.stopPropagation()}>
+      <div onClick={(e) => e.stopPropagation()} role="document">
         <Command label="Terminal Command Palette">
           <div className="flex items-center gap-2 border-b border-[--border-subtle] px-4">
             <Search size={16} className="text-[--text-tertiary]" />

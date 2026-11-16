@@ -113,12 +113,20 @@ export default function Skills() {
         />
 
         {/* Filter Tabs */}
-        <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-[--border-subtle] pb-4 font-mono text-xs">
+        <div
+          role="tablist"
+          aria-label="Filter skills by technology category"
+          className="mt-8 flex flex-wrap items-center gap-2 border-b border-[--border-subtle] pb-4 font-mono text-xs"
+        >
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
+                role="tab"
+                id={`tab-${tab.id}`}
+                aria-selected={isActive}
+                aria-controls="skills-tabpanel"
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative rounded-md px-3 py-1.5 font-semibold transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] ${
@@ -142,6 +150,9 @@ export default function Skills() {
 
         {/* Tools Grid */}
         <motion.div
+          id="skills-tabpanel"
+          role="tabpanel"
+          aria-labelledby={`tab-${activeTab}`}
           layout
           className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 font-mono text-xs"
         >

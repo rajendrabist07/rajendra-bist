@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
+import TenantIsolationSimulator from "@/components/ui/TenantIsolationSimulator";
 
 export function generateStaticParams() {
   return CASE_STUDIES.map(({ slug }) => ({ slug }));
@@ -94,6 +95,13 @@ export default async function CaseStudyPage({
             {study.architecture}
           </pre>
         </section>
+
+        {study.slug === "sovereign" && (
+          <section className="mt-12">
+            <h2 className="text-2xl font-semibold mb-4">Interactive Isolation Proof</h2>
+            <TenantIsolationSimulator />
+          </section>
+        )}
         <section className="mt-12">
           <h2 className="text-2xl font-semibold">Data model</h2>
           <p className="mt-3 leading-8 text-[--text-secondary]">
