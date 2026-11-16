@@ -25,7 +25,7 @@ export default function ProjectsIndexPage() {
         <h1 className="mt-4 text-4xl font-semibold md:text-6xl">
           Systems built around real constraints.
         </h1>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {CASE_STUDIES.map((study) => (
             <Link
               key={study.slug}

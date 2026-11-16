@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/case-studies";
 
@@ -36,7 +36,7 @@ export default async function CaseStudyPage({
           className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent-warm] mb-6"
         >
           <ArrowLeft size={14} />
-          Back to Systems
+          Back to Projects
         </Link>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent-warm]">
           Case study // {study.slug}
@@ -47,6 +47,31 @@ export default async function CaseStudyPage({
         <p className="mt-5 max-w-2xl text-lg leading-8 text-[--text-secondary]">
           {study.summary}
         </p>
+
+        <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs">
+          {study.liveUrl && (
+            <a
+              href={study.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="premium-button-primary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold transition-all hover:scale-105 active:scale-95"
+            >
+              <ExternalLink size={14} />
+              Live Application
+            </a>
+          )}
+          {study.githubUrl && (
+            <a
+              href={study.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="premium-button-secondary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold transition-all hover:scale-105 active:scale-95 hover:border-[--accent-warm]"
+            >
+              <Github size={14} />
+              Source Code
+            </a>
+          )}
+        </div>
         <div className="mt-12 grid gap-10 md:grid-cols-2">
           <article>
             <h2 className="text-2xl font-semibold">Problem</h2>

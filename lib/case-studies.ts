@@ -11,6 +11,8 @@ export const CASE_STUDIES = [
     failureModes: ['Invalid webhook signatures are rejected.', 'Provider limits use the next configured path.', 'Evidence collection failures are surfaced instead of silently treated as successful review.'],
     result: 'The project demonstrates an evidence-first review architecture with explicit provider fallback and bounded orchestration.',
     lessons: 'AI features become easier to reason about when the deterministic evidence boundary is designed before the model prompt.',
+    liveUrl: 'https://dev-guard-ai.vercel.app/',
+    githubUrl: 'https://github.com/rajendrabist07/dev-guard-ai',
   },
   {
     slug: 'edumethod-ai',
@@ -24,6 +26,8 @@ export const CASE_STUDIES = [
     failureModes: ['Missing source context should prevent a grounded answer from being implied.', 'Verification state remains distinct from the generated response.', 'Upload and retrieval steps can report failure independently.'],
     result: 'The project presents a data-centered approach to AI learning workflows rather than treating chat history as the product model.',
     lessons: 'Persistence and verification are product capabilities, not optional metadata added after the model integration.',
+    liveUrl: 'https://edumethod-ai.vercel.app',
+    githubUrl: 'https://github.com/rajendrabist07/edumethod-ai',
   },
   {
     slug: 'chronicle',
@@ -37,6 +41,8 @@ export const CASE_STUDIES = [
     failureModes: ['Malformed AI responses trigger a safe 503 fallback instead of breaking the editor state.', 'Failed database migrations abort startup cleanly to prevent runtime P2021/P2022 500 errors.', 'Unreachable email provider logs retry telemetry without blocking user HTTP requests.'],
     result: 'A production-grade, two-service publishing platform deployed across Vercel and Render with verified accounts, crawlable SEO, and schema-guarded AI assistance.',
     lessons: 'Backend reliability and strict boundary validation matter more than raw prompt complexity when building production software.',
+    liveUrl: 'https://chronicle-platform.vercel.app/',
+    githubUrl: 'https://github.com/rajendrabist07/chronicle',
   },
   {
     slug: 'sovereign',
@@ -46,10 +52,12 @@ export const CASE_STUDIES = [
     constraints: ['Tenant isolation must be mathematically guaranteed at the database layer with PostgreSQL RLS.', 'Agent workflows must be durable, resumable, and support human-in-the-loop approvals before high-risk actions.', 'LLM tool outputs must be schema-validated before modifying persistent state.'],
     architecture: 'Next.js Client -> Turborepo Monorepo -> Inngest Durable Workflow Engine -> PostgreSQL (RLS) -> Zod Schema Guard -> Tool-Calling Agent Loop',
     dataModel: 'Organizations, tenant memberships, agent configurations, workflow runs, step logs, tool invocations, and audit trails isolated via tenant_id and PostgreSQL Row-Level Security policies.',
-    decisions: ['Enforce tenant isolation via PostgreSQL Row-Level Security (RLS) at the database layer rather than relying on application queries.', 'Orchestrate agent workflows with Inngest for durable, resumable, and idempotent multi-step executions with human-in-the-loop approvals.', 'Treat the LLM as an untrusted dependency with JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt-injection tag defenses.'],
+    decisions: ['Enforce tenant isolation via PostgreSQL Row-Level Security (RLS) at the database layer rather than relying on application queries.', 'Orchestrate agent workflows with Inngest for durable, resumable, and idempotent multi-step executions with human-in-the-loop approvals.', 'Enforce strict schema validation and bounded tool execution for AI agent workflows with JSON mode, Zod schemas, hard timeouts, and prompt-injection defenses.'],
     failureModes: ['Cross-tenant queries are blocked at the database engine level by active RLS session policies.', 'Malformed LLM responses fail fast via Zod schemas and trigger deterministic fallback paths.', 'High-risk agent actions pause execution safely until explicitly approved by an organization human operator.'],
     result: 'An enterprise-grade multi-tenant architecture delivering verifiable database-level tenant isolation, durable execution, and schema-guarded AI agency.',
     lessons: 'True multi-tenancy belongs at the database schema layer, not in application WHERE clauses where an engineer slip creates a catastrophic data leak.',
+    liveUrl: 'https://sovereign-saas-platform.vercel.app/',
+    githubUrl: 'https://github.com/rajendrabist07/sovereign',
   },
 ] as const
 

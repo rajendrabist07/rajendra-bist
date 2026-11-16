@@ -156,7 +156,7 @@ const CASE_STUDIES = [
     keyDecision:
       "Enforced tenant isolation at the database layer via PostgreSQL Row-Level Security (RLS) and orchestrated durable, resumable step executions with Inngest.",
     frontendImplementation:
-      "Architected organization workspace in a Turborepo monorepo featuring human-in-the-loop agent review queues, audit logs, and tenant isolation dashboards.",
+      "Architected organization workspace in a Turborepo monorepo with PostgreSQL RLS tenant isolation, Inngest durable workflow execution, and schema-guarded AI tool calling.",
     metrics: [
       { value: "Postgres RLS", label: "DB Tenant Isolation" },
       { value: "Inngest", label: "Durable Runs" },
@@ -171,7 +171,7 @@ const CASE_STUDIES = [
       "Node.js",
       "Next.js 15",
     ],
-    liveUrl: "https://github.com/rajendrabist07/sovereign",
+    liveUrl: "https://sovereign-saas-platform.vercel.app/",
     githubUrl: "https://github.com/rajendrabist07/sovereign",
   },
   {
@@ -601,7 +601,7 @@ const CASE_STUDIES = [
     solution:
       "Two-service platform (Next.js on Vercel, Express/Prisma/PostgreSQL on Render) with server-rendered public pages, email-verified accounts, and Gemini tools whose structured output is schema-validated before it reaches the editor.",
     keyDecision:
-      "Treated the LLM as an untrusted dependency: JSON-mode requests, Zod-validated output, normalized tags, hard timeouts, and a single uniform failure path so provider errors never leak to users.",
+      "Bounded LLM integration: JSON-mode requests, Zod-validated output, normalized tags, hard timeouts, and a single uniform failure path so provider errors never leak to users.",
     frontendImplementation:
       "Server-rendered public reading pages with ISR, per-page metadata and dynamic social cards, plus a client-side writer workspace with markdown preview, draft autosave, and AI assist panels on a tokenized dark/light design system.",
     metrics: [
@@ -766,9 +766,9 @@ export default function Projects() {
 
       <Container className="relative z-10">
         <SectionHeader
-          eyebrow="03 // FEATURED PROJECTS"
-          title="Production Systems & Case Studies"
-          description="Real-world architectures structured around Problem, Solution, Key Decision, and Frontend Implementation."
+          eyebrow="03 // SELECTED WORK"
+          title="Selected Work & Case Studies"
+          description="Real-world applications structured around Problem, Solution, Key Decisions, and Trade-offs."
         />
 
         <div className="mt-12 space-y-20 md:space-y-24">
