@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { MouseEvent } from "react";
 import { Terminal, Download, Menu, X, Command } from "lucide-react";
 import { PERSONAL } from "@/lib/portfolio-data";
@@ -18,6 +18,13 @@ const navItems = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [keyHint, setKeyHint] = useState("⌘K");
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && !/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      setKeyHint("Ctrl+K");
+    }
+  }, []);
 
   const handleAnchorClick =
     (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
@@ -82,7 +89,7 @@ export default function Navbar() {
             <Command size={13} className="text-[#FF7A33]" />
             <span className="hidden md:inline text-[11px]">Search</span>
             <kbd className="hidden sm:inline-block rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.2 text-[10px] text-[--text-tertiary]">
-              ⌘K
+              {keyHint}
             </kbd>
           </button>
 
@@ -139,7 +146,7 @@ export default function Navbar() {
                 className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/[0.1] bg-white/[0.03] py-2.5 text-xs text-[--text-primary]"
               >
                 <Command size={14} className="text-[#FF7A33]" />
-                Command Palette (⌘K)
+                Command Palette ({keyHint})
               </button>
 
               <a

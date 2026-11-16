@@ -19,9 +19,6 @@ export default function FloatingAskAI() {
     >
       <Bot size={15} className="text-[--accent-cool] animate-pulse" />
       <span>AI Assistant</span>
-      <span className="rounded border border-[--border-subtle] bg-[--bg-surface] px-1.5 py-0.5 text-[10px] text-[--text-tertiary]">
-        ⌘K
-      </span>
     </button>
   );
 }
