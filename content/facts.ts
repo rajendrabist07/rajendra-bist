@@ -136,12 +136,12 @@ export const CREDENTIALS = z.array(CredentialSchema).parse([
   {
     institution: 'Kailali Multiple Campus',
     title: 'Higher Secondary (+2 Science)',
-    credentialType: 'Class XII Science Equivalent',
+    credentialType: 'Class XII Science',
     timeframe: '2022',
     status: 'Completed',
     description:
-      'Formal academic foundation in physical sciences, advanced calculus, physics, and computational reasoning in Nepal.',
-    topics: ['Mathematics', 'Physics', 'Scientific Computing', 'Logic & Analysis'],
+      '+2 Science stream (physics, chemistry, and mathematics).',
+    topics: ['Science Stream', 'Mathematics', 'Physics'],
   },
 ])
 
@@ -159,7 +159,7 @@ export const EXPERIENCE = z.array(ExperienceItemSchema).parse([
       'Design, build, and deploy full-stack applications end to end across Next.js (Vercel) and Express (Render) with PostgreSQL (Prisma) and MongoDB, owning schema design, REST APIs, authentication, CI, and production deployment.',
     achievements: [
       'Architecting Sovereign: multi-tenant B2B SaaS in a Turborepo monorepo where organizations define autonomous AI workflow agents; PostgreSQL Row-Level Security enforces tenant isolation at the database layer alongside RBAC, audit logging, and quota enforcement.',
-      'Built workflow execution on Inngest for durable, resumable, and idempotent runs with human-in-the-loop approval steps, and an agent tool-calling loop treating the LLM as an untrusted dependency via JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt-injection tag defenses.',
+      'Built workflow execution on Inngest for durable, resumable, and idempotent runs with human-in-the-loop approval steps, and an agent tool-calling loop using JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt-injection tag defenses.',
       'Built and deployed Chronicle: two-service platform with Next.js SSR/ISR on Vercel and Express REST API (JWT) on Render backed by PostgreSQL via Prisma; schema-guarded Gemini tools with transactional email (Brevo) and boot-time zero-drift Prisma migrations.',
       'Engineered DevGuard AI: GitHub App with LLM tool-calling loop (AST-based security linting & OSV.dev CVE scanning), 3-path model failover (Groq → Gemini → rule engine), HMAC-verified webhooks, Zod validation, and Redis rate limiting.',
     ],

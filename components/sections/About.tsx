@@ -99,9 +99,7 @@ export default function About() {
             <span className="text-[--text-primary] font-medium">
               Node.js, TypeScript, PostgreSQL, Express, and Next.js 15
             </span>
-            . Originally from Nepal, I am 100% legally authorized to live and work across India
-            without visa sponsorship or a work permit under the 1950 Indo-Nepal Treaty of Peace and Friendship,
-            and am actively available for roles in Delhi NCR or remote.
+            . Nepali national; eligible to work in India without sponsorship under the 1950 Indo-Nepal Treaty. Available for Full-Stack and Backend (SDE-1) roles in Delhi NCR or remote.
           </motion.p>
           <motion.p variants={itemVariants}>
             My engineering strategy is{" "}

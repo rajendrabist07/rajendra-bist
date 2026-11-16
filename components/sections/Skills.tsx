@@ -107,9 +107,9 @@ export default function Skills() {
 
       <Container className="relative z-10">
         <SectionHeader
-          eyebrow="02 // TECH ARSENAL"
-          title="Production Stack & Tooling"
-          description="Technologies used across the projects on this site."
+          eyebrow="02 // TECHNICAL STACK"
+          title="Technical Stack & Tooling"
+          description="Technologies used across the shipped projects on this site."
         />
 
         {/* Filter Tabs */}

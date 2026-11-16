@@ -12,7 +12,7 @@ const steps = [
     title: "Understand",
     tag: "CONSTRAINTS & SCOPE",
     description:
-      "Map data flows, failure modes, rate limits, and latency budgets before writing code.",
+      "Map data flows, edge cases, rate limits, and latency budgets before writing code.",
     icon: Search,
   },
   {
@@ -74,7 +74,7 @@ export default function Process() {
         <SectionHeader
           eyebrow="04 // ENGINEERING PROCESS"
           title="How I Architect & Ship Systems"
-          description="A four-stage delivery process that makes assumptions explicit, validates behavior, and keeps failure modes visible."
+          description="A four-stage delivery process that makes assumptions explicit, validates behavior, and keeps system reliability visible."
         />
 
         <motion.div
