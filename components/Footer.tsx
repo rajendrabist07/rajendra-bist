@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowUp, Github, Linkedin, Mail, Facebook } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
 import { PERSONAL } from "@/lib/portfolio-data";
 import Container from "@/components/ui/Container";
 
@@ -17,7 +17,6 @@ const explore = [
 const socials = [
   [Github, PERSONAL.github, "GitHub"],
   [Linkedin, PERSONAL.linkedin, "LinkedIn"],
-  [Facebook, PERSONAL.facebook, "Facebook"],
   [Mail, `mailto:${PERSONAL.email}`, "Email"],
 ];
 
@@ -64,8 +63,8 @@ export default function Footer() {
             </a>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-[--text-secondary]">
               Full-stack developer &amp; backend engineer based in New Delhi, India
-              architecting typed React interfaces, high-throughput APIs, and
-              production AI pipelines.
+              building typed full-stack applications: React interfaces, REST APIs, and
+              AI-integrated backends.
             </p>
           </div>
 
@@ -124,7 +123,7 @@ export default function Footer() {
 
         {/* Copyright & Back to Top */}
         <div className="flex flex-col gap-4 text-[11px] text-[--text-tertiary] md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Rajendra Bist. Production Systems Portfolio.</p>
+          <p>© 2026 Rajendra Bist.</p>
           <div className="flex items-center gap-6">
             <span>New Delhi, India</span>
             <a

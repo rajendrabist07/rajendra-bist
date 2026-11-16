@@ -36,8 +36,8 @@ export default function Credentials() {
       <Container className="relative z-10">
         <SectionHeader
           eyebrow="06 // CREDENTIALS & TRAINING"
-          title="Education & Verified Training"
-          description="Formal software engineering foundation and industry-standard technical accreditations."
+          title="Education"
+          description="Formal training and academic background."
         />
 
         <motion.div
@@ -93,6 +93,11 @@ export default function Credentials() {
                   <p className="mt-4 text-sm leading-relaxed text-[--text-secondary]">
                     {item.description}
                   </p>
+                  {item.institution === 'Vcare Technical Institute' && (
+                    <p className="mt-2 text-xs text-[--text-secondary]">
+                      Completed practical training at Vcare while simultaneously building the projects on this site (Feb 2025–present).
+                    </p>
+                  )}
                 </div>
 
                 <div className="mt-6 pt-5 border-t border-white/[0.06]">

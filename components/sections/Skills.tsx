@@ -25,103 +25,49 @@ import Container from "@/components/ui/Container";
 interface ToolItem {
   name: string;
   category: "backend" | "databases" | "devops" | "frontend" | "aiml";
-  badge: "CORE" | "EXPLORING";
+  badge: "CORE" | "WORKING" | "EXPLORING";
   icon: LucideIcon;
 }
 
 const ALL_TOOLS: ToolItem[] = [
-  // Backend Core
+  // Backend
   { name: "Node.js", category: "backend", badge: "CORE", icon: Server },
   { name: "TypeScript", category: "backend", badge: "CORE", icon: Code2 },
-  { name: "Express.js", category: "backend", badge: "CORE", icon: Server },
   { name: "REST APIs", category: "backend", badge: "CORE", icon: Network },
-  {
-    name: "Zod Validation",
-    category: "backend",
-    badge: "CORE",
-    icon: ShieldCheck,
-  },
-  {
-    name: "JWT Security",
-    category: "backend",
-    badge: "CORE",
-    icon: ShieldCheck,
-  },
-  { name: "WebSockets", category: "backend", badge: "CORE", icon: Zap },
+  { name: "Zod Validation", category: "backend", badge: "CORE", icon: ShieldCheck },
+  { name: "Prisma ORM", category: "backend", badge: "CORE", icon: Database },
+  { name: "Express.js", category: "backend", badge: "WORKING", icon: Server },
+  { name: "JWT Security", category: "backend", badge: "WORKING", icon: ShieldCheck },
+  { name: "Inngest", category: "backend", badge: "WORKING", icon: Workflow },
+  { name: "WebSockets", category: "backend", badge: "EXPLORING", icon: Zap },
 
-  // Databases Core
+  // Databases
   { name: "PostgreSQL", category: "databases", badge: "CORE", icon: Database },
-  {
-    name: "MongoDB Atlas",
-    category: "databases",
-    badge: "CORE",
-    icon: Database,
-  },
-  {
-    name: "Supabase pgvector",
-    category: "databases",
-    badge: "CORE",
-    icon: Database,
-  },
-  {
-    name: "Mongoose ORM",
-    category: "databases",
-    badge: "CORE",
-    icon: Database,
-  },
-  {
-    name: "Upstash Redis",
-    category: "databases",
-    badge: "CORE",
-    icon: Database,
-  },
+  { name: "MongoDB Atlas", category: "databases", badge: "WORKING", icon: Database },
+  { name: "Upstash Redis", category: "databases", badge: "WORKING", icon: Database },
+  { name: "Supabase pgvector", category: "databases", badge: "WORKING", icon: Database },
 
   // DevOps & Cloud
-  { name: "Docker", category: "devops", badge: "CORE", icon: Cloud },
-  { name: "Git & GitHub", category: "devops", badge: "CORE", icon: GitBranch },
-  {
-    name: "GitHub Actions CI/CD",
-    category: "devops",
-    badge: "CORE",
-    icon: Workflow,
-  },
-  { name: "Vercel Edge", category: "devops", badge: "CORE", icon: Cloud },
-  { name: "Linux / Bash", category: "devops", badge: "CORE", icon: Cpu },
+  { name: "GitHub Actions CI/CD", category: "devops", badge: "CORE", icon: Workflow },
+  { name: "Vercel", category: "devops", badge: "WORKING", icon: Cloud },
+  { name: "Turborepo", category: "devops", badge: "WORKING", icon: GitBranch },
+  { name: "Docker", category: "devops", badge: "EXPLORING", icon: Cloud },
+  { name: "Linux / Bash", category: "devops", badge: "EXPLORING", icon: Cpu },
 
   // Frontend
-  {
-    name: "Next.js 15 (App Router)",
-    category: "frontend",
-    badge: "CORE",
-    icon: Layers,
-  },
-  { name: "React 18.3", category: "frontend", badge: "CORE", icon: Code2 },
-  { name: "Tailwind CSS v4", category: "frontend", badge: "CORE", icon: Zap },
-  { name: "Framer Motion", category: "frontend", badge: "CORE", icon: Zap },
+  { name: "Next.js 15 (App Router)", category: "frontend", badge: "CORE", icon: Layers },
+  { name: "React", category: "frontend", badge: "WORKING", icon: Code2 },
+  { name: "Tailwind CSS v4", category: "frontend", badge: "WORKING", icon: Zap },
+  { name: "Framer Motion", category: "frontend", badge: "WORKING", icon: Zap },
 
   // AI & Systems
-  {
-    name: "RAG Pipelines",
-    category: "aiml",
-    badge: "CORE",
-    icon: BrainCircuit,
-  },
-  { name: "Google Gemini 2.5", category: "aiml", badge: "CORE", icon: Bot },
-  { name: "Groq LLM Engine", category: "aiml", badge: "CORE", icon: Zap },
-  { name: "Tool-Calling Agents", category: "aiml", badge: "CORE", icon: Bot },
-  {
-    name: "Vector Embeddings",
-    category: "aiml",
-    badge: "CORE",
-    icon: BrainCircuit,
-  },
+  { name: "Gemini API", category: "aiml", badge: "WORKING", icon: Bot },
+  { name: "Groq LLM Engine", category: "aiml", badge: "WORKING", icon: Zap },
+  { name: "Tool-Calling Agents", category: "aiml", badge: "WORKING", icon: Bot },
+  { name: "RAG Pipelines", category: "aiml", badge: "EXPLORING", icon: BrainCircuit },
+  { name: "Vector Embeddings", category: "aiml", badge: "EXPLORING", icon: BrainCircuit },
   { name: "LangChain.js", category: "aiml", badge: "EXPLORING", icon: Binary },
-  {
-    name: "LLM-as-Judge Evals",
-    category: "aiml",
-    badge: "EXPLORING",
-    icon: ShieldCheck,
-  },
+  { name: "LLM-as-Judge Evals", category: "aiml", badge: "EXPLORING", icon: ShieldCheck },
 ];
 
 const TABS = [
@@ -163,7 +109,7 @@ export default function Skills() {
         <SectionHeader
           eyebrow="02 // TECH ARSENAL"
           title="Production Stack & Tooling"
-          description="Technologies verified through real-world deployment, typed contracts, and measurable throughput."
+          description="Technologies used across the projects on this site."
         />
 
         {/* Filter Tabs */}
@@ -203,6 +149,7 @@ export default function Skills() {
             {filteredTools.map((tool) => {
               const Icon = tool.icon;
               const isCore = tool.badge === "CORE";
+              const isWorking = tool.badge === "WORKING";
 
               return (
                 <motion.div
@@ -215,6 +162,8 @@ export default function Skills() {
                   className={`group relative flex items-center justify-between gap-2 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-1 ${
                     isCore
                       ? "border border-[--border-strong] bg-[--bg-surface-2]/90 text-[--text-primary] hover:border-[--accent-warm]/50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                      : isWorking
+                      ? "border border-[--border-subtle] bg-[--bg-surface]/90 text-[--text-primary] hover:border-white/[0.2] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
                       : "border border-dashed border-[--border-subtle] bg-[--bg-surface]/80 text-[--text-secondary] hover:border-white/[0.2] hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
                   }`}
                 >
@@ -234,7 +183,9 @@ export default function Skills() {
                     className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider ${
                       isCore
                         ? "border border-[--accent-cool-dim] bg-[--accent-cool-dim] text-[--accent-cool]"
-                        : "border border-[--border-subtle] bg-[--bg-surface] text-[--text-tertiary]"
+                        : isWorking
+                        ? "border border-[--border-strong] bg-[--bg-surface-2] text-[--text-secondary]"
+                        : "border border-dashed border-[--border-subtle] bg-[--bg-surface] text-[--text-tertiary]"
                     }`}
                   >
                     {tool.badge}
