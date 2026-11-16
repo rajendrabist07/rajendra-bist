@@ -5,7 +5,8 @@ import { BLOG_POSTS } from "@/lib/blog";
 
 export const metadata = {
   title: "Engineering Notes",
-  description: "Engineering notes on backend systems and applied AI.",
+  description: "Engineering notes on backend systems, architecture, and applied AI.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {

@@ -17,7 +17,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudy(slug);
-  return study ? { title: study.title, description: study.summary } : {};
+  return study
+    ? {
+        title: `${study.title} | Case Study`,
+        description: study.summary.slice(0, 155),
+        alternates: { canonical: `/projects/${slug}` },
+        openGraph: {
+          title: `${study.title} — Architecture Case Study`,
+          description: study.summary.slice(0, 155),
+          url: `/projects/${slug}`,
+          type: "article",
+        },
+      }
+    : {};
 }
 
 export default async function CaseStudyPage({
@@ -29,8 +41,28 @@ export default async function CaseStudyPage({
   const study = getCaseStudy(slug);
   if (!study) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: study.title,
+    description: study.summary,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Web",
+    url: study.liveUrl || undefined,
+    codeRepository: study.githubUrl || undefined,
+    author: {
+      "@type": "Person",
+      name: "Rajendra Bist",
+      url: "https://www.bistrajendra.com.np",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[--bg-void] py-32 text-[--text-primary]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Container className="max-w-4xl">
         <Link
           href="/#projects"

@@ -36,8 +36,29 @@ export default async function BlogPostPage({
   if (!post) notFound();
   const html = await renderBlogPost(slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: "Rajendra Bist",
+      url: "https://www.bistrajendra.com.np",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Rajendra Bist",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[--bg-void] py-32 text-[--text-primary]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Container className="max-w-3xl">
         <Link
           href="/blog"

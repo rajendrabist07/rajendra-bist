@@ -5,7 +5,8 @@ import { CASE_STUDIES } from "@/lib/case-studies";
 
 export const metadata = {
   title: "Projects",
-  description: "Engineering case studies by Rajendra Bist.",
+  description: "Engineering case studies and system architectures by Rajendra Bist.",
+  alternates: { canonical: "/projects" },
 };
 
 export default function ProjectsIndexPage() {
