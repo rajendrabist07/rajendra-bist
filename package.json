@@ -8,6 +8,8 @@
     "build": "next build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "check:placeholders": "node scripts/check-placeholders.ts",
+    "check:links": "node scripts/check-links.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",

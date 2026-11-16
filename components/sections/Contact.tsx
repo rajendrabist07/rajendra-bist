@@ -18,18 +18,20 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { PERSONAL } from "@/lib/portfolio-data";
 import Container from "@/components/ui/Container";
 
+import { ObfuscatedEmail, ObfuscatedPhone } from "@/components/ui/ObfuscatedContact";
+
 const links = [
   {
     label: "Phone / Direct Line",
     href: `tel:${PERSONAL.phone.replace(/\s+/g, '')}`,
     icon: Phone,
-    value: PERSONAL.phone,
+    component: <ObfuscatedPhone />,
   },
   {
     label: "Email",
     href: `mailto:${PERSONAL.email}`,
     icon: Mail,
-    value: PERSONAL.email,
+    component: <ObfuscatedEmail />,
   },
   {
     label: "Location / Work Auth",
@@ -122,11 +124,11 @@ export default function Contact() {
           >
             <div className="flex items-center justify-between border-b border-[--border-subtle] pb-4 font-mono text-xs">
               <span className="font-bold text-[--text-primary]">
-                &gt; send_message.sh
+                Send a message
               </span>
-              <span className="text-[--accent-cool] flex items-center gap-1.5">
+              <span className="text-[--accent-cool] flex items-center gap-1.5 text-[11px]">
                 <span className="h-2 w-2 rounded-full bg-[--accent-cool] animate-pulse" />
-                ENDPOINT READY
+                Available for roles
               </span>
             </div>
 
@@ -197,7 +199,7 @@ export default function Contact() {
               <Send size={15} />
               {status === "sending"
                 ? "Dispatching Message..."
-                : "Dispatch Message"}
+                : "Send message"}
             </button>
 
             {feedback && (
@@ -239,9 +241,9 @@ export default function Contact() {
                         <p className="text-[10px] text-[--text-tertiary] uppercase">
                           {link.label}
                         </p>
-                        <p className="truncate font-medium text-[--text-primary] text-xs">
-                          {link.value}
-                        </p>
+                        <div className="truncate font-medium text-[--text-primary] text-xs">
+                          {link.component || link.value}
+                        </div>
                       </div>
                     </div>
                     <ArrowUpRight

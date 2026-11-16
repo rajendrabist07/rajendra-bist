@@ -4,6 +4,7 @@ import React from "react";
 import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
 import { PERSONAL } from "@/lib/portfolio-data";
 import Container from "@/components/ui/Container";
+import { ObfuscatedEmail } from "@/components/ui/ObfuscatedContact";
 
 const explore = [
   ["01 // About", "#about"],
@@ -71,7 +72,7 @@ export default function Footer() {
           {/* Col 2: Navigation Map */}
           <div>
             <h2 className="text-xs font-bold uppercase tracking-wider text-[--text-primary]">
-              System Index
+              Navigation
             </h2>
             <div className="mt-4 flex flex-col gap-2.5 text-xs text-[--text-secondary]">
               {explore.map(([label, href]) => (
@@ -89,14 +90,11 @@ export default function Footer() {
           {/* Col 3: Direct Comms & Location */}
           <div>
             <h2 className="text-xs font-bold uppercase tracking-wider text-[--text-primary]">
-              Direct Connection
+              Contact
             </h2>
-            <a
-              href={`mailto:${PERSONAL.email}`}
-              className="mt-4 block break-words text-[--text-primary] font-medium transition-colors hover:text-[--accent-warm]"
-            >
-              {PERSONAL.email}
-            </a>
+            <div className="mt-4 block break-words text-[--text-primary] font-medium transition-colors hover:text-[--accent-warm]">
+              <ObfuscatedEmail className="transition-colors hover:text-[--accent-warm]" />
+            </div>
             <p className="mt-2 text-[11px] text-[--text-tertiary]">
               New Delhi, India • Open to Delhi NCR &amp; Remote
             </p>
