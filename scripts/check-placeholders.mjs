@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 // Rule 3: Fail if content contains template placeholders or unfinished draft markers
 const FORBIDDEN_PATTERNS = [
@@ -15,7 +15,7 @@ const EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js', '.md', '.json'];
 
 let violations = 0;
 
-function scanDir(dir: string) {
+function scanDir(dir) {
   if (!fs.existsSync(dir)) return;
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
