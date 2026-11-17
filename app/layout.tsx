@@ -321,6 +321,12 @@ export default function RootLayout({
       <body
         className={`${displayFont.variable} ${monoFont.variable} bg-[--bg-primary] text-[--text-primary] antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#FF7A33] focus:text-[#050608] focus:rounded-lg focus:font-mono focus:text-xs focus:font-semibold focus:shadow-2xl"
+        >
+          Skip to main content
+        </a>
         <Providers>{children}</Providers>
       </body>
     </html>

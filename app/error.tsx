@@ -24,13 +24,21 @@ export default function Error({
         <p className="mt-3 text-[--text-secondary]">
           The error was recorded locally. Try the page again.
         </p>
-        <button
-          type="button"
-          onClick={reset}
-          className="premium-button-primary mt-6 rounded-lg px-5 py-3 font-mono text-sm"
-        >
-          Retry
-        </button>
+        <div className="mt-6 flex justify-center gap-3 font-mono text-xs">
+          <button
+            type="button"
+            onClick={reset}
+            className="premium-button-primary rounded-xl px-5 py-3 font-semibold transition-all hover:scale-105 active:scale-95"
+          >
+            Retry Request
+          </button>
+          <a
+            href="/"
+            className="premium-button-secondary rounded-xl px-5 py-3 font-semibold transition-all hover:border-[--accent-warm]"
+          >
+            Return Home
+          </a>
+        </div>
       </section>
     </main>
   );
