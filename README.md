@@ -205,10 +205,26 @@ npm run preview
 ### Verification commands
 
 ```bash
-npm run lint
+# 1. Typecheck
 npm run typecheck
+
+# 2. Linting
+npm run lint
+
+# 3. Guard against placeholder leaks (TODOs, template tokens)
+npm run check:placeholders
+
+# 4. Check external URLs from content/facts.ts
+npm run check:links
+
+# 5. Vitest test suite (API schemas, adversarial security tests)
 npm test
+
+# 6. Playwright E2E tests
 npm run test:e2e
+
+# 7. Production build
+npm run build
 ```
 
 CI runs these checks plus the production build. Playwright downloads Chromium in CI.
