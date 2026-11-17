@@ -10,7 +10,7 @@ Manual actions required after Phase 1 ships. These cannot be automated.
 
 ## Naukri Profile
 
-- [ ] Add **EduMethod AI** as the 4th project entry
+- [ ] Confirm 3 core projects listed: Sovereign, Chronicle, DevGuard AI
 - [ ] Change React version displayed from 19 → **18** (projects use React 18.3)
 
 ## LinkedIn
@@ -24,7 +24,8 @@ Manual actions required after Phase 1 ships. These cannot be automated.
 ## Live URL Verification
 
 - [ ] Verify `https://sovereign-saas-platform.vercel.app/` loads correctly
-- [ ] Verify `https://edumethod-ai.vercel.app/` loads correctly
+- [ ] Verify `https://chronicle-platform.vercel.app/` loads correctly
+- [ ] Verify `https://dev-guard-ai.vercel.app/` loads correctly
 
 ## Google Search Console
 

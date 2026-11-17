@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/projects/edumethod-ai',
+        destination: '/projects',
+        permanent: true,
+      },
+      {
         source: '/resume/:path*',
         destination: '/Resume/:path*',
         permanent: true,

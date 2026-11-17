@@ -65,7 +65,7 @@ FEATURED PROJECTS
   * **PostgreSQL Row-Level Security (RLS)**: Enforces tenant isolation mathematically at the database layer so no application WHERE clause omission can leak data.
   * **Inngest Workflow Engine**: Durable, resumable, and idempotent workflow runs with human-in-the-loop approval gates before sensitive actions.
   * **Schema-Guarded Tool Loop**: Treats LLMs as untrusted dependencies with JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt injection defenses.
-- **Links**: [GitHub Repository](https://github.com/rajendrabist07/sovereign)
+- **Links**: [Live Platform](https://sovereign-saas-platform.vercel.app/) | [GitHub Repository](https://github.com/rajendrabist07/sovereign)
 
 ### 2. Chronicle (Publishing Platform With Verified Accounts & Schema-Guarded AI Writing Tools)
 - **Status**: Sep 2026 (Live in Production)
@@ -88,13 +88,6 @@ FEATURED PROJECTS
   * **3-Tier Failover Router**: Primary Groq Llama 3.3 70B ➡️ Gemini 2.5 Flash ➡️ Deterministic Engine, providing an explicit fallback path during provider limits.
   * **Webhook Security**: HMAC-SHA256 signature verification (X-Hub-Signature-256) on incoming GitHub webhooks.
 - **Links**: [Live Demo](https://dev-guard-ai.vercel.app/) | [GitHub](https://github.com/rajendrabist07/dev-guard-ai)
-
-### 4. EduMethod AI (Cognitive EdTech Platform With Persistent Memory & pgvector RAG)
-- **Status**: Live in Production
-- **Problem**: Standard AI chatbots forget student weak areas between sessions and hallucinate answers on complex syllabus materials without grounding.
-- **Solution**: End-to-end cognitive workspace pairing long-term student memory profiles in Supabase with pgvector document grounding and an independent verification audit layer.
-- **Architecture & Stack**: Next.js 15, React 18.3, TypeScript, Clerk Auth, Supabase (PostgreSQL + pgvector), Upstash Redis, Groq Router, Gemini 2.5 Flash.
-- **Links**: [Live Demo](https://edumethod-ai.vercel.app) | [GitHub](https://github.com/rajendrabist07/edumethod-ai)
 
 ========================
 EXPERIENCE & EDUCATION

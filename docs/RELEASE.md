@@ -59,7 +59,7 @@ Ensure these environment variables are populated in your Vercel Project Settings
    - `/projects/sovereign`
    - `/projects/chronicle`
    - `/projects/devguard-ai`
-   - `/projects/edumethod-ai`
+   - `/projects/edumethod-ai` (verified permanent 308 redirect to `/projects`)
    - `/blog`
 
 4. **Sitemap & Robots**:

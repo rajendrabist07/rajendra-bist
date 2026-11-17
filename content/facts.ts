@@ -329,28 +329,6 @@ export const PROJECTS = z.array(ProjectSchema).parse([
     frontendImplementation:
       'Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.',
   },
-  {
-    title: 'EduMethod AI',
-    status: 'Live',
-    description:
-      'Adaptive learning platform with learner memory, pgvector RAG grounding, verification audits, and SM-2 spaced repetition.',
-    stack: [
-      'Next.js 15',
-      'React 18.3',
-      'TypeScript',
-      'Tailwind CSS v4',
-      'Clerk Auth',
-      'Supabase (pgvector)',
-      'Upstash Redis',
-      'Groq Model Router',
-      'Gemini 2.5 Flash API',
-    ],
-    imageUrl: '/images/edumethod-ai-card.svg',
-    liveUrl: 'https://edumethod-ai.vercel.app',
-    githubUrl: 'https://github.com/rajendrabist07/edumethod-ai',
-    frontendImplementation:
-      'Built the learning workspace around authenticated Next.js/React flows that connect upload, memory, verification, and spaced-repetition states to typed backend responses.',
-  },
 ])
 
 // ---------------------------------------------------------------------------

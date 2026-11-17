@@ -175,7 +175,7 @@ const CASE_STUDIES = [
     githubUrl: "https://github.com/rajendrabist07/sovereign",
   },
   {
-    tag: "PRODUCTION SYSTEM • 2026",
+    tag: "LIVE • 2026",
     title: "DevGuard AI",
     tagline: "Autonomous PR Security & Code Review Agent",
     image: "/images/devguard-ai-card.svg",
@@ -335,165 +335,7 @@ const CASE_STUDIES = [
     githubUrl: "https://github.com/rajendrabist07/dev-guard-ai",
   },
   {
-    tag: "PRODUCTION SYSTEM • 2026",
-    title: "EduMethod AI",
-    tagline: "Cognitive EdTech Platform With Persistent Memory & pgvector RAG",
-    image: "/images/edumethod-ai-card.svg",
-    terminalContent: `Syllabus Upload → [pgvector Embeddings]
-                    ↓
-               [Persistent Student Memory]
-                    ↓
-               [Verification Audit Layer]
-                    ↓
-               [SM-2 Spaced Repetition] → Mastery`,
-    architectureSvg: (
-      <svg
-        viewBox="0 0 440 200"
-        className="w-full h-auto text-[--text-secondary] font-mono text-[10px]"
-      >
-        <rect
-          x="15"
-          y="20"
-          width="115"
-          height="34"
-          rx="6"
-          fill="#10131A"
-          stroke="#FF7A33"
-          strokeWidth="1.5"
-        />
-        <text
-          x="72"
-          y="41"
-          fill="#EDEFF2"
-          textAnchor="middle"
-          fontWeight="bold"
-        >
-          Syllabus PDF
-        </text>
-
-        <rect
-          x="175"
-          y="20"
-          width="110"
-          height="34"
-          rx="6"
-          fill="#10131A"
-          stroke="#34D8B0"
-          strokeWidth="1.5"
-        />
-        <text x="230" y="41" fill="#34D8B0" textAnchor="middle">
-          pgvector Store
-        </text>
-
-        <rect
-          x="325"
-          y="20"
-          width="100"
-          height="34"
-          rx="6"
-          fill="#10131A"
-          stroke="rgba(255,255,255,0.15)"
-          strokeWidth="1"
-        />
-        <text x="375" y="41" fill="#EDEFF2" textAnchor="middle">
-          Memory Log
-        </text>
-
-        <rect
-          x="80"
-          y="120"
-          width="125"
-          height="34"
-          rx="6"
-          fill="#10131A"
-          stroke="#34D8B0"
-          strokeWidth="1.5"
-        />
-        <text
-          x="142"
-          y="141"
-          fill="#34D8B0"
-          textAnchor="middle"
-          fontWeight="bold"
-        >
-          SM-2 Algorithm
-        </text>
-
-        <rect
-          x="250"
-          y="120"
-          width="120"
-          height="34"
-          rx="6"
-          fill="#10131A"
-          stroke="#FF7A33"
-          strokeWidth="1.5"
-        />
-        <text
-          x="310"
-          y="141"
-          fill="#FF7A33"
-          textAnchor="middle"
-          fontWeight="bold"
-        >
-          Grounded Output
-        </text>
-
-        <path
-          d="M 130 37 L 175 37"
-          stroke="#34D8B0"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-          className="animate-pulse"
-        />
-        <path
-          d="M 285 37 L 325 37"
-          stroke="rgba(255,255,255,0.3)"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M 375 54 L 375 90 L 142 90 L 142 120"
-          stroke="#34D8B0"
-          strokeWidth="1.5"
-          strokeDasharray="5 3"
-        />
-        <path
-          d="M 205 137 L 250 137"
-          stroke="#FF7A33"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-          className="animate-pulse"
-        />
-      </svg>
-    ),
-    problem:
-      "Generic AI chatbots forget student weak areas between sessions and hallucinate answers on complex syllabus materials without grounding.",
-    solution:
-      "End-to-end cognitive workspace pairing long-term student memory profiles in Supabase with pgvector document grounding and an independent verification audit layer.",
-    keyDecision:
-      "Chose self-hosted pgvector inside PostgreSQL over external vector databases to eliminate cold starts and keep user data and vector embeddings in a single atomic transaction.",
-    frontendImplementation:
-      "Built the learning workspace around authenticated Next.js/React flows that connect upload, memory, verification, and spaced-repetition states to typed backend responses.",
-    metrics: [
-      { value: "pgvector", label: "Syllabus Grounding" },
-      { value: "SM-2", label: "Spaced Repetition" },
-      { value: "7 Engines", label: "Cognitive Core" },
-    ],
-    stack: [
-      "Next.js 15",
-      "React 18.3",
-      "TypeScript",
-      "Clerk Auth",
-      "Supabase (pgvector)",
-      "Upstash Redis",
-      "Groq Router",
-      "Gemini 2.5",
-    ],
-    liveUrl: "https://edumethod-ai.vercel.app",
-    githubUrl: "https://github.com/rajendrabist07/edumethod-ai",
-  },
-  {
-    tag: "PRODUCTION SYSTEM • 2026",
+    tag: "LIVE • 2026",
     title: "Chronicle",
     tagline:
       "Publishing Platform With Verified Accounts & Schema-Guarded AI Writing Tools",
@@ -628,7 +470,6 @@ const CASE_STUDIES = [
 const CASE_STUDY_SLUGS: Record<string, string> = {
   Sovereign: "sovereign",
   "DevGuard AI": "devguard-ai",
-  "EduMethod AI": "edumethod-ai",
   Chronicle: "chronicle",
 };
 
