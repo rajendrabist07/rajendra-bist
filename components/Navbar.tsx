@@ -1,164 +1,227 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import type { MouseEvent } from "react";
-import { Terminal, Download, Menu, X, Command } from "lucide-react";
-import { PERSONAL } from "@/lib/portfolio-data";
-import Container from "@/components/ui/Container";
+import React, { useState, useEffect, useRef } from 'react';
+import type { MouseEvent } from 'react';
+import { FACTS } from '@/content/facts';
+import { ThemeToggle } from '@/components/primitives/ThemeToggle';
+import { Icon } from '@/components/primitives/Icon';
 
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Stack", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Case Studies", href: "/projects" },
-  { label: "Notes", href: "/blog" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
+const NAV_ITEMS = [
+  { label: 'About', href: '#about', id: 'about' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Stack', href: '#skills', id: 'skills' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Process', href: '#process', id: 'process' },
+  { label: 'Notes', href: '/blog', id: 'blog' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [keyHint, setKeyHint] = useState("⌘K");
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
+  const [platformKey, setPlatformKey] = useState<string>('⌘K');
+  const drawerRef = useRef<HTMLDivElement>(null);
 
+  // Platform-aware keyboard shortcut hint
   useEffect(() => {
-    if (typeof navigator !== "undefined" && !/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      setKeyHint("Ctrl+K");
+    if (typeof navigator !== 'undefined' && !/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      setPlatformKey('Ctrl+K');
     }
   }, []);
 
-  const handleAnchorClick =
-    (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-      if (!href.startsWith("#")) return;
-      event.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
+  // Active section tracking via IntersectionObserver
+  useEffect(() => {
+    const sectionIds = ['home', 'about', 'projects', 'skills', 'experience', 'process', 'contact'];
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0,
       }
-      setOpen(false);
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // Focus trap for mobile drawer
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
     };
 
-  const triggerCmdk = () => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  const handleAnchorClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!href.startsWith('#')) return;
+    event.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
+  const openCommandPalette = (mode: 'search' | 'ai' = 'search') => {
     window.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "k", metaKey: true }),
+      new CustomEvent('open-cmdk', { detail: { mode } })
     );
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.06] bg-[#050608]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.45)]">
-      <Container
-        as="div"
-        className="flex items-center justify-between gap-4 py-3"
-      >
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-[--border-hairline] bg-[--bg-page]/85 backdrop-blur-md supports-[backdrop-filter:none]:bg-[--bg-page] transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Brand Monogram */}
         <a
           href="#home"
-          onClick={handleAnchorClick("#home")}
-          className="group flex items-center gap-2.5 font-mono text-sm font-bold tracking-tight text-[--text-primary] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] rounded px-1"
+          onClick={handleAnchorClick('#home')}
+          className="group flex items-center gap-2.5 font-mono text-sm font-bold tracking-tight text-[--text-primary] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] rounded-[--radius-control] p-1"
+          aria-label="Rajendra Bist - Home"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#FF7A33]/40 bg-[#10131A] text-xs font-black text-[#FF7A33] shadow-[0_0_12px_rgba(255,122,51,0.2)] transition-all group-hover:border-[#FF7A33] group-hover:shadow-[0_0_16px_rgba(255,122,51,0.35)]">
+          <span className="flex h-7 w-7 items-center justify-center rounded-[--radius-control] border border-[--accent] bg-[--accent-dim] text-xs font-bold text-[--accent] transition-transform group-hover:scale-105">
             RB
           </span>
-          <span className="text-xs tracking-wider text-[--text-secondary] transition-colors group-hover:text-[--text-primary]">
-            bistrajendra<span className="text-[#FF7A33]">.com.np</span>
+          <span className="text-xs tracking-wider text-[--text-secondary] group-hover:text-[--text-primary] transition-colors hidden sm:inline">
+            bistrajendra<span className="text-[--accent]">.com.np</span>
           </span>
         </a>
 
-        {/* Desktop Nav Items */}
-        <nav className="hidden items-center gap-1 xl:gap-2 lg:flex font-mono text-xs">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={handleAnchorClick(item.href)}
-              className="relative px-3 py-1.5 text-[--text-secondary] transition-colors duration-150 hover:text-[--text-primary] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm] rounded-md hover:bg-white/[0.04]"
-            >
-              <span>{item.label}</span>
-            </a>
-          ))}
-        </nav>
-
-        {/* Right Action Stack: ⌘K Trigger + Download CV */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* ⌘K Trigger Button */}
-          <button
-            type="button"
-            onClick={triggerCmdk}
-            aria-label="Open Command Palette"
-            className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.02] px-2.5 py-1.5 font-mono text-xs text-[--text-secondary] transition-all duration-200 hover:border-white/[0.18] hover:bg-white/[0.05] hover:text-[--text-primary] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm]"
-          >
-            <Command size={13} className="text-[#FF7A33]" />
-            <span className="hidden md:inline text-[11px]">Search</span>
-            <kbd className="hidden sm:inline-block rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.2 text-[10px] text-[--text-tertiary]">
-              {keyHint}
-            </kbd>
-          </button>
-
-          {/* Download CV CTA */}
-          <a
-            href={PERSONAL.resumeUrl}
-            download="Rajendra-Bist-Resume.pdf"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#FF7A33]/40 bg-[#FF7A33]/10 px-3.5 py-1.5 font-mono text-xs font-semibold text-[#FF7A33] shadow-[0_0_12px_rgba(255,122,51,0.15)] transition-all duration-200 hover:border-[#FF7A33] hover:bg-[#FF7A33] hover:text-[#050608] hover:shadow-[0_0_20px_rgba(255,122,51,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm]"
-          >
-            <Download size={13} />
-            <span>Resume</span>
-          </a>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[--text-secondary] transition-all duration-200 lg:hidden cursor-pointer hover:text-[--text-primary] hover:border-white/[0.16] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm]"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={open}
-            aria-controls="mobile-nav-menu"
-          >
-            {open ? <X size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
-      </Container>
-
-      {/* Mobile Drawer */}
-      {open && (
-        <div
-          id="mobile-nav-menu"
-          className="border-t border-white/[0.08] bg-[#050608]/95 px-6 py-5 backdrop-blur-2xl lg:hidden font-mono text-sm"
+        {/* Desktop Nav Items with Active State Highlight */}
+        <nav
+          className="hidden lg:flex items-center gap-1 font-mono text-xs"
+          aria-label="Main Navigation"
         >
-          <div className="flex flex-col gap-1.5">
-            {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => {
+            const isActive =
+              (item.id === 'blog' && false) ||
+              activeSection === item.id ||
+              (item.id === 'skills' && activeSection === 'skills');
+
+            return (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={handleAnchorClick(item.href)}
-                className="flex items-center justify-between rounded-lg px-3 py-2.5 text-[--text-secondary] transition-colors hover:bg-white/[0.04] hover:text-[--text-primary]"
+                aria-current={isActive ? 'page' : undefined}
+                className={`px-3 py-1.5 rounded-[--radius-control] transition-all duration-[--duration-micro] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] ${
+                  isActive
+                    ? 'text-[--accent] bg-[--accent-dim] font-semibold'
+                    : 'text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim]'
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Action Stack: Theme Toggle + ⌘K Trigger + Resume CTA */}
+        <div className="flex items-center gap-2.5">
+          {/* Theme Switcher Toggle */}
+          <ThemeToggle showLabel={false} />
+
+          {/* ⌘K Command Palette Trigger */}
+          <button
+            type="button"
+            onClick={() => openCommandPalette('search')}
+            aria-label="Open Command Palette"
+            className="flex items-center gap-2 px-2.5 py-1.5 font-mono text-xs text-[--text-secondary] bg-[--bg-surface-2] border border-[--border-hairline] hover:border-[--border-strong] hover:text-[--text-primary] rounded-[--radius-control] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+          >
+            <Icon name="terminal" size={13} className="text-[--accent]" />
+            <span className="hidden md:inline text-[11px]">Search</span>
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded border border-[--border-hairline] bg-[--bg-surface-3] text-[10px] text-[--text-tertiary]">
+              {platformKey}
+            </kbd>
+          </button>
+
+          {/* Download Resume Button */}
+          <a
+            href={FACTS.resume.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs font-medium text-[--accent] bg-[--accent-dim] border border-[--accent] hover:brightness-110 rounded-[--radius-control] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+          >
+            <span>Resume</span>
+          </a>
+
+          {/* Mobile Sheet Menu Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav-menu"
+            className="lg:hidden p-2 text-[--text-secondary] hover:text-[--text-primary] border border-[--border-hairline] bg-[--bg-surface-2] rounded-[--radius-control] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] cursor-pointer"
+          >
+            {isOpen ? '✕' : '☰'}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Sheet Menu */}
+      {isOpen && (
+        <div
+          id="mobile-nav-menu"
+          ref={drawerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
+          className="lg:hidden border-t border-[--border-hairline] bg-[--bg-page] px-6 py-6 font-mono text-sm space-y-4"
+        >
+          <div className="flex flex-col space-y-2">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={handleAnchorClick(item.href)}
+                className="flex items-center justify-between px-3 py-2.5 rounded-[--radius-control] text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim] transition-colors"
               >
                 <span>{item.label}</span>
-                <span className="text-xs text-[#FF7A33]">&rarr;</span>
+                <span className="text-[--accent]">→</span>
               </a>
             ))}
+          </div>
 
-            <div className="mt-4 flex flex-col gap-2.5 border-t border-white/[0.08] pt-4">
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                  triggerCmdk();
-                }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/[0.1] bg-white/[0.03] py-2.5 text-xs text-[--text-primary]"
-              >
-                <Command size={14} className="text-[#FF7A33]" />
-                Command Palette ({keyHint})
-              </button>
+          <div className="pt-4 border-t border-[--border-hairline] flex flex-col gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                openCommandPalette('search');
+              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-[--bg-surface-2] border border-[--border-hairline] rounded-[--radius-control] text-xs font-mono text-[--text-primary]"
+            >
+              <Icon name="terminal" size={14} className="text-[--accent]" />
+              Command Palette ({platformKey})
+            </button>
 
-              <a
-                href={PERSONAL.resumeUrl}
-                download="Rajendra-Bist-Resume.pdf"
-                onClick={() => setOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#FF7A33] py-2.5 text-xs font-semibold text-[#050608]"
-              >
-                <Download size={14} />
-                Download Resume (PDF)
-              </a>
-            </div>
+            <a
+              href={FACTS.resume.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-[--accent] text-[--accent-ink] font-medium rounded-[--radius-control] text-xs font-mono"
+            >
+              Download Resume (PDF)
+            </a>
           </div>
         </div>
       )}

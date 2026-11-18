@@ -521,3 +521,26 @@ export const SITE_CONFIG = SiteConfigSchema.parse({
   SITE_DESCRIPTION:
     'Full-stack developer shipping complete apps: Next.js, Node.js, PostgreSQL — schema design to deployment. Open to SDE-1 roles in Delhi NCR and remote.',
 })
+
+// Unified FACTS export aggregating verified facts
+export const FACTS = {
+  personal: PERSONAL,
+  education: EDUCATION,
+  credentials: CREDENTIALS,
+  timelineEvents: TIMELINE_EVENTS,
+  experience: EXPERIENCE,
+  skills: SKILLS,
+  projects: PROJECTS,
+  siteConfig: SITE_CONFIG,
+  availability: PERSONAL.availability,
+  resume: {
+    url: PERSONAL.resumeUrl,
+  },
+  contact: {
+    email: PERSONAL.email,
+    github: PERSONAL.github,
+    linkedin: PERSONAL.linkedin,
+    phone: PERSONAL.phone,
+    location: PERSONAL.location,
+  },
+} as const;

@@ -141,7 +141,7 @@ for (const s of suites) {
       failures++;
       continue;
     }
-    for (const surf of s.surfaces.slice(0, 3)) { // test on page, surface-1, surface-2
+    for (const surf of s.surfaces) { // test on all surfaces: page, surface-1, surface-2, surface-3
       const sHex = s.data[surf];
       if (!sHex) continue;
       const ratio = contrast(uHex, sHex);

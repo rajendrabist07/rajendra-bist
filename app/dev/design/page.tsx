@@ -87,8 +87,8 @@ CREATE POLICY tenant_isolation ON tenants
         <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-[--border-hairline]">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Annotation>INTERNAL // DEV SPEC</Annotation>
-              <Chip variant="blueprint">DIRECTION A BLUEPRINT</Chip>
+              <Annotation>Design Specification</Annotation>
+              <Chip variant="blueprint">Direction A Blueprint</Chip>
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[--text-primary]">
               Design System & Primitives
@@ -102,12 +102,12 @@ CREATE POLICY tenant_isolation ON tenants
           </div>
         </header>
 
-        <DimensionLine label="PRIMITIVES CATALOG" />
+        <DimensionLine label="Primitives Catalog" />
 
         {/* Section 1: Buttons & Links */}
         <Section id="buttons">
           <div className="mb-4">
-            <Annotation>COMP.01 // ACTIONS</Annotation>
+            <Annotation>Interactive Actions</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Buttons & Links</h2>
           </div>
           <Surface level={1} className="p-6 space-y-6">
@@ -143,26 +143,26 @@ CREATE POLICY tenant_isolation ON tenants
         {/* Section 2: Surfaces & Elevation */}
         <Section id="surfaces">
           <div className="mb-4">
-            <Annotation>COMP.02 // ELEVATION</Annotation>
+            <Annotation>Elevation Tiers</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Surface Levels (3 Tiers)</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Surface level={1} interactive className="p-6">
-              <span className="font-mono text-xs text-[--accent]">[SURFACE LEVEL 1]</span>
+              <span className="font-mono text-xs text-[--accent]">Surface Level 1</span>
               <h3 className="text-base font-semibold mt-2 text-[--text-primary]">Card Base</h3>
               <p className="text-sm text-[--text-secondary] mt-1">
                 Base card surface (<code className="text-xs">--bg-surface-1</code>) with hairline border.
               </p>
             </Surface>
             <Surface level={2} interactive className="p-6">
-              <span className="font-mono text-xs text-[--accent]">[SURFACE LEVEL 2]</span>
+              <span className="font-mono text-xs text-[--accent]">Surface Level 2</span>
               <h3 className="text-base font-semibold mt-2 text-[--text-primary]">Elevated Surface</h3>
               <p className="text-sm text-[--text-secondary] mt-1">
                 Elevated card (<code className="text-xs">--bg-surface-2</code>) with strong border.
               </p>
             </Surface>
             <Surface level={3} className="p-6">
-              <span className="font-mono text-xs text-[--accent]">[SURFACE LEVEL 3]</span>
+              <span className="font-mono text-xs text-[--accent]">Surface Level 3</span>
               <h3 className="text-base font-semibold mt-2 text-[--text-primary]">Code Container</h3>
               <p className="text-sm text-[--text-secondary] mt-1">
                 Inset container (<code className="text-xs">--bg-surface-3</code>) for code and data.
@@ -174,7 +174,7 @@ CREATE POLICY tenant_isolation ON tenants
         {/* Section 3: Chips, Badges & Tooltips */}
         <Section id="chips">
           <div className="mb-4">
-            <Annotation>COMP.03 // METADATA</Annotation>
+            <Annotation>Status & Metadata</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Chips, Annotations & Tooltips</h2>
           </div>
           <Surface level={1} className="p-6 flex flex-wrap items-center gap-4">
@@ -183,8 +183,8 @@ CREATE POLICY tenant_isolation ON tenants
             </Chip>
             <Chip variant="tech">PostgreSQL 16</Chip>
             <Chip variant="tech">Next.js 15 App Router</Chip>
-            <Chip variant="blueprint">DEPLOYED // 2 SERVICES</Chip>
-            <Annotation>SPEC // 01 · IDENTITY</Annotation>
+            <Chip variant="blueprint">Deployed Services: 2</Chip>
+            <Annotation>New Delhi, India</Annotation>
             <Tooltip content="Live in New Delhi, India (IST UTC+5:30)">
               <button className="px-3 py-1 font-mono text-xs text-[--text-secondary] border border-[--border-hairline] rounded-[--radius-control] hover:border-[--border-strong] cursor-help">
                 Hover for Tooltip
@@ -196,12 +196,12 @@ CREATE POLICY tenant_isolation ON tenants
         {/* Section 4: CodeWindow */}
         <Section id="code">
           <div className="mb-4">
-            <Annotation>COMP.04 // CODE</Annotation>
+            <Annotation>Schema Definition</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">CodeWindow (Blueprint CAD Frame)</h2>
           </div>
           <CodeWindow
             title="migration.sql"
-            tag="PRISMA // RLS"
+            tag="Prisma RLS"
             code={sampleCode}
             language="sql"
           />
@@ -212,7 +212,7 @@ CREATE POLICY tenant_isolation ON tenants
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
               <div className="mb-4">
-                <Annotation>COMP.05 // TABS</Annotation>
+                <Annotation>Category Filters</Annotation>
                 <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Tabs (WAI-ARIA)</h2>
               </div>
               <Surface level={1} className="p-6">
@@ -221,7 +221,7 @@ CREATE POLICY tenant_isolation ON tenants
             </div>
             <div>
               <div className="mb-4">
-                <Annotation>COMP.06 // TIMELINE</Annotation>
+                <Annotation>Milestone Log</Annotation>
                 <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Timeline (Dual-Lane Log)</h2>
               </div>
               <Surface level={1} className="p-6">
@@ -234,7 +234,7 @@ CREATE POLICY tenant_isolation ON tenants
         {/* Section 6: Fields & Forms */}
         <Section id="fields">
           <div className="mb-4">
-            <Annotation>COMP.07 // INPUTS</Annotation>
+            <Annotation>Input Fields</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Form Fields & Validation</h2>
           </div>
           <Surface level={1} className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -262,11 +262,11 @@ CREATE POLICY tenant_isolation ON tenants
         {/* Section 7: Viewfinder & CropMarks */}
         <Section id="cropmarks">
           <div className="mb-4">
-            <Annotation>COMP.08 // IDENTITY FRAME</Annotation>
+            <Annotation>Identity Viewfinder</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">CropMarks & 4:5 Portrait Viewfinder</h2>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-8">
-            <div className="w-64">
+            <div className="w-64 max-w-[400px]">
               <CropMarks size={18}>
                 <div className="relative aspect-[4/5] w-full rounded-[--radius-control] overflow-hidden border border-[--border-hairline] bg-[--bg-surface-2]">
                   <Image
@@ -277,7 +277,7 @@ CREATE POLICY tenant_isolation ON tenants
                     className="object-cover object-top"
                   />
                   <div className="absolute bottom-2 right-2 bg-[--bg-page] border border-[--border-strong] px-2 py-0.5 rounded-[--radius-control] font-mono text-[10px] text-[--accent]">
-                    28°36&apos;N · 77°12&apos;E
+                    New Delhi, India
                   </div>
                 </div>
               </CropMarks>
@@ -293,7 +293,7 @@ CREATE POLICY tenant_isolation ON tenants
               <div className="flex flex-wrap gap-2">
                 <Chip variant="tech">AVIF: 31 KB</Chip>
                 <Chip variant="tech">WebP: 28 KB</Chip>
-                <Chip variant="blueprint">4:5 ASPECT RATIO</Chip>
+                <Chip variant="blueprint">4:5 Aspect Ratio</Chip>
               </div>
             </div>
           </div>
@@ -302,7 +302,7 @@ CREATE POLICY tenant_isolation ON tenants
         {/* Section 8: Toast & Icons */}
         <Section id="toasts-icons">
           <div className="mb-4">
-            <Annotation>COMP.09 // SYSTEM FEEDBACK</Annotation>
+            <Annotation>System Notifications</Annotation>
             <h2 className="text-xl font-bold mt-1 text-[--text-primary]">Toasts & Icons</h2>
           </div>
           <Surface level={1} className="p-6 space-y-6">
@@ -323,7 +323,7 @@ CREATE POLICY tenant_isolation ON tenants
           </Surface>
         </Section>
 
-        <DimensionLine label="END OF BLUEPRINT SPEC" />
+        <DimensionLine label="End of Specification" />
       </Container>
     </main>
   );
