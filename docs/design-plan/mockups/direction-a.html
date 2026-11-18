@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direction A: "Blueprint" — Identity Mockup</title>
+  <style>
+    /* Direction A Design Tokens */
+    :root[data-theme="dark"] {
+      --bg-page: #0B1220;
+      --bg-surface-1: #101A2E;
+      --bg-surface-2: #16233B;
+      --bg-surface-3: #1D2D49;
+      --border-hairline: rgba(148, 178, 255, 0.14);
+      --border-strong: rgba(148, 178, 255, 0.28);
+      --text-primary: #E8EEFB;
+      --text-secondary: #A9B6D3;
+      --text-tertiary: #8A98B8;
+      --accent: #38D0F0;
+      --accent-ink: #051A24;
+      --accent-dim: rgba(56, 208, 240, 0.12);
+      --status-live: #3DDC97;
+      --grid-line: rgba(148, 178, 255, 0.05);
+      --grid-major: rgba(148, 178, 255, 0.10);
+    }
+
+    :root[data-theme="light"] {
+      --bg-page: #F4F7FB;
+      --bg-surface-1: #FFFFFF;
+      --bg-surface-2: #EAF0F8;
+      --bg-surface-3: #DCE5F2;
+      --border-hairline: rgba(15, 30, 60, 0.10);
+      --border-strong: rgba(15, 30, 60, 0.22);
+      --text-primary: #0B1220;
+      --text-secondary: #334155;
+      --text-tertiary: #475569;
+      --accent: #0369A1;
+      --accent-ink: #FFFFFF;
+      --accent-dim: rgba(3, 105, 161, 0.10);
+      --status-live: #065F46;
+      --grid-line: rgba(15, 30, 60, 0.04);
+      --grid-major: rgba(15, 30, 60, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Blueprint Technical Grid Background */
+    .blueprint-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+      mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top Control Bar */
+    header {
+      border-bottom: 1px solid var(--border-hairline);
+      background: var(--bg-surface-1);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-mark {
+      padding: 4px 8px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      color: var(--accent);
+    }
+    .theme-toggle {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 80px 0 100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 50px 0;
+      }
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface-2);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-family: ui-monospace, monospace;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--status-live);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .hero-role {
+      font-family: ui-monospace, monospace;
+      font-size: clamp(14px, 2vw, 17px);
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .caret {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--accent);
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-pitch {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 54ch;
+      margin-bottom: 32px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Viewfinder Portrait Frame */
+    .viewfinder {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 4/5;
+      margin: 0 auto;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface-1);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    /* Blueprint Crop Marks */
+    .crop-mark {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: var(--accent);
+      border-style: solid;
+    }
+    .crop-tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .crop-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .crop-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+    .crop-br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    .viewfinder-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-surface-2);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .viewfinder-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .annotation-chip {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-strong);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--text-primary);
+    }
+
+    /* Case File Project Card */
+    .section-title {
+      font-size: 13px;
+      font-family: ui-monospace, monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 40px;
+      letter-spacing: -0.02em;
+    }
+
+    .case-file {
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface-1);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 900px) {
+      .case-file { grid-template-columns: 1fr; }
+    }
+
+    .case-file-content {
+      padding: 40px;
+    }
+    .case-file-header {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-surface-3);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-hairline);
+    }
+    .case-file-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .case-file-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    .bullet-list {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .bullet-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .bullet-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .evidence-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-hairline);
+    }
+    .evidence-item {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .evidence-label {
+      font-size: 11px;
+      font-family: ui-monospace, monospace;
+      color: var(--text-tertiary);
+    }
+    .evidence-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 2px;
+    }
+    .evidence-source {
+      font-size: 10px;
+      font-family: ui-monospace, monospace;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    /* Interactive Blueprint Architecture Diagram */
+    .diagram-pane {
+      background: var(--bg-surface-2);
+      border-left: 1px solid var(--border-hairline);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (max-width: 900px) {
+      .diagram-pane {
+        border-left: none;
+        border-top: 1px solid var(--border-hairline);
+      }
+    }
+    .diagram-header {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .diagram-box {
+      border: 1px solid var(--border-strong);
+      background: var(--bg-surface-1);
+      border-radius: 8px;
+      padding: 16px;
+      position: relative;
+    }
+    .diagram-node {
+      border: 1px solid var(--accent);
+      background: var(--bg-surface-3);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .diagram-node:hover {
+      border-color: #3DDC97;
+      cursor: pointer;
+    }
+    .diagram-arrow {
+      text-align: center;
+      color: var(--accent);
+      font-family: ui-monospace, monospace;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    /* Contact Hub */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 100px;
+    }
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    .contact-card {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-hairline);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-family: ui-monospace, monospace;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: var(--accent);
+    }
+    .copy-pill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-hairline);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+    }
+    .copy-btn {
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-hairline);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="blueprint-grid"></div>
+
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-mark">RB</span>
+        <span>bistrajendra.com.np</span>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button class="theme-toggle" onclick="toggleTheme()">
+          <span id="theme-icon">☀️</span>
+          <span id="theme-label">Light Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div>
+        <div class="status-chip">
+          <span class="status-dot"></span>
+          <span>Available immediately · Delhi NCR / Remote</span>
+        </div>
+        <h1>Rajendra Bist</h1>
+        <div class="hero-role">
+          <span>&gt; Full-Stack Developer &amp; Backend Engineer</span>
+          <span class="caret"></span>
+        </div>
+        <p class="hero-pitch">
+          I build complete web applications, from strict database schema design and multi-tenant row-level security to resilient cloud deployments.
+        </p>
+        <div class="btn-group">
+          <a href="#projects" class="btn-primary">View Case Files</a>
+          <a href="/resume/Rajendra_Bist_Full_Stack_Developer.pdf" class="btn-secondary">Download CV</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="viewfinder">
+          <div class="crop-mark crop-tl"></div>
+          <div class="crop-mark crop-tr"></div>
+          <div class="crop-mark crop-bl"></div>
+          <div class="crop-mark crop-br"></div>
+          <div class="viewfinder-inner">
+            <img src="../../../public/images/Rajendra-Bist.png" alt="Rajendra Bist">
+            <div class="annotation-chip">New Delhi, India · 14:32 IST</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Case File -->
+    <div class="section-title">Case File 01 // Systems Architecture</div>
+    <div class="section-h2">Featured Project Case File</div>
+
+    <div class="case-file">
+      <div class="case-file-content">
+        <div class="case-file-header">
+          <span class="badge" style="color: var(--accent); border-color: var(--accent);">IN DEVELOPMENT</span>
+          <span class="badge">TURBOREPO MONOREPO</span>
+        </div>
+        <div class="case-file-title">Sovereign</div>
+        <div class="case-file-desc">
+          Multi-tenant B2B SaaS platform where organizations define autonomous AI workflow agents with PostgreSQL Row-Level Security and Inngest.
+        </div>
+        <ul class="bullet-list">
+          <li>Separates each organization's data with PostgreSQL Row-Level Security policies, ensuring strict database-level tenant isolation.</li>
+          <li>Orchestrates durable multi-step executions with Inngest, supporting idempotent retries and human approval gates.</li>
+          <li>Built reviewer interface for queue inspection, tool authorization, and audit trail verification.</li>
+        </ul>
+
+        <div class="evidence-strip">
+          <div class="evidence-item">
+            <div class="evidence-label">DATABASE ISOLATION</div>
+            <div class="evidence-value">PostgreSQL RLS</div>
+            <div class="evidence-source">source: migrations/20261002111243_enable_rls</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-label">WORKFLOW ENGINE</div>
+            <div class="evidence-value">Inngest Durable Runs</div>
+            <div class="evidence-source">source: apps/web/inngest/run-workflow.ts</div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <a href="https://sovereign-saas-platform.vercel.app/" class="btn-primary" target="_blank">Live Platform</a>
+          <a href="https://github.com/rajendrabist07/sovereign" class="btn-secondary" target="_blank">View Repository</a>
+        </div>
+      </div>
+
+      <div class="diagram-pane">
+        <div class="diagram-header">
+          <span>FIG 1.1 — EXECUTION PATH (SIMPLIFIED)</span>
+          <span style="color: var(--accent);">STATUS: ACTIVE</span>
+        </div>
+        <div class="diagram-box">
+          <div class="diagram-node">
+            <span>Next.js App Router (tRPC Client)</span>
+            <span style="color: var(--text-tertiary);">UI Layer</span>
+          </div>
+          <div class="diagram-arrow">↓ [SET LOCAL app.tenant_id]</div>
+          <div class="diagram-node" style="border-color: #3DDC97;">
+            <span>PostgreSQL Engine (RLS Boundary)</span>
+            <span style="color: #3DDC97;">Fail-Closed</span>
+          </div>
+          <div class="diagram-arrow">↓ [Durable Step Dispatch]</div>
+          <div class="diagram-node">
+            <span>Inngest Workflow Runner</span>
+            <span style="color: var(--text-tertiary);">Orchestrator</span>
+          </div>
+          <div class="diagram-arrow">↓ [Schema Verification]</div>
+          <div class="diagram-node">
+            <span>Zod Schema Validation Guard</span>
+            <span style="color: var(--accent);">Bounded</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Hub -->
+    <div class="section-title">Direct Communication</div>
+    <div class="section-h2">Contact Hub</div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="copy-pill">
+          <div>
+            <div style="font-size: 11px; color: var(--text-tertiary);">EMAIL</div>
+            <div>rajendrabist396@gmail.com</div>
+          </div>
+          <button class="copy-btn" onclick="navigator.clipboard.writeText('rajendrabist396@gmail.com'); alert('Email copied!');">Copy</button>
+        </div>
+        <div class="copy-pill">
+          <div>
+            <div style="font-size: 11px; color: var(--text-tertiary);">LOCATION &amp; TIMEZONE</div>
+            <div>New Delhi, India (Asia/Kolkata · IST)</div>
+          </div>
+          <span style="color: var(--status-live); font-size: 11px;">UTC +5:30</span>
+        </div>
+        <div class="copy-pill">
+          <div>
+            <div style="font-size: 11px; color: var(--text-tertiary);">WORK AUTHORIZATION</div>
+            <div>India (1950 Treaty, No Visa Required)</div>
+          </div>
+          <span style="color: var(--accent); font-size: 11px;">Eligible</span>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <form onsubmit="event.preventDefault(); alert('Message form demo validated.');">
+          <div class="form-group">
+            <label for="name">NAME</label>
+            <input type="text" id="name" class="form-control" placeholder="Your name or company" required>
+          </div>
+          <div class="form-group">
+            <label for="email">WORK EMAIL</label>
+            <input type="email" id="email" class="form-control" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="msg">ROLE OR PROBLEM BRIEF</label>
+            <textarea id="msg" class="form-control" rows="3" placeholder="Describe the role or engineering project..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+      document.getElementById('theme-label').textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+    }
+  </script>
+</body>
+</html>
