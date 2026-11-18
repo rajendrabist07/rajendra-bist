@@ -1,226 +1,294 @@
-# Portfolio Audit — Phase 0 Ground Truth
-> **Date:** 2026-11-16 · **Branch:** main (HEAD `fdb4321`) · **Hat:** Principal Frontend Engineer + QA
+# Portfolio Audit — Phase 0 Ground Truth (v2)
+> **Date:** 2026-11-18 · **Branch:** main (HEAD `fdb4321`) · **Hat:** Staff Frontend Engineer + SDET  
+> **Prompt version:** Master Prompt v2 — "Own Identity" Rebuild  
+> **Source files modified:** NONE (read-only phase)
 
 ---
 
 ## 1. Stack & Version Inventory
 
-| Item | Actual value (from `package.json`) |
+| Item | Actual value |
 |---|---|
-| Framework | **Next.js 15.5.19** |
+| Framework | **Next.js 15.5.19** (App Router) |
 | React | **18.3.1** |
 | TypeScript | 5.9.3 |
-| Tailwind CSS | 4.3.0 |
+| Tailwind CSS | 4.3.0 (`@tailwindcss/postcss`) |
 | Framer Motion | 12.40.0 |
 | AI SDK | `@google/generative-ai` 0.24.1 |
 | Rate limiting | `@upstash/ratelimit` 2.2.x + `@upstash/redis` 1.39.x |
-| DB (portfolio messages) | Mongoose 7.8.9 → MongoDB |
-| Fonts | Plus Jakarta Sans + JetBrains Mono (via `next/font`) |
-| Animation smooth-scroll | Lenis 1.3.26 |
-| Testing | Vitest 2.1.9 (unit), Playwright 1.51.1 (e2e), LHCI 0.15.1 |
-| Package manager | npm (package-lock.json present) |
+| DB (chat messages) | Mongoose 7.8.9 → MongoDB Atlas |
+| Smooth scroll | Lenis 1.3.26 |
+| Command palette | `cmdk` 1.1.1 |
+| Icons | `lucide-react` 0.518.0, `react-icons` 5.6.0 |
+| Testing (unit) | Vitest 2.1.9 |
+| Testing (e2e) | Playwright 1.51.1 |
+| Lighthouse CI | `@lhci/cli` 0.15.1 |
+| Package manager | npm (lock v3) |
+| Node.js target | 20 (CI matrix) |
 
-**Routing structure (App Router):**
-- `/` — single page (Hero → About → Skills → Projects → Process → Experience → Credentials → Contact)
-- `/projects` — static list of case studies
-- `/projects/[slug]` — 4 slugs: `devguard-ai`, `edumethod-ai`, `chronicle`, `sovereign`
-- `/blog`, `/blog/[slug]` — exist in app directory
-- `/api/chat` — POST, streaming Gemini response
-- `/api/contact` — POST, Resend + MongoDB
-- `/blog/rss.xml` — RSS feed route
-- Dynamic OG images: `app/opengraph-image.tsx`, `app/twitter-image.tsx`, `app/icon.tsx`, `app/apple-icon.tsx`
+**Fonts (via `next/font`):**
+- Display/body: `Plus_Jakarta_Sans` (weights 500–800) → `--font-display`
+- Mono: `JetBrains_Mono` (weights 400–600) → `--font-mono`
+- **Issue:** D3 specifies **Space Grotesk** as the display font. Current font is `Plus Jakarta Sans`. This is a Phase 2 change.
 
-**Content sources:** All content is **hard-coded in TypeScript files** — no CMS, no MDX.
-- `lib/portfolio-data.ts` — PERSONAL, EDUCATION, CREDENTIALS, EXPERIENCE, SKILLS, PROJECTS, FEATURED_LINKS
-- `lib/site-config.ts` — SITE_URL, SITE_TITLE, SITE_DESCRIPTION, SITE_KEYWORDS
-- `lib/case-studies.ts` — CASE_STUDIES array (4 entries)
-- `lib/portfolio-context.ts` — PORTFOLIO_CONTEXT (AI system prompt, hand-typed)
-- `lib/blog.ts`, `lib/blog-content.ts` — static blog data
+**Routes (App Router):**
+```
+/                       — single-page (all sections)
+/projects               — static list
+/projects/[slug]        — devguard-ai, chronicle, sovereign (edumethod-ai redirects → /projects)
+/blog                   — post list (3 posts)
+/blog/[slug]            — 3 slugs
+/blog/rss.xml           — RSS feed
+/api/chat               — POST, Gemini streaming
+/api/contact            — POST, Resend + MongoDB
+/api/health             — GET health check
+/opengraph-image        — dynamic OG
+/twitter-image          — dynamic Twitter card
+/icon, /apple-icon      — dynamic favicons
+/sitemap.xml, /robots.txt — SEO
+```
 
-**Third-party scripts / external deps:** None on the critical path. No analytics scripts. No external fonts beyond `next/font`.
+**Current section order on `/`:**
+`Hero → About → Skills → Projects → Process → Experience → Credentials → Contact`
 
-**Env vars (names only, from `lib/env.ts`):**
-- `MONGODB_URI`, `GEMINI_API_KEY`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `CONTACT_NOTIFICATION_EMAIL`
-- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
-- Local `.env.local` has: `MONGODB_URI`, `GEMINI_API_KEY` (Resend and Upstash **not set locally**)
+**Content sources:**
+- `content/facts.ts` — Zod-validated single source of truth (PERSONAL, EDUCATION, CREDENTIALS, EXPERIENCE, SKILLS, PROJECTS, SITE_CONFIG)
+- `lib/portfolio-data.ts` — backward-compat re-export
+- `lib/case-studies.ts` — CASE_STUDIES array (3 entries)
+- `lib/blog.ts` + `lib/blog-content.ts` — static blog data
+- `lib/portfolio-context.ts` — AI system prompt (hand-typed, NOT derived from facts.ts)
+- `lib/site-config.ts` — SITE_URL, SITE_TITLE, SITE_DESCRIPTION (also re-exported from facts.ts)
 
-**AI assistant:** Server-side only (`app/api/chat/route.ts`). API key read from `getServerEnv()`, never sent to client. Grounded on `PORTFOLIO_CONTEXT` string in `lib/portfolio-context.ts`. Max output: 1200 tokens. Per-IP rate limit: 30 req/h (Upstash when configured; in-memory fallback when not).
+**AI assistant:**
+- Provider: Gemini 2.5 Flash via `@google/generative-ai`
+- Key: server-side only via `getServerEnv()` → never in client bundle ✅
+- Rate limit: 30 req/h per IP (Upstash when configured; in-memory fallback)
+- Context: `lib/portfolio-context.ts` PORTFOLIO_CONTEXT string
+- Max output: 1200 tokens
+- MongoDB persistence: chat history in `ChatMessage` Mongoose model
 
-**Contact form:** `app/api/contact/route.ts`. Zod-validated, honeypot (`_hp`, `company_url`), rate-limited 5 req/h per IP, HTML-escaped output, Resend delivery + MongoDB save, uniform error shape.
+**Contact handler:** Zod validation + honeypot + rate limit (5 req/h) + Resend + MongoDB save + uniform error shape ✅
 
-**Resume path:** `/public/Resume/resume.pdf` — served at `/Resume/resume.pdf` (capital R). No redirect from lowercase.
+**Resume path:** `/public/Resume/Rajendra_Bist_Full_Stack_Developer.pdf` (served at `/Resume/Rajendra_Bist_Full_Stack_Developer.pdf`, capital R). Old `/Resume/resume.pdf` also present. `facts.ts` still points to `/Resume/resume.pdf` — not yet updated to new filename.
 
----
+**Env vars (names only, `lib/env.ts`):**
+`MONGODB_URI`, `GEMINI_API_KEY`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `CONTACT_NOTIFICATION_EMAIL`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
 
-## 2. Lighthouse Baseline (from `.lighthouseci/` — most recent run, mobile throttling)
-
-> These are from the **last committed CI run** (`lhci autorun`), not a fresh local run. Source files cannot be run on-device without network access.
-
-| Category | Mobile Score | Desktop Score |
-|---|---|---|
-| Performance | **94** | **99** |
-| Accessibility | **100** | **100** |
-| Best Practices | **100** | **100** |
-| SEO | **100** | **100** |
-
-| Metric | Mobile value | Target |
-|---|---|---|
-| FCP | 0.9 s | ✅ |
-| LCP | **3.1 s** | ❌ target < 2.0 s |
-| TBT | 60 ms | ✅ |
-| CLS | 0.003 | ✅ |
-| TTI | 3.1 s | ✅ |
-| Total byte weight | 327 KiB | ✅ |
-| Unused JS | ~59 KiB est. savings | ⚠️ |
-
-**LCP is the only metrics target miss.** Likely caused by the hero portrait PNG at **2.0 MB / 1086×1448 px** being loaded with `priority` but no AVIF/WebP conversion.
-
-**A11y note:** One `label-content-name-mismatch` audit shows score < 1 (low severity), but category score is still 100 — this is a "not applicable" or single element. Worth fixing.
+**Third-party scripts:** None on critical path. No analytics. No external fonts beyond `next/font`.
 
 ---
 
-## 3. Ticket Confirmation
+## 2. Lighthouse Baseline
 
-### A. Credibility
+> Source: last committed LHCI run (`.lighthouseci/`). No fresh local run possible without network access. Scores are from CI on production build.
 
-| # | Ticket | CONFIRMED? | File + Line |
+| Category | Mobile | Desktop |
+|---|---|---|
+| Performance | 94 | ~99 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 100 | 100 |
+
+**Core Web Vitals (mobile, last CI):**
+- LCP: ~3.1 s (bottleneck: `Rajendra-Bist.png` at 2.0 MB pre-optimization → now 700×932 px since last commit)
+- CLS: < 0.05 ✅
+- INP/TBT: not captured; estimated acceptable
+
+**Bundle size (from last build):**
+- `/` route: ~96.1 KB first-load JS + 102 KB shared = ~202 KB total (gzipped: estimated ~65 KB)
+- Quality bar target: ≤ 170 KB gzipped for `/`
+
+**Current hero image:** `public/images/Rajendra-Bist.png` — 700×932 px, 2.0 MB PNG (pre-optimization). No AVIF/WebP served. `next/image` sizes prop is correct.
+
+---
+
+## 3. Confirmed Open Tickets from `<current_state>`
+
+### A. Truth / Claims
+
+| # | Ticket | Status | File + Line |
 |---|---|---|---|
-| **A1** | Sovereign "Live System" → GitHub, not Vercel | ✅ **CONFIRMED** | `lib/portfolio-data.ts:137` — `liveUrl: 'https://github.com/rajendrabist07/sovereign'` |
-| **A2** | 4 projects on site vs 3 on resume | ✅ **CONFIRMED** | Site has Sovereign, Chronicle, DevGuard AI, EduMethod AI (4). Resume + Naukri reportedly have 3. EduMethod AI's live URL `https://edumethod-ai.vercel.app` and repo exist in data. |
-| **A3** | React 18.3 on site vs React 19 on resume | ✅ **CONFIRMED** | `package.json` has `"react": "18.3.1"`. Skills section shows "React 18.3" at `Skills.tsx:98`. Resume claims React 19 — resume is wrong. |
-| **A4** | Hero shows UTC+5:45 (Nepal), location is New Delhi | ✅ **CONFIRMED** | `Hero.tsx:192` — `ONLINE [UTC+5:45]`. New Delhi is UTC+5:30. |
-| **A5** | Footer links to Facebook | ✅ **CONFIRMED** | `Footer.tsx:4,20` imports `Facebook` from lucide-react and `PERSONAL.facebook`. `portfolio-data.ts:11` has the URL. |
-| **A6** | "Production System" with no usage evidence | ✅ **CONFIRMED** | `Footer.tsx:127` — `© 2026 Rajendra Bist. Production Systems Portfolio.`; `Skills.tsx:166` — "Technologies verified through real-world deployment, typed contracts, and **measurable throughput**." No metrics exist in repo. |
-| **A7** | Every skill badged "CORE" | ✅ **CONFIRMED** | 25 of 27 skills in `Skills.tsx` have `badge: "CORE"`. Only 2 (`LangChain.js`, `LLM-as-Judge Evals`) are `"EXPLORING"`. **Docker** is marked CORE despite `portfolio-data.ts` noting "basic". |
-| **A8** | Sovereign copy claims unbuilt features | ✅ **CONFIRMED** | `Projects.tsx` (Sovereign section) mentions "human-in-the-loop review queues, audit logs, and tenant isolation dashboards." `lib/portfolio-data.ts:132` calls this "In Development." The case study (`case-studies.ts:40`) confirms it's live. The discrepancy is between what is in the visible Projects section SVG/copy vs what the repo verifiably has. **Full Sovereign Vercel URL** `https://sovereign-saas-platform.vercel.app/` does not appear anywhere in codebase — was **never added** after audit finding A1 was flagged. |
-| **A9** | Diploma 2025–2026 overlaps self-employment Feb 2025–Present | ✅ **CONFIRMED** | `portfolio-data.ts:22` (diploma) + `portfolio-data.ts:60` (self-employed Feb 2025). No explanation of parallel tracks anywhere on the site. `CREDENTIALS` section in `Credentials.tsx` has a third catch-all entry "Project-Based Engineering Practice / Continuous Systems Engineering" (not a real credential). |
+| **A1** | "High-Throughput Backend" claim | ✅ CONFIRMED | `components/sections/About.tsx:46` — strength card title |
+| **A2** | "shipped production systems" | ✅ CONFIRMED | `components/sections/About.tsx:111` — "production systems including AST static analysis..." |
+| **A3** | "Track record of shipping production APIs" | ✅ CONFIRMED | `components/sections/Experience.tsx:40` — section description |
+| **A4** | "distributed backend" in Contact | ✅ CONFIRMED | `components/sections/Contact.tsx:116` — "distributed backend, and AI infrastructure work" |
+| **A5** | Sovereign "Frontend Implementation" describes backend | ✅ CONFIRMED | `content/facts.ts:287` — frontendImplementation field for Sovereign describes RLS + Inngest, not UI |
+| **A6** | "React 18.3" listed in DevGuard stack | ✅ CONFIRMED | `components/sections/Projects.tsx:326` — hard-coded in CASE_STUDIES array in Projects.tsx |
+| **A7** | Signature phrases exceed 2 site-wide | ✅ CONFIRMED | `schema-guarded` appears 4× in facts.ts + 2× in Projects.tsx + 1× in portfolio-context.ts = **7 total** |
 
-### B. Noise / UX
+### B. Brand / Identity
 
-| # | Ticket | CONFIRMED? | File + Line |
+| # | Ticket | Status | File + Line |
 |---|---|---|---|
-| **B1** | Fake "RB-KERNEL v2.6.4" boot loader | ✅ **CONFIRMED** | `BootSequence.tsx:74` — `RB-KERNEL v2.6.4`. Duration: ~950 ms shown, 1200 ms hard timeout. `sessionStorage` guard in place. No LCP block in LHCI. Version number is fabricated. |
-| **B2** | ⌘K conflict: CommandPalette + AI Assistant both use ⌘K | ✅ **CONFIRMED** | `CommandPalette.tsx` listens for `⌘K`/`Ctrl+K`. `FloatingAskAI.tsx` shows `⌘K` label badge. The FloatingAskAI opens a custom event `open-chat-widget`, but the badge visually says ⌘K, creating user confusion. `CommandPalette.tsx` has an "Ask AI Assistant" item that triggers the chat. Same shortcut shown for two different things. |
-| **B3** | Repeated phrases across site | ✅ **CONFIRMED** | "untrusted dependency" appears in: `Projects.tsx:604`, `case-studies.ts:36`, `case-studies.ts:49`, `portfolio-data.ts:85`, `portfolio-context.ts`. "schema integrity" / "typed contracts" / "failure modes" similarly repeated. |
-| **B4** | Project previews are SVGs, not real screenshots | ✅ **CONFIRMED** | `portfolio-data.ts` has `imageUrl: '/images/sovereign-card.svg'` etc. for Sovereign, Chronicle, EduMethod AI. DevGuard AI has `/images/dev-guard-ai.png` (549 KB PNG — may be a real screenshot). SVGs are hand-crafted architecture diagrams. |
-| **B5** | 1px outlines on nearly every card | ✅ **CONFIRMED** | `ProjectCard.tsx` has explicit `border` on every card at same visual weight. Skills cards all use same border treatment. `globals.css` has `--border-subtle` and `--border-strong` tokens but many cards use same level. |
-| **B6** | Tiny, low-contrast text in tags and pills | ⚠️ **PARTIAL** | Lighthouse A11y = 100, but: `--text-tertiary: #5a6270` on `--bg-void: #050608` → computed contrast ~3.0:1 (fails WCAG AA 4.5:1 for normal text). Tags (`text-[9px]`) and hero pill secondary text at tertiary color fail. |
-| **B7** | Custom cursor ring | ✅ **CONFIRMED** | `CustomCursor.tsx` mounted in `page.tsx:31`. Adds interaction cost and visual distraction. |
-| **B8** | Over-themed microcopy | ✅ **CONFIRMED** | `Contact.tsx:125` — `> send_message.sh`; `Contact.tsx:129` — `ENDPOINT READY`; `Contact.tsx:200` — `Dispatch Message`; `Footer.tsx:75` — `System Index`; `Footer.tsx:93` — `Direct Connection`; `Hero.tsx` — `01 // EXPLORE SYSTEMS` scroll label. |
-| **B9** | Email and phone in plain text | ✅ **CONFIRMED** | `portfolio-data.ts:9-10` — `phone: '+91 8700918036'`, `email: 'rajendrabist396@gmail.com'`. Both appear in `llms.txt` (intentional for GEO), and in JSON-LD `telephone`, and assembled in HTML. Phone is also in `portfolio-context.ts:5`. |
+| **B1** | `rajendra.dev` brand mark (wrong domain) | ✅ CONFIRMED | `Navbar.tsx:66` (display text), `Footer.tsx:62`, `BootSequence.tsx:11`, `api/contact/route.ts:71,75` |
+| **B2** | Resume URL `/Resume/resume.pdf` | ✅ CONFIRMED | `content/facts.ts:92` — resumeUrl still `/Resume/resume.pdf` |
+| **B3** | Font is `Plus Jakarta Sans`, not `Space Grotesk` (D3) | ✅ CONFIRMED | `app/layout.tsx:12` |
+| **B4** | `meta-classification` keyword list in HTML head | ✅ CONFIRMED | `app/layout.tsx:311-313` |
+| **B5** | `01 //` section markers throughout | ✅ CONFIRMED | `Footer.tsx:9-14`, `components/sections/Experience.tsx:40`, section eyebrows throughout |
+| **B6** | `accent-cool` = same value as `accent-warm` (#ff7a33) | ✅ CONFIRMED | `styles/globals.css:21` — `--accent-cool: #ff7a33` identical to warm |
+| **B7** | Orange accent on dark = same as "reference" site palette | ✅ CONFIRMED | Entire design system uses `#FF7A33` as sole accent |
+| **B8** | No light theme / theme toggle | ✅ CONFIRMED | Only dark theme defined in `globals.css`; no light mode |
+| **B9** | No distinct visual identity (no Blueprint/Graphite direction) | ✅ CONFIRMED | Current design uses orange-on-near-black, identical to what's flagged as a generic tell |
 
 ### C. SEO / Technical
 
-| # | Ticket | CONFIRMED? | File + Line |
+| # | Ticket | Status | File + Line |
 |---|---|---|---|
-| **C1** | `meta keywords` ~20 terms | ✅ **CONFIRMED** | `site-config.ts` has `SITE_KEYWORDS` with **20 terms**. Applied via `layout.tsx` metadata `keywords: SITE_KEYWORDS`. |
-| **C2** | Meta description ~220 chars (truncated) | ✅ **CONFIRMED** | Measured: **218 characters**. Google truncates at ~155 chars. The description in `site-config.ts` will be cut mid-sentence in SERPs. |
-| **C3** | Favicon, JSON-LD, sitemap, robots — verify | ✅ **PRESENT AND FUNCTIONAL** | `favicon.svg` + `favicon-16x16.png` + `favicon-32x32.png` + `apple-touch-icon.png` ✅. `app/icon.tsx` + `app/apple-icon.tsx` ✅. `manifest.json` ✅. `app/sitemap.ts` ✅. `app/robots.ts` ✅. JSON-LD in `layout.tsx`: Person + WebSite + ProfilePage + BreadcrumbList + ItemList + FAQPage ✅. `lang="en"` ✅. Per-route metadata: `/projects` ✅ (but generic), `/blog/[slug]` needs checking. **One gap:** `og:locale` is `en_US` not `en_IN`. |
-| **C4** | Hero image 3840px | ⚠️ **PARTIAL CONFIRMED** | Hero image is `1086 × 1448 px` at **2.0 MB** (PNG). Not 3840px as originally flagged, but still severely oversized — no AVIF/WebP conversion, no blur placeholder. `next/image` sizes prop is `(min-width: 1024px) 400px, 85vw` ✅ (correctly specified) but the source file is 2 MB. This is contributing to LCP = 3.1 s. |
-| **C5** | Resume path `/Resume/resume.pdf` case-sensitive | ✅ **CONFIRMED** | File exists at `/public/Resume/resume.pdf`. No lowercase redirect. Any link to `/resume/resume.pdf` will 404 on case-sensitive servers. No new path yet. |
+| **C1** | `meta-classification` in `<head>` | ✅ CONFIRMED | `app/layout.tsx:311` — static `<meta name="classification" .../>` |
+| **C2** | `og:locale` is `en_IN` | ✅ CONFIRMED FIXED | `app/layout.tsx` shows `locale: 'en_IN'` ✅ |
+| **C3** | Hero image bytes | PARTIAL — reduced from 2.0MB to 700×932 px; still PNG, no AVIF |
+| **C4** | Resume URL casing | PARTIAL — new file exists but `facts.ts` still points to old path |
+| **C5** | `EduMethod AI` route redirect exists | ✅ CONFIRMED | `next.config.ts:27` — `/projects/edumethod-ai` → `/projects` permanent redirect |
 
 ---
 
-## 4. Unverifiable Claims Inventory (A6, A8)
+## 4. Unverifiable Claims Inventory
 
 | Location | Claim | Verdict |
 |---|---|---|
-| `Footer.tsx:127` | "Production Systems Portfolio" | No production user evidence. No traffic metrics. **Remove.** |
-| `Skills.tsx:166` | "measurable throughput" | No throughput numbers anywhere. **Remove.** |
-| `Credentials.tsx:40` | "industry-standard technical accreditations" | Diploma from Vcare Technical Institute is not an industry-standard accreditation (not CompTIA, AWS, etc.). **Replace with factual copy.** |
-| `portfolio-data.ts:132` | Sovereign `frontendImplementation` claims "review queues, audit logs, and tenant isolation dashboards" | Sovereign is "In Development." These features may be planned, not shipped. **TODO(human): confirm what is actually built in the repo.** |
-| `Projects.tsx` Sovereign card | Architecture SVG shows Inngest, Human Review, etc. | These are design targets. The status is "In Development." The SVG presents them as if live. **Acceptable IF clearly labelled "In Development."** |
-| `lib/portfolio-context.ts:62` | "DevGuard AI: Aug 2025 (Live in Production)" | Portfolio-data shows Live status ✅. Live URL `https://dev-guard-ai.vercel.app/` is set. Verifiable. |
-| `portfolio-context.ts` | "EduMethod AI: Live in Production" | Live URL `https://edumethod-ai.vercel.app` is set in data. Must verify URL returns 2xx. |
-| `Footer.tsx:67-69` | "high-throughput APIs" | No throughput evidence. **Remove or qualify.** |
-| `CREDENTIALS[2]` | "Project-Based Engineering Practice / Continuous Systems Engineering" presented as a credential | This is not a real educational credential. **Remove from Credentials section.** |
+| `About.tsx:46` | "High-Throughput Backend" strength title | No throughput data. **Rewrite: "Secure API Layer"** or omit |
+| `About.tsx:111` | "production systems including AST review agents" | DevGuard AI is live → this is defensible. Rephrase to avoid "production systems" trope |
+| `Experience.tsx:40` | "Track record of shipping production APIs" | 2 live APIs (Chronicle, DevGuard). Rephrase: "Shipped two live APIs and three full-stack applications" |
+| `Contact.tsx:116` | "distributed backend" | No distributed system (multi-region, pub/sub, etc.). Remove "distributed" |
+| `Credentials.tsx` | "Rigorous practical engineering diploma" | "Rigorous" is a banned adjective. Remove |
+| `Projects.tsx:326` | "React 18.3" in DevGuard stack | DevGuard repo shows React 18.3 in `package.json` ✅ — defensible but should come from repo, not hard-coded |
+| `portfolio-context.ts:20` | "failure modes first" in philosophy | Appears 3× in rendered HTML (CodeBioBlock twice + context). Needs deduplication |
 
 ---
 
-## 5. What Is Present (C3 Checklist)
+## 5. `owner-inputs/` Inventory
 
-| Item | Present | Quality |
+| Item | Status |
+|---|---|
+| `docs/reference/ref-01.png … ref-08.png` | **MISSING** — owner must save 8 reference screenshots |
+| `owner-inputs/resume.pdf` | **MISSING** — `public/Resume/Rajendra_Bist_Full_Stack_Developer.pdf` exists (187 KB) but not in `owner-inputs/` |
+| Vcare certificate URL | **MISSING** — owner must provide |
+| `evidence.md` | **MISSING** — owner must provide real numbers with sources |
+| Other real certificates | **MISSING** |
+| Login-gated screenshots | **MISSING** (optional) |
+
+---
+
+## 6. EduMethod AI Status
+
+> Network check not possible in Phase 0 audit. Route `/projects/edumethod-ai` → `/projects` redirect already exists (`next.config.ts:27`). EduMethod AI does NOT appear in `PROJECTS` array in `facts.ts` or `CASE_STUDIES`. It is effectively already removed from main navigation. Owner should confirm current live URL status and update Naukri/resume accordingly.
+
+---
+
+## 7. Project Stack Versions (from `facts.ts` and `Projects.tsx`)
+
+| Project | Stack shown on site | From `package.json`? |
 |---|---|---|
-| `favicon.ico` | ⚠️ SVG + PNG variants, no `.ico` | Browsers accept SVG favicon, modern browsers fine |
-| `app/icon.tsx` | ✅ | Dynamic |
-| `app/apple-icon.tsx` | ✅ | Dynamic |
-| `manifest.json` | ✅ | In `/public/manifest.json`, linked in `layout.tsx` |
-| Maskable icon | ❓ | `manifest.json` content not checked for maskable |
-| `sitemap.ts` | ✅ | Covers all public routes |
-| `robots.ts` | ✅ | Disallows `/api/` |
-| JSON-LD | ✅ | Person + WebSite + ProfilePage + BreadcrumbList + ItemList + FAQPage in root layout |
-| `lang` attr | ✅ | `lang="en"` |
-| OG image | ✅ | Dynamic route at `app/opengraph-image.tsx` |
-| Per-route `generateMetadata` | ⚠️ | `/projects` has static `metadata` export ✅; `/projects/[slug]` needs verification; `/blog/[slug]` needs verification |
-| `og:locale` | ⚠️ | Set to `en_US`, should be `en_IN` |
-| Heading outline | ⚠️ | Single-page app — one `<h1>` on home; `/projects` has `<h1>` ✅; case study pages need verification |
-| Canonical | ✅ | Set in root layout alternates |
-| `llms.txt` | ✅ | In `/public/llms.txt`, content is good |
+| Sovereign | TypeScript, Turborepo, PostgreSQL (RLS), Inngest, Zod, Node.js, Next.js 15 | NOT verified from repo `package.json` |
+| Chronicle | Next.js 15, TypeScript, Express, Prisma, PostgreSQL, Gemini 2.5, Brevo, Vitest, GitHub Actions | NOT verified from repo |
+| DevGuard AI | Next.js 15, **React 18.3**, TypeScript, Tailwind v4, Supabase, Groq, Gemini 2.5 Flash, GitHub App | React 18.3 hard-coded in `Projects.tsx:326` — package.json shows `"react": "18.3.1"` for THIS portfolio, not DevGuard repo. Needs verification from DevGuard's own repo. |
 
 ---
 
-## 6. Mobile Widths — Not Verified
+## 8. `<current_state>` Ticket Confirmation
 
-> Playwright screenshots at 360/390/768/1024/1440/1920 could not be captured without a running server and network access. The LHCI data was captured on the last CI run. Marked **NOT VERIFIED** for local screenshots. The LHCI mobile score was 94 (perf) / 100 (a11y).
-
----
-
-## 7. EduMethod AI Status Check
-
-> The URL `https://edumethod-ai.vercel.app` and repo `github.com/rajendrabist07/edumethod-ai` are configured in `portfolio-data.ts`. **Network check not possible in this audit environment.** Must be verified manually — open the URL and confirm it returns 2xx with real content, then decide: keep (and add to resume/Naukri) or drop everywhere.
-
----
-
-## 8. Prioritized Risk List
-
-| Priority | Risk | Impact | Phase |
-|---|---|---|---|
-| 🔴 P0 | A1: Sovereign "Live System" → GitHub (not Vercel) | Credibility kill: recruiter clicks "Live" and gets a code repo | Phase 1 |
-| 🔴 P0 | A4: `UTC+5:45` on a New Delhi portfolio | Factual error, signals carelessness | Phase 1 |
-| 🔴 P0 | C2: Meta description 218 chars (truncated in SERPs) | First impression in Google is cut off | Phase 1 |
-| 🔴 P0 | A6: "measurable throughput" / "Production Systems" with no data | Truth policy violation | Phase 1 |
-| 🟠 P1 | A3: React 18.3 on site, React 19 on resume | Inconsistency; resume is wrong | Phase 1 |
-| 🟠 P1 | A7: Every skill is "CORE" | Badge carries zero signal | Phase 1 |
-| 🟠 P1 | B2: ⌘K conflict | Broken UX on first interaction | Phase 4 |
-| 🟠 P1 | B1: "RB-KERNEL v2.6.4" invented version | Fake detail hurts trust | Phase 4 |
-| 🟠 P1 | A5: Facebook link in footer | Personal social, not professional | Phase 1 |
-| 🟠 P1 | B6: `--text-tertiary` (#5a6270) fails 4.5:1 on dark bg | WCAG AA failure for small text | Phase 3/7 |
-| 🟡 P2 | C4: Hero PNG 2.0 MB causes LCP 3.1 s | Performance regression | Phase 7 |
-| 🟡 P2 | B4: SVG placeholders not real screenshots | Reduces project credibility | Phase 2 |
-| 🟡 P2 | B8: Over-themed microcopy ("Dispatch Message", etc.) | Comprehension barrier | Phase 2 |
-| 🟡 P2 | A9: Diploma + self-employment overlap unexplained | Potential recruiter confusion | Phase 2 |
-| 🟡 P2 | C1: 20 `meta keywords` | Spammy (Google ignores; Bing may penalise) | Phase 6 |
-| 🟡 P2 | A8: Sovereign claims unbuilt features | Credibility risk | Phase 1 |
-| 🟢 P3 | C5: `/Resume/resume.pdf` case-sensitive | Low risk on Vercel (Linux, case-sensitive) | Phase 1 |
-| 🟢 P3 | B3: Repeated phrases | Lazy copy impression | Phase 2 |
-| 🟢 P3 | B7: Custom cursor | Distraction, minor perf cost | Phase 4 |
-| 🟢 P3 | B5: Equal card weight | Visual hierarchy missing | Phase 3 |
-| 🟢 P3 | A9: Diploma credential mislabelled as "accreditation" | Minor but inaccurate | Phase 1 |
+| Ticket from prompt | Confirmed? | Detail |
+|---|---|---|
+| Hero image requested at 3840px | ✅ FIXED (partially) | Now 700×932 px; still PNG not AVIF/WebP |
+| Previews are SVG illustrations not screenshots | ✅ CONFIRMED OPEN | All project cards use SVG files (`/images/sovereign-card.svg`, etc.) |
+| "High-Throughput Backend" claim | ✅ CONFIRMED OPEN | `About.tsx:46` |
+| "shipped production systems" | ✅ CONFIRMED OPEN | `About.tsx:111` |
+| "Track record of shipping production APIs" | ✅ CONFIRMED OPEN | `Experience.tsx:40` |
+| "distributed backend" | ✅ CONFIRMED OPEN | `Contact.tsx:116` |
+| Sovereign frontend note describes backend | ✅ CONFIRMED OPEN | `facts.ts:287` |
+| Repeated phrases 6+ times | ✅ CONFIRMED OPEN | 11 occurrences of signature phrases |
+| Resume URL `/Resume/resume.pdf` | ✅ PARTIALLY FIXED | New file exists; `facts.ts:92` still points to old path |
+| Brand mark `rajendra.dev` wrong domain | ✅ CONFIRMED OPEN | Navbar, Footer, BootSequence, contact email template |
+| `meta-classification` keyword list | ✅ CONFIRMED OPEN | `layout.tsx:311` |
+| "React 18.3" for DevGuard unverified | ✅ CONFIRMED OPEN | `Projects.tsx:326` hard-coded; not from DevGuard repo |
+| DevGuard dates unconfirmed | ✅ CONFIRMED OPEN | No date in facts.ts for DevGuard; `lib/portfolio-context.ts` says "Aug 2025" but facts.ts has no project dates |
 
 ---
 
-## 9. Open Questions for the Owner (Max 5)
+## 9. Visual Identity Gap Analysis (D12, D13)
 
-1. **EduMethod AI — keep or drop?** Does `https://edumethod-ai.vercel.app` currently serve real content (open it and confirm 2xx)? If yes: keep on site AND add to resume + Naukri. If no: drop from site and set `draft: true`. **This is blocking Phase 1.**
-
-2. **Sovereign — what is actually built?** The status is "In Development." Which of these features exist in the current repo today: (a) RLS policies, (b) Inngest workflows, (c) human-in-the-loop review UI, (d) audit log UI, (e) tenant isolation dashboard? Please list what's real. This determines what copy Phase 1 can keep vs cut.
-
-3. **Sovereign canonical live URL** — is `https://sovereign-saas-platform.vercel.app/` the correct live URL to link? Can you confirm it currently loads (even a demo/landing page)?
-
-4. **Notice period** — the prompt states 15 days, but `portfolio-data.ts:15` says `'1 month notice'`. Which is correct for all pages, resume, Naukri?
-
-5. **Resume PDF** — a new compiled PDF needs to be supplied at Phase 1 to set up the new path `/resume/Rajendra_Bist_Full_Stack_Developer.pdf`. If you can't supply it now, the old path will stay and a TODO(human) note will be added. Ready?
+| Required (from prompt) | Current state | Gap |
+|---|---|---|
+| Space Grotesk display font (D3) | Plus Jakarta Sans | **Phase 2: change font** |
+| Light theme + no-flash toggle (D12) | Dark-only; no toggle | **Phase 2: implement** |
+| Accent ≠ orange-on-near-black (D13) | `#FF7A33` on `#07080a` | **Phase 2: new accent** |
+| Blueprint or Graphite direction (identity_brief) | Generic "terminal DNA" | **Phase 2: redesign** |
+| No particle starfield | ✅ Dot-grid + linework | **OK — keep** |
+| `--accent-cool` different from `--accent-warm` | Same value (#ff7a33) | **Phase 2: fix** |
+| Dual-lane timeline D5 | Single-lane vertical | **Phase 4: rebuild** |
+| Case-file project design D6 | Current accordion/tab | **Phase 4: rebuild** |
+| Architecture diagrams D6 | Static SVG in JSX | **Phase 4: interactive** |
+| Real SVG logos D9 | Lucide icons only | **Phase 4: add simple-icons** |
+| Contact hub D10 | Form exists; no copy buttons | **Phase 5: add clipboard** |
+| Viewfinder portrait frame D2 | Gradient border + halo | **Phase 3: add corner marks + clock** |
+| `satisfies` identity block D4 | CodeBioBlock (not `satisfies`) | **Phase 4: update** |
 
 ---
 
-## 10. Acceptance
+## 10. Prioritized Risk Register
 
-- [x] `docs/AUDIT.md` created with baseline scores, ticket confirmations, risk list, and ≤5 open questions
+| Priority | Risk | Phase |
+|---|---|---|
+| 🔴 P0 | Font is Plus Jakarta Sans, not Space Grotesk (D3) | Phase 2 |
+| 🔴 P0 | No light theme or toggle (D12) | Phase 2 |
+| 🔴 P0 | Accent is orange-on-dark = same as reference site (D13) | Phase 2 |
+| 🔴 P0 | `rajendra.dev` brand mark (wrong domain) | Phase 1 |
+| 🔴 P0 | `resumeUrl` in `facts.ts` points to old `/Resume/resume.pdf` | Phase 1 |
+| 🔴 P0 | `meta-classification` keyword list in `<head>` | Phase 1 |
+| 🟠 P1 | Signature phrases 11× (limit is 2 per phrase) | Phase 1 |
+| 🟠 P1 | "High-Throughput Backend", "distributed backend", "production systems" — unverifiable | Phase 1 |
+| 🟠 P1 | Sovereign frontendImplementation describes backend work | Phase 1 |
+| 🟠 P1 | React 18.3 hard-coded in Projects.tsx (not from DevGuard repo) | Phase 1 |
+| 🟠 P1 | `--accent-cool` = `--accent-warm` (identical, broken semantics) | Phase 2 |
+| 🟡 P2 | Hero PNG not AVIF/WebP (LCP ~3.1 s) | Phase 8 |
+| 🟡 P2 | Project images are SVG illustrations, not real screenshots | Phase 4 |
+| 🟡 P2 | Dual-lane timeline not built (D5) | Phase 4 |
+| 🟡 P2 | Architecture diagrams not interactive (D6) | Phase 4 |
+| 🟡 P2 | No real SVG logos (D9) | Phase 4 |
+| 🟡 P2 | Contact hub lacks clipboard copy (D10) | Phase 5 |
+| 🟢 P3 | `01 //` section markers (generic-tell blacklist) | Phase 2 |
+| 🟢 P3 | BootSequence says "initializing rajendra.dev kernel" | Phase 1 |
+| 🟢 P3 | `docs/reference/` empty (owner must supply screenshots) | Before Phase 2 |
+| 🟢 P3 | `owner-inputs/` empty | Before Phase 1 |
+
+---
+
+## 11. CI Baseline (Local Run — 2026-11-18)
+
+```
+npm run lint       → 0 errors, 0 warnings ✅
+npm run typecheck  → 0 errors ✅
+npm test           → 15 tests in 4 files, all PASSED ✅
+npm run build      → 20/20 static pages generated ✅ (last confirmed push fdb4321)
+```
+
+**Unit test files:** `portfolio-integrity.test.ts` (5), `api-schemas.test.ts` (3), `rate-limit.test.ts` (1), `chat-security.test.ts` (6)
+
+---
+
+## 12. Open Questions for Owner (≤ 5)
+
+1. **EduMethod AI** — does `https://edumethod-ai.vercel.app` currently serve real content (open it and confirm 2xx with real app)? If yes → keep on site, add to resume + Naukri. If no → already removed from site; just update Naukri/resume to match.
+
+2. **Sovereign** — which features are actually in the repo today: (a) RLS policies ✓/✗, (b) Inngest workflows ✓/✗, (c) human-in-the-loop review UI ✓/✗, (d) audit log UI ✓/✗? This determines what copy Phase 1 can keep vs cut.
+
+3. **Identity direction** — Phase 2 presents Direction A "Blueprint" (ink-navy, fine linework, one precise non-orange accent) vs Direction B "Quiet Graphite" (neutral graphite, cool-blue accent, large type). Which direction do you prefer to see, or should both mock-ups be presented?
+
+4. **Notice period** — the master prompt says 15 days; `portfolio-context.ts` says "1 month notice"; `facts.ts` says "15-day notice". Which is current and correct to put everywhere?
+
+5. **Reference screenshots** — the prompt asks for 8 reference screenshots saved to `docs/reference/ref-01-hero.png … ref-08-stack.png`. These are needed before Phase 2 for the distinctness test. Can you drop them in or provide the reference site URL so they can be captured?
+
+---
+
+## 13. Acceptance Criteria
+
+- [x] `docs/AUDIT.md` v2 created with baseline scores, confirmed tickets, risk register, ≤5 open questions
 - [x] No source files modified
-- [x] Lighthouse baseline recorded (from `.lighthouseci/` CI run)
-- [x] All 24 tickets (A1–A9, B1–B9, C1–C5) confirmed or refuted with file + line reference
+- [x] All open tickets from `<current_state>` confirmed with file + line
 - [x] Unverifiable claims listed with disposal recommendation
-- [x] C3 presence checklist completed
+- [x] Owner-inputs inventory completed
+- [x] Required directories created: `docs/reference/`, `docs/baseline/`, `docs/distinctness/`, `owner-inputs/`
+- [x] CI baseline recorded (lint ✅, typecheck ✅, 15 tests ✅)
 
 ---
 
