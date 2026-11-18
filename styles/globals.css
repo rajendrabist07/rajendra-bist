@@ -651,3 +651,64 @@ html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Shiki dual-theme support */
+html[data-theme="dark"] .shiki,
+html[data-theme="dark"] .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+}
+
+html[data-theme="light"] .shiki,
+html[data-theme="light"] .shiki span {
+  color: var(--shiki-light) !important;
+  background-color: transparent !important;
+}
+
+.shiki {
+  background-color: transparent !important;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.shiki code {
+  display: block;
+}
+
+.shiki .line {
+  display: block;
+  min-height: 1.25rem;
+  animation: shikiLineFadeIn 0.35s ease-out backwards;
+}
+
+.shiki .line:nth-child(1) { animation-delay: 0.05s; }
+.shiki .line:nth-child(2) { animation-delay: 0.10s; }
+.shiki .line:nth-child(3) { animation-delay: 0.15s; }
+.shiki .line:nth-child(4) { animation-delay: 0.20s; }
+.shiki .line:nth-child(5) { animation-delay: 0.25s; }
+.shiki .line:nth-child(6) { animation-delay: 0.30s; }
+.shiki .line:nth-child(7) { animation-delay: 0.35s; }
+.shiki .line:nth-child(8) { animation-delay: 0.40s; }
+.shiki .line:nth-child(9) { animation-delay: 0.45s; }
+.shiki .line:nth-child(10) { animation-delay: 0.50s; }
+
+@keyframes shikiLineFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiki .line {
+    animation: none !important;
+  }
+}

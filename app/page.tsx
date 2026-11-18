@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import BlueprintBackground from "@/components/ui/BlueprintBackground";
-import IntroSequence from "@/components/ui/IntroSequence";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import FloatingAskAI from "@/components/ui/FloatingAskAI";
 import Navbar from "@/components/Navbar";
@@ -11,7 +10,6 @@ const CommandPalette = dynamic(() => import("@/components/ui/CommandPalette"));
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
-import Process from "@/components/sections/Process";
 import Experience from "@/components/sections/Experience";
 import Credentials from "@/components/sections/Credentials";
 import Contact from "@/components/sections/Contact";
@@ -24,9 +22,6 @@ export default function HomePage() {
       <div className="relative min-h-screen bg-[--bg-void] text-[--text-primary]">
         {/* Top Viewport Scroll Progress Bar */}
         <ScrollProgress />
-
-        {/* First visit session intro (≤900ms, real font readiness) */}
-        <IntroSequence />
 
         {/* ⌘K Command Palette */}
         <CommandPalette />
@@ -46,7 +41,6 @@ export default function HomePage() {
           <About />
           <Skills />
           <Projects />
-          <Process />
           <Experience />
           <Credentials />
           <Contact />

@@ -101,7 +101,7 @@ test.describe('Phase 3 Hero, Navigation & Intro Tests', () => {
 
     // Dialog role and mode switcher
     await expect(page.locator('div[role="dialog"]')).toBeVisible();
-    const askAiTab = page.getByRole('button', { name: /ask ai assistant/i });
+    const askAiTab = page.getByRole('button', { name: /ask ai/i });
     await expect(askAiTab).toBeVisible();
     await askAiTab.click();
 

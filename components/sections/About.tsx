@@ -1,160 +1,128 @@
-"use client";
+import React from 'react';
+import Container from '@/components/ui/Container';
+import SectionHeader from '@/components/ui/SectionHeader';
+import IdentityBlock from '@/components/ui/IdentityBlock';
+import { getIdentityBlockHtml } from '@/lib/shiki-highlight';
+import { Database, ShieldCheck, CheckCircle2, CloudLightning } from 'lucide-react';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { Blocks, BrainCircuit, Database, Network } from "lucide-react";
-import SectionHeader from "@/components/ui/SectionHeader";
-import CodeBioBlock from "@/components/ui/CodeBioBlock";
-import Container from "@/components/ui/Container";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
-
-const strengths = [
+const ENGINEERING_STEPS = [
   {
-    title: "Systems-First Architecture",
-    description:
-      "Establish strict database schemas, API contracts, and failure boundaries prior to client execution.",
-    icon: Network,
-    badge: "ARCHITECTURE",
-  },
-  {
-    title: "Contract-Driven Full-Stack",
-    description:
-      "Bridge complex client state with typed backend endpoints and make data-shape failures easier to detect.",
-    icon: Blocks,
-    badge: "TYPESAFE",
-  },
-  {
-    title: "Secure API Architecture",
-    description:
-      "Implementing JWT authentication, rate limiting, transactional database operations, and caching layers.",
+    number: '01',
+    title: 'Schema & Migrations',
+    description: 'PostgreSQL RLS modeling with Prisma; zero-drift migrations run before app boot.',
+    evidence: 'Chronicle prisma/migrations · Sovereign enable_rls',
     icon: Database,
-    badge: "BACKEND",
   },
   {
-    title: "Deterministic AI Guardrails",
-    description:
-      "Grounded retrieval pipelines and multi-tier LLM fallback routers that bound failure and preserve context.",
-    icon: BrainCircuit,
-    badge: "RELIABILITY",
+    number: '02',
+    title: 'Contract Validation',
+    description: 'Runtime Zod schemas enforce boundaries on all REST inputs and tool-calling agent outputs.',
+    evidence: 'DevGuard lib/schemas · Chronicle api/validators',
+    icon: ShieldCheck,
+  },
+  {
+    number: '03',
+    title: 'Automated CI Gates',
+    description: 'Vitest unit & integration test suites, linting, and GitHub Actions CI blocking regressions.',
+    evidence: 'DevGuard evals/run-eval · Chronicle vitest suite',
+    icon: CheckCircle2,
+  },
+  {
+    number: '04',
+    title: 'Resilient Deployment',
+    description: 'Multi-provider model fallback router and graceful degradation across Vercel and Render.',
+    evidence: 'DevGuard router.ts (Groq → Gemini → rules)',
+    icon: CloudLightning,
   },
 ];
 
-export default function About() {
+export default async function About() {
+  const { html, code } = await getIdentityBlockHtml();
+
   return (
-    <section
-      id="about"
-      className="relative overflow-hidden py-24 md:py-32 section-tone-alt"
-    >
-      <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <div className="section-watermark" aria-hidden="true">01</div>
-      <Container className="relative z-10">
+    <section id="about" className="relative py-20 md:py-28 border-b border-[--border-hairline]">
+      <Container>
         <SectionHeader
-          eyebrow="01 // ARCHITECTURE & PHILOSOPHY"
-          title="Engineering Systems with Rigor"
-          description="Representing engineering identity through structured schemas, strict typing, and fault-tolerant pipelines."
+          eyebrow="ENGINEERING PHILOSOPHY & CAPABILITY"
+          title="Building Systems from Schema to Deployment"
+          description="Focusing on contract integrity, verifiable tenant boundaries, and failure resilience."
         />
 
-        {/* rajendra.config.ts as Opening Element of About */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55 }}
-          className="mt-8 mb-12 max-w-4xl"
-        >
-          <CodeBioBlock />
-        </motion.div>
+        {/* Two-Column About Layout */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: 3 Narrative Paragraphs (<= 68ch) */}
+          <div className="lg:col-span-6 space-y-6 max-w-[68ch] text-[--text-secondary] text-base sm:text-lg leading-relaxed font-sans">
+            <p>
+              I&apos;m a full-stack developer in New Delhi who builds complete web applications:
+              database schema, API, authentication, interface and deployment. My daily stack is{' '}
+              <strong className="text-[--text-primary] font-semibold">
+                Node.js, TypeScript, PostgreSQL, Next.js and React
+              </strong>
+              .
+            </p>
 
-        {/* Systems Narrative */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-          className="space-y-5 text-base leading-relaxed text-[--text-secondary] sm:text-lg sm:leading-8"
-        >
-          <motion.p variants={itemVariants}>
-            I&apos;m a full-stack developer and backend engineer based in{" "}
-            <span className="text-[--text-primary] font-medium">New Delhi, India</span>{" "}
-            working primarily with{" "}
-            <span className="text-[--text-primary] font-medium">
-              Node.js, TypeScript, PostgreSQL, Express, and Next.js 15
-            </span>
-            . Nepali national; eligible to work in India without sponsorship under the 1950 Indo-Nepal Treaty. Available for Full-Stack and Backend (SDE-1) roles in Delhi NCR or remote.
-          </motion.p>
-          <motion.p variants={itemVariants}>
-            My engineering strategy is{" "}
-            <span className="text-[--accent-warm] font-semibold">
-              systems-first
-            </span>
-            : define rigid database models, enforce schema validation, and
-            architect fallback paths before writing UI code. I&apos;ve shipped
-            applications including AST static analysis review agents,
-            vector similarity search with pgvector, and resilient multi-model
-            LLM streaming pipelines.
-          </motion.p>
-          <motion.p variants={itemVariants}>
-            In AI engineering, I pair probabilistic models with software
-            controls: grounded retrieval, schema guardrails, bounded outputs,
-            and explicit fallback behavior that makes failure visible and
-            testable.
-          </motion.p>
-        </motion.div>
+            <p>
+              I learn by building, alongside a Diploma in IT. Since July 2026 I have shipped{' '}
+              <strong className="text-[--text-primary] font-semibold">DevGuard AI</strong>, a GitHub App
+              that reviews pull requests, and{' '}
+              <strong className="text-[--text-primary] font-semibold">Chronicle</strong>, a publishing
+              platform with AI writing tools.{' '}
+              <strong className="text-[--text-primary] font-semibold">Sovereign</strong>, a
+              multi-tenant SaaS for AI workflow agents, is in active development.
+            </p>
 
-        {/* 4 Architectural Strengths Cards */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {strengths.map((item) => {
-            const Icon = item.icon;
-            return (
-              <motion.article
-                key={item.title}
-                variants={itemVariants}
-                className="surface-panel group relative overflow-hidden rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-white/[0.2] hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]"
-              >
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[--accent-warm]/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-all group-hover:border-[--accent-warm]/40 group-hover:scale-105">
-                    <Icon size={19} />
-                  </span>
-                  <span className="rounded border border-[--border-subtle] bg-[--bg-surface-2] px-2 py-0.5 font-mono text-[10px] text-[--accent-cool]">
-                    {item.badge}
-                  </span>
+            <p>
+              I care about the parts that break: input validation, safe database migrations, and what an
+              app does when a service fails. I&apos;m available immediately in Delhi NCR or remote, and I can
+              work in India without sponsorship under the 1950 Indo-Nepal Treaty.
+            </p>
+          </div>
+
+          {/* Right Column: Sticky Identity Block (Build-time Shiki highlighted) */}
+          <div className="lg:col-span-6 sticky top-24">
+            <IdentityBlock highlightedHtml={html} rawCode={code} />
+          </div>
+        </div>
+
+        {/* Process / Engineering Systems Compact Strip */}
+        <div id="process" className="mt-20 pt-12 border-t border-[--border-hairline]">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <h3 className="text-sm font-mono uppercase tracking-wider text-[--accent] font-semibold">
+              Delivery Sequence · Engineering Discipline
+            </h3>
+            <span className="text-xs font-mono text-[--text-tertiary]">
+              Practices verified across shipped project repositories
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {ENGINEERING_STEPS.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={step.number}
+                  className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-1] p-5 flex flex-col justify-between transition-colors hover:border-[--border-strong] group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between font-mono text-xs mb-3">
+                      <span className="font-bold text-[--accent]">{step.number}</span>
+                      <Icon size={16} className="text-[--text-tertiary] group-hover:text-[--accent] transition-colors" />
+                    </div>
+                    <h4 className="text-sm font-semibold text-[--text-primary] mb-1.5">
+                      {step.title}
+                    </h4>
+                    <p className="text-xs text-[--text-secondary] leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-[--border-hairline] font-mono text-[10px] text-[--text-tertiary]">
+                    {step.evidence}
+                  </div>
                 </div>
-                <h3 className="mt-4 font-mono text-sm font-bold text-[--text-primary] tracking-tight">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-[--text-secondary]">
-                  {item.description}
-                </p>
-              </motion.article>
-            );
-          })}
-        </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </Container>
     </section>
   );

@@ -167,7 +167,7 @@ export default function CommandPalette() {
                   : 'border-transparent text-[--text-tertiary] hover:text-[--text-primary]'
               }`}
             >
-              Search Systems
+              Search
             </button>
             <button
               type="button"
@@ -179,7 +179,7 @@ export default function CommandPalette() {
               }`}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[--accent] animate-pulse" />
-              Ask AI Assistant
+              Ask AI
             </button>
           </div>
           <button

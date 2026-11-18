@@ -1,113 +1,192 @@
-'use client';
-
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
-import SectionHeader from '@/components/ui/SectionHeader';
-import { EXPERIENCE } from '@/lib/portfolio-data';
 import Container from '@/components/ui/Container';
+import SectionHeader from '@/components/ui/SectionHeader';
+import { Hammer, GraduationCap, Calendar, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
+interface TimelineEntry {
+  title: string;
+  organization: string;
+  timeframe: string;
+  outcome: string;
+  stack?: string[];
+  link?: string;
+}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
+const BUILDING_MILESTONES: TimelineEntry[] = [
+  {
+    title: 'Sovereign — Multi-Tenant B2B SaaS',
+    organization: 'Independent Project',
+    timeframe: 'Oct 2026 – Present',
+    outcome: 'Architected PostgreSQL RLS tenant isolation with Inngest durable workflow runs and human approval UI.',
+    stack: ['PostgreSQL (RLS)', 'Next.js 15', 'Inngest', 'Turborepo'],
+    link: '#projects',
   },
-};
+  {
+    title: 'Chronicle — Publishing Platform',
+    organization: 'Independent Project',
+    timeframe: 'Sep 2026',
+    outcome: 'Shipped two-service architecture (Next.js on Vercel + Express on Render) with Zod-validated Gemini AI tools.',
+    stack: ['Next.js', 'Express', 'Prisma', 'PostgreSQL'],
+    link: '#projects',
+  },
+  {
+    title: 'DevGuard AI — PR Review App',
+    organization: 'Independent Project',
+    timeframe: 'Jul 2026 – Aug 2026',
+    outcome: 'Engineered GitHub App with 3-tier model router (Groq → Gemini → rules), HMAC webhooks, and AST linting.',
+    stack: ['Node.js', 'Groq', 'Gemini', 'Redis'],
+    link: '#projects',
+  },
+];
+
+const LEARNING_MILESTONES: TimelineEntry[] = [
+  {
+    title: 'Diploma in IT (Full-Stack Web Dev)',
+    organization: 'Vcare Technical Institute · India',
+    timeframe: '2025 – 2026',
+    outcome: 'Completed practical engineering training in REST APIs, JWT authentication, MongoDB, and production deployment.',
+    stack: ['Node.js', 'Express', 'React', 'MongoDB'],
+  },
+  {
+    title: 'Higher Secondary (+2 Science)',
+    organization: 'Kailali Multiple Campus · Nepal',
+    timeframe: '2022',
+    outcome: 'Rigorous foundational background in Physics, Chemistry, and Mathematics (Class XII equivalent).',
+    stack: ['Mathematics', 'Physics', 'Chemistry'],
+  },
+];
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative overflow-hidden py-24 md:py-32 section-tone-alt">
-      <div className="divider-gradient absolute top-0 left-0 right-0" />
-      <div className="section-watermark" aria-hidden="true">05</div>
-
-      <Container className="relative z-10">
+    <section id="experience" className="relative py-20 md:py-28 border-b border-[--border-hairline]">
+      <Container>
         <SectionHeader
-          eyebrow="05 // EXPERIENCE & TIMELINE"
-          title="Work & Systems Timeline"
-          description="Timeline of shipping live web APIs, workflow systems, and type-safe applications."
+          eyebrow="CHRONOLOGY & TRACK RECORD"
+          title="Dual-Lane Experience Timeline"
+          description="Parallel progression across self-directed production software and structured technical education."
         />
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={containerVariants}
-          className="relative ml-3 border-l-2 border-[--border-strong] pl-6 sm:ml-6 sm:pl-10 space-y-12"
-        >
-          {EXPERIENCE.map((exp, index) => (
-            <motion.div key={index} variants={itemVariants} className="relative group">
-              {/* Timeline Indicator Dot */}
-              <span className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[--accent-warm] bg-[--bg-void] shadow-[0_0_12px_rgba(255,122,51,0.35)]">
-                <span className="h-2 w-2 rounded-full bg-[--accent-warm]" />
-              </span>
+        {/* "Today" Live Marker */}
+        <div className="mt-12 flex items-center justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-4 py-1.5 font-mono text-xs text-[--text-primary] shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[--status-live] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[--status-live]" />
+            </span>
+            <span className="font-semibold text-[--text-primary]">Today</span>
+            <span className="text-[--text-tertiary]">·</span>
+            <span className="text-[--text-secondary]">Active SDE Search (Delhi NCR / Remote)</span>
+          </div>
+        </div>
 
-              {/* Experience Card */}
-              <article className="surface-panel rounded-2xl p-6 sm:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-white/[0.2] hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-3 py-1 font-mono text-xs font-semibold text-[--accent-warm] mb-3">
-                      <Briefcase size={13} />
-                      {exp.company}
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-[--text-primary] tracking-tight">
-                      {exp.role}
-                    </h3>
+        {/* Dual Lane Desktop Grid / Single Column Mobile */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 relative">
+          {/* Subtle center dividing guideline on desktop */}
+          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-[--border-hairline] -translate-x-1/2 pointer-events-none" />
+
+          {/* Lane 1: Building */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--accent] font-semibold uppercase tracking-wider">
+              <Hammer size={15} />
+              <span>Building · Shipped Software</span>
+            </div>
+
+            <div className="space-y-4">
+              {BUILDING_MILESTONES.map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-1] p-5 transition-all hover:border-[--border-strong] focus-within:ring-2 focus-within:ring-[--focus-ring]"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <h4 className="text-sm font-bold text-[--text-primary] tracking-tight">
+                      {item.link ? (
+                        <Link
+                          href={item.link}
+                          className="hover:text-[--accent] inline-flex items-center gap-1 focus:outline-none"
+                        >
+                          {item.title}
+                          <ArrowUpRight size={13} className="text-[--text-tertiary]" />
+                        </Link>
+                      ) : (
+                        item.title
+                      )}
+                    </h4>
+                    <span className="shrink-0 inline-flex items-center gap-1 font-mono text-[11px] text-[--text-tertiary] bg-[--bg-surface-2] px-2 py-0.5 rounded-[--radius-control]">
+                      <Calendar size={11} />
+                      {item.timeframe}
+                    </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-[--text-tertiary]">
-                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-[--border-subtle] bg-[--bg-surface-2] px-2.5 py-1">
-                      <Calendar size={13} className="text-[--accent-warm]" />
-                      {exp.timeframe}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-[--border-subtle] bg-[--bg-surface-2] px-2.5 py-1">
-                      <MapPin size={13} className="text-[--text-tertiary]" />
-                      {exp.location}
+                  <p className="text-xs text-[--text-secondary] leading-relaxed mb-3">
+                    {item.outcome}
+                  </p>
+
+                  {item.stack && (
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[--border-hairline]">
+                      {item.stack.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[10px] text-[--text-tertiary] bg-[--bg-surface-2] px-2 py-0.5 rounded-[--radius-control]"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Lane 2: Learning */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--text-secondary] font-semibold uppercase tracking-wider">
+              <GraduationCap size={15} className="text-[--accent]" />
+              <span>Learning · Education & Training</span>
+            </div>
+
+            <div className="space-y-4">
+              {LEARNING_MILESTONES.map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-1] p-5 transition-all hover:border-[--border-strong] focus-within:ring-2 focus-within:ring-[--focus-ring]"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <h4 className="text-sm font-bold text-[--text-primary] tracking-tight">
+                      {item.title}
+                    </h4>
+                    <span className="shrink-0 inline-flex items-center gap-1 font-mono text-[11px] text-[--text-tertiary] bg-[--bg-surface-2] px-2 py-0.5 rounded-[--radius-control]">
+                      <Calendar size={11} />
+                      {item.timeframe}
                     </span>
                   </div>
-                </div>
 
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-[--text-secondary]">
-                  {exp.description}
-                </p>
+                  <div className="text-xs font-mono text-[--accent] mb-2">
+                    {item.organization}
+                  </div>
 
-                {/* Key Measurable Outcomes */}
-                <div className="mt-5 space-y-2">
-                  {exp.achievements.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[--text-secondary]">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[--accent-cool]" />
-                      <span>{item}</span>
+                  <p className="text-xs text-[--text-secondary] leading-relaxed mb-3">
+                    {item.outcome}
+                  </p>
+
+                  {item.stack && (
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[--border-hairline]">
+                      {item.stack.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[10px] text-[--text-tertiary] bg-[--bg-surface-2] px-2 py-0.5 rounded-[--radius-control]"
+                        >
+                          {t}
+                        </span>
+                      ))}
                     </div>
-                  ))}
-                </div>
-
-                {/* Stack Tag Pills */}
-                <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06]">
-                  {exp.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="tag-pill"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            </motion.div>
-          ))}
-        </motion.div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
       </Container>
     </section>
   );
