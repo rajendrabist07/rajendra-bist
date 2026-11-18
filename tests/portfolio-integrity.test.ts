@@ -24,6 +24,20 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     expect(PERSONAL.availability.noticePeriodDays).toBe(0)
   })
 
+  it('verifies resume PDF exists at exact lowercase path, is under 300KB, and does not contain 15 days', async () => {
+    const fs = await import('node:fs')
+    const path = await import('node:path')
+    const resumePath = path.resolve(process.cwd(), 'public/resume/Rajendra_Bist_Full_Stack_Developer.pdf')
+    expect(fs.existsSync(resumePath)).toBe(true)
+    const stats = fs.statSync(resumePath)
+    expect(stats.size).toBeGreaterThan(50000)
+    expect(stats.size).toBeLessThan(300000)
+
+    const raw = fs.readFileSync(resumePath, 'latin1')
+    expect(raw.toLowerCase().includes('15 days')).toBe(false)
+    expect(raw.toLowerCase().includes('15-day')).toBe(false)
+  })
+
   it('verifies all featured projects have valid links, slugs, stacks, and sourced evidence', () => {
     expect(PROJECTS.length).toBeGreaterThanOrEqual(3)
     const titles = PROJECTS.map((p) => p.title)

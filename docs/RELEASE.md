@@ -49,7 +49,7 @@ Ensure these environment variables are populated in your Vercel Project Settings
 1. **Live Domain Check**:
    - Visit `https://www.bistrajendra.com.np`
    - Verify hero displays live time in IST (`New Delhi · HH:MM IST`)
-   - Verify availability chip: `Available · 15-day notice · Delhi NCR / remote`
+   - Verify availability chip: `Available immediately · Delhi NCR / remote`
    - Test "View Projects" and "Download Resume" buttons
 
 2. **Redirect Validation**:

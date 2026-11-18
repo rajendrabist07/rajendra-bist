@@ -139,7 +139,7 @@ rajendra-bist/
 │   └── ContactMessage.ts            # Mongoose schema for contact inquiries
 ├── public/
 │   ├── Resume/resume.pdf            # PDF Resume
-│   ├── images/                      # Optimized image assets (DevGuard AI, EduMethod, profile)
+│   ├── images/                      # Optimized image assets (DevGuard AI, Chronicle, Sovereign, profile)
 │   ├── favicon.svg                  # Vector favicon
 │   ├── manifest.json                # PWA web app manifest
 │   ├── og-image.svg                 # OpenGraph social preview image

@@ -389,16 +389,16 @@ export const PROJECTS = z.array(ProjectSchema).parse([
       'Built organizational workspace with tRPC client queries, workflow run list views, approval dialogs, and tenant-scoped dashboard components.',
     evidence: [
       {
-        label: 'Monorepo Architecture',
-        value: 'Turborepo + pnpm workspaces',
-        source: 'github.com/rajendrabist07/sovereign/blob/main/package.json',
+        label: 'Database Isolation (RLS)',
+        value: 'PostgreSQL RLS with fail-closed tenant policies',
+        source: 'github.com/rajendrabist07/sovereign/blob/main/packages/db/prisma/migrations/20261002111243_enable_rls/migration.sql',
         verifiedOn: '2026-11-18',
         draft: false,
       },
       {
-        label: 'Database Isolation',
-        value: 'PostgreSQL RLS with Prisma adapter',
-        source: 'github.com/rajendrabist07/sovereign/blob/main/packages/db/package.json',
+        label: 'Workflow Approvals UI',
+        value: 'Human-in-the-loop review routes & components',
+        source: 'github.com/rajendrabist07/sovereign/blob/main/apps/web/app/(app)/approvals/page.tsx',
         verifiedOn: '2026-11-18',
         draft: false,
       },
@@ -431,9 +431,9 @@ export const PROJECTS = z.array(ProjectSchema).parse([
       'Server-rendered public reading pages with ISR, per-page metadata, and a writer workspace with markdown preview, autosave, and AI assist panels.',
     evidence: [
       {
-        label: 'Production Services',
+        label: 'Deployed Services',
         value: '2 (Next.js client + Express API)',
-        source: 'github.com/rajendrabist07/chronicle',
+        source: 'github.com/rajendrabist07/chronicle/blob/main/package.json',
         verifiedOn: '2026-11-18',
         draft: false,
       },
@@ -471,16 +471,16 @@ export const PROJECTS = z.array(ProjectSchema).parse([
       'Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.',
     evidence: [
       {
-        label: 'Model Failover Paths',
+        label: 'Model Failover Router',
         value: '3-tier router (Groq -> Gemini -> AST rules)',
-        source: 'github.com/rajendrabist07/dev-guard-ai',
+        source: 'github.com/rajendrabist07/dev-guard-ai/blob/main/lib/agent/router.ts',
         verifiedOn: '2026-11-18',
         draft: false,
       },
       {
-        label: 'Test & Evaluation Suite',
+        label: 'Automated Evaluation Suite',
         value: 'Vitest + automated eval runner scripts',
-        source: 'github.com/rajendrabist07/dev-guard-ai/blob/main/package.json',
+        source: 'github.com/rajendrabist07/dev-guard-ai/blob/main/evals/run-eval.ts',
         verifiedOn: '2026-11-18',
         draft: false,
       },
