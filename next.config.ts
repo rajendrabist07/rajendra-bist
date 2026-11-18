@@ -29,8 +29,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/resume/:path*',
-        destination: '/Resume/:path*',
+        source: '/Resume/resume.pdf',
+        destination: '/resume/Rajendra_Bist_Full_Stack_Developer.pdf',
+        permanent: true,
+      },
+      {
+        source: '/resume/resume.pdf',
+        destination: '/resume/Rajendra_Bist_Full_Stack_Developer.pdf',
+        permanent: true,
+      },
+      {
+        source: '/Resume/:path*',
+        destination: '/resume/:path*',
         permanent: true,
       },
       {

@@ -4,6 +4,12 @@ import { z } from 'zod'
 // Zod schemas
 // ---------------------------------------------------------------------------
 
+const AvailabilitySchema = z.object({
+  status: z.string(),
+  noticePeriodDays: z.number().int().nonnegative(),
+  formatted: z.string(),
+})
+
 const PersonalSchema = z.object({
   name: z.string(),
   role: z.string(),
@@ -16,7 +22,7 @@ const PersonalSchema = z.object({
   website: z.string().url(),
   resumeUrl: z.string(),
   workAuthorization: z.string(),
-  availability: z.string(),
+  availability: AvailabilitySchema,
   noticePeriod: z.string(),
   languages: z.array(z.string()),
 })
@@ -37,6 +43,21 @@ const CredentialSchema = z.object({
   status: z.enum(['Completed', 'Ongoing']),
   description: z.string(),
   topics: z.array(z.string()),
+  verifyUrl: z.string().url().optional(),
+  draft: z.boolean().default(false),
+})
+
+const TimelineEventSchema = z.object({
+  lane: z.enum(['Building', 'Learning']),
+  role: z.string(),
+  organization: z.string(),
+  timeframe: z.string(),
+  start: z.string(),
+  end: z.string(),
+  label: z.string(),
+  description: z.string(),
+  achievements: z.array(z.string()),
+  stack: z.array(z.string()),
 })
 
 const ExperienceItemSchema = z.object({
@@ -54,18 +75,34 @@ const SkillCategorySchema = z.object({
   items: z.array(z.string()),
 })
 
+export const EvidenceSchema = z.object({
+  label: z.string().min(1),
+  value: z.string().min(1),
+  source: z.string().min(1),
+  verifiedOn: z.string().optional(),
+  draft: z.boolean().default(false),
+})
+
+export type Evidence = z.infer<typeof EvidenceSchema>
+
 const ProjectStatusSchema = z.enum(['Live', 'In Development', 'Archived'])
 
 const ProjectSchema = z.object({
+  slug: z.string(),
   title: z.string(),
   status: ProjectStatusSchema,
+  timeframe: z.string(),
   description: z.string(),
   stack: z.array(z.string()),
   imageUrl: z.string(),
   liveUrl: z.string().url(),
   githubUrl: z.string().url(),
   frontendImplementation: z.string(),
+  evidence: z.array(EvidenceSchema),
+  draft: z.boolean().default(false),
 })
+
+export type Project = z.infer<typeof ProjectSchema>
 
 const SiteConfigSchema = z.object({
   SITE_URL: z.string().url(),
@@ -89,11 +126,15 @@ export const PERSONAL = PersonalSchema.parse({
   github: 'https://github.com/rajendrabist07',
   linkedin: 'https://www.linkedin.com/in/rajendra-bist-169926370',
   website: 'https://www.bistrajendra.com.np',
-  resumeUrl: '/Resume/resume.pdf',
+  resumeUrl: '/resume/Rajendra_Bist_Full_Stack_Developer.pdf',
   workAuthorization:
     'Nepali national; eligible to work in India without sponsorship under the 1950 Indo-Nepal Treaty.',
-  availability: '15-day notice · Delhi NCR / remote',
-  noticePeriod: '15 days',
+  availability: {
+    status: 'Available immediately',
+    noticePeriodDays: 0,
+    formatted: 'Available immediately · Delhi NCR / remote',
+  },
+  noticePeriod: 'Available immediately',
   languages: ['English', 'Hindi (Proficient)', 'Nepali (Native)'],
 })
 
@@ -114,23 +155,25 @@ export const EDUCATION = z.array(EducationItemSchema).parse([
     degree: 'Higher Secondary (+2 Science, Class XII equivalent)',
     timeframe: '2022',
     location: 'Nepal',
-    description: 'Physics, Mathematics, and computational foundations',
+    description: 'Physics, Chemistry, and Mathematics',
   },
 ])
 
 // ---------------------------------------------------------------------------
-// CREDENTIALS — only real credentials (no "Project-Based Engineering Practice")
+// CREDENTIALS — only real credentials with verifyUrl and draft flag
 // ---------------------------------------------------------------------------
 
 export const CREDENTIALS = z.array(CredentialSchema).parse([
   {
     institution: 'Vcare Technical Institute',
-    title: 'Diploma in IT (Full-Stack Web Development)',
+    title: 'Full-Stack Web Development',
     credentialType: 'Professional Engineering Training',
     timeframe: '2025 – 2026',
     status: 'Completed',
+    verifyUrl: 'https://drive.google.com/file/d/1nRuMQefR-kxjTr32fHj0uK2v78Hy8FE1/view',
+    draft: false,
     description:
-      'Rigorous practical engineering diploma covering Node.js, Express.js, React, MongoDB, REST APIs, database modeling, and production deployment patterns in India.',
+      'Practical engineering diploma covering Node.js, Express.js, React, MongoDB, REST APIs, database modeling, and deployment workflows in India.',
     topics: ['Node.js', 'Express.js', 'React', 'MongoDB', 'REST APIs', 'PostgreSQL'],
   },
   {
@@ -139,14 +182,68 @@ export const CREDENTIALS = z.array(CredentialSchema).parse([
     credentialType: 'Class XII Science',
     timeframe: '2022',
     status: 'Completed',
+    draft: false,
     description:
       '+2 Science stream (physics, chemistry, and mathematics).',
-    topics: ['Science Stream', 'Mathematics', 'Physics'],
+    topics: ['Science Stream'],
   },
 ])
 
 // ---------------------------------------------------------------------------
-// EXPERIENCE
+// TIMELINE EVENTS — Dual-Lane: Building vs Learning
+// ---------------------------------------------------------------------------
+
+export const TIMELINE_EVENTS = z.array(TimelineEventSchema).parse([
+  {
+    lane: 'Building',
+    role: 'Full-Stack Developer (Self-Employed)',
+    organization: 'Independent Projects',
+    timeframe: 'Feb 2025 – Present',
+    start: '2025-02',
+    end: 'Present',
+    label: 'Engineering & Deployment',
+    description:
+      'Design, build, and deploy full-stack applications end to end across Next.js and Express with PostgreSQL and MongoDB, owning schema design, APIs, authentication, and deployment.',
+    achievements: [
+      'Architecting Sovereign: multi-tenant B2B SaaS in a Turborepo monorepo with PostgreSQL Row-Level Security tenant isolation, Inngest durable workflows, and RBAC.',
+      'Built and deployed Chronicle: two-service platform with Next.js SSR/ISR on Vercel and Express REST API (JWT) on Render backed by PostgreSQL via Prisma with zero-drift migrations.',
+      'Shipped DevGuard AI (Jul 2026 – Aug 2026): GitHub review application with multi-model failover (Groq, Gemini), AST security linting, HMAC-verified webhooks, and Redis rate limiting.',
+    ],
+    stack: [
+      'TypeScript',
+      'Turborepo',
+      'PostgreSQL (RLS)',
+      'Inngest',
+      'Node.js',
+      'Express',
+      'Prisma',
+      'Next.js 15',
+      'Zod',
+      'Gemini 2.5',
+      'Vitest',
+      'GitHub Actions',
+    ],
+  },
+  {
+    lane: 'Learning',
+    role: 'Full-Stack Web Development Trainee',
+    organization: 'Vcare Technical Institute',
+    timeframe: '2025 – 2026',
+    start: '2025-01',
+    end: '2026',
+    label: 'Professional Engineering Training',
+    description:
+      'Completed practical diploma training in full-stack engineering focused on API design, database schema modeling, protected authentication flows, and deployment in India.',
+    achievements: [
+      'Implemented REST API modules, protected JWT authentication routes, database schemas, and reusable React interface patterns.',
+      'Practiced software delivery workflows including Git, environment variables, CI deployment checks, and debugging discipline.',
+    ],
+    stack: ['Node.js', 'Express.js', 'React', 'MongoDB', 'REST APIs', 'Git'],
+  },
+])
+
+// ---------------------------------------------------------------------------
+// EXPERIENCE (Backward-compatible export for existing components)
 // ---------------------------------------------------------------------------
 
 export const EXPERIENCE = z.array(ExperienceItemSchema).parse([
@@ -156,12 +253,12 @@ export const EXPERIENCE = z.array(ExperienceItemSchema).parse([
     timeframe: 'Feb 2025 – Present',
     location: 'Remote',
     description:
-      'Design, build, and deploy full-stack applications end to end across Next.js (Vercel) and Express (Render) with PostgreSQL (Prisma) and MongoDB, owning schema design, REST APIs, authentication, CI, and production deployment.',
+      'Design, build, and deploy full-stack applications end to end across Next.js (Vercel) and Express (Render) with PostgreSQL (Prisma) and MongoDB, owning schema design, REST APIs, authentication, CI, and deployment.',
     achievements: [
-      'Architecting Sovereign: multi-tenant B2B SaaS in a Turborepo monorepo where organizations define autonomous AI workflow agents; PostgreSQL Row-Level Security enforces tenant isolation at the database layer alongside RBAC, audit logging, and quota enforcement.',
-      'Built workflow execution on Inngest for durable, resumable, and idempotent runs with human-in-the-loop approval steps, and an agent tool-calling loop using JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt-injection tag defenses.',
-      'Built and deployed Chronicle: two-service platform with Next.js SSR/ISR on Vercel and Express REST API (JWT) on Render backed by PostgreSQL via Prisma; schema-guarded Gemini tools with transactional email (Brevo) and boot-time zero-drift Prisma migrations.',
-      'Engineered DevGuard AI: GitHub App with LLM tool-calling loop (AST-based security linting & OSV.dev CVE scanning), 3-path model failover (Groq → Gemini → rule engine), HMAC-verified webhooks, Zod validation, and Redis rate limiting.',
+      'Architecting Sovereign: multi-tenant B2B SaaS in a Turborepo monorepo where organizations define autonomous AI workflow agents; PostgreSQL Row-Level Security enforces tenant isolation alongside RBAC and audit logging.',
+      'Built workflow execution on Inngest for durable, resumable runs with human-in-the-loop approval steps, and an agent tool-calling loop using JSON-mode requests and Zod output verification.',
+      'Built and deployed Chronicle: two-service platform with Next.js SSR/ISR on Vercel and Express REST API (JWT) on Render backed by PostgreSQL via Prisma; Zod-validated Gemini tools with transactional email (Brevo) and boot-time zero-drift Prisma migrations.',
+      'Engineered DevGuard AI (Jul 2026 – Aug 2026): GitHub App with tool-calling loop (AST-based security linting & OSV.dev CVE scanning), 3-path model failover (Groq → Gemini → rule engine), HMAC-verified webhooks, Zod validation, and Redis rate limiting.',
     ],
     stack: [
       'TypeScript',
@@ -187,7 +284,7 @@ export const EXPERIENCE = z.array(ExperienceItemSchema).parse([
       'Completed practical diploma training in full-stack engineering focused on API engineering, database schema modeling, protected authentication flows, and deployment patterns in India.',
     achievements: [
       'Implemented REST API modules, protected JWT authentication routes, database schemas, and reusable React interface patterns.',
-      'Practiced production workflows including Git, environment variables, CI deployment checks, and debugging discipline.',
+      'Practiced software delivery workflows including Git, environment variables, CI deployment checks, and debugging discipline.',
     ],
     stack: ['Node.js', 'Express.js', 'React', 'MongoDB', 'REST APIs', 'Git'],
   },
@@ -262,15 +359,17 @@ export const SKILLS = z.array(SkillCategorySchema).parse([
 ])
 
 // ---------------------------------------------------------------------------
-// PROJECTS
+// PROJECTS — 3 canonical projects with real package.json stacks & evidence
 // ---------------------------------------------------------------------------
 
 export const PROJECTS = z.array(ProjectSchema).parse([
   {
+    slug: 'sovereign',
     title: 'Sovereign',
     status: 'In Development',
+    timeframe: '2026',
     description:
-      'Multi-tenant B2B SaaS platform in a Turborepo monorepo with PostgreSQL Row-Level Security (RLS), Inngest durable workflows, and schema-guarded AI agents.',
+      'Multi-tenant B2B SaaS platform for AI workflow agents, isolating tenant data with PostgreSQL Row-Level Security (RLS) and executing durable workflows via Inngest.',
     stack: [
       'TypeScript',
       'Turborepo',
@@ -278,21 +377,44 @@ export const PROJECTS = z.array(ProjectSchema).parse([
       'Inngest',
       'Zod',
       'Node.js',
-      'Next.js 15',
+      'Next.js 16',
+      'React 19',
+      'tRPC',
+      'Prisma',
     ],
     imageUrl: '/images/sovereign-card.svg',
     liveUrl: 'https://sovereign-saas-platform.vercel.app/',
     githubUrl: 'https://github.com/rajendrabist07/sovereign',
     frontendImplementation:
-      'Architected organization workspace in a Turborepo monorepo with PostgreSQL RLS tenant isolation, Inngest durable workflow execution, and schema-guarded AI tool calling.',
+      'Built organizational workspace with tRPC client queries, workflow run list views, approval dialogs, and tenant-scoped dashboard components.',
+    evidence: [
+      {
+        label: 'Monorepo Architecture',
+        value: 'Turborepo + pnpm workspaces',
+        source: 'github.com/rajendrabist07/sovereign/blob/main/package.json',
+        verifiedOn: '2026-11-18',
+        draft: false,
+      },
+      {
+        label: 'Database Isolation',
+        value: 'PostgreSQL RLS with Prisma adapter',
+        source: 'github.com/rajendrabist07/sovereign/blob/main/packages/db/package.json',
+        verifiedOn: '2026-11-18',
+        draft: false,
+      },
+    ],
+    draft: false,
   },
   {
+    slug: 'chronicle',
     title: 'Chronicle',
     status: 'Live',
+    timeframe: '2026',
     description:
-      'Two-service technical publishing platform with server-rendered public pages, email-verified accounts, and schema-guarded Gemini AI writing tools.',
+      'Two-service technical publishing platform with server-rendered public pages, email-verified accounts, and schema-validated Gemini AI writing tools.',
     stack: [
-      'Next.js 15',
+      'Next.js',
+      'React 19',
       'TypeScript',
       'Express',
       'Prisma',
@@ -306,28 +428,85 @@ export const PROJECTS = z.array(ProjectSchema).parse([
     liveUrl: 'https://chronicle-platform.vercel.app/',
     githubUrl: 'https://github.com/rajendrabist07/chronicle.git',
     frontendImplementation:
-      'Server-rendered public reading pages with ISR, per-page metadata and dynamic social cards, plus a client-side writer workspace with markdown preview, draft autosave, and AI assist panels on a tokenized dark/light design system.',
+      'Server-rendered public reading pages with ISR, per-page metadata, and a writer workspace with markdown preview, autosave, and AI assist panels.',
+    evidence: [
+      {
+        label: 'Production Services',
+        value: '2 (Next.js client + Express API)',
+        source: 'github.com/rajendrabist07/chronicle',
+        verifiedOn: '2026-11-18',
+        draft: false,
+      },
+      {
+        label: 'Automated Testing',
+        value: 'Vitest unit & integration test suite',
+        source: 'github.com/rajendrabist07/chronicle/blob/main/package.json',
+        verifiedOn: '2026-11-18',
+        draft: false,
+      },
+    ],
+    draft: false,
   },
   {
+    slug: 'devguard-ai',
     title: 'DevGuard AI',
     status: 'Live',
+    timeframe: 'Jul 2026 – Aug 2026',
     description:
       'Autonomous GitHub review agent using AST checks, CVE scans, test evidence, and multi-model fallback routing.',
     stack: [
       'Next.js 15',
-      'React 18.3',
+      'React 19',
       'TypeScript',
       'Tailwind CSS v4',
       'Supabase',
       'Groq Llama 3.3',
       'Gemini 2.5 Flash',
-      'GitHub App',
+      'GitHub App API',
     ],
     imageUrl: '/images/devguard-ai-card.svg',
     liveUrl: 'https://dev-guard-ai.vercel.app/',
     githubUrl: 'https://github.com/rajendrabist07/dev-guard-ai',
     frontendImplementation:
       'Designed the dashboard experience around traceable review states, exposing agent steps, PR simulation, and review evidence without hiding the backend verification flow.',
+    evidence: [
+      {
+        label: 'Model Failover Paths',
+        value: '3-tier router (Groq -> Gemini -> AST rules)',
+        source: 'github.com/rajendrabist07/dev-guard-ai',
+        verifiedOn: '2026-11-18',
+        draft: false,
+      },
+      {
+        label: 'Test & Evaluation Suite',
+        value: 'Vitest + automated eval runner scripts',
+        source: 'github.com/rajendrabist07/dev-guard-ai/blob/main/package.json',
+        verifiedOn: '2026-11-18',
+        draft: false,
+      },
+    ],
+    draft: false,
+  },
+])
+
+// ---------------------------------------------------------------------------
+// DRAFT PROJECTS — Kept in facts for non-rendered tracking
+// ---------------------------------------------------------------------------
+
+export const DRAFT_PROJECTS = z.array(ProjectSchema).parse([
+  {
+    slug: 'edumethod-ai',
+    title: 'EduMethod AI',
+    status: 'Archived',
+    timeframe: '2025',
+    description: 'AI-assisted learning platform prototype.',
+    stack: ['React', 'Node.js', 'MongoDB'],
+    imageUrl: '/images/edumethod-ai-card.svg',
+    liveUrl: 'https://edumethod-ai.vercel.app',
+    githubUrl: 'https://github.com/rajendrabist07/edumethod-ai',
+    frontendImplementation: 'Interactive student workspace.',
+    evidence: [],
+    draft: true,
   },
 ])
 

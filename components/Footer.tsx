@@ -59,7 +59,7 @@ export default function Footer() {
             >
               RB<span className="text-[--accent-warm]">.</span>
               <span className="ml-2 text-xs font-normal text-[--text-tertiary]">
-                / rajendra.dev
+                / bistrajendra.com.np
               </span>
             </a>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-[--text-secondary]">

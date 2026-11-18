@@ -113,7 +113,7 @@ export default function Contact() {
         <SectionHeader
           eyebrow="07 // CONTACT & INQUIRIES"
           title="Initiate a Collaboration"
-          description="For full-stack, distributed backend, and AI infrastructure work, send a concrete problem or role brief."
+          description="For full-stack, backend systems, and AI integration work, send a concrete problem or role brief."
         />
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">

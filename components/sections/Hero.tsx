@@ -48,7 +48,7 @@ export default function Hero() {
           {/* Availability Status Chip */}
           <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-1.5 font-mono text-xs text-[--text-secondary] backdrop-blur-md shadow-sm mb-4">
             <span className="h-2 w-2 rounded-full bg-[#34D8B0] animate-pulse" />
-            <span>Available · 15-day notice · Delhi NCR / remote</span>
+            <span>{PERSONAL.availability.status} · Delhi NCR / remote</span>
           </div>
 
           {/* Big Bold Name */}

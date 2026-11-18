@@ -8,8 +8,8 @@ export default function BootSequence() {
   const [step, setStep] = useState(0);
 
   const lines = [
-    "> initializing rajendra.dev kernel...",
-    "> loading distributed systems telemetry...",
+    "> initializing bistrajendra.com.np kernel...",
+    "> loading full-stack engineering telemetry...",
     "> systems online. welcome.",
   ];
 

@@ -68,11 +68,11 @@ export async function POST(req: NextRequest) {
             from: env.RESEND_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>',
             to: [notificationRecipient],
             reply_to: email,
-            subject: `[rajendra.dev] New Message from ${name}`,
+            subject: `[bistrajendra.com.np] New Message from ${name}`,
             html: `
               <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; max-width: 600px; margin: 0 auto; background: #050608; color: #edeff2; padding: 28px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
                 <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                  <span style="font-weight: 800; font-size: 18px; color: #ff7a33; letter-spacing: -0.5px;">RB &bull; rajendra.dev</span>
+                  <span style="font-weight: 800; font-size: 18px; color: #ff7a33; letter-spacing: -0.5px;">RB &bull; bistrajendra.com.np</span>
                 </div>
                 <h2 style="color: #edeff2; margin-top: 0; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">New Contact Submission</h2>
                 <div style="background: #10131a; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06);">

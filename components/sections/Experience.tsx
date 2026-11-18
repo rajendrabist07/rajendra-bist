@@ -37,7 +37,7 @@ export default function Experience() {
         <SectionHeader
           eyebrow="05 // EXPERIENCE & TIMELINE"
           title="Work & Systems Timeline"
-          description="Track record of shipping production APIs, AI workflows, and type-safe web applications."
+          description="Timeline of shipping live web APIs, workflow systems, and type-safe applications."
         />
 
         <motion.div

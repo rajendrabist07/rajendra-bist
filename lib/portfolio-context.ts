@@ -13,11 +13,11 @@ IDENTITY & ESSENTIALS
 - Portfolio: https://www.bistrajendra.com.np
 - GitHub: https://github.com/rajendrabist07
 - LinkedIn: https://www.linkedin.com/in/rajendra-bist-169926370
-- Resume Download: /Resume/resume.pdf
+- Resume Download: /resume/Rajendra_Bist_Full_Stack_Developer.pdf
 - Work Authorization: Nepali national; 100% legally authorized to live and work in India without any visa sponsorship or work permit under the 1950 Indo-Nepal Treaty of Peace and Friendship.
-- Availability: 1 month notice; open to Delhi NCR (on-site / hybrid) or remote worldwide.
+- Availability: Available immediately; open to Delhi NCR (on-site / hybrid) or remote worldwide.
 - Languages: English, Hindi (Proficient), Nepali (Native).
-- Engineering Philosophy: "Schema integrity, typed contracts, and failure modes first, UI second."
+- Engineering Philosophy: "Schema integrity, explicit error boundaries, and defensive architecture, UI second."
 
 ========================
 COMMUNICATION STYLE & RULES
@@ -64,11 +64,11 @@ FEATURED PROJECTS
 - **Key Engineering Decisions**:
   * **PostgreSQL Row-Level Security (RLS)**: Enforces tenant isolation mathematically at the database layer so no application WHERE clause omission can leak data.
   * **Inngest Workflow Engine**: Durable, resumable, and idempotent workflow runs with human-in-the-loop approval gates before sensitive actions.
-  * **Schema-Guarded Tool Loop**: Treats LLMs as untrusted dependencies with JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt injection defenses.
+  * **Bounded Tool Execution**: JSON-mode requests, Zod-validated outputs, hard timeouts, and prompt injection defenses.
 - **Links**: [Live Platform](https://sovereign-saas-platform.vercel.app/) | [GitHub Repository](https://github.com/rajendrabist07/sovereign)
 
-### 2. Chronicle (Publishing Platform With Verified Accounts & Schema-Guarded AI Writing Tools)
-- **Status**: Sep 2026 (Live in Production)
+### 2. Chronicle (Publishing Platform With Verified Accounts & Schema-Validated AI Writing Tools)
+- **Status**: 2026 (Live)
 - **Problem**: Publishing apps with AI features usually trust model output blindly and skip operational basics: verified accounts, transactional email, crawlable rendering, and migration-safe deploys.
 - **Solution**: Two-service platform (Next.js on Vercel, Express/Prisma/PostgreSQL on Render) with server-rendered public pages, email-verified accounts, and Gemini tools whose structured output is schema-validated before it reaches the editor.
 - **Architecture & Stack**: Next.js 15, TypeScript, Express, Prisma, PostgreSQL, Gemini 2.5, Brevo Email, Vitest, GitHub Actions.
@@ -79,10 +79,10 @@ FEATURED PROJECTS
 - **Links**: [Live Demo](https://chronicle-platform.vercel.app/) | [Frontend GitHub](https://github.com/rajendrabist07/chronicle) | [API GitHub](https://github.com/rajendrabist07/content-platform)
 
 ### 3. DevGuard AI (Autonomous PR Security & Code Review Agent)
-- **Status**: Aug 2025 (Live in Production)
+- **Status**: Jul 2026 – Aug 2026 (Live)
 - **Problem**: Traditional AI review bots hallucinate syntax, miss security CVEs, crash on rate limits, and provide vague text rather than deterministic, actionable fixes.
 - **Solution**: Autonomous GitHub App that turns LLMs into intelligent orchestrators invoking diagnostic tools to collect verified empirical evidence before generating 1-click inline PR patches.
-- **Architecture & Stack**: Next.js 15, React 18.3, TypeScript, Tailwind CSS v4, Supabase Postgres, Octokit GitHub API, Groq Llama 3.3 70B, Gemini 2.5 Flash.
+- **Architecture & Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS v4, Supabase Postgres, Octokit GitHub API, Groq Llama 3.3 70B, Gemini 2.5 Flash.
 - **Key Engineering Decisions**:
   * **Empirical Tool-Calling Loop**: Autonomous agent loop capped at 5 iterations invoking AST Static Linter, OSV.dev CVE Scanner, and Vitest test runner.
   * **3-Tier Failover Router**: Primary Groq Llama 3.3 70B ➡️ Gemini 2.5 Flash ➡️ Deterministic Engine, providing an explicit fallback path during provider limits.
@@ -100,5 +100,5 @@ EXPERIENCE & EDUCATION
   * Comprehensive practical engineering training covering Node.js, Express.js, React, MongoDB, REST APIs, database schema design, and deployment discipline.
 - **Higher Secondary (+2 Science, Class XII equivalent) | 2022**:
   * Kailali Multiple Campus (Nepal)
-  * Rigorous foundation in physical sciences, mathematics, physics, and computational logic.
+  * Coursework in physics, chemistry, and mathematics.
 `;

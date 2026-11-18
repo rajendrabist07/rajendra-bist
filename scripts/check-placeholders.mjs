@@ -8,6 +8,7 @@ const FORBIDDEN_PATTERNS = [
   { name: 'Handlebars/Mustache template {{var}}', regex: /\{\{\s*[a-zA-Z0-9_-]+\s*\}\}/ },
   { name: 'Unfilled city placeholder [City', regex: /\[City/i },
   { name: 'Placeholder domain example.com', regex: /example\.com/i },
+  { name: 'Coming soon placeholder', regex: /\bComing\s+soon\b/i },
 ];
 
 const TARGET_DIRS = ['components', 'app', 'content'];

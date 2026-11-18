@@ -152,15 +152,15 @@ const CASE_STUDIES = [
     problem:
       "Multi-tenant AI SaaS platforms often rely on leaky application-level tenant filters and fragile, stateless LLM executions that fail silently or leak confidential data across organizational boundaries.",
     solution:
-      "Architecting a backend-heavy, multi-tenant platform in a Turborepo monorepo with PostgreSQL Row-Level Security, Inngest durable workflows, human-in-the-loop approvals, and schema-guarded tool loops.",
+      "Architecting a backend-heavy, multi-tenant platform in a Turborepo monorepo with PostgreSQL Row-Level Security, Inngest durable workflows, human-in-the-loop approvals, and bounded tool loops.",
     keyDecision:
       "Enforced tenant isolation at the database layer via PostgreSQL Row-Level Security (RLS) and orchestrated durable, resumable step executions with Inngest.",
     frontendImplementation:
-      "Architected organization workspace in a Turborepo monorepo with PostgreSQL RLS tenant isolation, Inngest durable workflow execution, and schema-guarded AI tool calling.",
+      "Built organizational workspace with tRPC queries, workflow run list views, approval dialogs, and tenant-scoped dashboard components.",
     metrics: [
       { value: "Postgres RLS", label: "DB Tenant Isolation" },
       { value: "Inngest", label: "Durable Runs" },
-      { value: "Zod-Guarded", label: "Agent Tool Loop" },
+      { value: "Zod Validated", label: "Agent Tool Loop" },
     ],
     stack: [
       "TypeScript",
@@ -323,7 +323,7 @@ const CASE_STUDIES = [
     ],
     stack: [
       "Next.js 15",
-      "React 18.3",
+      "React 19",
       "TypeScript",
       "Tailwind v4",
       "Supabase",
@@ -447,7 +447,7 @@ const CASE_STUDIES = [
     frontendImplementation:
       "Server-rendered public reading pages with ISR, per-page metadata and dynamic social cards, plus a client-side writer workspace with markdown preview, draft autosave, and AI assist panels on a tokenized dark/light design system.",
     metrics: [
-      { value: "Zod-Guarded", label: "AI Output Contract" },
+      { value: "Schema-Validated", label: "AI Output Contract" },
       { value: "SSR + ISR", label: "Public Reading Surface" },
       { value: "CI-Gated", label: "Tests on Every Push" },
     ],

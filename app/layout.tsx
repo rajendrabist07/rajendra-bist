@@ -152,8 +152,8 @@ const jsonLdGraph = {
       email: `mailto:${PERSONAL.email}`,
       sameAs: [PERSONAL.github, PERSONAL.linkedin],
       knowsAbout: [
-        "React 18.3",
-        "Next.js 15",
+        "React",
+        "Next.js",
         "TypeScript",
         "JavaScript",
         "Tailwind CSS v4",
@@ -289,7 +289,7 @@ const jsonLdGraph = {
           name: "What does Rajendra Bist specialize in?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Rajendra specializes in full-stack and backend systems engineering: Node.js, Express.js, PostgreSQL (Row-Level Security, pgvector), Next.js 15 (App Router, ISR), Inngest durable workflows, Prisma ORM, Zod validation, and schema-guarded AI agent loops.",
+            text: "Rajendra specializes in full-stack and backend systems engineering: Node.js, Express.js, PostgreSQL (Row-Level Security, pgvector), Next.js 15 (App Router, ISR), Inngest durable workflows, Prisma ORM, Zod validation, and bounded AI agent loops.",
           },
         },
       ],
@@ -307,10 +307,6 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <meta name="author" content={PERSONAL.name} />
-        <meta
-          name="classification"
-          content="Portfolio, Software Engineering, Full-Stack Development, Backend Development, AI Systems, Remote Software Engineer"
-        />
         <meta name="format-detection" content="telephone=no" />
         <link rel="manifest" href="/manifest.json" />
         <script

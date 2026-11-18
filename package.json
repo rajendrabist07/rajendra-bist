@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "check:placeholders": "node scripts/check-placeholders.mjs",
+    "check:evidence": "node scripts/check-evidence.mjs",
     "check:links": "node scripts/check-links.mjs",
     "test": "vitest run",
     "test:watch": "vitest",

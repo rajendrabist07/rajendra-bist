@@ -19,6 +19,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run check:placeholders
+      - run: npm run check:evidence
       - run: npm run check:links
       - run: npm test
       - run: npm run build

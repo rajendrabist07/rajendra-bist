@@ -43,11 +43,11 @@ const strengths = [
     badge: "TYPESAFE",
   },
   {
-    title: "High-Throughput Backend",
+    title: "Secure API Architecture",
     description:
-      "Architecting secure authentications, rate limiting, MongoDB & PostgreSQL transactions, and caching.",
+      "Implementing JWT authentication, rate limiting, transactional database operations, and caching layers.",
     icon: Database,
-    badge: "PERFORMANCE",
+    badge: "BACKEND",
   },
   {
     title: "Deterministic AI Guardrails",
@@ -108,7 +108,7 @@ export default function About() {
             </span>
             : define rigid database models, enforce schema validation, and
             architect fallback paths before writing UI code. I&apos;ve shipped
-            production systems including AST static analysis review agents,
+            applications including AST static analysis review agents,
             vector similarity search with pgvector, and resilient multi-model
             LLM streaming pipelines.
           </motion.p>

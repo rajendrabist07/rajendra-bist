@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { PERSONAL, PROJECTS, EXPERIENCE, CREDENTIALS, SKILLS } from '../lib/portfolio-data'
+import {
+  PERSONAL,
+  PROJECTS,
+  EXPERIENCE,
+  TIMELINE_EVENTS,
+  CREDENTIALS,
+  SKILLS,
+} from '../lib/portfolio-data'
 import { CASE_STUDIES, getCaseStudy } from '../lib/case-studies'
 import { BLOG_POSTS } from '../lib/blog'
 import { SITE_URL } from '../lib/site-config'
@@ -12,21 +19,51 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     expect(PERSONAL.phone).toBe('+91 8700918036')
     expect(PERSONAL.location).toBe('New Delhi, India')
     expect(SITE_URL).toBe('https://www.bistrajendra.com.np')
+    expect(PERSONAL.resumeUrl).toBe('/resume/Rajendra_Bist_Full_Stack_Developer.pdf')
+    expect(PERSONAL.availability.status).toBe('Available immediately')
+    expect(PERSONAL.availability.noticePeriodDays).toBe(0)
   })
 
-  it('verifies all featured projects have valid links, slugs and stacks', () => {
+  it('verifies all featured projects have valid links, slugs, stacks, and sourced evidence', () => {
     expect(PROJECTS.length).toBeGreaterThanOrEqual(3)
     const titles = PROJECTS.map((p) => p.title)
     expect(titles).toContain('Sovereign')
     expect(titles).toContain('Chronicle')
     expect(titles).toContain('DevGuard AI')
 
+    const devguard = PROJECTS.find((p) => p.title === 'DevGuard AI')
+    expect(devguard?.timeframe).toBe('Jul 2026 – Aug 2026')
+    // DevGuard stack contains real React 19 from package.json, not unverified React 18.3
+    expect(devguard?.stack).not.toContain('React 18.3')
+
     for (const project of PROJECTS) {
       expect(project.liveUrl).toBeTruthy()
       expect(project.githubUrl).toBeTruthy()
       expect(project.stack.length).toBeGreaterThan(3)
       expect(project.description.length).toBeGreaterThan(20)
+      expect(project.frontendImplementation.length).toBeGreaterThan(20)
+      expect(project.evidence.length).toBeGreaterThan(0)
+      for (const item of project.evidence) {
+        expect(item.label).toBeTruthy()
+        expect(item.value).toBeTruthy()
+        expect(item.source).toBeTruthy()
+      }
     }
+  })
+
+  it('verifies dual-lane timeline events exist with Building and Learning lanes', () => {
+    expect(TIMELINE_EVENTS.length).toBeGreaterThanOrEqual(2)
+    const lanes = TIMELINE_EVENTS.map((e) => e.lane)
+    expect(lanes).toContain('Building')
+    expect(lanes).toContain('Learning')
+  })
+
+  it('verifies credentials have valid verify links and draft flags', () => {
+    expect(CREDENTIALS.length).toBeGreaterThanOrEqual(2)
+    const vcare = CREDENTIALS.find((c) => c.institution === 'Vcare Technical Institute')
+    expect(vcare?.verifyUrl).toBeTruthy()
+    expect(vcare?.verifyUrl).toContain('drive.google.com')
+    expect(vcare?.draft).toBe(false)
   })
 
   it('verifies case studies match slug lookup contracts', () => {

@@ -6,11 +6,11 @@ import { Check, Copy, Terminal } from "lucide-react";
 const codeString = `export const engineer = {
   name: "Rajendra Bist",
   role: "Full-Stack Developer & Backend Engineer",
-  location: "New Delhi, India [Open to Delhi NCR / Remote]",
-  focus: "Schema design, REST APIs, tenant isolation & production systems",
+  location: "New Delhi, India [Available immediately · Delhi NCR / Remote]",
+  focus: "Schema design, REST APIs, tenant isolation & reliable web apps",
   core_stack: ["TypeScript", "Node.js", "PostgreSQL", "Next.js 15", "Express"],
   current_project: "Sovereign — Multi-Tenant B2B SaaS on PostgreSQL RLS",
-  philosophy: "Schema integrity, typed contracts, and failure modes first"
+  philosophy: "Schema integrity, explicit error boundaries, and defensive architecture"
 };`;
 
 const codeRows = [
@@ -33,14 +33,14 @@ const codeRows = [
   <>
     <span className="text-[--text-secondary]">location</span>:{" "}
     <span className="text-[--text-primary]">
-      &quot;New Delhi, India [Open to Delhi NCR / Remote]&quot;
+      &quot;New Delhi, India [Available immediately · Delhi NCR / Remote]&quot;
     </span>
     ,
   </>,
   <>
     <span className="text-[--text-secondary]">focus</span>:{" "}
     <span className="text-[--accent-cool]">
-      &quot;Schema design, REST APIs, tenant isolation &amp; production systems&quot;
+      &quot;Schema design, REST APIs, tenant isolation &amp; reliable web apps&quot;
     </span>
     ,
   </>,
@@ -61,7 +61,7 @@ const codeRows = [
   <>
     <span className="text-[--text-secondary]">philosophy</span>:{" "}
     <span className="text-[--text-tertiary]">
-      &quot;Schema integrity, typed contracts, and failure modes first&quot;
+      &quot;Schema integrity, explicit error boundaries, and defensive architecture&quot;
     </span>
   </>,
   <>{"};"}</>,

@@ -59,7 +59,7 @@ export default function Navbar() {
             RB
           </span>
           <span className="text-xs tracking-wider text-[--text-secondary] transition-colors group-hover:text-[--text-primary]">
-            rajendra<span className="text-[#FF7A33]">.dev</span>
+            bistrajendra<span className="text-[#FF7A33]">.com.np</span>
           </span>
         </a>
 
