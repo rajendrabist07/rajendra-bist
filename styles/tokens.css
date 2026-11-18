@@ -1,0 +1,97 @@
+/* ==========================================================================
+   DIRECTION A: "BLUEPRINT" DESIGN TOKENS
+   Master Token Specification · WCAG 2.2 Compliant
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-page: #0B1220;
+  --bg-surface-1: #101A2E;
+  --bg-surface-2: #16233B;
+  --bg-surface-3: #1D2D49;
+
+  /* Borders & Hairlines */
+  --border-hairline: rgba(148, 178, 255, 0.14);
+  --border-strong: rgba(148, 178, 255, 0.28);
+  --border-ui: #5B79AD;
+
+  /* Typography Colors */
+  --text-primary: #E8EEFB;
+  --text-secondary: #A9B6D3;
+  --text-tertiary: #8A98B8;
+
+  /* Accent & Interactive */
+  --accent: #38D0F0;
+  --accent-ink: #051A24;
+  --accent-dim: rgba(56, 208, 240, 0.12);
+  --focus-ring: #38D0F0;
+
+  /* Live & Status */
+  --status-live: #3DDC97;
+  --status-live-dim: rgba(61, 220, 151, 0.12);
+
+  /* Blueprint Grid */
+  --grid-line: rgba(148, 178, 255, 0.05);
+  --grid-major: rgba(148, 178, 255, 0.10);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg-page: #F4F7FB;
+  --bg-surface-1: #FFFFFF;
+  --bg-surface-2: #EAF0F8;
+  --bg-surface-3: #DCE5F2;
+
+  /* Borders & Hairlines */
+  --border-hairline: rgba(15, 34, 64, 0.12);
+  --border-strong: rgba(15, 34, 64, 0.25);
+  --border-ui: #64748B;
+
+  /* Typography Colors */
+  --text-primary: #0B1220;
+  --text-secondary: #334155;
+  --text-tertiary: #475569;
+
+  /* Accent & Interactive */
+  --accent: #0369A1;
+  --accent-ink: #FFFFFF;
+  --accent-dim: rgba(3, 105, 161, 0.10);
+  --focus-ring: #0369A1;
+
+  /* Live & Status */
+  --status-live: #065F46;
+  --status-live-dim: rgba(6, 95, 70, 0.10);
+
+  /* Blueprint Grid */
+  --grid-line: rgba(15, 34, 64, 0.04);
+  --grid-major: rgba(15, 34, 64, 0.08);
+}
+
+:root {
+  /* Radii — 3 levels plus pill */
+  --radius-control: 8px;
+  --radius-card: 16px;
+  --radius-feature: 24px;
+  --radius-pill: 9999px;
+
+  /* Fluid Typography Scale */
+  --text-display: clamp(2.5rem, 6vw, 4.2rem);
+  --text-h1: clamp(2.0rem, 4vw, 2.75rem);
+  --text-h2: clamp(1.35rem, 2.5vw, 1.75rem);
+  --text-h3: clamp(1.1rem, 1.8vw, 1.25rem);
+  --text-lead: clamp(1.0rem, 1.4vw, 1.125rem);
+  --text-body: clamp(0.9375rem, 1.1vw, 1.0rem);
+  --text-mono-data: clamp(0.8125rem, 1.0vw, 0.875rem);
+  --text-mono-micro: 0.75rem;
+
+  /* Motion Physics Tokens */
+  --ease-blueprint: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-micro: 120ms;
+  --duration-standard: 220ms;
+  --duration-flow: 450ms;
+}

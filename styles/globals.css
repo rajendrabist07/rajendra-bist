@@ -1,57 +1,83 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
+@theme {
+  --color-bg-page: var(--bg-page);
+  --color-surface-1: var(--bg-surface-1);
+  --color-surface-2: var(--bg-surface-2);
+  --color-surface-3: var(--bg-surface-3);
+
+  --color-border-hairline: var(--border-hairline);
+  --color-border-strong: var(--border-strong);
+  --color-border-ui: var(--border-ui);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-dim: var(--accent-dim);
+  --color-focus-ring: var(--focus-ring);
+
+  --color-status-live: var(--status-live);
+  --color-status-live-dim: var(--status-live-dim);
+
+  --font-sans: var(--font-display), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
+  --radius-feature: var(--radius-feature);
+  --radius-pill: var(--radius-pill);
+
+  --ease-blueprint: var(--ease-blueprint);
+}
+
+/* ==========================================================================
+   LEGACY BRIDGE: Maps legacy variable names to new Direction A Blueprint tokens
+   NOTE: REMOVE IN PHASE 4
+   ========================================================================== */
 :root {
-  /* Apple Polish × Terminal DNA Token Spec */
-  --bg-0: #07080a;
-  --bg-1: #0e1013;
-  --bg-2: #15181c;
-  --bg-3: #1c2025;
-  --bg-void: var(--bg-0);
-  --bg-surface: var(--bg-1);
-  --bg-surface-2: var(--bg-2);
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
+  --bg-0: var(--bg-page);
+  --bg-1: var(--bg-surface-1);
+  --bg-2: var(--bg-surface-2);
+  --bg-3: var(--bg-surface-3);
+  --bg-void: var(--bg-page);
+  --bg-surface: var(--bg-surface-1);
+  --bg-surface-2: var(--bg-surface-2);
+  --border-subtle: var(--border-hairline);
 
-  /* Text Hierarchy — WCAG AA verified (>= 4.5:1 against dark surfaces) */
-  --text-primary: #f5f5f7;
-  --text-secondary: #a1a1a6;
-  --text-tertiary: #8e8e93;
-
-  /* Accent & Status Colors */
-  --accent-warm: #ff7a33; /* Molten amber — CTAs, focus ring, key links */
-  --accent-warm-dim: rgba(255, 122, 51, 0.12);
-  --accent-cool: #ff7a33;
-  --accent-cool-dim: var(--accent-warm-dim);
-  --status-live: #34d8b0; /* Live indicator dot */
+  /* Legacy orange replaced with Blueprint Cyan */
+  --accent-warm: var(--accent);
+  --accent-warm-dim: var(--accent-dim);
+  --accent-cool: var(--accent);
+  --accent-cool-dim: var(--accent-dim);
 
   /* Semantic Mappings */
   --danger: #ff5d5d;
-  --bg-primary: var(--bg-0);
-  --bg-elevated: var(--bg-2);
-  --bg-code: var(--bg-2);
-  --border: var(--border-subtle);
+  --bg-primary: var(--bg-page);
+  --bg-elevated: var(--bg-surface-2);
+  --bg-code: var(--bg-surface-3);
+  --border: var(--border-hairline);
   --border-hover: var(--border-strong);
-  --accent-primary: var(--accent-warm);
-  --accent-secondary: var(--accent-cool);
-  --accent-glow: rgba(255, 122, 51, 0.22);
+  --accent-primary: var(--accent);
+  --accent-secondary: var(--accent);
+  --accent-glow: var(--accent-dim);
   --text-muted: var(--text-tertiary);
   --success: var(--status-live);
-  --warning: var(--accent-warm);
-
-  /* Hierarchy Radii */
-  --radius-control: 8px;
-  --radius-card: 16px;
-  --radius-feature: 24px;
-  --radius-pill: 9999px;
+  --warning: var(--accent);
 
   /* Fluid Clamp Typography Scale */
-  --text-hero: 5.25rem;
-  --text-h2: 2.5rem;
-  --text-h3: 1.5rem;
-  --text-body: 1rem;
-  --text-small: 0.875rem;
+  --text-hero: var(--text-display);
+  --text-h2: var(--text-h2);
+  --text-h3: var(--text-h3);
+  --text-body: var(--text-body);
+  --text-small: var(--text-mono-data);
   --font-sans: var(--font-display);
 }
+/* END REMOVE IN PHASE 4 */
 
 html {
   scroll-behavior: smooth;
@@ -78,7 +104,7 @@ body {
 
 /* Accessibility: Visible Focus Rings for Keyboard Navigation */
 :focus-visible {
-  outline: 2px solid var(--accent-warm) !important;
+  outline: 2px solid var(--focus-ring) !important;
   outline-offset: 2px !important;
 }
 
@@ -106,8 +132,8 @@ pre,
 }
 
 ::selection {
-  background: rgba(255, 122, 51, 0.28);
-  color: #ffffff;
+  background: var(--accent-dim);
+  color: var(--text-primary);
 }
 
 /* Lenis Smooth Scroll Recommended Base */
@@ -149,7 +175,7 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-warm);
+  background: var(--accent);
 }
 
 /* Background Noise Overlay (SVG Turbulence - Tiled, GPU Cheap) */
@@ -196,7 +222,7 @@ html.lenis body {
   width: 650px;
   height: 650px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 122, 51, 0.065) 0%, rgba(255, 122, 51, 0.015) 50%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
   filter: blur(80px);
   will-change: transform;
   animation: ambient-drift-1 26s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
@@ -243,20 +269,20 @@ html.lenis body {
   background:
     radial-gradient(
       circle at 18% 15%,
-      rgba(255, 122, 51, 0.07) 0%,
+      var(--accent-dim) 0%,
       transparent 42%
     ),
     radial-gradient(
       circle at 82% 75%,
-      rgba(52, 216, 176, 0.055) 0%,
+      rgba(61, 220, 151, 0.055) 0%,
       transparent 46%
     ),
     radial-gradient(
       circle at 50% 50%,
-      rgba(16, 19, 26, 0.65) 0%,
+      var(--bg-surface-2) 0%,
       transparent 70%
     ),
-    linear-gradient(180deg, #050608 0%, #070911 50%, #050608 100%);
+    linear-gradient(180deg, var(--bg-page) 0%, var(--bg-surface-1) 50%, var(--bg-page) 100%);
 }
 
 /* Animations */
@@ -378,24 +404,24 @@ html.lenis body {
 }
 
 .surface-panel:hover {
-  border-color: rgba(255, 122, 51, 0.3);
+  border-color: var(--border-strong);
   box-shadow:
     0 20px 50px -10px rgba(0, 0, 0, 0.85),
-    0 0 30px -4px rgba(255, 122, 51, 0.12),
-    0 0 0 1px rgba(255, 122, 51, 0.2);
+    0 0 30px -4px var(--accent-dim),
+    0 0 0 1px var(--accent-dim);
 }
 
 .surface-panel-nested {
-  background: rgba(16, 19, 26, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-hairline);
 }
 
 .code-card {
-  background: #0d0f15;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-surface-3);
+  border: 1px solid var(--border-hairline);
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.85),
-    0 0 0 1px rgba(255, 255, 255, 0.04);
+    0 0 0 1px var(--border-hairline);
 }
 
 /* Gradient Dividers */
@@ -405,7 +431,7 @@ html.lenis body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.08) 50%,
+    var(--border-hairline) 50%,
     transparent 100%
   );
 }
@@ -416,43 +442,43 @@ html.lenis body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 122, 51, 0.25) 50%,
+    var(--accent-dim) 50%,
     transparent 100%
   );
 }
 
 /* Terminal Buttons */
 .premium-button-primary {
-  background: var(--accent-warm);
-  color: #050608;
+  background: var(--accent);
+  color: var(--accent-ink);
   font-weight: 600;
-  border: 1px solid rgba(255, 122, 51, 0.5);
+  border: 1px solid var(--accent);
   box-shadow:
-    0 10px 28px -4px rgba(255, 122, 51, 0.35),
+    0 10px 28px -4px var(--accent-dim),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .premium-button-primary:hover {
-  background: #ff8e50;
+  filter: brightness(1.1);
   box-shadow:
-    0 16px 36px -4px rgba(255, 122, 51, 0.5),
+    0 16px 36px -4px var(--accent-dim),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
 }
 
 .premium-button-secondary {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--accent-dim);
   color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-strong);
   backdrop-filter: blur(12px);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .premium-button-secondary:hover {
-  background: rgba(255, 122, 51, 0.08);
-  border-color: rgba(255, 122, 51, 0.4);
-  color: #ffffff;
+  background: var(--border-strong);
+  border-color: var(--accent);
+  color: var(--text-primary);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
 }
@@ -475,8 +501,8 @@ html.lenis body {
 /* Stat Cards (High-Hierarchy Metric Blocks with Accent Gradient Header) */
 .stat-card {
   position: relative;
-  background: rgba(16, 19, 26, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-hairline);
   border-radius: 0.85rem;
   padding: 0.85rem 0.75rem;
   text-align: center;
@@ -492,14 +518,14 @@ html.lenis body {
   left: 10%;
   right: 10%;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--accent-warm) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
   opacity: 0.85;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 122, 51, 0.35);
-  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 16px -2px rgba(255, 122, 51, 0.15);
+  border-color: var(--border-strong);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 16px -2px var(--accent-dim);
 }
 
 /* Tag Pills (Low-Hierarchy Metadata Tags) */

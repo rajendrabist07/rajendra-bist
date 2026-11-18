@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/dev/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        ],
+      },
+      {
         source: '/(.*)',
         headers: [
           { key: 'X-Frame-Options', value: 'DENY' },

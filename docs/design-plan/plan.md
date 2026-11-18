@@ -92,6 +92,13 @@ Calculated via exact relative luminance formulas ($L = 0.2126R + 0.7152G + 0.072
 | `status-live` | `#3DDC97` | `surface-1` | `#101A2E` | **9.83:1** | ✅ PASS | ✅ PASS |
 | `status-live` | `#3DDC97` | `surface-2` | `#16233B` | **8.88:1** | ✅ PASS | ✅ PASS |
 | `status-live` | `#3DDC97` | `surface-3` | `#1D2D49` | **7.80:1** | ✅ PASS | ✅ PASS |
+| `accent-ink` | `#051A24` | `accent (button)` | `#38D0F0` | **9.70:1** | ✅ PASS | ✅ PASS |
+| `border-ui` | `#5B79AD` | `page` | `#0B1220` | **4.26:1** | — (UI) | ✅ PASS |
+| `border-ui` | `#5B79AD` | `surface-1` | `#101A2E` | **3.96:1** | — (UI) | ✅ PASS |
+| `border-ui` | `#5B79AD` | `surface-2` | `#16233B` | **3.58:1** | — (UI) | ✅ PASS |
+| `focus-ring` | `#38D0F0` | `page` | `#0B1220` | **10.21:1** | — (UI) | ✅ PASS |
+| `focus-ring` | `#38D0F0` | `surface-1` | `#101A2E` | **9.47:1** | — (UI) | ✅ PASS |
+| `focus-ring` | `#38D0F0` | `surface-2` | `#16233B` | **8.56:1** | — (UI) | ✅ PASS |
 
 ### Direction A: Blueprint (Light Mode) — All Pass ✅
 | Text Token | Text Hex | Surface | Surface Hex | Contrast Ratio | WCAG AA Body ($\ge 4.5:1$) | WCAG AA Large/UI ($\ge 3:1$) |
@@ -116,6 +123,13 @@ Calculated via exact relative luminance formulas ($L = 0.2126R + 0.7152G + 0.072
 | `status-live` | `#065F46` | `surface-1` | `#FFFFFF` | **7.68:1** | ✅ PASS | ✅ PASS |
 | `status-live` | `#065F46` | `surface-2` | `#EAF0F8` | **6.70:1** | ✅ PASS | ✅ PASS |
 | `status-live` | `#065F46` | `surface-3` | `#DCE5F2` | **6.05:1** | ✅ PASS | ✅ PASS |
+| `accent-ink` | `#FFFFFF` | `accent (button)` | `#0369A1` | **5.93:1** | ✅ PASS | ✅ PASS |
+| `border-ui` | `#64748B` | `page` | `#F4F7FB` | **4.43:1** | — (UI) | ✅ PASS |
+| `border-ui` | `#64748B` | `surface-1` | `#FFFFFF` | **4.76:1** | — (UI) | ✅ PASS |
+| `border-ui` | `#64748B` | `surface-2` | `#EAF0F8` | **4.15:1** | — (UI) | ✅ PASS |
+| `focus-ring` | `#0369A1` | `page` | `#F4F7FB` | **5.52:1** | — (UI) | ✅ PASS |
+| `focus-ring` | `#0369A1` | `surface-1` | `#FFFFFF` | **5.93:1** | — (UI) | ✅ PASS |
+| `focus-ring` | `#0369A1` | `surface-2` | `#EAF0F8` | **5.18:1** | — (UI) | ✅ PASS |
 
 ---
 

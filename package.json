@@ -8,6 +8,7 @@
     "build": "next build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "check:contrast": "node scripts/check-contrast.mjs",
     "check:placeholders": "node scripts/check-placeholders.mjs",
     "check:evidence": "node scripts/check-evidence.mjs",
     "check:links": "node scripts/check-links.mjs",

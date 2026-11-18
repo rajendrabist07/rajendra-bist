@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "../styles/globals.css";
 import { Providers } from "./providers";
 import { PERSONAL, PROJECTS, SKILLS } from "@/lib/portfolio-data";
@@ -10,17 +10,17 @@ import {
   SITE_URL,
 } from "@/lib/site-config";
 
-const displayFont = Plus_Jakarta_Sans({
+const displayFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
 const monoFont = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -96,11 +96,17 @@ export const viewport: Viewport = {
 const themeInitScript = `
 (() => {
   try {
-    const storedTheme = window.localStorage.getItem('theme');
+    const match = document.cookie.match(/(?:^|; )theme=([^;]*)/);
+    const cookieTheme = match ? decodeURIComponent(match[1]) : null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    document.documentElement.dataset.theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : systemTheme;
+    const resolvedTheme = (cookieTheme === 'light' || cookieTheme === 'dark') ? cookieTheme : systemTheme;
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
+    document.documentElement.dataset.theme = resolvedTheme;
+    document.documentElement.style.colorScheme = resolvedTheme;
   } catch {
+    document.documentElement.setAttribute('data-theme', 'dark');
     document.documentElement.dataset.theme = 'dark';
+    document.documentElement.style.colorScheme = 'dark';
   }
 })();
 `;
@@ -303,7 +309,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${displayFont.variable} ${monoFont.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <meta name="author" content={PERSONAL.name} />
@@ -319,7 +325,7 @@ export default function RootLayout({
       >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#FF7A33] focus:text-[#050608] focus:rounded-lg focus:font-mono focus:text-xs focus:font-semibold focus:shadow-2xl"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[--accent] focus:text-[--accent-ink] focus:rounded-[--radius-control] focus:font-mono focus:text-xs focus:font-semibold focus:shadow-2xl"
         >
           Skip to main content
         </a>
