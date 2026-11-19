@@ -121,4 +121,41 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     const skillCategories = SKILLS.map((s) => s.category)
     expect(skillCategories).toEqual(['Frontend', 'Backend', 'Database', 'Tools & DevOps', 'AI & APIs'])
   })
+
+  it('verifies all project case studies have word counts <= 700 words', async () => {
+    const { CASE_FILES } = await import('../content/projects')
+    for (const project of CASE_FILES) {
+      const text = [
+        project.title,
+        project.headline,
+        project.summary,
+        project.problem,
+        ...(project.constraints || []),
+        ...(project.builtBullets || []),
+        project.decision?.title,
+        project.decision?.description,
+        project.decision?.tradeoff,
+        project.frontendNote?.summary,
+        ...(project.evidence || []).map((e) => e.label + ' ' + e.value),
+        ...(project.whatNext || []),
+      ]
+        .filter(Boolean)
+        .join(' ')
+      const wordCount = text.trim().split(/\s+/).length
+      expect(wordCount).toBeLessThanOrEqual(700)
+      expect(wordCount).toBeGreaterThan(100)
+    }
+  })
+
+  it('verifies all project titles <= 60 chars and descriptions <= 155 chars', async () => {
+    const { CASE_FILES } = await import('../content/projects')
+    for (const project of CASE_FILES) {
+      const metaTitle = `${project.title} | Architecture Case Study`
+      expect(metaTitle.length).toBeLessThanOrEqual(60)
+
+      const metaDesc = (project.summary || project.headline).slice(0, 155)
+      expect(metaDesc.length).toBeLessThanOrEqual(155)
+      expect(metaDesc.length).toBeGreaterThan(50)
+    }
+  })
 })

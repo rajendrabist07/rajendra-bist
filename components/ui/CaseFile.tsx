@@ -1,9 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { ExternalLink, Github, ArrowRight, ShieldCheck, FileCode, CheckCircle2 } from 'lucide-react';
 import { CaseFileProject } from '@/content/projects/types';
-import ArchitectureDiagram from './ArchitectureDiagram';
 import { CropMarks } from '@/components/primitives/CropMarks';
+
+const ArchitectureDiagram = dynamic(() => import('./ArchitectureDiagram'), { ssr: true });
 
 export interface CaseFileProps {
   project: CaseFileProject;
@@ -42,7 +44,7 @@ export default function CaseFile({ project }: CaseFileProps) {
           </h3>
           {isLead && (
             <span className="font-mono text-[11px] text-[--accent] bg-[--accent-dim] px-2 py-0.5 rounded-[--radius-pill] border border-[--accent]">
-              Primary Architecture Spec
+              Featured
             </span>
           )}
         </div>

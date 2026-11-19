@@ -75,13 +75,6 @@ export const SOVEREIGN_PROJECT: CaseFileProject = {
     caseStudy: '/projects/sovereign',
   },
   stack: ['Next.js 15', 'React', 'TypeScript', 'PostgreSQL (RLS)', 'Prisma', 'Inngest', 'Turborepo'],
-  screenshot: {
-    desktopWebp: '/images/projects/sovereign/desktop.webp',
-    desktopAvif: '/images/projects/sovereign/desktop.avif',
-    mobileWebp: '/images/projects/sovereign/mobile.webp',
-    mobileAvif: '/images/projects/sovereign/mobile.avif',
-    alt: 'Sovereign multi-tenant B2B workflow SaaS landing interface',
-  },
   architecture: {
     title: 'Architecture (simplified)',
     flowDescription:

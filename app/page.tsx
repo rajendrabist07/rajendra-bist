@@ -2,19 +2,17 @@ import dynamic from "next/dynamic";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import BlueprintBackground from "@/components/ui/BlueprintBackground";
 import ScrollProgress from "@/components/ui/ScrollProgress";
-import FloatingAskAI from "@/components/ui/FloatingAskAI";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
+import ClientModals from "@/components/providers/ClientModals";
 
-const CommandPalette = dynamic(() => import("@/components/ui/CommandPalette"));
-import About from "@/components/sections/About";
-import Skills from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
-import Experience from "@/components/sections/Experience";
-import Credentials from "@/components/sections/Credentials";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/Footer";
-import ChatAgent from "@/components/sections/ChatAgent";
+const About = dynamic(() => import("@/components/sections/About"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+const Skills = dynamic(() => import("@/components/sections/Skills"));
+const Experience = dynamic(() => import("@/components/sections/Experience"));
+const Credentials = dynamic(() => import("@/components/sections/Credentials"));
+const Contact = dynamic(() => import("@/components/sections/Contact"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function HomePage() {
   return (
@@ -23,17 +21,11 @@ export default function HomePage() {
         {/* Top Viewport Scroll Progress Bar */}
         <ScrollProgress />
 
-        {/* ⌘K Command Palette */}
-        <CommandPalette />
-
         {/* Fixed Blueprint Grid Background */}
         <BlueprintBackground />
 
         {/* Navigation & Header */}
         <Navbar />
-
-        {/* Floating Quick Comms */}
-        <FloatingAskAI />
 
         {/* Main Content Sections */}
         <main id="main-content" className="relative z-10">
@@ -49,8 +41,8 @@ export default function HomePage() {
         {/* Telemetry Footer */}
         <Footer />
 
-        {/* Gemini 2.5 AI Assistant Modal */}
-        <ChatAgent />
+        {/* Client Interactive Modals (Command Palette, Floating Quick Comms, Chat Agent) */}
+        <ClientModals />
       </div>
     </SmoothScrollProvider>
   );

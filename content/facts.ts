@@ -1,121 +1,113 @@
-import { z } from 'zod'
-
 // ---------------------------------------------------------------------------
-// Zod schemas
+// TypeScript Type Interfaces
 // ---------------------------------------------------------------------------
 
-const AvailabilitySchema = z.object({
-  status: z.string(),
-  noticePeriodDays: z.number().int().nonnegative(),
-  formatted: z.string(),
-})
+export interface Availability {
+  status: string;
+  noticePeriodDays: number;
+  formatted: string;
+}
 
-const PersonalSchema = z.object({
-  name: z.string(),
-  role: z.string(),
-  tagline: z.string(),
-  location: z.string(),
-  phone: z.string(),
-  email: z.string().email(),
-  github: z.string().url(),
-  linkedin: z.string().url(),
-  website: z.string().url(),
-  resumeUrl: z.string(),
-  workAuthorization: z.string(),
-  availability: AvailabilitySchema,
-  noticePeriod: z.string(),
-  languages: z.array(z.string()),
-})
+export interface Personal {
+  name: string;
+  role: string;
+  tagline: string;
+  location: string;
+  phone: string;
+  email: string;
+  github: string;
+  linkedin: string;
+  website: string;
+  resumeUrl: string;
+  workAuthorization: string;
+  availability: Availability;
+  noticePeriod: string;
+  languages: string[];
+}
 
-const EducationItemSchema = z.object({
-  school: z.string(),
-  degree: z.string(),
-  timeframe: z.string(),
-  location: z.string(),
-  description: z.string(),
-})
+export interface EducationItem {
+  school: string;
+  degree: string;
+  timeframe: string;
+  location: string;
+  description: string;
+}
 
-const CredentialSchema = z.object({
-  institution: z.string(),
-  title: z.string(),
-  credentialType: z.string(),
-  timeframe: z.string(),
-  status: z.enum(['Completed', 'Ongoing']),
-  description: z.string(),
-  topics: z.array(z.string()),
-  verifyUrl: z.string().url().optional(),
-  draft: z.boolean().default(false),
-})
+export interface Credential {
+  institution: string;
+  title: string;
+  credentialType: string;
+  timeframe: string;
+  status: 'Completed' | 'Ongoing';
+  description: string;
+  topics: string[];
+  verifyUrl?: string;
+  draft?: boolean;
+}
 
-const TimelineEventSchema = z.object({
-  lane: z.enum(['Building', 'Learning']),
-  role: z.string(),
-  organization: z.string(),
-  timeframe: z.string(),
-  start: z.string(),
-  end: z.string(),
-  label: z.string(),
-  description: z.string(),
-  achievements: z.array(z.string()),
-  stack: z.array(z.string()),
-})
+export interface TimelineEvent {
+  lane: 'Building' | 'Learning';
+  role: string;
+  organization: string;
+  timeframe: string;
+  start: string;
+  end: string;
+  label: string;
+  description: string;
+  achievements: string[];
+  stack: string[];
+}
 
-const ExperienceItemSchema = z.object({
-  role: z.string(),
-  company: z.string(),
-  timeframe: z.string(),
-  location: z.string(),
-  description: z.string(),
-  achievements: z.array(z.string()),
-  stack: z.array(z.string()),
-})
+export interface ExperienceItem {
+  role: string;
+  company: string;
+  timeframe: string;
+  location: string;
+  description: string;
+  achievements: string[];
+  stack: string[];
+}
 
-const SkillCategorySchema = z.object({
-  category: z.string(),
-  items: z.array(z.string()),
-})
+export interface SkillCategory {
+  category: string;
+  items: string[];
+}
 
-export const EvidenceSchema = z.object({
-  label: z.string().min(1),
-  value: z.string().min(1),
-  source: z.string().min(1),
-  verifiedOn: z.string().optional(),
-  draft: z.boolean().default(false),
-})
+export interface Evidence {
+  label: string;
+  value: string;
+  source: string;
+  verifiedOn?: string;
+  draft?: boolean;
+}
 
-export type Evidence = z.infer<typeof EvidenceSchema>
+export interface Project {
+  slug: string;
+  title: string;
+  status: 'Live' | 'In Development' | 'Archived';
+  timeframe: string;
+  description: string;
+  stack: string[];
+  imageUrl: string;
+  liveUrl: string;
+  githubUrl: string;
+  frontendImplementation: string;
+  evidence: Evidence[];
+  draft?: boolean;
+}
 
-const ProjectStatusSchema = z.enum(['Live', 'In Development', 'Archived'])
-
-const ProjectSchema = z.object({
-  slug: z.string(),
-  title: z.string(),
-  status: ProjectStatusSchema,
-  timeframe: z.string(),
-  description: z.string(),
-  stack: z.array(z.string()),
-  imageUrl: z.string(),
-  liveUrl: z.string().url(),
-  githubUrl: z.string().url(),
-  frontendImplementation: z.string(),
-  evidence: z.array(EvidenceSchema),
-  draft: z.boolean().default(false),
-})
-
-export type Project = z.infer<typeof ProjectSchema>
-
-const SiteConfigSchema = z.object({
-  SITE_URL: z.string().url(),
-  SITE_NAME: z.string(),
-  SITE_TITLE: z.string(),
-  SITE_DESCRIPTION: z.string().max(155),
-})
+export interface SiteConfig {
+  SITE_URL: string;
+  SITE_NAME: string;
+  SITE_TITLE: string;
+  SITE_DESCRIPTION: string;
+}
 
 // ---------------------------------------------------------------------------
 // PERSONAL
 // ---------------------------------------------------------------------------
 
-export const PERSONAL = PersonalSchema.parse({
+export const PERSONAL: Personal = {
   name: 'Rajendra Bist',
   role: 'Full-Stack Developer & Backend Engineer',
   tagline:
@@ -136,13 +128,13 @@ export const PERSONAL = PersonalSchema.parse({
   },
   noticePeriod: 'Available immediately',
   languages: ['English', 'Hindi (Proficient)', 'Nepali (Native)'],
-})
+}
 
 // ---------------------------------------------------------------------------
 // EDUCATION
 // ---------------------------------------------------------------------------
 
-export const EDUCATION = z.array(EducationItemSchema).parse([
+export const EDUCATION: EducationItem[] = [
   {
     school: 'Vcare Technical Institute',
     degree: 'Diploma in IT (Full-Stack Web Development)',
@@ -157,13 +149,13 @@ export const EDUCATION = z.array(EducationItemSchema).parse([
     location: 'Nepal',
     description: 'Physics, Chemistry, and Mathematics',
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // CREDENTIALS — only real credentials with verifyUrl and draft flag
 // ---------------------------------------------------------------------------
 
-export const CREDENTIALS = z.array(CredentialSchema).parse([
+export const CREDENTIALS: Credential[] = [
   {
     institution: 'Vcare Technical Institute',
     title: 'Full-Stack Web Development',
@@ -187,13 +179,13 @@ export const CREDENTIALS = z.array(CredentialSchema).parse([
       '+2 Science stream (physics, chemistry, and mathematics).',
     topics: ['Science Stream'],
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // TIMELINE EVENTS — Dual-Lane: Building vs Learning
 // ---------------------------------------------------------------------------
 
-export const TIMELINE_EVENTS = z.array(TimelineEventSchema).parse([
+export const TIMELINE_EVENTS: TimelineEvent[] = [
   {
     lane: 'Building',
     role: 'Full-Stack Developer (Self-Employed)',
@@ -240,13 +232,13 @@ export const TIMELINE_EVENTS = z.array(TimelineEventSchema).parse([
     ],
     stack: ['Node.js', 'Express.js', 'React', 'MongoDB', 'REST APIs', 'Git'],
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // EXPERIENCE (Backward-compatible export for existing components)
 // ---------------------------------------------------------------------------
 
-export const EXPERIENCE = z.array(ExperienceItemSchema).parse([
+export const EXPERIENCE: ExperienceItem[] = [
   {
     role: 'Full-Stack Developer (Self-Employed)',
     company: 'Independent Projects',
@@ -288,13 +280,13 @@ export const EXPERIENCE = z.array(ExperienceItemSchema).parse([
     ],
     stack: ['Node.js', 'Express.js', 'React', 'MongoDB', 'REST APIs', 'Git'],
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // SKILLS
 // ---------------------------------------------------------------------------
 
-export const SKILLS = z.array(SkillCategorySchema).parse([
+export const SKILLS: SkillCategory[] = [
   {
     category: 'Frontend',
     items: [
@@ -356,13 +348,13 @@ export const SKILLS = z.array(SkillCategorySchema).parse([
       'RAG Pipelines',
     ],
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // PROJECTS — 3 canonical projects with real package.json stacks & evidence
 // ---------------------------------------------------------------------------
 
-export const PROJECTS = z.array(ProjectSchema).parse([
+export const PROJECTS: Project[] = [
   {
     slug: 'sovereign',
     title: 'Sovereign',
@@ -529,13 +521,13 @@ export const PROJECTS = z.array(ProjectSchema).parse([
     ],
     draft: false,
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // DRAFT PROJECTS — Kept in facts for non-rendered tracking
 // ---------------------------------------------------------------------------
 
-export const DRAFT_PROJECTS = z.array(ProjectSchema).parse([
+export const DRAFT_PROJECTS: Project[] = [
   {
     slug: 'edumethod-ai',
     title: 'EduMethod AI',
@@ -550,19 +542,19 @@ export const DRAFT_PROJECTS = z.array(ProjectSchema).parse([
     evidence: [],
     draft: true,
   },
-])
+]
 
 // ---------------------------------------------------------------------------
 // SITE_CONFIG
 // ---------------------------------------------------------------------------
 
-export const SITE_CONFIG = SiteConfigSchema.parse({
+export const SITE_CONFIG: SiteConfig = {
   SITE_URL: 'https://www.bistrajendra.com.np',
   SITE_NAME: 'Rajendra Bist Portfolio',
   SITE_TITLE: 'Full-Stack Developer & Backend Engineer | Rajendra Bist',
   SITE_DESCRIPTION:
     'Full-stack developer shipping complete apps: Next.js, Node.js, PostgreSQL — schema design to deployment. Open to SDE-1 roles in Delhi NCR and remote.',
-})
+};
 
 // Unified FACTS export aggregating verified facts
 export const FACTS = {

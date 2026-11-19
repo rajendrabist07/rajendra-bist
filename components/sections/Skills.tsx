@@ -36,36 +36,173 @@ interface StackItem {
   icon?: React.FC<IconProps>;
   monogram?: string;
   context: string;
+  proofUrl?: string;
 }
 
 const STACK_DATA: StackItem[] = [
   // Core (strictly 8, all verified in shipped projects)
-  { name: 'TypeScript', category: 'backend', tier: 'Core', icon: SiTypescript, context: 'End-to-end typing in Sovereign, Chronicle & DevGuard' },
-  { name: 'Node.js', category: 'backend', tier: 'Core', icon: SiNodedotjs, context: 'Server runtime in Express API & GitHub webhook services' },
-  { name: 'PostgreSQL', category: 'databases', tier: 'Core', icon: SiPostgresql, context: 'Database engine with RLS isolation in Sovereign & Chronicle' },
-  { name: 'Next.js 15', category: 'frontend', tier: 'Core', icon: SiNextdotjs, context: 'App Router with ISR & Server Actions across projects' },
-  { name: 'React', category: 'frontend', tier: 'Core', icon: SiReact, context: 'UI component architecture and hooks state management' },
-  { name: 'Prisma ORM', category: 'databases', tier: 'Core', icon: SiPrisma, context: 'Data modeling and boot-time migrations in Sovereign' },
-  { name: 'Zod', category: 'backend', tier: 'Core', icon: SiZod, context: 'Runtime boundary validation on API inputs and AI outputs' },
-  { name: 'Express.js', category: 'backend', tier: 'Core', icon: SiExpress, context: 'REST API service for Chronicle with JWT authentication' },
+  {
+    name: 'TypeScript',
+    category: 'backend',
+    tier: 'Core',
+    icon: SiTypescript,
+    context: 'Strict typing across Sovereign, Chronicle & DevGuard',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/package.json',
+  },
+  {
+    name: 'Node.js',
+    category: 'backend',
+    tier: 'Core',
+    icon: SiNodedotjs,
+    context: 'Server runtime in Express API & GitHub webhook services',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json',
+  },
+  {
+    name: 'PostgreSQL',
+    category: 'databases',
+    tier: 'Core',
+    icon: SiPostgresql,
+    context: 'Database engine with RLS tenant policies in Sovereign',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/packages/db/prisma/migrations/20261002111243_enable_rls/migration.sql',
+  },
+  {
+    name: 'Next.js 15',
+    category: 'frontend',
+    tier: 'Core',
+    icon: SiNextdotjs,
+    context: 'App Router with ISR & Server Actions across projects',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/package.json',
+  },
+  {
+    name: 'React',
+    category: 'frontend',
+    tier: 'Core',
+    icon: SiReact,
+    context: 'UI component architecture and hooks state management',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/package.json',
+  },
+  {
+    name: 'Prisma ORM',
+    category: 'databases',
+    tier: 'Core',
+    icon: SiPrisma,
+    context: 'Data modeling and boot-time migrations in Chronicle API',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json',
+  },
+  {
+    name: 'Zod',
+    category: 'backend',
+    tier: 'Core',
+    icon: SiZod,
+    context: 'Runtime boundary validation on API inputs and AI outputs',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/lib/validation/schemas.ts',
+  },
+  {
+    name: 'Express.js',
+    category: 'backend',
+    tier: 'Core',
+    icon: SiExpress,
+    context: 'REST API service for Chronicle with JWT authentication',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json',
+  },
 
-  // Working (all appear in shipped projects)
-  { name: 'Tailwind CSS', category: 'frontend', tier: 'Working', icon: SiTailwindcss, context: 'Design token based layout & responsive utility architecture' },
-  { name: 'Inngest', category: 'backend', tier: 'Working', monogram: 'IN', context: 'Durable workflow execution and approval loops in Sovereign' },
-  { name: 'Upstash Redis', category: 'databases', tier: 'Working', icon: SiRedis, context: 'Token-bucket rate limiting in DevGuard AI' },
-  { name: 'Supabase', category: 'databases', tier: 'Working', icon: SiSupabase, context: 'Managed PostgreSQL instance with pgvector in DevGuard AI' },
-  { name: 'Vitest', category: 'devops', tier: 'Working', icon: SiVitest, context: 'Unit and integration test suites in Chronicle & DevGuard' },
-  { name: 'GitHub Actions', category: 'devops', tier: 'Working', icon: SiGithubactions, context: 'Automated CI pipelines for linting, tests, and builds' },
-  { name: 'Turborepo', category: 'devops', tier: 'Working', icon: SiTurborepo, context: 'Monorepo workspace orchestration in Sovereign' },
-  { name: 'Git', category: 'devops', tier: 'Working', icon: SiGit, context: 'Version control discipline, atomic commits and branch hygiene' },
+  // Working (verified in shipped projects and this portfolio)
+  {
+    name: 'Tailwind CSS',
+    category: 'frontend',
+    tier: 'Working',
+    icon: SiTailwindcss,
+    context: 'Design token based layout & responsive utility architecture',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/package.json',
+  },
+  {
+    name: 'Inngest',
+    category: 'backend',
+    tier: 'Working',
+    monogram: 'IN',
+    context: 'Durable workflow execution and approval loops in Sovereign',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/package.json',
+  },
+  {
+    name: 'Upstash Redis',
+    category: 'databases',
+    tier: 'Working',
+    icon: SiRedis,
+    context: 'Token-bucket rate limiting in DevGuard AI',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json',
+  },
+  {
+    name: 'Supabase',
+    category: 'databases',
+    tier: 'Working',
+    icon: SiSupabase,
+    context: 'Managed PostgreSQL instance with pgvector in DevGuard AI',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json',
+  },
+  {
+    name: 'Vitest',
+    category: 'devops',
+    tier: 'Working',
+    icon: SiVitest,
+    context: 'Unit and integration test suites in Chronicle & DevGuard',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/package.json',
+  },
+  {
+    name: 'GitHub Actions',
+    category: 'devops',
+    tier: 'Working',
+    icon: SiGithubactions,
+    context: 'Automated CI pipelines for linting, tests, and builds',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/.github/workflows/ci.yml',
+  },
+  {
+    name: 'Turborepo',
+    category: 'devops',
+    tier: 'Working',
+    icon: SiTurborepo,
+    context: 'Monorepo workspace orchestration in Sovereign',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/package.json',
+  },
+  {
+    name: 'Framer Motion',
+    category: 'frontend',
+    tier: 'Working',
+    icon: SiFramer,
+    context: 'Fluid micro-interactions and transitions in this portfolio',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/rajendra-bist/main/package.json',
+  },
 
-  // Basics (coursework, small projects, or portfolio tooling)
-  { name: 'MongoDB', category: 'databases', tier: 'Basics', icon: SiMongodb, context: 'Document database modeling in Vcare training projects & API' },
-  { name: 'Framer Motion', category: 'frontend', tier: 'Basics', icon: SiFramer, context: 'Fluid micro-interactions and transitions in this portfolio' },
-  { name: 'Docker', category: 'devops', tier: 'Basics', icon: SiDocker, context: 'Local containerization of multi-service development stacks' },
-
-  // Exploring (actively learning)
-  { name: 'Python', category: 'backend', tier: 'Exploring', icon: SiPython, context: 'Scripting and evaluation routines for AI datasets' },
+  // Basics (coursework or verified utility scripts with no exaggerated claims)
+  {
+    name: 'Docker',
+    category: 'devops',
+    tier: 'Basics',
+    icon: SiDocker,
+    context: '',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/Dockerfile',
+  },
+  {
+    name: 'Linux CLI',
+    category: 'devops',
+    tier: 'Basics',
+    icon: SiGit,
+    context: '',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/scripts/smoke.sh',
+  },
+  {
+    name: 'MongoDB',
+    category: 'databases',
+    tier: 'Basics',
+    icon: SiMongodb,
+    context: '',
+  },
+  {
+    name: 'Python',
+    category: 'backend',
+    tier: 'Basics',
+    icon: SiPython,
+    context: '',
+  },
 ];
 
 const TABS: { id: Category; label: string }[] = [
@@ -197,9 +334,11 @@ export default function Skills() {
                   {item.name}
                 </h4>
 
-                <p className="mt-1 text-xs text-[--text-secondary] leading-relaxed line-clamp-2">
-                  {item.context}
-                </p>
+                {item.context ? (
+                  <p className="mt-1 text-xs text-[--text-secondary] leading-relaxed line-clamp-2">
+                    {item.context}
+                  </p>
+                ) : null}
               </div>
             );
           })}

@@ -34,17 +34,22 @@ export default function TenantIsolationSimulator() {
           <span className="font-bold tracking-tight">PostgreSQL Row-Level Security (RLS) Simulator</span>
         </div>
         <span className="rounded-[--radius-pill] border border-[--border-hairline] bg-[--bg-surface-3] px-2.5 py-0.5 text-[10px] text-[--text-tertiary]">
-          Illustrative Simulation
+          Illustrative simulation
         </span>
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <span className="text-[--text-secondary]">Active Tenant Session:</span>
-        <div className="inline-flex rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-1] p-1">
+        <div
+          role="group"
+          aria-label="Select active tenant session"
+          className="inline-flex rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-1] p-1"
+        >
           <button
             type="button"
+            aria-pressed={activeTenant === "org_alpha"}
             onClick={() => setActiveTenant("org_alpha")}
-            className={`rounded-[--radius-control] px-3 py-1 text-xs font-semibold transition-colors cursor-pointer ${
+            className={`rounded-[--radius-control] px-3 py-1 text-xs font-semibold transition-colors motion-reduce:transition-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] ${
               activeTenant === "org_alpha"
                 ? "bg-[--accent] text-[--accent-ink]"
                 : "text-[--text-secondary] hover:text-[--text-primary]"
@@ -54,8 +59,9 @@ export default function TenantIsolationSimulator() {
           </button>
           <button
             type="button"
+            aria-pressed={activeTenant === "org_beta"}
             onClick={() => setActiveTenant("org_beta")}
-            className={`rounded-[--radius-control] px-3 py-1 text-xs font-semibold transition-colors cursor-pointer ${
+            className={`rounded-[--radius-control] px-3 py-1 text-xs font-semibold transition-colors motion-reduce:transition-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] ${
               activeTenant === "org_beta"
                 ? "bg-[--accent] text-[--accent-ink]"
                 : "text-[--text-secondary] hover:text-[--text-primary]"

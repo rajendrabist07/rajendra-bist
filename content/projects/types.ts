@@ -52,7 +52,7 @@ export interface CaseFileProject {
   problem?: string;
   constraints?: string[];
   whatNext?: string[];
-  screenshot: {
+  screenshot?: {
     desktopWebp: string;
     desktopAvif: string;
     mobileWebp: string;

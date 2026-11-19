@@ -22,7 +22,7 @@ test.describe('Phase 4B Projects & Case Files', () => {
     // 2. Sovereign Case File (Lead)
     const sovereignArticle = page.locator('#project-sovereign');
     await expect(sovereignArticle).toBeVisible();
-    await expect(sovereignArticle.getByText('Primary Architecture Spec')).toBeVisible();
+    await expect(sovereignArticle.getByText('Featured')).toBeVisible();
     await expect(sovereignArticle.getByText('Database-Level Isolation Over Application-Level Filters')).toBeVisible();
     await expect(sovereignArticle.getByText('apps/web/app/(app)/approvals/page.tsx')).toBeVisible();
 
@@ -58,8 +58,8 @@ test.describe('Phase 4B Projects & Case Files', () => {
     await clientNode.focus();
     await expect(clientNode).toBeFocused();
 
-    // 6. Responsive Screenshot Picture element
-    const picture = sovereignArticle.locator('picture');
+    // 6. Responsive Screenshot Picture element (DevGuard AI)
+    const picture = devguardArticle.locator('picture');
     await expect(picture).toBeVisible();
     const desktopImg = picture.locator('img');
     await expect(desktopImg).toBeVisible();
