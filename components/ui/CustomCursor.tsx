@@ -57,7 +57,7 @@ export default function CustomCursor() {
     <>
       {/* Precision Center Dot */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-[--accent-warm]"
+        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full bg-[--accent]"
         animate={{
           x: mousePosition.x - 3,
           y: mousePosition.y - 3,
@@ -69,14 +69,14 @@ export default function CustomCursor() {
 
       {/* Trailing Ring / Morphing Aura */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full border border-[--accent-warm]"
+        className="pointer-events-none fixed top-0 left-0 z-50 rounded-full border border-[--accent]"
         animate={{
           x: mousePosition.x - (isHovered ? 20 : 14),
           y: mousePosition.y - (isHovered ? 20 : 14),
           width: isHovered ? 40 : 28,
           height: isHovered ? 40 : 28,
-          backgroundColor: isHovered ? 'rgba(255, 122, 51, 0.15)' : 'transparent',
-          borderColor: isHovered ? '#FF7A33' : 'rgba(255, 122, 51, 0.45)',
+          backgroundColor: isHovered ? 'var(--accent-dim)' : 'transparent',
+          borderColor: isHovered ? 'var(--accent)' : 'var(--border-strong)',
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 280, mass: 0.2 }}
       />

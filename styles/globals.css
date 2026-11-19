@@ -35,59 +35,15 @@
   --ease-blueprint: var(--ease-blueprint);
 }
 
-/* ==========================================================================
-   LEGACY BRIDGE: Maps legacy variable names to new Direction A Blueprint tokens
-   NOTE: REMOVE IN PHASE 4
-   ========================================================================== */
-:root {
-  --bg-0: var(--bg-page);
-  --bg-1: var(--bg-surface-1);
-  --bg-2: var(--bg-surface-2);
-  --bg-3: var(--bg-surface-3);
-  --bg-void: var(--bg-page);
-  --bg-surface: var(--bg-surface-1);
-  --bg-surface-2: var(--bg-surface-2);
-  --border-subtle: var(--border-hairline);
-
-  /* Legacy orange replaced with Blueprint Cyan */
-  --accent-warm: var(--accent);
-  --accent-warm-dim: var(--accent-dim);
-  --accent-cool: var(--accent);
-  --accent-cool-dim: var(--accent-dim);
-
-  /* Semantic Mappings */
-  --danger: #ff5d5d;
-  --bg-primary: var(--bg-page);
-  --bg-elevated: var(--bg-surface-2);
-  --bg-code: var(--bg-surface-3);
-  --border: var(--border-hairline);
-  --border-hover: var(--border-strong);
-  --accent-primary: var(--accent);
-  --accent-secondary: var(--accent);
-  --accent-glow: var(--accent-dim);
-  --text-muted: var(--text-tertiary);
-  --success: var(--status-live);
-  --warning: var(--accent);
-
-  /* Fluid Clamp Typography Scale */
-  --text-hero: var(--text-display);
-  --text-h2: var(--text-h2);
-  --text-h3: var(--text-h3);
-  --text-body: var(--text-body);
-  --text-small: var(--text-mono-data);
-  --font-sans: var(--font-display);
-}
-/* END REMOVE IN PHASE 4 */
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
-  background-color: var(--bg-void);
+  background-color: var(--bg-page);
   color-scheme: dark;
 }
 
 body {
-  background: var(--bg-void);
+  background: var(--bg-page);
   color: var(--text-primary);
   font-family:
     var(--font-sans),
@@ -165,12 +121,12 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-void);
+  background: var(--bg-page);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--bg-surface-2);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-hairline);
   border-radius: 4px;
 }
 
@@ -342,7 +298,7 @@ html.lenis body {
 
 /* Fluid Typography Utilities */
 .fluid-hero {
-  font-size: var(--text-hero);
+  font-size: var(--text-display);
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
@@ -365,20 +321,20 @@ html.lenis body {
 }
 
 .fluid-small {
-  font-size: var(--text-small);
+  font-size: var(--text-mono-data);
   line-height: 1.5;
 }
 
 /* 3-Tier Elevation System (Linear / Vercel Grade) */
 .elevation-0 {
-  background: var(--bg-void);
+  background: var(--bg-page);
 }
 
 .elevation-1 {
-  background: var(--bg-surface);
+  background: var(--bg-surface-1);
   box-shadow:
     0 12px 36px -4px rgba(0, 0, 0, 0.65),
-    0 0 0 1px var(--border-subtle);
+    0 0 0 1px var(--border-hairline);
 }
 
 .elevation-2 {
@@ -493,7 +449,7 @@ html.lenis body {
 
 .system-chip-learning {
   background: transparent;
-  border: 1px dashed var(--border-subtle);
+  border: 1px dashed var(--border-hairline);
   color: var(--text-secondary);
   font-family: var(--font-mono), monospace;
 }
@@ -551,11 +507,11 @@ html.lenis body {
 
 /* Section Background Tone Shifts & Ambient Watermarks */
 .section-tone-void {
-  background-color: #050608;
+  background-color: var(--bg-page);
 }
 
 .section-tone-alt {
-  background-color: #070911;
+  background-color: var(--bg-surface-1);
 }
 
 .section-watermark {
@@ -576,12 +532,12 @@ html.lenis body {
 [cmdk-root] {
   max-width: 640px;
   width: 90vw;
-  background: var(--bg-surface);
+  background: var(--bg-surface-1);
   border: 1px solid var(--border-strong);
   border-radius: 1rem;
   box-shadow:
     0 25px 80px rgba(0, 0, 0, 0.85),
-    0 0 0 1px var(--border-subtle);
+    0 0 0 1px var(--border-hairline);
   overflow: hidden;
   font-family: var(--font-mono), monospace;
 }
@@ -592,7 +548,7 @@ html.lenis body {
   background: transparent;
   color: var(--text-primary);
   border: none;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-hairline);
   font-size: 0.95rem;
   font-family: var(--font-mono), monospace;
   outline: none;
@@ -632,7 +588,7 @@ html.lenis body {
 [cmdk-item][data-selected="true"] {
   background: var(--bg-surface-2);
   color: var(--text-primary);
-  border-left: 2px solid var(--accent-warm);
+  border-left: 2px solid var(--accent);
 }
 
 [cmdk-item]:hover {

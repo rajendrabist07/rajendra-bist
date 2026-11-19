@@ -11,6 +11,7 @@
     "check:contrast": "node scripts/check-contrast.mjs",
     "check:placeholders": "node scripts/check-placeholders.mjs",
     "check:evidence": "node scripts/check-evidence.mjs",
+    "check:citations": "node scripts/check-citations.mjs",
     "check:links": "node scripts/check-links.mjs",
     "test": "vitest run",
     "test:watch": "vitest",

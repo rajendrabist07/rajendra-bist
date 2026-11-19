@@ -11,16 +11,16 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-[--bg-void] py-32 text-[--text-primary]">
+    <main className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">
       <Container>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent-warm] mb-6"
+          className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent] mb-6"
         >
           <ArrowLeft size={14} />
           Back to Overview
         </Link>
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent-warm]">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent]">
           Notes // Engineering
         </p>
         <h1 className="mt-4 text-4xl font-semibold md:text-6xl">

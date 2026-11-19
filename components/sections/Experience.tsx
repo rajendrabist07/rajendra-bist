@@ -76,7 +76,7 @@ export default function Experience() {
             </span>
             <span className="font-semibold text-[--text-primary]">Today</span>
             <span className="text-[--text-tertiary]">·</span>
-            <span className="text-[--text-secondary]">Active SDE Search (Delhi NCR / Remote)</span>
+            <span className="text-[--text-secondary]">Available immediately</span>
           </div>
         </div>
 

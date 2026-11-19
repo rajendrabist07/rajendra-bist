@@ -23,41 +23,16 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[--bg-void] py-16 font-mono text-xs text-[--text-secondary]">
-      <div className="divider-gradient absolute top-0 left-0 right-0" />
-
-      {/* Full-Width Dual Ambient Glows */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(circle at 10% 30%, rgba(255, 122, 51, 0.045) 0%, transparent 55%),
-            radial-gradient(circle at 90% 70%, rgba(52, 216, 176, 0.035) 0%, transparent 55%)
-          `,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Subtle Matrix Texture */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.02]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at center, rgba(255,255,255,0.7) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-        aria-hidden="true"
-      />
-
+    <footer className="relative overflow-hidden bg-[--bg-page] py-16 font-mono text-xs text-[--text-secondary] border-t border-[--border-hairline]">
       <Container className="relative z-10">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.8fr_1fr]">
           {/* Col 1: Identity & Telemetry */}
           <div>
             <a
               href="#home"
-              className="font-mono text-xl font-bold tracking-tight text-[--text-primary] transition-colors duration-200 hover:text-[--accent-warm]"
+              className="font-mono text-xl font-bold tracking-tight text-[--text-primary] transition-colors duration-200 hover:text-[--accent]"
             >
-              RB<span className="text-[--accent-warm]">.</span>
+              RB<span className="text-[--accent]">.</span>
               <span className="ml-2 text-xs font-normal text-[--text-tertiary]">
                 / bistrajendra.com.np
               </span>
@@ -79,7 +54,7 @@ export default function Footer() {
                 <a
                   key={label}
                   href={href}
-                  className="w-fit transition-colors duration-200 hover:text-[--accent-warm]"
+                  className="w-fit transition-colors duration-200 hover:text-[--accent]"
                 >
                   {label}
                 </a>
@@ -92,8 +67,8 @@ export default function Footer() {
             <h2 className="text-xs font-bold uppercase tracking-wider text-[--text-primary]">
               Contact
             </h2>
-            <div className="mt-4 block break-words text-[--text-primary] font-medium transition-colors hover:text-[--accent-warm]">
-              <ObfuscatedEmail className="transition-colors hover:text-[--accent-warm]" />
+            <div className="mt-4 block break-words text-[--text-primary] font-medium transition-colors hover:text-[--accent]">
+              <ObfuscatedEmail className="transition-colors hover:text-[--accent]" />
             </div>
             <p className="mt-2 text-[11px] text-[--text-tertiary]">
               New Delhi, India • Open to Delhi NCR &amp; Remote
@@ -107,7 +82,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label as string}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-[--text-secondary] transition-all duration-200 hover:border-[--accent-warm]/40 hover:text-[--accent-warm] hover:scale-105 active:scale-95"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] text-[--text-secondary] transition-all duration-200 hover:border-[--border-strong] hover:text-[--accent] hover:scale-105 active:scale-95"
                 >
                   <Icon size={16} />
                 </a>
@@ -117,7 +92,7 @@ export default function Footer() {
         </div>
 
         {/* Soft Divider above Copyright */}
-        <div className="divider-gradient my-8" />
+        <div className="my-8 border-t border-[--border-hairline]" />
 
         {/* Copyright & Back to Top */}
         <div className="flex flex-col gap-4 text-[11px] text-[--text-tertiary] md:flex-row md:items-center md:justify-between">
@@ -126,7 +101,7 @@ export default function Footer() {
             <span>New Delhi, India</span>
             <a
               href="#home"
-              className="inline-flex items-center gap-1 text-[--text-secondary] transition-colors hover:text-[--accent-warm]"
+              className="inline-flex items-center gap-1 text-[--text-secondary] transition-colors hover:text-[--accent]"
             >
               Back to top <ArrowUp size={12} />
             </a>

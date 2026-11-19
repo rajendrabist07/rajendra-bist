@@ -70,21 +70,21 @@ export async function POST(req: NextRequest) {
             reply_to: email,
             subject: `[bistrajendra.com.np] New Message from ${name}`,
             html: `
-              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; max-width: 600px; margin: 0 auto; background: #050608; color: #edeff2; padding: 28px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; max-width: 600px; margin: 0 auto; background: #0B1220; color: #E8EEFB; padding: 28px; border-radius: 12px; border: 1px solid rgba(148,178,255,0.14);">
                 <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                  <span style="font-weight: 800; font-size: 18px; color: #ff7a33; letter-spacing: -0.5px;">RB &bull; bistrajendra.com.np</span>
+                  <span style="font-weight: 800; font-size: 18px; color: #38D0F0; letter-spacing: -0.5px;">RB &bull; bistrajendra.com.np</span>
                 </div>
-                <h2 style="color: #edeff2; margin-top: 0; font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">New Contact Submission</h2>
-                <div style="background: #10131a; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06);">
+                <h2 style="color: #E8EEFB; margin-top: 0; font-size: 18px; border-bottom: 1px solid rgba(148,178,255,0.14); padding-bottom: 12px;">New Contact Submission</h2>
+                <div style="background: #101A2E; padding: 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(148,178,255,0.14);">
                   <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Sender:</strong> ${escapeHtml(name)}</p>
-                  <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #ff7a33;">${escapeHtml(email)}</a></p>
-                  <p style="margin: 0; font-size: 12px; color: #8e97a3;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })} (IST)</p>
+                  <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #38D0F0;">${escapeHtml(email)}</a></p>
+                  <p style="margin: 0; font-size: 12px; color: #A9B6D3;"><strong>Timestamp:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })} (IST)</p>
                 </div>
-                <h3 style="color: #8e97a3; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Message Content:</h3>
-                <div style="background: #0b0d11; padding: 16px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; color: #edeff2; border: 1px solid rgba(255, 122, 51, 0.2); font-size: 14px;">
+                <h3 style="color: #A9B6D3; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Message Content:</h3>
+                <div style="background: #16233B; padding: 16px; border-radius: 8px; line-height: 1.6; white-space: pre-wrap; color: #E8EEFB; border: 1px solid rgba(56, 208, 240, 0.2); font-size: 14px;">
 ${escapeHtml(message)}
                 </div>
-                <p style="margin-top: 24px; font-size: 11px; color: #5a6270; text-align: center;">
+                <p style="margin-top: 24px; font-size: 11px; color: #8A98B8; text-align: center;">
                   Delivered securely from Rajendra Bist Portfolio &bull; bistrajendra.com.np
                 </p>
               </div>

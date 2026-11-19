@@ -18,9 +18,9 @@ export default function Image() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#050608',
+          backgroundColor: '#0B1220',
           backgroundImage:
-            'radial-gradient(circle at 18% 12%, rgba(255, 122, 51, 0.15), transparent 40%), radial-gradient(circle at 76% 22%, rgba(255, 255, 255, 0.04), transparent 45%), radial-gradient(circle at 86% 92%, rgba(255, 122, 51, 0.12), transparent 42%)',
+            'radial-gradient(circle at 18% 12%, rgba(56, 208, 240, 0.15), transparent 40%), radial-gradient(circle at 76% 22%, rgba(255, 255, 255, 0.04), transparent 45%), radial-gradient(circle at 86% 92%, rgba(56, 208, 240, 0.12), transparent 42%)',
           padding: '60px',
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
@@ -31,21 +31,21 @@ export default function Image() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'linear-gradient(135deg, #10131a, #050608)',
-            border: '1.5px solid rgba(255, 122, 51, 0.5)',
+            background: 'linear-gradient(135deg, #101A2E, #0B1220)',
+            border: '1.5px solid rgba(56, 208, 240, 0.5)',
             borderRadius: '16px',
             padding: '8px 24px',
             marginBottom: '24px',
             boxShadow: '0 18px 48px rgba(0, 0, 0, 0.6)',
           }}
         >
-          <span style={{ fontSize: '28px', fontWeight: 850, color: '#edeff2' }}>R</span>
-          <span style={{ fontSize: '28px', fontWeight: 850, color: '#ff7a33', marginLeft: '2px' }}>B</span>
+          <span style={{ fontSize: '28px', fontWeight: 850, color: '#E8EEFB' }}>R</span>
+          <span style={{ fontSize: '28px', fontWeight: 850, color: '#38D0F0', marginLeft: '2px' }}>B</span>
           <span
             style={{
               fontSize: '16px',
               fontWeight: 600,
-              color: '#8e97a3',
+              color: '#A9B6D3',
               marginLeft: '14px',
               letterSpacing: '2px',
             }}
@@ -59,7 +59,7 @@ export default function Image() {
           style={{
             fontSize: '68px',
             fontWeight: 900,
-            color: '#edeff2',
+            color: '#E8EEFB',
             letterSpacing: '-2px',
             textAlign: 'center',
             lineHeight: 1.1,
@@ -68,12 +68,12 @@ export default function Image() {
           Rajendra Bist
         </div>
 
-        {/* Role with Molten Amber */}
+        {/* Role with Blueprint Cyan */}
         <div
           style={{
             fontSize: '34px',
             fontWeight: 700,
-            color: '#ff7a33',
+            color: '#38D0F0',
             marginTop: '12px',
             textAlign: 'center',
             letterSpacing: '-0.5px',
@@ -86,7 +86,7 @@ export default function Image() {
         <div
           style={{
             fontSize: '20px',
-            color: '#8e97a3',
+            color: '#A9B6D3',
             marginTop: '16px',
             textAlign: 'center',
             maxWidth: '850px',
@@ -119,13 +119,13 @@ export default function Image() {
             <div
               key={tech}
               style={{
-                backgroundColor: '#10131a',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                backgroundColor: '#101A2E',
+                border: '1px solid rgba(148, 178, 255, 0.14)',
                 borderRadius: '9999px',
                 padding: '6px 16px',
                 fontSize: '14px',
                 fontWeight: 600,
-                color: '#edeff2',
+                color: '#E8EEFB',
               }}
             >
               {tech}

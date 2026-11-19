@@ -22,50 +22,50 @@ import {
   SiDocker,
   SiPython,
   SiMongodb,
-  SiVercel,
   SiFramer,
-} from 'react-icons/si';
-import type { IconType } from 'react-icons';
+  type IconProps,
+} from '@/components/icons/TechIcons';
 
-type Tier = 'Core' | 'Working' | 'Exploring';
-type Category = 'all' | 'backend' | 'frontend' | 'databases' | 'devops' | 'exploring';
+type Tier = 'Core' | 'Working' | 'Basics' | 'Exploring';
+type Category = 'all' | 'backend' | 'frontend' | 'databases' | 'devops' | 'basics_exploring';
 
 interface StackItem {
   name: string;
-  category: 'backend' | 'frontend' | 'databases' | 'devops' | 'exploring';
+  category: 'backend' | 'frontend' | 'databases' | 'devops';
   tier: Tier;
-  icon?: IconType;
+  icon?: React.FC<IconProps>;
   monogram?: string;
   context: string;
 }
 
 const STACK_DATA: StackItem[] = [
-  // Core (at most 8, all in shipped projects)
+  // Core (strictly 8, all verified in shipped projects)
   { name: 'TypeScript', category: 'backend', tier: 'Core', icon: SiTypescript, context: 'End-to-end typing in Sovereign, Chronicle & DevGuard' },
   { name: 'Node.js', category: 'backend', tier: 'Core', icon: SiNodedotjs, context: 'Server runtime in Express API & GitHub webhook services' },
   { name: 'PostgreSQL', category: 'databases', tier: 'Core', icon: SiPostgresql, context: 'Database engine with RLS isolation in Sovereign & Chronicle' },
   { name: 'Next.js 15', category: 'frontend', tier: 'Core', icon: SiNextdotjs, context: 'App Router with ISR & Server Actions across projects' },
-  { name: 'Express.js', category: 'backend', tier: 'Core', icon: SiExpress, context: 'REST API service for Chronicle with JWT authentication' },
   { name: 'React', category: 'frontend', tier: 'Core', icon: SiReact, context: 'UI component architecture and hooks state management' },
-  { name: 'Prisma ORM', category: 'databases', tier: 'Core', icon: SiPrisma, context: 'Data modeling and boot-time migrations in Chronicle' },
+  { name: 'Prisma ORM', category: 'databases', tier: 'Core', icon: SiPrisma, context: 'Data modeling and boot-time migrations in Sovereign' },
   { name: 'Zod', category: 'backend', tier: 'Core', icon: SiZod, context: 'Runtime boundary validation on API inputs and AI outputs' },
+  { name: 'Express.js', category: 'backend', tier: 'Core', icon: SiExpress, context: 'REST API service for Chronicle with JWT authentication' },
 
   // Working (all appear in shipped projects)
   { name: 'Tailwind CSS', category: 'frontend', tier: 'Working', icon: SiTailwindcss, context: 'Design token based layout & responsive utility architecture' },
   { name: 'Inngest', category: 'backend', tier: 'Working', monogram: 'IN', context: 'Durable workflow execution and approval loops in Sovereign' },
   { name: 'Upstash Redis', category: 'databases', tier: 'Working', icon: SiRedis, context: 'Token-bucket rate limiting in DevGuard AI' },
-  { name: 'Supabase', category: 'databases', tier: 'Working', icon: SiSupabase, context: 'Managed PostgreSQL instance with pgvector extension' },
+  { name: 'Supabase', category: 'databases', tier: 'Working', icon: SiSupabase, context: 'Managed PostgreSQL instance with pgvector in DevGuard AI' },
   { name: 'Vitest', category: 'devops', tier: 'Working', icon: SiVitest, context: 'Unit and integration test suites in Chronicle & DevGuard' },
   { name: 'GitHub Actions', category: 'devops', tier: 'Working', icon: SiGithubactions, context: 'Automated CI pipelines for linting, tests, and builds' },
   { name: 'Turborepo', category: 'devops', tier: 'Working', icon: SiTurborepo, context: 'Monorepo workspace orchestration in Sovereign' },
   { name: 'Git', category: 'devops', tier: 'Working', icon: SiGit, context: 'Version control discipline, atomic commits and branch hygiene' },
-  { name: 'MongoDB', category: 'databases', tier: 'Working', icon: SiMongodb, context: 'Document database modeling in Vcare training projects' },
-  { name: 'Vercel', category: 'devops', tier: 'Working', icon: SiVercel, context: 'Edge deployment and hosting for Next.js applications' },
-  { name: 'Framer Motion', category: 'frontend', tier: 'Working', icon: SiFramer, context: 'Fluid micro-interactions and layout transitions' },
 
-  // Exploring (clearly labelled)
-  { name: 'Docker', category: 'exploring', tier: 'Exploring', icon: SiDocker, context: 'Local containerization of multi-service architectures' },
-  { name: 'Python', category: 'exploring', tier: 'Exploring', icon: SiPython, context: 'Scripting and evaluation routines for AI datasets' },
+  // Basics (coursework, small projects, or portfolio tooling)
+  { name: 'MongoDB', category: 'databases', tier: 'Basics', icon: SiMongodb, context: 'Document database modeling in Vcare training projects & API' },
+  { name: 'Framer Motion', category: 'frontend', tier: 'Basics', icon: SiFramer, context: 'Fluid micro-interactions and transitions in this portfolio' },
+  { name: 'Docker', category: 'devops', tier: 'Basics', icon: SiDocker, context: 'Local containerization of multi-service development stacks' },
+
+  // Exploring (actively learning)
+  { name: 'Python', category: 'backend', tier: 'Exploring', icon: SiPython, context: 'Scripting and evaluation routines for AI datasets' },
 ];
 
 const TABS: { id: Category; label: string }[] = [
@@ -74,7 +74,7 @@ const TABS: { id: Category; label: string }[] = [
   { id: 'frontend', label: 'Frontend' },
   { id: 'databases', label: 'Databases & Storage' },
   { id: 'devops', label: 'DevOps & Tooling' },
-  { id: 'exploring', label: 'Exploring' },
+  { id: 'basics_exploring', label: 'Basics & Exploring' },
 ];
 
 export default function Skills() {
@@ -85,7 +85,9 @@ export default function Skills() {
     activeTab === 'all'
       ? STACK_DATA
       : STACK_DATA.filter((item) =>
-          activeTab === 'exploring' ? item.tier === 'Exploring' : item.category === activeTab
+          activeTab === 'basics_exploring'
+            ? item.tier === 'Basics' || item.tier === 'Exploring'
+            : item.category === activeTab
         );
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
@@ -182,6 +184,8 @@ export default function Skills() {
                         ? 'border-[--accent] text-[--accent] bg-[--accent-dim] font-semibold'
                         : item.tier === 'Working'
                         ? 'border-[--border-hairline] text-[--text-secondary] bg-[--bg-surface-2]'
+                        : item.tier === 'Basics'
+                        ? 'border-[--border-hairline] text-[--text-tertiary] bg-[--bg-surface-2]'
                         : 'border-dashed border-[--border-hairline] text-[--text-tertiary] bg-[--bg-surface-3]'
                     }`}
                   >

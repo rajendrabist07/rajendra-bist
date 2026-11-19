@@ -19,7 +19,7 @@ import ChatAgent from "@/components/sections/ChatAgent";
 export default function HomePage() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[--bg-void] text-[--text-primary]">
+      <div className="relative min-h-screen bg-[--bg-page] text-[--text-primary]">
         {/* Top Viewport Scroll Progress Bar */}
         <ScrollProgress />
 

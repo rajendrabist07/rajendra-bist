@@ -122,12 +122,12 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="surface-panel rounded-2xl p-6 shadow-2xl sm:p-8 border border-[--border-strong] bg-[--bg-surface-2]"
           >
-            <div className="flex items-center justify-between border-b border-[--border-subtle] pb-4 font-mono text-xs">
+            <div className="flex items-center justify-between border-b border-[--border-hairline] pb-4 font-mono text-xs">
               <span className="font-bold text-[--text-primary]">
                 Send a message
               </span>
-              <span className="text-[--accent-cool] flex items-center gap-1.5 text-[11px]">
-                <span className="h-2 w-2 rounded-full bg-[--accent-cool] animate-pulse" />
+              <span className="text-[--status-live] flex items-center gap-1.5 text-[11px]">
+                <span className="h-2 w-2 rounded-full bg-[--status-live] animate-pulse" />
                 Available for roles
               </span>
             </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                   name="name"
                   value={form.name}
                   onChange={(e) => updateField("name", e.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-[--border-subtle] bg-[--bg-surface] px-4 py-3.5 text-sm text-[--text-primary] outline-none transition-all duration-200 placeholder:text-[--text-tertiary] focus:border-[--accent-warm] focus:ring-1 focus:ring-[--accent-warm]"
+                  className="mt-1.5 w-full rounded-xl border border-[--border-hairline] bg-[--bg-surface-1] px-4 py-3.5 text-sm text-[--text-primary] outline-none transition-all duration-200 placeholder:text-[--text-tertiary] focus:border-[--accent] focus:ring-1 focus:ring-[--focus-ring]"
                   placeholder="Your full name"
                   required
                 />
@@ -169,7 +169,7 @@ export default function Contact() {
                   type="email"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-[--border-subtle] bg-[--bg-surface] px-4 py-3.5 text-sm text-[--text-primary] outline-none transition-all duration-200 placeholder:text-[--text-tertiary] focus:border-[--accent-warm] focus:ring-1 focus:ring-[--accent-warm]"
+                  className="mt-1.5 w-full rounded-xl border border-[--border-hairline] bg-[--bg-surface-1] px-4 py-3.5 text-sm text-[--text-primary] outline-none transition-all duration-200 placeholder:text-[--text-tertiary] focus:border-[--accent] focus:ring-1 focus:ring-[--focus-ring]"
                   placeholder="name@company.com"
                   required
                 />
@@ -184,7 +184,7 @@ export default function Contact() {
                   name="message"
                   value={form.message}
                   onChange={(e) => updateField("message", e.target.value)}
-                  className="mt-1.5 min-h-[140px] w-full resize-none rounded-xl border border-[--border-subtle] bg-[--bg-surface] px-4 py-3.5 text-sm text-[--text-primary] outline-none transition-all duration-200 placeholder:text-[--text-tertiary] focus:border-[--accent-warm] focus:ring-1 focus:ring-[--accent-warm]"
+                  className="mt-1.5 min-h-[140px] w-full resize-none rounded-xl border border-[--border-hairline] bg-[--bg-surface-1] px-4 py-3.5 text-sm text-[--text-primary] outline-none transition-all duration-200 placeholder:text-[--text-tertiary] focus:border-[--accent] focus:ring-1 focus:ring-[--focus-ring]"
                   placeholder="Outline the role, architecture challenge, or engineering proposal..."
                   required
                 />
@@ -194,7 +194,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="premium-button-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-mono text-xs font-semibold cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--accent-warm]"
+              className="premium-button-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-mono text-xs font-semibold cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
             >
               <Send size={15} />
               {status === "sending"
@@ -208,8 +208,8 @@ export default function Contact() {
                 aria-live="polite"
                 className={`mt-3 flex items-center gap-2 font-mono text-xs ${
                   status === "success"
-                    ? "text-[--accent-cool]"
-                    : "text-[--danger]"
+                    ? "text-[--status-live]"
+                    : "text-[--text-secondary]"
                 }`}
               >
                 {status === "success" ? (
@@ -236,7 +236,7 @@ export default function Contact() {
                     className="surface-panel group flex items-center justify-between rounded-xl p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[--border-strong]"
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
-                      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[--bg-surface-2] border border-[--border-subtle] text-[--accent-warm] transition-colors group-hover:border-[--accent-warm]">
+                      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[--bg-surface-2] border border-[--border-hairline] text-[--accent] transition-colors group-hover:border-[--accent]">
                         <Icon size={17} />
                       </span>
                       <div className="min-w-0">
@@ -250,7 +250,7 @@ export default function Contact() {
                     </div>
                     <ArrowUpRight
                       size={15}
-                      className="text-[--text-tertiary] transition-colors group-hover:text-[--accent-warm]"
+                      className="text-[--text-tertiary] transition-colors group-hover:text-[--accent]"
                     />
                   </a>
                 );
@@ -260,9 +260,9 @@ export default function Contact() {
             <a
               href={PERSONAL.resumeUrl}
               download="Rajendra-Bist-Resume.pdf"
-              className="premium-button-secondary mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-semibold transition-all duration-200 hover:border-[--accent-warm]"
+              className="premium-button-secondary mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-semibold transition-all duration-200 hover:border-[--accent]"
             >
-              <Download size={15} className="text-[--accent-warm]" />
+              <Download size={15} className="text-[--accent]" />
               Download Full Curriculum Vitae (PDF)
             </a>
           </div>
