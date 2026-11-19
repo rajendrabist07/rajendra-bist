@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function ProjectsIndexPage() {
   return (
-    <main className="min-h-screen bg-[--bg-page] py-28 sm:py-36 text-[--text-primary]">
+    <main id="main-content" className="min-h-screen bg-[--bg-page] py-28 sm:py-36 text-[--text-primary]">
       <Container>
         <Link
           href="/"
@@ -67,6 +67,7 @@ export default function ProjectsIndexPage() {
 
               <div className="mt-6 pt-4 border-t border-[--border-hairline] flex items-center justify-between font-mono text-xs text-[--accent]">
                 <span>Read case file</span>
+                <span className="sr-only">: {study.title}</span>
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </div>
             </Link>

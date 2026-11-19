@@ -330,9 +330,9 @@ export default function Skills() {
                   </span>
                 </div>
 
-                <h4 className="text-sm font-bold text-[--text-primary] tracking-tight">
+                <h3 className="text-sm font-bold text-[--text-primary] tracking-tight">
                   {item.name}
-                </h4>
+                </h3>
 
                 {item.context ? (
                   <p className="mt-1 text-xs text-[--text-secondary] leading-relaxed line-clamp-2">

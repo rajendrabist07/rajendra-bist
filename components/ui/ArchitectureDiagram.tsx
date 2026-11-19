@@ -170,7 +170,6 @@ export default function ArchitectureDiagram({
                 transform={`translate(${pos.x}, ${pos.y})`}
                 tabIndex={0}
                 role="button"
-                aria-label={`${node.label}: ${node.sublabel}`}
                 onMouseEnter={() => setActiveNodeId(node.id)}
                 onMouseLeave={() => setActiveNodeId(null)}
                 onFocus={() => setActiveNodeId(node.id)}

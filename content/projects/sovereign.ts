@@ -11,7 +11,7 @@ export const SOVEREIGN_PROJECT: CaseFileProject = {
   summary:
     'A multi-tenant B2B SaaS platform in a Turborepo monorepo where organizations define autonomous AI workflow agents with PostgreSQL Row-Level Security tenant isolation and Inngest durable orchestration.',
   problem:
-    'Multi-tenant AI SaaS platforms often rely on leaky application-level tenant filters and fragile, stateless LLM executions that fail silently or leak confidential data across organizational boundaries.',
+    'Multi-tenant AI agent platforms require strict tenant isolation and durable execution to prevent cross-tenant data exposure and lost execution state during background runs.',
   constraints: [
     'Tenant isolation must be mathematically guaranteed at the database layer with PostgreSQL RLS.',
     'Agent workflows must be durable, resumable, and support human-in-the-loop approvals before high-risk actions.',

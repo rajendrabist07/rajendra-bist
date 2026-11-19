@@ -57,7 +57,7 @@ export default function CaseFile({ project }: CaseFileProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] text-[--text-primary] hover:border-[--border-strong] hover:text-[--accent] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
-              aria-label={`Open live service for ${project.title}`}
+              aria-label={`Live Site for ${project.title}`}
             >
               <span>Live Site</span>
               <ExternalLink size={13} />
@@ -69,7 +69,7 @@ export default function CaseFile({ project }: CaseFileProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] text-[--text-secondary] hover:text-[--text-primary] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
-              aria-label={`View source code for ${project.title}`}
+              aria-label={`Code repository for ${project.title}`}
             >
               <Github size={13} />
               <span>Code</span>
@@ -78,8 +78,10 @@ export default function CaseFile({ project }: CaseFileProps) {
           <Link
             href={project.links.caseStudy}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] bg-[--accent] text-[--accent-ink] font-semibold hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+            aria-label={`Case study: ${project.title}`}
           >
             <span>Case Study</span>
+            <span className="sr-only">: {project.title}</span>
             <ArrowRight size={13} />
           </Link>
         </div>

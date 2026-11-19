@@ -5,6 +5,7 @@ node_modules
 dist
 .vscode
 .lighthouseci
+.lighthouseci-desktop
 test-results
 playwright-report
 *.tsbuildinfo

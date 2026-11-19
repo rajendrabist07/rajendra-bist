@@ -161,21 +161,21 @@ export default function Hero() {
                   <picture>
                     <source
                       media="(max-width: 640px)"
-                      srcSet="/images/rajendra-bist-portrait-sm.avif"
-                      type="image/avif"
-                    />
-                    <source
-                      media="(max-width: 640px)"
                       srcSet="/images/rajendra-bist-portrait-sm.webp"
                       type="image/webp"
                     />
                     <source
-                      srcSet="/images/rajendra-bist-portrait.avif"
+                      srcSet="/images/rajendra-bist-portrait.webp"
+                      type="image/webp"
+                    />
+                    <source
+                      media="(max-width: 640px)"
+                      srcSet="/images/rajendra-bist-portrait-sm.avif"
                       type="image/avif"
                     />
                     <source
-                      srcSet="/images/rajendra-bist-portrait.webp"
-                      type="image/webp"
+                      srcSet="/images/rajendra-bist-portrait.avif"
+                      type="image/avif"
                     />
                     <img
                       src="/images/rajendra-bist-portrait.webp"
@@ -183,6 +183,7 @@ export default function Hero() {
                       width={400}
                       height={500}
                       loading="eager"
+                      fetchPriority="high"
                       decoding="async"
                       className="w-full h-full object-cover object-top"
                     />

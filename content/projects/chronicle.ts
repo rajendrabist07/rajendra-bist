@@ -11,7 +11,7 @@ export const CHRONICLE_PROJECT: CaseFileProject = {
   summary:
     'A two-service technical publishing platform combining server-rendered public pages, email-verified accounts, boot-time Prisma migrations, and schema-validated Gemini AI writing assistance.',
   problem:
-    'Publishing apps with AI features usually trust model output blindly and skip operational basics: verified accounts, transactional email, crawlable rendering, and migration-safe deploys.',
+    'Technical publishing platforms require verified accounts, abuse resistance, schema-validated AI tooling, and server-rendered public pages to maintain editorial trust and search visibility.',
   constraints: [
     'Free-tier hosting requires resilient cold-start handling and boot-time migrations.',
     'LLM structured outputs can be malformed and must be schema-validated before reaching the editor.',

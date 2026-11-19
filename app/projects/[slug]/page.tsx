@@ -70,13 +70,12 @@ export default async function CaseStudyPage({
   const jsonLd = [
     {
       '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
+      '@type': 'SoftwareSourceCode',
       name: study.title,
       description: study.headline,
-      applicationCategory: 'DeveloperApplication',
-      operatingSystem: 'Web',
       url: study.links.live || undefined,
       codeRepository: study.links.code || undefined,
+      programmingLanguage: 'TypeScript',
       author: {
         '@type': 'Person',
         name: 'Rajendra Bist',
@@ -110,10 +109,10 @@ export default async function CaseStudyPage({
   ];
 
   return (
-    <main className="min-h-screen bg-[--bg-page] py-28 sm:py-36 text-[--text-primary]">
+    <main id="main-content" className="min-h-screen bg-[--bg-page] py-28 sm:py-36 text-[--text-primary]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <Container className="max-w-4xl">
         {/* Navigation & Header */}

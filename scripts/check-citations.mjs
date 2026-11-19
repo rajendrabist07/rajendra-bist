@@ -10,6 +10,11 @@ const STATIC_CITATIONS = [
   'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/packages/db/prisma/migrations/20261010104804_audit_log_revoke_update_delete/migration.sql',
   'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/app/(app)/approvals/page.tsx',
   'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/package.json',
+  'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/tsconfig.json',
+  'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/inngest/run-workflow.ts',
+  'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/inngest/client.ts',
+  'https://raw.githubusercontent.com/rajendrabist07/sovereign/main/packages/db/package.json',
+  'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json',
   'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/lib/agent/router.ts',
   'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/lib/validation/schemas.ts',
   'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/evals/run-eval.ts',
@@ -18,7 +23,10 @@ const STATIC_CITATIONS = [
   'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/__tests__/validation.test.ts',
   'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/.github/workflows/ci.yml',
   'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/app/components/reading/AskThisArticle.tsx',
-  'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/app/components/editor/MarkdownEditor.tsx'
+  'https://raw.githubusercontent.com/rajendrabist07/chronicle/main/app/components/editor/MarkdownEditor.tsx',
+  'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/Dockerfile',
+  'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/docker-compose.yml',
+  'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json',
 ];
 
 async function checkUrl(url, retries = 3) {

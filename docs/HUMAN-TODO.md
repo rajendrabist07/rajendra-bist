@@ -26,3 +26,9 @@ Manual actions and optional owner inputs. These cannot be automated.
 
 - [ ] Verify `bistrajendra.com.np` in Google Search Console.
 - [ ] Submit sitemap: `https://www.bistrajendra.com.np/sitemap.xml`. (Note: `/dev/design` is excluded from sitemap and tagged `noindex, nofollow`).
+
+## Case Study Problem Statements (Needs Owner Confirmation)
+
+- [ ] **Sovereign**: Confirm problem statement: "Multi-tenant AI agent platforms require strict tenant isolation and durable execution to prevent cross-tenant data exposure and lost execution state during background runs."
+- [ ] **DevGuard AI**: Confirm problem statement: "Automated code review relying solely on single-shot LLM prompts on raw diffs produces unverified comments. Collecting deterministic static analysis, AST linting, and dependency vulnerability scans prior to inference grounds findings in concrete repository evidence."
+- [ ] **Chronicle**: Confirm problem statement: "Technical publishing platforms require verified accounts, abuse resistance, schema-validated AI tooling, and server-rendered public pages to maintain editorial trust and search visibility."

@@ -103,10 +103,10 @@ export default async function BlogPostPage({
   ];
 
   return (
-    <main className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">
+    <main id="main-content" className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <Container className="max-w-3xl">
         <Link

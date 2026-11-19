@@ -94,7 +94,6 @@ export default function Navbar() {
           href="#home"
           onClick={handleAnchorClick('#home')}
           className="group flex items-center gap-2.5 font-mono text-sm font-bold tracking-tight text-[--text-primary] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] rounded-[--radius-control] p-1"
-          aria-label="Rajendra Bist - Home"
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-[--radius-control] border border-[--accent] bg-[--accent-dim] text-xs font-bold text-[--accent] transition-transform group-hover:scale-105">
             RB
@@ -142,12 +141,12 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => openCommandPalette('search')}
-            aria-label="Open Command Palette"
             className="flex items-center gap-2 px-2.5 py-1.5 font-mono text-xs text-[--text-secondary] bg-[--bg-surface-2] border border-[--border-hairline] hover:border-[--border-strong] hover:text-[--text-primary] rounded-[--radius-control] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
           >
             <Icon name="terminal" size={13} className="text-[--accent]" />
             <span className="hidden md:inline text-[11px]">Search</span>
-            <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded border border-[--border-hairline] bg-[--bg-surface-3] text-[10px] text-[--text-tertiary]">
+            <span className="md:hidden sr-only">Search</span>
+            <kbd aria-hidden="true" className="hidden sm:inline-block px-1.5 py-0.5 rounded border border-[--border-hairline] bg-[--bg-surface-3] text-[10px] text-[--text-tertiary]">
               {platformKey}
             </kbd>
           </button>
@@ -171,7 +170,7 @@ export default function Navbar() {
             aria-controls="mobile-nav-menu"
             className="lg:hidden p-2 text-[--text-secondary] hover:text-[--text-primary] border border-[--border-hairline] bg-[--bg-surface-2] rounded-[--radius-control] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] cursor-pointer"
           >
-            {isOpen ? '✕' : '☰'}
+            <span aria-hidden="true">{isOpen ? '✕' : '☰'}</span>
           </button>
         </div>
       </div>

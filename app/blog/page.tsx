@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">
+    <main id="main-content" className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">
       <Container>
         <Link
           href="/"

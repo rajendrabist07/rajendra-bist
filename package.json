@@ -42,6 +42,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.51.1",
     "@tailwindcss/postcss": "4.3.0",

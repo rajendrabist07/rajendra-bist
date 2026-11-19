@@ -297,7 +297,7 @@ export default function Contact() {
 
             {/* Privacy & Retention Disclosure */}
             <p className="mt-3 text-[11px] text-[--text-tertiary] text-center sm:text-left">
-              Messages submitted through this form are retained for 90 days for response routing and never shared with third parties.
+              I keep messages for 90 days, then they are deleted automatically.
             </p>
           </form>
 

@@ -10,8 +10,11 @@ import React, { useEffect, useRef, useState } from 'react';
 export default function HeroSvgTrace() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
     // 1. Reduced motion check
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (motionQuery.matches) {
@@ -48,6 +51,8 @@ export default function HeroSvgTrace() {
       observer?.disconnect();
     };
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <div

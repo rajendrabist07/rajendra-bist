@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
-import type { Person, WebSite, ProfilePage, SoftwareApplication, BlogPosting, BreadcrumbList } from 'schema-dts';
+import type { Person, WebSite, ProfilePage, SoftwareSourceCode, BlogPosting, BreadcrumbList } from 'schema-dts';
 import sitemap from '../app/sitemap';
 import robots from '../app/robots';
 import { SITE_URL } from '../lib/site-config';
@@ -34,21 +34,21 @@ const PUBLIC_ROUTES: RouteSeoExpectation[] = [
     file: 'projects/sovereign.html',
     expectedH1: 'Sovereign',
     expectedCanonical: `${SITE_URL}/projects/sovereign`,
-    expectedTypes: ['SoftwareApplication', 'BreadcrumbList'],
+    expectedTypes: ['SoftwareSourceCode', 'BreadcrumbList'],
   },
   {
     route: '/projects/devguard-ai',
     file: 'projects/devguard-ai.html',
     expectedH1: 'DevGuard AI',
     expectedCanonical: `${SITE_URL}/projects/devguard-ai`,
-    expectedTypes: ['SoftwareApplication', 'BreadcrumbList'],
+    expectedTypes: ['SoftwareSourceCode', 'BreadcrumbList'],
   },
   {
     route: '/projects/chronicle',
     file: 'projects/chronicle.html',
     expectedH1: 'Chronicle',
     expectedCanonical: `${SITE_URL}/projects/chronicle`,
-    expectedTypes: ['SoftwareApplication', 'BreadcrumbList'],
+    expectedTypes: ['SoftwareSourceCode', 'BreadcrumbList'],
   },
   {
     route: '/blog',

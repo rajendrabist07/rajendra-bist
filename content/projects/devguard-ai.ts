@@ -11,7 +11,7 @@ export const DEVGUARD_PROJECT: CaseFileProject = {
   summary:
     'An autonomous GitHub review agent combining deterministic AST security linting, OSV.dev CVE database checks, and a 3-tier model router to produce verified pull request feedback.',
   problem:
-    'LLM-only code review produces plausible but unverifiable comments with high hallucination rates. The review flow needed deterministic evidence collection before triggering model inference.',
+    'Automated code review relying solely on single-shot LLM prompts on raw diffs produces unverified comments. Collecting deterministic static analysis, AST linting, and dependency vulnerability scans prior to inference grounds findings in concrete repository evidence.',
   constraints: [
     'GitHub webhook delivery must be verified with HMAC SHA-256 signatures.',
     'External model providers can rate-limit or fail, requiring resilient multi-provider fallback.',

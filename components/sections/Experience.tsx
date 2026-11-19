@@ -87,10 +87,10 @@ export default function Experience() {
 
           {/* Lane 1: Building */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--accent] font-semibold uppercase tracking-wider">
+            <h3 className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--accent] font-semibold uppercase tracking-wider">
               <Hammer size={15} />
               <span>Building · Shipped Software</span>
-            </div>
+            </h3>
 
             <div className="space-y-4">
               {BUILDING_MILESTONES.map((item) => (
@@ -141,10 +141,10 @@ export default function Experience() {
 
           {/* Lane 2: Learning */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--text-secondary] font-semibold uppercase tracking-wider">
+            <h3 className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--text-secondary] font-semibold uppercase tracking-wider">
               <GraduationCap size={15} className="text-[--accent]" />
               <span>Learning · Education & Training</span>
-            </div>
+            </h3>
 
             <div className="space-y-4">
               {LEARNING_MILESTONES.map((item) => (

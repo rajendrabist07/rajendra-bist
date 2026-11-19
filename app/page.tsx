@@ -17,7 +17,7 @@ const Contact = dynamic(() => import("@/components/sections/Contact"));
 export default function HomePage() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[--bg-page] text-[--text-primary]">
+      <div className="relative min-h-screen bg-[--bg-page] text-[--text-primary] overflow-x-clip">
         {/* Top Viewport Scroll Progress Bar */}
         <ScrollProgress />
 

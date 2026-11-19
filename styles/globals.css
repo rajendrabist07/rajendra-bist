@@ -40,11 +40,13 @@ html {
   scroll-padding-top: 5rem;
   background-color: var(--bg-page);
   color-scheme: dark;
+  overflow-x: clip;
 }
 
 body {
   background: var(--bg-page);
   color: var(--text-primary);
+  overflow-x: clip;
   font-family:
     var(--font-sans),
     system-ui,
@@ -346,8 +348,8 @@ html.lenis body {
 
 /* Card & Surface Panels */
 .surface-panel {
-  background: rgba(11, 13, 17, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-hairline);
   box-shadow:
     0 12px 40px -8px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(255, 255, 255, 0.03);
