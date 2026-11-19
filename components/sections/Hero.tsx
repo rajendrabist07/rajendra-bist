@@ -158,15 +158,35 @@ export default function Hero() {
             >
               <CropMarks size={18}>
                 <div className="relative aspect-[4/5] w-full rounded-[--radius-control] overflow-hidden border border-[--border-hairline] bg-[--bg-surface-2] shadow-[0_0_32px_var(--accent-dim)]">
-                  <Image
-                    src="/images/rajendra-bist-portrait.webp"
-                    alt="Rajendra Bist - Full-Stack Developer & Backend Engineer"
-                    width={400}
-                    height={500}
-                    priority
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 380px, 400px"
-                    className="w-full h-full object-cover object-top"
-                  />
+                  <picture>
+                    <source
+                      media="(max-width: 640px)"
+                      srcSet="/images/rajendra-bist-portrait-sm.avif"
+                      type="image/avif"
+                    />
+                    <source
+                      media="(max-width: 640px)"
+                      srcSet="/images/rajendra-bist-portrait-sm.webp"
+                      type="image/webp"
+                    />
+                    <source
+                      srcSet="/images/rajendra-bist-portrait.avif"
+                      type="image/avif"
+                    />
+                    <source
+                      srcSet="/images/rajendra-bist-portrait.webp"
+                      type="image/webp"
+                    />
+                    <img
+                      src="/images/rajendra-bist-portrait.webp"
+                      alt="Rajendra Bist - Full-Stack Developer & Backend Engineer"
+                      width={400}
+                      height={500}
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </picture>
 
                   {/* Two real-data annotation chips */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">

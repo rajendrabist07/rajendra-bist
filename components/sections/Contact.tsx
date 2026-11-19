@@ -130,7 +130,7 @@ export default function Contact() {
         <SectionHeader
           eyebrow="Contact · Direct Inquiries"
           title="Send a role or a problem."
-          description="Available for full-time backend and full-stack software engineering roles (Delhi NCR & Remote). Standard response within 24 business hours."
+          description="Available for full-time backend and full-stack software engineering roles (Delhi NCR & Remote)."
         />
 
         {/* Availability & Timezone Badges */}

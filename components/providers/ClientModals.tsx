@@ -1,8 +1,8 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import CommandPalette from '@/components/ui/CommandPalette';
 
-const CommandPalette = dynamic(() => import('@/components/ui/CommandPalette'), { ssr: false });
 const FloatingAskAI = dynamic(() => import('@/components/ui/FloatingAskAI'), { ssr: false });
 const ChatAgent = dynamic(() => import('@/components/sections/ChatAgent'), { ssr: false });
 

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 import { PERSONAL } from '@/lib/portfolio-data';
@@ -21,6 +19,11 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
+  const buildDate = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    year: 'numeric',
+  }).format(new Date());
+
   return (
     <footer className="relative overflow-hidden bg-[--bg-page] py-16 font-mono text-xs text-[--text-secondary] border-t border-[--border-hairline]">
       <Container className="relative z-10">
@@ -98,7 +101,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4 text-[11px] text-[--text-tertiary] md:flex-row md:items-center md:justify-between">
           <p>© 2026 Rajendra Bist. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <span>Last updated: Nov 2026</span>
+            <span>Last updated: {buildDate}</span>
             <a
               href="#home"
               className="inline-flex items-center gap-1 text-[--text-secondary] transition-colors hover:text-[--accent] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[--focus-ring]"

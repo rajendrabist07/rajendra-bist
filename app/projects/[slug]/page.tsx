@@ -240,7 +240,7 @@ export default async function CaseStudyPage({
         {study.screenshot && (
           <section className="mt-12">
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4">
-              Production Deployment Capture
+              Live Capture
             </h2>
             <CropMarks size={14}>
               <div className="overflow-hidden rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-2]">

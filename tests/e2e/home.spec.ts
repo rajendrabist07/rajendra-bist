@@ -18,7 +18,7 @@ test.describe('Portfolio Critical End-to-End User Journeys', () => {
     const searchBtn = page.getByLabel('Open Command Palette')
     await expect(searchBtn).toBeVisible()
     await searchBtn.click()
-    await expect(page.locator('[cmdk-root]')).toBeVisible()
+    await expect(page.locator('div[role="dialog"]')).toBeVisible()
     await expect(page.locator('[cmdk-input]')).toBeVisible()
   })
 

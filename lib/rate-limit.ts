@@ -1,5 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
+import { createHash } from 'node:crypto'
 
 type LocalLimit = { count: number; resetAt: number }
 
@@ -9,6 +10,14 @@ const hasUpstash = Boolean(
 )
 const redis = hasUpstash ? Redis.fromEnv() : null
 const limiters = new Map<string, Ratelimit>()
+
+export function hashIdentifier(id: string): string {
+  return createHash('sha256').update(id || 'unknown').digest('hex').slice(0, 32)
+}
+
+export function resetLocalRateLimits(): void {
+  localLimits.clear()
+}
 
 function getLimiter(limit: number, window: `${number} ${'m' | 'h' | 'd'}`) {
   const key = `${limit}:${window}`
@@ -31,7 +40,8 @@ export async function checkRateLimit(
   limit: number,
   window: `${number} ${'m' | 'h' | 'd'}`,
 ) {
-  const key = `${namespace}:${identifier}`
+  const hashedId = hashIdentifier(identifier)
+  const key = `${namespace}:${hashedId}`
 
   if (redis) {
     const result = await getLimiter(limit, window).limit(key)

@@ -4,6 +4,7 @@ import BlueprintBackground from "@/components/ui/BlueprintBackground";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
+import Footer from "@/components/Footer";
 import ClientModals from "@/components/providers/ClientModals";
 
 const About = dynamic(() => import("@/components/sections/About"));
@@ -12,7 +13,6 @@ const Skills = dynamic(() => import("@/components/sections/Skills"));
 const Experience = dynamic(() => import("@/components/sections/Experience"));
 const Credentials = dynamic(() => import("@/components/sections/Credentials"));
 const Contact = dynamic(() => import("@/components/sections/Contact"));
-const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function HomePage() {
   return (

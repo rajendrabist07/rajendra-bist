@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import {
   Container,
   Section,
@@ -31,6 +32,10 @@ export const metadata: Metadata = {
 };
 
 export default function DevDesignPage() {
+  if (process.env.VERCEL_ENV === 'production') {
+    notFound();
+  }
+
   const sampleCode = `-- PostgreSQL Row-Level Security Policy
 ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
 FORCE ROW LEVEL SECURITY;

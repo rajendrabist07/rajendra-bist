@@ -71,7 +71,7 @@ test.describe('Phase 5 Contact Hub, Footer, Case Studies, and Notes', () => {
     await page.goto('/projects/devguard-ai');
     await page.waitForLoadState('networkidle');
     await expect(page.getByRole('heading', { name: 'DevGuard AI', exact: true })).toBeVisible();
-    await expect(page.getByText('Production Deployment Capture')).toBeVisible();
+    await expect(page.getByText('Live Capture')).toBeVisible();
 
     // 5. Blog and RSS
     await page.goto('/blog');

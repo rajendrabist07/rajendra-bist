@@ -29,4 +29,8 @@ await base.clone().webp({ quality: 85 }).toFile('public/images/rajendra-bist-por
 // Output 4:5 AVIF
 await base.clone().avif({ quality: 80 }).toFile('public/images/rajendra-bist-portrait.avif');
 
+// Output Mobile 380x475 derivatives
+await base.clone().resize(380, 475).webp({ quality: 80 }).toFile('public/images/rajendra-bist-portrait-sm.webp');
+await base.clone().resize(380, 475).avif({ quality: 75 }).toFile('public/images/rajendra-bist-portrait-sm.avif');
+
 console.log('Derivatives generated successfully.');

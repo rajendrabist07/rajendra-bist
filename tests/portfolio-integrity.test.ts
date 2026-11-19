@@ -142,6 +142,7 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
         .filter(Boolean)
         .join(' ')
       const wordCount = text.trim().split(/\s+/).length
+      console.log(`REAL_WORD_COUNT: [${project.slug}] ${project.title}: ${wordCount} words`)
       expect(wordCount).toBeLessThanOrEqual(700)
       expect(wordCount).toBeGreaterThan(100)
     }

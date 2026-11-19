@@ -312,6 +312,20 @@ export default function RootLayout({
     <html lang="en" className={`${displayFont.variable} ${monoFont.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/rajendra-bist-portrait-sm.webp"
+          type="image/webp"
+          media="(max-width: 640px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/rajendra-bist-portrait.webp"
+          type="image/webp"
+          media="(min-width: 641px)"
+        />
         <meta name="author" content={PERSONAL.name} />
         <meta name="format-detection" content="telephone=no" />
         <link rel="manifest" href="/manifest.json" />
