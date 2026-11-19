@@ -1,12 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { BLOG_POSTS } from "@/lib/blog";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Engineering Notes",
-  description: "Engineering notes on backend systems, architecture, and applied AI.",
+  description: "Engineering notes on backend systems, database architecture, and applied AI by Rajendra Bist.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Engineering Notes | Rajendra Bist",
+    description: "Engineering notes on backend systems, database architecture, and applied AI by Rajendra Bist.",
+    url: "https://www.bistrajendra.com.np/blog",
+    locale: "en_IN",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Rajendra Bist Engineering Notes" }],
+  },
 };
 
 export default function BlogPage() {

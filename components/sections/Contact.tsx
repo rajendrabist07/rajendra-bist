@@ -294,6 +294,11 @@ export default function Contact() {
                 <span>Download resume (PDF)</span>
               </a>
             </div>
+
+            {/* Privacy & Retention Disclosure */}
+            <p className="mt-3 text-[11px] text-[--text-tertiary] text-center sm:text-left">
+              Messages submitted through this form are retained for 90 days for response routing and never shared with third parties.
+            </p>
           </form>
 
           {/* Right Column: Direct Contact Hub Cards */}

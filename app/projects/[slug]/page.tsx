@@ -29,16 +29,31 @@ export async function generateMetadata({
   const study = getProjectBySlug(slug);
   if (!study) return {};
 
-  const description = study.summary || study.headline;
+  const description = study.headline;
   return {
-    title: `${study.title} | Architecture Case Study`,
-    description: description.slice(0, 155),
+    title: `${study.title} Case Study`,
+    description,
     alternates: { canonical: `/projects/${slug}` },
     openGraph: {
-      title: `${study.title} — Architecture Case Study`,
-      description: description.slice(0, 155),
+      title: `${study.title} Case Study | Rajendra Bist`,
+      description,
       url: `/projects/${slug}`,
       type: 'article',
+      locale: 'en_IN',
+      images: [
+        {
+          url: '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: `${study.title} Architecture Case Study — Rajendra Bist`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${study.title} Case Study | Rajendra Bist`,
+      description,
+      images: ['/opengraph-image'],
     },
   };
 }
@@ -52,21 +67,47 @@ export default async function CaseStudyPage({
   const study = getProjectBySlug(slug);
   if (!study) notFound();
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: study.title,
-    description: study.summary || study.headline,
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Web',
-    url: study.links.live || undefined,
-    codeRepository: study.links.code || undefined,
-    author: {
-      '@type': 'Person',
-      name: 'Rajendra Bist',
-      url: 'https://www.bistrajendra.com.np',
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: study.title,
+      description: study.headline,
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Web',
+      url: study.links.live || undefined,
+      codeRepository: study.links.code || undefined,
+      author: {
+        '@type': 'Person',
+        name: 'Rajendra Bist',
+        url: 'https://www.bistrajendra.com.np',
+      },
     },
-  };
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.bistrajendra.com.np',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Case Files',
+          item: 'https://www.bistrajendra.com.np/projects',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: `${study.title} Case Study`,
+          item: `https://www.bistrajendra.com.np/projects/${slug}`,
+        },
+      ],
+    },
+  ];
 
   return (
     <main className="min-h-screen bg-[--bg-page] py-28 sm:py-36 text-[--text-primary]">

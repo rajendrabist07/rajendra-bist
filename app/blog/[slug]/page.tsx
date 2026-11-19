@@ -17,13 +17,36 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = BLOG_POSTS.find((item) => item.slug === slug);
-  return post
-    ? {
-        title: post.title,
-        description: post.description,
-        alternates: { canonical: `/blog/${slug}` },
-      }
-    : {};
+  if (!post) return {};
+
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title: `${post.title} | Rajendra Bist`,
+      description: post.description,
+      url: `/blog/${slug}`,
+      type: "article",
+      locale: "en_IN",
+      publishedTime: post.date,
+      authors: ["Rajendra Bist"],
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: `${post.title} — Engineering Note by Rajendra Bist`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | Rajendra Bist`,
+      description: post.description,
+      images: ["/opengraph-image"],
+    },
+  };
 }
 
 export default async function BlogPostPage({
@@ -36,22 +59,48 @@ export default async function BlogPostPage({
   if (!post) notFound();
   const html = await renderBlogPost(slug);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    author: {
-      "@type": "Person",
-      name: "Rajendra Bist",
-      url: "https://www.bistrajendra.com.np",
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      author: {
+        "@type": "Person",
+        name: "Rajendra Bist",
+        url: "https://www.bistrajendra.com.np",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Rajendra Bist",
+      },
     },
-    publisher: {
-      "@type": "Person",
-      name: "Rajendra Bist",
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.bistrajendra.com.np",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Engineering Notes",
+          item: "https://www.bistrajendra.com.np/blog",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+          item: `https://www.bistrajendra.com.np/blog/${slug}`,
+        },
+      ],
     },
-  };
+  ];
 
   return (
     <main className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">

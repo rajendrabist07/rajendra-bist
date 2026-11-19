@@ -16,18 +16,18 @@ X-Frame-Options: DENY
 X-Content-Type-Options: nosniff
 Referrer-Policy: strict-origin-when-cross-origin
 Permissions-Policy: camera=(), microphone=(), geolocation=()
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://generativelanguage.googleapis.com https://api.resend.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+Strict-Transport-Security: max-age=63072000
+Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://generativelanguage.googleapis.com https://api.resend.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;
 ```
 
 ---
 
-## 2. Policy Directives Breakdown
+## 2. Policy Directives & Architectural Trade-offs
 
-| Directive | Value | Rationale |
+| Directive | Value | Architectural Rationale & Trade-off Notes |
 |---|---|---|
 | `default-src` | `'self'` | Disallows loading resources from arbitrary third-party origins by default. |
-| `script-src` | `'self' 'unsafe-inline' 'unsafe-eval'` | Permits Next.js client runtime hydration and Shiki syntax highlighting while restricting external untrusted scripts. |
+| `script-src` | `'self' 'unsafe-inline'` | **Removed `'unsafe-eval'`** as it is unneeded in production. **Accepts `'unsafe-inline'`** because implementing per-request cryptographic nonces would force dynamic SSR on every request, completely disabling static HTML generation (SSG) and edge CDN caching for the entire portfolio. |
 | `style-src` | `'self' 'unsafe-inline'` | Permits Tailwind CSS utility classes and Next.js font/style injections. |
 | `img-src` | `'self' data: blob: https:` | Permits local optimized WebP/AVIF images, inline SVG data URIs, and external project previews. |
 | `font-src` | `'self' data:` | Allows local Space Grotesk and JetBrains Mono fonts. |
@@ -36,50 +36,18 @@ Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsa
 | `frame-ancestors` | `'none'` | Completely disables iframe embedding, eliminating clickjacking attack vectors (paired with `X-Frame-Options: DENY`). |
 | `base-uri` | `'self'` | Disallows DOM-based `<base>` tag injection attacks. |
 | `form-action` | `'self'` | Ensures contact and feedback forms submit strictly to internal same-origin API routes (`/api/contact`). |
+| `upgrade-insecure-requests` | directive enabled | Automatically promotes HTTP requests to HTTPS. |
+
+### Critical Evidence Caveat
+> **Important Note on "No Violations":**  
+> While the automated Playwright test recorded zero `securitypolicyviolation` events during navigation and interaction, reporting "no violations" under a policy permitting `'unsafe-inline'` is **not strong evidence** of absolute XSS immunity. It proves that existing first-party scripts and libraries load without CSP syntax blockage, but defense-in-depth relies on strict server-side Zod validation, text sanitization, and React's default DOM escaping.
 
 ---
 
-## 3. Playwright Violation Monitoring Evidence
+## 3. Strict-Transport-Security (HSTS) Note
 
-In `tests/e2e/phase6-security.spec.ts`, an event listener for `securitypolicyviolation` was attached via `addInitScript` prior to document evaluation.
-
-```ts
-test('3. No CSP violations triggered on home page render', async ({ page }) => {
-  const violations: Array<{ blockedURI: string; violatedDirective: string }> = [];
-  await page.exposeFunction('logCSPViolation', (data) => violations.push(data));
-  await page.addInitScript(() => {
-    document.addEventListener('securitypolicyviolation', (e) => {
-      (window as any).logCSPViolation({
-        blockedURI: e.blockedURI,
-        violatedDirective: e.violatedDirective,
-      });
-    });
-  });
-  await page.goto('/');
-  await page.waitForLoadState('networkidle');
-  expect(violations).toHaveLength(0);
-});
+In accordance with deployment best practices on Vercel, `includeSubDomains` and `preload` were removed from `next.config.ts`, maintaining:
+```http
+Strict-Transport-Security: max-age=63072000
 ```
-
-**Result:** Passed with `0` violations recorded.
-
----
-
-## 4. Production Header Verification (`curl -sI`)
-
-Raw server headers captured from running production instance:
-
-```text
-HTTP/1.1 200 OK
-X-Frame-Options: DENY
-X-Content-Type-Options: nosniff
-Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: camera=(), microphone=(), geolocation=()
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://generativelanguage.googleapis.com https://api.resend.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
-Vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
-x-nextjs-cache: HIT
-x-nextjs-prerender: 1
-Cache-Control: s-maxage=31536000
-Content-Type: text/html; charset=utf-8
-```
+Domain-level subdomains and HSTS preload submission remain governed by Vercel's edge certificate infrastructure.

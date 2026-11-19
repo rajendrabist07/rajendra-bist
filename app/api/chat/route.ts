@@ -18,6 +18,8 @@ function getClientIp(req: NextRequest): string {
   return "127.0.0.1";
 }
 
+import { StreamTagSanitizer } from "@/lib/stream-sanitizer";
+
 function sanitizeText(text: string): string {
   // Strip raw HTML tags to prevent cross-site scripting or unexpected markup in chat renders
   return text.replace(/<[^>]*>/g, "");
@@ -132,13 +134,21 @@ export async function POST(req: NextRequest) {
           let fullResponse = "";
 
           try {
+            const sanitizer = new StreamTagSanitizer();
             for await (const chunk of result.stream) {
               const text = chunk.text();
               if (text) {
-                const sanitized = sanitizeText(text);
-                fullResponse += sanitized;
-                controller.enqueue(encoder.encode(sanitized));
+                const sanitized = sanitizer.processChunk(text);
+                if (sanitized) {
+                  fullResponse += sanitized;
+                  controller.enqueue(encoder.encode(sanitized));
+                }
               }
+            }
+            const trailing = sanitizer.flush();
+            if (trailing) {
+              fullResponse += trailing;
+              controller.enqueue(encoder.encode(trailing));
             }
 
             if (env.MONGODB_URI) {

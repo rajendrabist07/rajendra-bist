@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from 'vitest'
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest'
 import { NextRequest } from 'next/server'
 import { POST } from '../app/api/contact/route'
 import { resetLocalRateLimits } from '../lib/rate-limit'
@@ -6,6 +6,13 @@ import { resetLocalRateLimits } from '../lib/rate-limit'
 describe('Contact API Hardening & Verification', () => {
   beforeEach(() => {
     resetLocalRateLimits()
+    vi.unstubAllEnvs()
+    vi.restoreAllMocks()
+  })
+
+  afterEach(() => {
+    vi.unstubAllEnvs()
+    vi.restoreAllMocks()
   })
 
   function makeRequest(body: Record<string, unknown> | string, headers: Record<string, string> = {}) {
@@ -137,5 +144,67 @@ describe('Contact API Hardening & Verification', () => {
     expect(json.ok).toBe(false)
     expect(json.code).toBe('RATE_LIMITED')
     expect(blockedRes.headers.get('Retry-After')).toBeDefined()
+  })
+
+  it('8. Provider Success: successful email dispatch returns ok: true', async () => {
+    vi.stubEnv('RESEND_API_KEY', 're_test_dummy_key')
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+      new Response(JSON.stringify({ id: 'msg_123' }), { status: 200 }),
+    )
+
+    const req = makeRequest({
+      name: 'Legit Sender',
+      email: 'sender@example.com',
+      message: 'This is a genuine inquiry reaching the twenty character mark.',
+    })
+
+    const res = await POST(req)
+    const json = await res.json()
+    expect(res.status).toBe(200)
+    expect(json.ok).toBe(true)
+    expect(json.code).toBe('SUCCESS')
+    expect(json.message).toBe('Message delivered successfully.')
+    expect(fetchSpy).toHaveBeenCalledTimes(1)
+  })
+
+  it('9. Provider Failure: retries 3 times then returns uniform error without leaking details', async () => {
+    vi.stubEnv('RESEND_API_KEY', 're_test_dummy_key')
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ error: 'Internal Resend Outage', code: 500 }), { status: 500 }),
+    )
+
+    const req = makeRequest({
+      name: 'Retry Sender',
+      email: 'retry@example.com',
+      message: 'This is a genuine inquiry reaching the twenty character mark.',
+    })
+
+    const res = await POST(req)
+    const json = await res.json()
+    expect(res.status).toBe(503)
+    expect(json.ok).toBe(false)
+    expect(json.code).toBe('SERVICE_UNAVAILABLE')
+    expect(json.message).not.toContain('Internal Resend Outage')
+    expect(fetchSpy).toHaveBeenCalledTimes(3)
+  })
+
+  it('10. Provider Retry: succeeds on attempt 2 after transient 500 failure', async () => {
+    vi.stubEnv('RESEND_API_KEY', 're_test_dummy_key')
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(new Response(JSON.stringify({ error: 'Transient error' }), { status: 500 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ id: 'msg_success_retry' }), { status: 200 }))
+
+    const req = makeRequest({
+      name: 'Retry Success Sender',
+      email: 'success_retry@example.com',
+      message: 'This is a genuine inquiry reaching the twenty character mark.',
+    })
+
+    const res = await POST(req)
+    const json = await res.json()
+    expect(res.status).toBe(200)
+    expect(json.ok).toBe(true)
+    expect(json.code).toBe('SUCCESS')
+    expect(fetchSpy).toHaveBeenCalledTimes(2)
   })
 })

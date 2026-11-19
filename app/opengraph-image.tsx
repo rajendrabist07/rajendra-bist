@@ -79,7 +79,7 @@ export default function Image() {
             letterSpacing: '-0.5px',
           }}
         >
-          Backend-First Full-Stack &amp; AI Systems Engineer
+          Full-Stack Developer &amp; Backend Engineer
         </div>
 
         {/* Tagline */}
@@ -93,7 +93,7 @@ export default function Image() {
             lineHeight: 1.5,
           }}
         >
-          Designing and shipping production-oriented full-stack products with typed contracts, database integrity, and bounded AI integrations.
+          Full-stack developer in New Delhi. Next.js, Node.js and PostgreSQL applications from schema to deployment.
         </div>
 
         {/* Tech Stack Pills */}
@@ -107,14 +107,14 @@ export default function Image() {
           }}
         >
           {[
-            'Node.js',
-            'Next.js 15',
             'TypeScript',
-            'PostgreSQL',
-            'Supabase pgvector',
-            'MongoDB',
-            'Groq',
-            'Gemini',
+            'Next.js',
+            'Node.js',
+            'PostgreSQL (RLS)',
+            'Inngest',
+            'Prisma',
+            'Docker',
+            'Zod',
           ].map((tech) => (
             <div
               key={tech}

@@ -52,6 +52,7 @@
     "eslint": "8.57.1",
     "eslint-config-next": "15.5.19",
     "postcss": "8.5.15",
+    "schema-dts": "^2.1.0",
     "shiki": "^4.6.0",
     "tailwindcss": "4.3.0",
     "typescript": "5.9.3",

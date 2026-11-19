@@ -7,6 +7,13 @@ export const metadata = {
   title: "Projects | Rajendra Bist",
   description: "Production system case files, architecture specifications, and verified repository evidence.",
   alternates: { canonical: "/projects" },
+  openGraph: {
+    title: "Projects | Rajendra Bist",
+    description: "Production system case files, architecture specifications, and verified repository evidence.",
+    url: "/projects",
+    locale: "en_IN",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function ProjectsIndexPage() {

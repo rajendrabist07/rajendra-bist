@@ -76,7 +76,7 @@ test.describe('Phase 5 Contact Hub, Footer, Case Studies, and Notes', () => {
     // 5. Blog and RSS
     await page.goto('/blog');
     await page.waitForLoadState('networkidle');
-    await expect(page.getByText('pgvector versus an external vector database')).toBeVisible();
+    await expect(page.getByText('pgvector vs. External Vector Databases')).toBeVisible();
 
     // 6. Capture Phase 5 Snapshots (Contact & Footer in Dark & Light, Desktop & Mobile)
     const shotsDir = path.resolve('docs/shots/phase-5');

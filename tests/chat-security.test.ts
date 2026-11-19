@@ -3,6 +3,7 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { chatRequestSchema, contactRequestSchema } from '../lib/api-schemas';
 import { PORTFOLIO_CONTEXT } from '../lib/portfolio-context';
+import { StreamTagSanitizer } from '../lib/stream-sanitizer';
 
 describe('AI Assistant & API Security Hardening (Adversarial Tests)', () => {
   // Test 1: Extremely long input capping
@@ -94,5 +95,21 @@ describe('AI Assistant & API Security Hardening (Adversarial Tests)', () => {
         expect(content).not.toContain(pattern);
       }
     }
+  });
+
+  // Test 8: Stream tag sanitizer handles HTML tags split across chunks
+  it('8. Sanitization: handles HTML tag split across multiple stream chunks', () => {
+    const sanitizer = new StreamTagSanitizer();
+    const chunk1 = 'Hello <scr';
+    const chunk2 = 'ipt>alert("xss")</script> world!';
+
+    const out1 = sanitizer.processChunk(chunk1);
+    const out2 = sanitizer.processChunk(chunk2);
+    const out3 = sanitizer.flush();
+
+    const fullOutput = out1 + out2 + out3;
+    expect(fullOutput).not.toContain('<script>');
+    expect(fullOutput).not.toContain('</script>');
+    expect(fullOutput).toBe('Hello alert("xss") world!');
   });
 });
