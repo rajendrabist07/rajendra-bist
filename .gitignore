@@ -6,6 +6,8 @@ dist
 .vscode
 .lighthouseci
 .lighthouseci-desktop
+.lighthouseci-10runs
+docs/private/
 test-results
 playwright-report
 *.tsbuildinfo

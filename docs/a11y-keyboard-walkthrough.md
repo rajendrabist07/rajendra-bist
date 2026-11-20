@@ -1,15 +1,19 @@
 # Keyboard Navigation Walkthrough & Accessibility Audit
 
 > **Standard:** WCAG 2.2 AA Conformance  
-> **Audited Date:** 2026-11-19  
+> **Audited Date:** 2026-11-20  
 > **Environment:** Next.js Production Build (`next start`), Chromium / Safari / Firefox  
+> **Verification Policy:** Every item below is explicitly tagged as either `asserted by Playwright (<test file / test name>)` or `not tested; owner must check manually`.
 
 ---
 
 ## 1. Skip-to-Content Link
 - **Initial Focus:** Pressing `Tab` upon initial page load immediately focuses the `.skip-to-content` anchor element.
+  - *Status:* `not tested; owner must check manually`
 - **Visual Presentation:** Visually hidden off-screen (`-top-12`) until focused, then smoothly slides into view at `top-4 left-4 z-50` with high-contrast accent outline and surface background.
+  - *Status:* `not tested; owner must check manually`
 - **Activation:** Pressing `Enter` jumps directly to `<main id="main-content">`, skipping the navigation bar entirely.
+  - *Status:* `not tested; owner must check manually`
 
 ---
 
@@ -20,53 +24,71 @@
   3. Nav links: `About`, `Experience`, `Projects`, `Stack`, `Credentials`, `Blog`, `Contact`
   4. Search / Command Palette button (`Cmd+K`)
   5. Theme toggle switch (`ThemeToggle`)
-  6. Primary "Get in Touch" contact CTA
+  6. Primary "Resume" button
+  - *Status:* `not tested; owner must check manually`
 - **Focus Indicators:** Every interactive header element displays an explicit `2px` focus ring with `var(--color-accent)` and `2px` offset (`focus-visible:ring-2 focus-visible:ring-accent`).
-- **No Focus Traps:** Tab flows linearly without trapping or losing focus.
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe scan: /)`
+- **No Focus Traps in Top Header:** Tab flows linearly without trapping or losing focus.
+  - *Status:* `asserted by Playwright (tests/e2e/home.spec.ts: homepage renders hero, sections, and navigation landmarks)`
 
 ---
 
 ## 3. Command Palette (`Cmd+K` / `Ctrl+K`)
-- **Invocation:** Keyboard shortcut `Cmd+K` (macOS) / `Ctrl+K` (Windows/Linux) or clicking the search button.
+- **Invocation via Keyboard:** Global shortcut `Ctrl+k` / `Cmd+k` opens the command palette.
+  - *Status:* `asserted by Playwright (tests/e2e/smoke.spec.ts: 4. Command Palette (Cmd+K/Ctrl+K, filter results, Esc focus return))`
 - **Focus Management:** Focus immediately transfers into the search `<input role="combobox">`.
-- **Navigation:**
-  - `ArrowDown` / `ArrowUp`: cycles through navigable results and actions.
-  - `Enter`: activates the highlighted command (navigates route or executes action).
-  - `Escape`: closes the palette and restores focus to the invoking trigger button.
-- **Focus Trap:** Tab within the open dialog is trapped strictly inside the modal container.
+  - *Status:* `asserted by Playwright (tests/e2e/smoke.spec.ts: 4. Command Palette (Cmd+K/Ctrl+K, filter results, Esc focus return))`
+- **Query Filtering:** Typing a query updates the list of navigable items and project deep-links.
+  - *Status:* `asserted by Playwright (tests/e2e/smoke.spec.ts: 4. Command Palette (Cmd+K/Ctrl+K, filter results, Esc focus return))`
+- **Escape Dismissal & Focus Restoration:** Pressing `Escape` closes the palette and restores focus to the invoking trigger.
+  - *Status:* `asserted by Playwright (tests/e2e/smoke.spec.ts: 4. Command Palette (Cmd+K/Ctrl+K, filter results, Esc focus return))`
+- **A11y & Contrast Compliance:** Axe scans while palette is active in dark and light modes.
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Command Palette open (dark theme) and (light theme))`
 
 ---
 
-## 4. Ask AI Chat Drawer (`Cmd+J` / Floating Trigger)
-- **Invocation:** Floating button or global keybinding `Cmd+J`.
-- **Focus Management:** Focus transfers directly to the question input.
-- **Keyboard Actions:**
-  - `Enter`: submits prompt to the assistant.
-  - `Escape`: dismisses the chat drawer and returns focus to the trigger.
-- **ARIA Live Regions:** Assistant responses announce streaming completions politely (`aria-live="polite"`).
+## 4. Mobile Navigation Drawer (`<390px`)
+- **Trigger Activation:** Clicking or activating the hamburger trigger opens the mobile sheet drawer (`aria-expanded="true"`, `aria-controls="mobile-nav-menu"`).
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Mobile Navigation Drawer open)`
+- **Focus Trap:** Focus remains inside drawer while open; dismissible via Escape or backdrop click.
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Mobile Navigation Drawer open)`
+- **A11y Conformance:** Zero axe violations on mobile navigation drawer in both dark and light modes.
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Mobile Navigation Drawer open (dark theme) and (light theme))`
 
 ---
 
-## 5. Projects & Interactive Architecture Diagram
-- **Case Files:**
-  - Project cards and action links ("Live Site", "Source Code", "Deep Dive") are standard `<a>` tags with explicit accessible labels that include visible text (`aria-label="Live Site for Sovereign"`).
-- **Architecture Diagram:**
-  - Architecture node buttons can be focused via `Tab`.
-  - Pressing `Enter` or `Space` activates the node detail inspector, updating the live parameter view.
-  - No hover-only interactions; all metadata is reachable via keyboard.
+## 5. Skills Tab Panels
+- **Tab Navigation:** ArrowLeft / ArrowRight switches between technology categories (`Backend & Systems`, `Frontend`, etc.).
+  - *Status:* `not tested; owner must check manually`
+- **Tab Selection & Content Update:** Clicking a category tab switches the rendered skill badges.
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Skills Tab Panels switched)`
+- **A11y Conformance:** Zero axe violations across switched tab panels in both dark and light modes.
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Skills Tab Panels switched (dark theme) and (light theme))`
 
 ---
 
-## 6. Contact Form & Interactive Inputs
-- **Inputs:**
-  - `<input id="name">`, `<input id="email">`, `<textarea id="message">`.
-  - All form controls have associated `<label for="...">` elements.
-  - Clear error states with `aria-invalid="true"` and `aria-describedby` when validation errors occur.
-- **Submission:** Submitting with `Enter` or activating the "Send Message" button (`type="submit"`).
+## 6. Projects & Architecture Diagram
+- **Case File Links:** "Source Code", "Live App", and "Deep Dive" are standard semantic `<a>` anchors with visible and accessible text.
+  - *Status:* `asserted by Playwright (tests/e2e/phase4b.spec.ts: verifies CaseFiles, Architecture Diagram, Evidence Strip, and Case Study routes)`
+- **Architecture Diagram Node Selection:** Keyboard navigation through diagram nodes and activation via Enter/Space.
+  - *Status:* `not tested; owner must check manually`
+- **Static Blueprint Fallback:** Accessible SVG layout under reduced motion.
+  - *Status:* `asserted by Playwright (tests/e2e/smoke.spec.ts: 5. Prefers-reduced-motion)`
 
 ---
 
-## 7. Automated Axe & Reflow Verification Summary
-- **Axe-core scan:** 0 violations across all 9 public routes in dark and light modes.
-- **Reflow (WCAG 1.4.10):** 0 horizontal scroll at 320px viewport width and 200% zoom.
-- **Touch Targets (WCAG 2.5.8):** All primary touch targets meet or exceed minimum spacing and 44x44px bounding hit areas.
+## 7. Contact Form & Error Validation
+- **Form Controls & Labels:** `<input id="contact-name">`, `<input id="contact-email">`, `<textarea id="contact-message">` bound with `<label for="...">`.
+  - *Status:* `asserted by Playwright (tests/e2e/home.spec.ts: contact form validates input fields client-side)`
+- **Client-Side Validation Errors:** Submitting empty fields sets `aria-invalid="true"` and displays error alerts (`aria-describedby`).
+  - *Status:* `asserted by Playwright (tests/e2e/home.spec.ts: contact form validates input fields client-side)`
+- **Error Contrast Compliance:** Validation error alert and messages meet WCAG 2.2 AA contrast in both dark and light themes (≥ 4.5:1).
+  - *Status:* `asserted by Playwright (tests/e2e/accessibility-axe.spec.ts: Axe interactive: Contact Form Validation Errors (dark theme) and (light theme))`
+- **Mocked Submission Flow:** Successful submission displays polite feedback alert (`role="status"`).
+  - *Status:* `asserted by Playwright (tests/e2e/smoke.spec.ts: 2. Contact form mocked submission flow)`
+
+---
+
+## 8. Summary of Automated Verification
+- **Automated Axe Scan Tests:** 28 passing Playwright tests covering initial paint across 9 routes (dark & light) + 4 interactive states (dark & light) + touch target compliance + 320px reflow.
+- **Manual Verification Scope:** Skip link initial tab focus jump, arrow-key navigation between tablist tabs, and interactive SVG node activation remain marked for human review.

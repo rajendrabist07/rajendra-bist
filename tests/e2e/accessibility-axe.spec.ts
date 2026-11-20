@@ -13,7 +13,9 @@ const PUBLIC_ROUTES = [
   '/blog/ast-based-pr-review',
 ];
 
-test.describe('WCAG 2.2 AA Axe Audits (Dark and Light Themes)', () => {
+const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
+
+test.describe('WCAG 2.2 AA Axe Audits - Initial Paint (Dark and Light Themes)', () => {
   for (const route of PUBLIC_ROUTES) {
     test(`Axe scan: ${route} (dark theme)`, async ({ page, context }) => {
       await context.addCookies([{ name: 'theme', value: 'dark', domain: '127.0.0.1', path: '/' }]);
@@ -22,7 +24,7 @@ test.describe('WCAG 2.2 AA Axe Audits (Dark and Light Themes)', () => {
       await page.waitForLoadState('networkidle');
 
       const accessibilityScanResults = await new AxeBuilder({ page })
-        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+        .withTags(AXE_TAGS)
         .analyze();
 
       expect(accessibilityScanResults.violations).toEqual([]);
@@ -35,7 +37,7 @@ test.describe('WCAG 2.2 AA Axe Audits (Dark and Light Themes)', () => {
       await page.waitForLoadState('networkidle');
 
       const accessibilityScanResults = await new AxeBuilder({ page })
-        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+        .withTags(AXE_TAGS)
         .analyze();
 
       expect(accessibilityScanResults.violations).toEqual([]);
@@ -43,7 +45,101 @@ test.describe('WCAG 2.2 AA Axe Audits (Dark and Light Themes)', () => {
   }
 });
 
-test.describe('Touch Targets (>= 44px on 390px mobile viewport)', () => {
+test.describe('WCAG 2.2 AA Axe Audits - Interactive States', () => {
+  const themes: ('dark' | 'light')[] = ['dark', 'light'];
+
+  for (const theme of themes) {
+    test(`Axe interactive: Command Palette open (${theme} theme)`, async ({ page, context }) => {
+      await context.addCookies([{ name: 'theme', value: theme, domain: '127.0.0.1', path: '/' }]);
+      await page.emulateMedia({ colorScheme: theme });
+      await page.goto('/');
+      await page.waitForLoadState('networkidle');
+
+      // Open command palette via shortcut
+      await page.keyboard.press('Control+k');
+      await page.waitForSelector('[role="combobox"], [role="dialog"], input[placeholder*="command"]', { timeout: 3000 });
+
+      const results = await new AxeBuilder({ page })
+        .withTags(AXE_TAGS)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
+
+    test(`Axe interactive: Mobile Navigation Drawer open (${theme} theme)`, async ({ page, context }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await context.addCookies([{ name: 'theme', value: theme, domain: '127.0.0.1', path: '/' }]);
+      await page.emulateMedia({ colorScheme: theme });
+      await page.goto('/');
+      await page.waitForLoadState('networkidle');
+
+      // Open mobile drawer
+      const trigger = page.locator('button[aria-label="Toggle navigation menu"]');
+      await trigger.click();
+      await page.waitForSelector('#mobile-nav-menu', { state: 'visible', timeout: 3000 });
+
+      const results = await new AxeBuilder({ page })
+        .withTags(AXE_TAGS)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
+
+    test(`Axe interactive: Skills Tab Panels switched (${theme} theme)`, async ({ page, context }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+      await context.addCookies([{ name: 'theme', value: theme, domain: '127.0.0.1', path: '/' }]);
+      await page.emulateMedia({ colorScheme: theme });
+      await page.goto('/');
+      await page.waitForLoadState('networkidle');
+
+      // Switch to Backend tab
+      const backendTab = page.locator('#tab-backend');
+      await backendTab.scrollIntoViewIfNeeded();
+      await backendTab.click();
+      await page.waitForTimeout(300);
+
+      let results = await new AxeBuilder({ page })
+        .withTags(AXE_TAGS)
+        .analyze();
+      expect(results.violations).toEqual([]);
+
+      // Switch to Frontend tab
+      const frontendTab = page.locator('#tab-frontend');
+      await frontendTab.click();
+      await page.waitForTimeout(300);
+
+      results = await new AxeBuilder({ page })
+        .withTags(AXE_TAGS)
+        .analyze();
+      expect(results.violations).toEqual([]);
+    });
+
+    test(`Axe interactive: Contact Form Validation Errors (${theme} theme)`, async ({ page, context }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+      await context.addCookies([{ name: 'theme', value: theme, domain: '127.0.0.1', path: '/' }]);
+      await page.emulateMedia({ colorScheme: theme });
+      await page.goto('/');
+      await page.waitForLoadState('networkidle');
+
+      // Scroll to contact form and submit empty form to trigger validation errors
+      const contactSection = page.locator('#contact');
+      await contactSection.scrollIntoViewIfNeeded();
+      const submitBtn = page.locator('button[type="submit"]:has-text("Send Message")');
+      await submitBtn.click();
+
+      // Wait for error feedback
+      await page.waitForSelector('text=Full name is required', { timeout: 3000 });
+
+      const results = await new AxeBuilder({ page })
+        .withTags(AXE_TAGS)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
+  }
+});
+
+test.describe('Touch Targets (WCAG 2.2 AA SC 2.5.8 >= 24x24px on 390px mobile viewport)', () => {
   test('interactive elements meet touch target requirements on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');
@@ -60,9 +156,9 @@ test.describe('Touch Targets (>= 44px on 390px mobile viewport)', () => {
         const style = window.getComputedStyle(el);
         if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') continue;
 
-        // Check if dimension is smaller than 44px without an inline-flex/block container
-        if (rect.width < 44 || rect.height < 44) {
-          const isInlineLink = el.tagName === 'A' && el.parentElement && window.getComputedStyle(el.parentElement).display.includes('inline') || el.closest('p') !== null;
+        // WCAG 2.2 AA 2.5.8 Target Size (Minimum) is 24x24px
+        if (rect.width < 24 || rect.height < 24) {
+          const isInlineLink = (el.tagName === 'A' && el.parentElement && window.getComputedStyle(el.parentElement).display.includes('inline')) || el.closest('p') !== null;
           if (!isInlineLink) {
             violations.push({
               tag: el.tagName,
@@ -76,7 +172,7 @@ test.describe('Touch Targets (>= 44px on 390px mobile viewport)', () => {
       return violations;
     });
 
-    console.log('Mobile touch audit found elements < 44x44 (excluding inline paragraph links):', touchViolations.length);
+    console.log('Mobile touch audit found interactive elements < 24x24px:', touchViolations.length);
   });
 });
 

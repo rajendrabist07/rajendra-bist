@@ -20,7 +20,7 @@ describe('Portfolio Integrity & Truthfulness Data Contracts', () => {
     expect(PERSONAL.location).toBe('New Delhi, India')
     expect(SITE_URL).toBe('https://www.bistrajendra.com.np')
     expect(PERSONAL.resumeUrl).toBe('/resume/Rajendra_Bist_Full_Stack_Developer.pdf')
-    expect(PERSONAL.availability.status).toBe('Available immediately')
+    expect(PERSONAL.availability.status).toBe('Open to work · Available immediately')
     expect(PERSONAL.availability.noticePeriodDays).toBe(0)
   })
 

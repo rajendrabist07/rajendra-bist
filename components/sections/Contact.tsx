@@ -165,7 +165,7 @@ export default function Contact() {
               <div
                 role="alert"
                 aria-live="assertive"
-                className="mt-6 flex items-start gap-2.5 rounded-[--radius-control] border border-red-500/40 bg-red-500/10 p-3.5 font-mono text-xs text-red-400"
+                className="mt-6 flex items-start gap-2.5 rounded-[--radius-control] border border-red-500/40 bg-red-500/10 p-3.5 font-mono text-xs text-red-700 dark:text-red-400 font-medium"
               >
                 <AlertCircle size={16} className="shrink-0 mt-0.5" />
                 <span>{feedback}</span>
@@ -215,7 +215,7 @@ export default function Contact() {
                   required
                 />
                 {errors.name && (
-                  <p id="contact-name-error" className="mt-1.5 text-[11px] text-red-400">
+                  <p id="contact-name-error" className="mt-1.5 text-[11px] text-red-700 dark:text-red-400 font-medium">
                     {errors.name}
                   </p>
                 )}
@@ -241,7 +241,7 @@ export default function Contact() {
                   required
                 />
                 {errors.email && (
-                  <p id="contact-email-error" className="mt-1.5 text-[11px] text-red-400">
+                  <p id="contact-email-error" className="mt-1.5 text-[11px] text-red-700 dark:text-red-400 font-medium">
                     {errors.email}
                   </p>
                 )}
@@ -267,7 +267,7 @@ export default function Contact() {
                   required
                 />
                 {errors.message && (
-                  <p id="contact-message-error" className="mt-1.5 text-[11px] text-red-400">
+                  <p id="contact-message-error" className="mt-1.5 text-[11px] text-red-700 dark:text-red-400 font-medium">
                     {errors.message}
                   </p>
                 )}

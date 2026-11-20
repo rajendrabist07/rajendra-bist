@@ -32,7 +32,7 @@ test.describe('Phase 3 Hero, Navigation & Intro Tests', () => {
     expect(h1Spans).toBe(0);
 
     // Availability chip
-    const availChip = page.locator('#home').getByText('Available immediately · Delhi NCR / remote');
+    const availChip = page.locator('#home').getByText('Open to work · Available immediately · Delhi NCR / remote');
     await expect(availChip).toBeVisible();
 
     // Two-sentence pitch
@@ -95,13 +95,15 @@ test.describe('Phase 3 Hero, Navigation & Intro Tests', () => {
 
   test('navigation glass effect, active link highlight, and command palette integration', async ({ page }) => {
     await page.goto('/');
-    const searchBtn = page.getByRole('button', { name: 'Open Command Palette' });
+    await page.waitForLoadState('networkidle');
+    const searchBtn = page.getByRole('button', { name: /search/i }).first();
     await expect(searchBtn).toBeVisible();
     await searchBtn.click();
 
     // Dialog role and mode switcher
-    await expect(page.locator('div[role="dialog"]')).toBeVisible();
-    const askAiTab = page.getByRole('button', { name: /ask ai/i });
+    const dialog = page.locator('div[role="dialog"]');
+    await expect(dialog).toBeVisible();
+    const askAiTab = dialog.getByRole('button', { name: 'Ask AI', exact: true });
     await expect(askAiTab).toBeVisible();
     await askAiTab.click();
 

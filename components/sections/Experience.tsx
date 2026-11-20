@@ -76,7 +76,7 @@ export default function Experience() {
             </span>
             <span className="font-semibold text-[--text-primary]">Today</span>
             <span className="text-[--text-tertiary]">·</span>
-            <span className="text-[--text-secondary]">Available immediately</span>
+            <span className="text-[--text-secondary]">Open to work · Available immediately</span>
           </div>
         </div>
 

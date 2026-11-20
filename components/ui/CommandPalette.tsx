@@ -185,7 +185,7 @@ export default function CommandPalette() {
           <button
             type="button"
             onClick={handleClose}
-            aria-label="Close command palette"
+            aria-label="ESC close command palette"
             className="text-xs text-[--text-tertiary] hover:text-[--text-primary] px-2 py-1 cursor-pointer"
           >
             ESC

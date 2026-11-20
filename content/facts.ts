@@ -122,9 +122,9 @@ export const PERSONAL: Personal = {
   workAuthorization:
     'Nepali national; eligible to work in India without sponsorship under the 1950 Indo-Nepal Treaty.',
   availability: {
-    status: 'Available immediately',
+    status: 'Open to work · Available immediately',
     noticePeriodDays: 0,
-    formatted: 'Available immediately · Delhi NCR / remote',
+    formatted: 'Open to work · Available immediately · Delhi NCR / remote',
   },
   noticePeriod: 'Available immediately',
   languages: ['English', 'Hindi (Proficient)', 'Nepali (Native)'],

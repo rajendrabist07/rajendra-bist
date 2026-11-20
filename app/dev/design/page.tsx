@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export default function DevDesignPage() {
-  if (process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production') {
+  if (process.env.VERCEL_ENV === 'production') {
     notFound();
   }
 
