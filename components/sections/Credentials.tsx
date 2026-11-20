@@ -5,12 +5,12 @@ import { Award, GraduationCap, Calendar, ExternalLink, CheckCircle } from 'lucid
 
 interface CredentialItem {
   title: string;
-  institution: string;
-  timeframe: string;
-  type: string;
+  institution?: string;
+  timeframe?: string;
+  type?: string;
   description: string;
   verifyUrl?: string;
-  assumptionNote?: string;
+  draft?: boolean;
   icon: typeof Award;
 }
 
@@ -25,14 +25,11 @@ const CREDENTIAL_CARDS: CredentialItem[] = [
     icon: GraduationCap,
   },
   {
-    title: 'Full-Stack Web Development Certificate',
-    institution: 'Professional Engineering Training',
-    timeframe: '2025 – 2026',
-    type: 'Certificate of Completion',
+    title: 'Full-Stack Web Development',
     description:
-      'Verified completion of practical full-stack web engineering curriculum with hands-on application delivery.',
+      'Practical full-stack web engineering curriculum with hands-on application delivery.',
     verifyUrl: 'https://drive.google.com/file/d/1nRuMQefR-kxjTr32fHj0uK2v78Hy8FE1/view',
-    assumptionNote: 'Issuer assumed as Vcare Technical Institute training partner per owner document record.',
+    draft: true,
     icon: Award,
   },
   {
@@ -70,33 +67,33 @@ export default function Credentials() {
                     <div className="flex h-10 w-10 items-center justify-center rounded-[--radius-control] bg-[--bg-surface-2] border border-[--border-hairline] text-[--accent]">
                       <Icon size={18} />
                     </div>
-                    <span className="inline-flex items-center gap-1 font-mono text-[11px] text-[--text-tertiary] bg-[--bg-surface-2] px-2.5 py-1 rounded-[--radius-control]">
-                      <Calendar size={11} />
-                      {card.timeframe}
-                    </span>
+                    {card.timeframe && (
+                      <span className="inline-flex items-center gap-1 font-mono text-[11px] text-[--text-tertiary] bg-[--bg-surface-2] px-2.5 py-1 rounded-[--radius-control]">
+                        <Calendar size={11} />
+                        {card.timeframe}
+                      </span>
+                    )}
                   </div>
 
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[--accent] font-semibold">
-                    {card.type}
-                  </span>
+                  {card.type && (
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-[--accent] font-semibold">
+                      {card.type}
+                    </span>
+                  )}
 
                   <h3 className="text-base font-bold text-[--text-primary] tracking-tight mt-1 mb-1">
                     {card.title}
                   </h3>
 
-                  <div className="text-xs font-mono text-[--text-secondary] mb-3">
-                    {card.institution}
-                  </div>
+                  {card.institution && (
+                    <div className="text-xs font-mono text-[--text-secondary] mb-3">
+                      {card.institution}
+                    </div>
+                  )}
 
                   <p className="text-xs text-[--text-secondary] leading-relaxed">
                     {card.description}
                   </p>
-
-                  {card.assumptionNote && (
-                    <div className="mt-3 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] p-2.5 font-mono text-[10px] text-[--text-tertiary] leading-relaxed">
-                      ⚠️ Note: {card.assumptionNote}
-                    </div>
-                  )}
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-[--border-hairline]">

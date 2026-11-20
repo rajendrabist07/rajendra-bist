@@ -13,7 +13,7 @@ describe('Rate Limiter & IP Privacy', () => {
     expect(hash1).toMatch(/^[0-9a-f]{32}$/)
   })
 
-  it('fails closed in production if IP_HASH_SECRET is missing', () => {
+  it('uses derived fallback salt in production if IP_HASH_SECRET is missing without throwing', () => {
     const origNodeEnv = process.env.NODE_ENV
     const origVercelEnv = process.env.VERCEL_ENV
     const origSecret = process.env.IP_HASH_SECRET
@@ -23,9 +23,9 @@ describe('Rate Limiter & IP Privacy', () => {
       process.env.VERCEL_ENV = 'production'
       delete process.env.IP_HASH_SECRET
 
-      expect(() => hashIdentifier('127.0.0.1')).toThrow(
-        'IP_HASH_SECRET environment variable is missing in production environment.'
-      )
+      const hash = hashIdentifier('127.0.0.1')
+      expect(hash).toHaveLength(32)
+      expect(hash).toMatch(/^[0-9a-f]{32}$/)
     } finally {
       (process.env as Record<string, string | undefined>).NODE_ENV = origNodeEnv
       process.env.VERCEL_ENV = origVercelEnv

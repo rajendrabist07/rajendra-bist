@@ -106,7 +106,28 @@ export default function CommandPalette() {
       });
 
       if (!res.ok) {
-        throw new Error('Chat service temporarily unavailable.');
+        const errorJson = await res.json().catch(() => null);
+        const code = errorJson?.code;
+        let errorMessage = 'Unable to connect to assistant right now. Please email rajendrabist396@gmail.com directly.';
+        if (code === 'ASSISTANT_OFFLINE') {
+          errorMessage = 'The AI assistant is currently offline. Please email rajendrabist396@gmail.com directly.';
+        } else if (code === 'RATE_LIMITED') {
+          errorMessage = 'You have reached the rate limit (30 messages / hour). Please wait a moment or email rajendrabist396@gmail.com directly.';
+        } else if (code === 'PROVIDER_ERROR') {
+          errorMessage = 'The AI provider service encountered an upstream issue. Please try again or reach out at rajendrabist396@gmail.com.';
+        } else if (code === 'PROVIDER_TIMEOUT') {
+          errorMessage = 'The AI assistant timed out while generating a response. Please try again or contact rajendrabist396@gmail.com.';
+        } else if (code === 'FORBIDDEN_ORIGIN') {
+          errorMessage = 'Request origin not authorized. Please email rajendrabist396@gmail.com directly.';
+        } else if (code === 'INVALID_INPUT') {
+          errorMessage = errorJson?.error || 'Invalid query format. Please rephrase or email rajendrabist396@gmail.com.';
+        }
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === assistantId ? { ...msg, content: errorMessage } : msg
+          )
+        );
+        return;
       }
 
       const nextSession = res.headers.get('X-Session-Id');
@@ -319,7 +340,20 @@ export default function CommandPalette() {
                           : 'bg-[--bg-surface-2] text-[--text-primary] border border-[--border-hairline]'
                       }`}
                     >
-                      {msg.content || (isLoading ? 'Analyzing portfolio facts...' : '')}
+                      {msg.role === 'assistant' && msg.content.includes('rajendrabist396@gmail.com') ? (
+                        <span>
+                          {msg.content.split('rajendrabist396@gmail.com')[0]}
+                          <a
+                            href="mailto:rajendrabist396@gmail.com"
+                            className="text-[--accent] underline hover:brightness-110"
+                          >
+                            rajendrabist396@gmail.com
+                          </a>
+                          {msg.content.split('rajendrabist396@gmail.com')[1]}
+                        </span>
+                      ) : (
+                        msg.content || (isLoading ? 'Analyzing portfolio facts...' : '')
+                      )}
                     </div>
                   </div>
                 ))

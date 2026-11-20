@@ -32,3 +32,10 @@ Manual actions and optional owner inputs. These cannot be automated.
 - [ ] **Sovereign**: Confirm problem statement: "Multi-tenant AI agent platforms require strict tenant isolation and durable execution to prevent cross-tenant data exposure and lost execution state during background runs."
 - [ ] **DevGuard AI**: Confirm problem statement: "Automated code review relying solely on single-shot LLM prompts on raw diffs produces unverified comments. Collecting deterministic static analysis, AST linting, and dependency vulnerability scans prior to inference grounds findings in concrete repository evidence."
 - [ ] **Chronicle**: Confirm problem statement: "Technical publishing platforms require verified accounts, abuse resistance, schema-validated AI tooling, and server-rendered public pages to maintain editorial trust and search visibility."
+
+## Certificate Issuer & Date Confirmation (Needs Owner Input)
+
+- [ ] **Full-Stack Web Development Certificate:**
+  - Link: [Google Drive Certificate](https://drive.google.com/file/d/1nRuMQefR-kxjTr32fHj0uK2v78Hy8FE1/view)
+  - Previous assumption note removed from UI: "Issuer assumed as Vcare Technical Institute training partner per owner document record."
+  - Action needed: Please confirm the official issuing institution and completion year so they can be displayed on the portfolio card. Until confirmed, the card displays title "Full-Stack Web Development" and the verification link only, with no unverified issuer or date.

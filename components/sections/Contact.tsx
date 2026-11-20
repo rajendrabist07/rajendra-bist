@@ -168,7 +168,19 @@ export default function Contact() {
                 className="mt-6 flex items-start gap-2.5 rounded-[--radius-control] border border-red-500/40 bg-red-500/10 p-3.5 font-mono text-xs text-red-700 dark:text-red-400 font-medium"
               >
                 <AlertCircle size={16} className="shrink-0 mt-0.5" />
-                <span>{feedback}</span>
+                <span>
+                  {feedback.includes('rajendrabist396@gmail.com') ? (
+                    <>
+                      {feedback.split('rajendrabist396@gmail.com')[0]}
+                      <a href="mailto:rajendrabist396@gmail.com" className="underline hover:brightness-110">
+                        rajendrabist396@gmail.com
+                      </a>
+                      {feedback.split('rajendrabist396@gmail.com')[1]}
+                    </>
+                  ) : (
+                    feedback
+                  )}
+                </span>
               </div>
             )}
 

@@ -1,0 +1,172 @@
+{
+  "generatedAt": "2026-11-20T13:11:33.499Z",
+  "skills": [
+    {
+      "name": "TypeScript",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/package.json",
+      "regex": "\"typescript\":\\s*\"\\^?5",
+      "status": "VERIFIED",
+      "matchedLine": "\"typescript\": \"^5\""
+    },
+    {
+      "name": "Node.js",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json",
+      "regex": "\"@types/node\":\\s*\"\\^?22",
+      "status": "VERIFIED",
+      "matchedLine": "\"@types/node\": \"^22.13.0\","
+    },
+    {
+      "name": "PostgreSQL",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/packages/db/prisma/migrations/20261002111243_enable_rls/migration.sql",
+      "regex": "ENABLE ROW LEVEL SECURITY",
+      "status": "VERIFIED",
+      "matchedLine": "ALTER TABLE tenants        ENABLE ROW LEVEL SECURITY;"
+    },
+    {
+      "name": "Next.js",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/package.json",
+      "regex": "\"next\":\\s*\"16",
+      "status": "VERIFIED",
+      "matchedLine": "\"next\": \"16.3.5\","
+    },
+    {
+      "name": "React",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/chronicle/main/package.json",
+      "regex": "\"react\":\\s*\"19",
+      "status": "VERIFIED",
+      "matchedLine": "\"react\": \"19.2.8\","
+    },
+    {
+      "name": "Prisma ORM",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json",
+      "regex": "\"prisma\":\\s*\\{",
+      "status": "VERIFIED",
+      "matchedLine": "\"prisma\": {"
+    },
+    {
+      "name": "Zod",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/lib/validation/schemas.ts",
+      "regex": "z\\.object\\(\\{",
+      "status": "VERIFIED",
+      "matchedLine": "export const TryApiSchema = z.object({"
+    },
+    {
+      "name": "Express.js",
+      "tier": "Core",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json",
+      "regex": "\"express\":\\s*\"\\^?5",
+      "status": "VERIFIED",
+      "matchedLine": "\"express\": \"^5.2.1\","
+    },
+    {
+      "name": "Tailwind CSS",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/chronicle/main/package.json",
+      "regex": "\"tailwindcss\":\\s*\"\\^?4",
+      "status": "VERIFIED",
+      "matchedLine": "\"tailwindcss\": \"^4\","
+    },
+    {
+      "name": "Inngest",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/package.json",
+      "regex": "\"inngest\":\\s*\"\\^?4",
+      "status": "VERIFIED",
+      "matchedLine": "\"inngest\": \"^4.22.0\","
+    },
+    {
+      "name": "Upstash Redis",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json",
+      "regex": "\"@upstash/ratelimit\":",
+      "status": "VERIFIED",
+      "matchedLine": "\"@upstash/ratelimit\": \"^2.0.8\","
+    },
+    {
+      "name": "Supabase",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json",
+      "regex": "\"@supabase/supabase-js\":",
+      "status": "VERIFIED",
+      "matchedLine": "\"@supabase/supabase-js\": \"^2.48.1\","
+    },
+    {
+      "name": "Vitest",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/chronicle/main/package.json",
+      "regex": "\"vitest\":",
+      "status": "VERIFIED",
+      "matchedLine": "\"vitest\": \"^5.0.3\""
+    },
+    {
+      "name": "GitHub Actions",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/chronicle/main/.github/workflows/ci.yml",
+      "regex": "uses:\\s*actions/checkout@v4",
+      "status": "VERIFIED",
+      "matchedLine": "uses: actions/checkout@v4"
+    },
+    {
+      "name": "Turborepo",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/package.json",
+      "regex": "\"turbo\":\\s*\"\\^?2",
+      "status": "VERIFIED",
+      "matchedLine": "\"turbo\": \"^2.10.13\""
+    },
+    {
+      "name": "Framer Motion",
+      "tier": "Working",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/rajendra-bist/main/package.json",
+      "regex": "\"framer-motion\":",
+      "status": "VERIFIED",
+      "matchedLine": "\"framer-motion\": \"12.40.0\","
+    }
+  ],
+  "architecturalClaims": [
+    {
+      "name": "Sovereign: Human Approval Wait",
+      "claim": "Workflow execution sleeps durably awaiting manual human approval decision event with timeout",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/inngest/run-workflow.ts",
+      "regex": "step\\.waitForEvent\\(`step-\\$\\{i\\}-wait`",
+      "status": "VERIFIED",
+      "matchedLine": "const wake = await step.waitForEvent(`step-${i}-wait`, {"
+    },
+    {
+      "name": "Sovereign: Agent Tool Loop",
+      "claim": "Iterative tool execution loop bounded by maximum step iterations with JSON validation",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/lib/agent/executor.ts",
+      "regex": "for \\(let iteration = 1; iteration <= limits\\.maxIterations; iteration\\+\\+\\)",
+      "status": "VERIFIED",
+      "matchedLine": "for (let iteration = 1; iteration <= limits.maxIterations; iteration++) {"
+    },
+    {
+      "name": "Sovereign: Hard Timeouts / Limits",
+      "claim": "Explicit bounded agent resource limits (max iterations, max total tokens, max tool calls per turn)",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/lib/agent/executor.ts",
+      "regex": "export const DEFAULT_LIMITS: AgentLimits =",
+      "status": "VERIFIED",
+      "matchedLine": "export const DEFAULT_LIMITS: AgentLimits = {"
+    },
+    {
+      "name": "Sovereign: Untrusted-Input Wrapper",
+      "claim": "Outside data sanitization and boundary tagging to isolate instructions from untrusted data",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/sovereign/main/apps/web/lib/agent/untrusted.ts",
+      "regex": "export function wrapUntrusted\\(",
+      "status": "VERIFIED",
+      "matchedLine": "export function wrapUntrusted(label: string, text: string, maxChars = MAX_UNTRUSTED_CHARS): string {"
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "passed": 20,
+    "failed": 0
+  }
+}

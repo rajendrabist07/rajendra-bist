@@ -39,7 +39,7 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(400)
     expect(json.ok).toBe(false)
-    expect(json.code).toBe('VALIDATION_FAILED')
+    expect(json.code).toBe('INVALID_INPUT')
     expect(json.message).toContain('control characters')
   })
 
@@ -53,7 +53,7 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(400)
     expect(json.ok).toBe(false)
-    expect(json.code).toBe('VALIDATION_FAILED')
+    expect(json.code).toBe('INVALID_INPUT')
     expect(json.message).toContain('20 characters')
   })
 
@@ -68,7 +68,7 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(400)
     expect(json.ok).toBe(false)
-    expect(json.code).toBe('VALIDATION_FAILED')
+    expect(json.code).toBe('INVALID_INPUT')
   })
 
   it('4. Honeypot: silently accepts _hp payload without sending', async () => {
@@ -83,7 +83,7 @@ describe('Contact API Hardening & Verification', () => {
     expect(res.status).toBe(200)
     expect(json.ok).toBe(true)
     expect(json.code).toBe('DELIVERED')
-    expect(json.message).toBe('Message received.')
+    expect(json.message).toBe('Message delivered.')
   })
 
   it('5. Same-Origin Check: blocks cross-origin requests', async () => {
@@ -102,7 +102,7 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(403)
     expect(json.ok).toBe(false)
-    expect(json.code).toBe('FORBIDDEN')
+    expect(json.code).toBe('FORBIDDEN_ORIGIN')
     expect(json.message).toContain('Cross-origin')
   })
 
@@ -115,7 +115,7 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(413)
     expect(json.ok).toBe(false)
-    expect(json.code).toBe('PAYLOAD_TOO_LARGE')
+    expect(json.code).toBe('INVALID_INPUT')
   })
 
   it('7. Rate Limiting: rejects requests exceeding 5 per hour per IP hash', async () => {
@@ -162,8 +162,8 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(200)
     expect(json.ok).toBe(true)
-    expect(json.code).toBe('SUCCESS')
-    expect(json.message).toBe('Message delivered successfully.')
+    expect(json.code).toBe('DELIVERED')
+    expect(json.message).toContain('Message delivered')
     expect(fetchSpy).toHaveBeenCalledTimes(1)
   })
 
@@ -204,7 +204,7 @@ describe('Contact API Hardening & Verification', () => {
     const json = await res.json()
     expect(res.status).toBe(200)
     expect(json.ok).toBe(true)
-    expect(json.code).toBe('SUCCESS')
+    expect(json.code).toBe('DELIVERED')
     expect(fetchSpy).toHaveBeenCalledTimes(2)
   })
 })

@@ -1,19 +1,22 @@
-import { NextRequest } from 'next/server'
-import { connectToDatabase } from '@/lib/mongodb'
-import ContactMessage from '@/models/ContactMessage'
-import { contactRequestSchema } from '@/lib/api-schemas'
-import { getServerEnv } from '@/lib/env'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { NextRequest } from 'next/server';
+import { connectToDatabase } from '@/lib/mongodb';
+import ContactMessage from '@/models/ContactMessage';
+import { contactRequestSchema } from '@/lib/api-schemas';
+import { getServerEnv } from '@/lib/env';
+import { checkRateLimit } from '@/lib/rate-limit';
+import { isRequestOriginAllowed } from '@/lib/origin-check';
+
+export const maxDuration = 30;
 
 function getClientIp(req: NextRequest): string {
-  const forwarded = req.headers.get('x-forwarded-for')
+  const forwarded = req.headers.get('x-forwarded-for');
   if (forwarded) {
-    const first = forwarded.split(',')[0]?.trim()
-    if (first) return first
+    const first = forwarded.split(',')[0]?.trim();
+    if (first) return first;
   }
-  const realIp = req.headers.get('x-real-ip')
-  if (realIp) return realIp.trim()
-  return '127.0.0.1'
+  const realIp = req.headers.get('x-real-ip');
+  if (realIp) return realIp.trim();
+  return '127.0.0.1';
 }
 
 function escapeHtml(value: string): string {
@@ -23,42 +26,17 @@ function escapeHtml(value: string): string {
     '>': '&gt;',
     "'": '&#39;',
     '"': '&quot;',
-  })[character] as string)
-}
-
-function isOriginAllowed(req: NextRequest): boolean {
-  const origin = req.headers.get('origin')
-  if (!origin) {
-    // If no origin header (e.g. server-side test or same-site navigation), check referer
-    const referer = req.headers.get('referer')
-    if (!referer) return true // allow when neither is sent (e.g. standard curl or non-browser client)
-    try {
-      const refererHost = new URL(referer).host
-      const host = req.headers.get('host')
-      return !host || refererHost === host
-    } catch {
-      return false
-    }
-  }
-
-  try {
-    const originHost = new URL(origin).host
-    const host = req.headers.get('host')
-    if (!host) return true
-    return originHost === host
-  } catch {
-    return false
-  }
+  })[character] as string);
 }
 
 async function sendEmailWithRetry(
   apiKey: string,
   payload: {
-    from: string
-    to: string[]
-    reply_to: string
-    subject: string
-    html: string
+    from: string;
+    to: string[];
+    reply_to: string;
+    subject: string;
+    html: string;
   },
   maxAttempts = 3,
 ): Promise<boolean> {
@@ -71,147 +49,180 @@ async function sendEmailWithRetry(
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-      })
+      });
 
       if (res.ok) {
-        return true
+        return true;
       }
 
       // If client-side error (e.g. 401 unauth, 403, 422), do not retry
       if (res.status >= 400 && res.status < 500) {
-        break
+        break;
       }
     } catch {
       // Network failure; retry on subsequent iteration
     }
 
     if (attempt < maxAttempts) {
-      await new Promise((resolve) => setTimeout(resolve, attempt * 150))
+      await new Promise((resolve) => setTimeout(resolve, attempt * 150));
     }
   }
-  return false
+  return false;
 }
 
 export async function POST(req: NextRequest) {
+  const requestId = crypto.randomUUID();
+
   try {
     // 1. Same-Origin Check
-    if (!isOriginAllowed(req)) {
+    if (!isRequestOriginAllowed(req)) {
+      console.error(`[CONTACT_ERROR] code=FORBIDDEN_ORIGIN status=403 requestId=${requestId}`);
       return Response.json(
         {
           ok: false,
-          code: 'FORBIDDEN',
+          code: 'FORBIDDEN_ORIGIN',
           message: 'Cross-origin requests are not allowed.',
+          contactEmail: 'rajendrabist396@gmail.com',
         },
         { status: 403 },
-      )
+      );
     }
 
     // 2. Body Size Limit (10 KB = 10,240 bytes)
-    const contentLength = req.headers.get('content-length')
+    const contentLength = req.headers.get('content-length');
     if (contentLength && parseInt(contentLength, 10) > 10240) {
+      console.error(`[CONTACT_ERROR] code=INVALID_INPUT status=413 requestId=${requestId}`);
       return Response.json(
         {
           ok: false,
-          code: 'PAYLOAD_TOO_LARGE',
+          code: 'INVALID_INPUT',
           message: 'Request payload exceeds 10 KB limit.',
+          contactEmail: 'rajendrabist396@gmail.com',
         },
         { status: 413 },
-      )
+      );
     }
 
     // 3. Rate Limiting (5 requests per hour per IP hash)
-    const ip = getClientIp(req)
-    const rateLimit = await checkRateLimit('contact', ip, 5, '1 h')
-
-    if (!rateLimit.success) {
-      return Response.json(
-        {
-          ok: false,
-          code: 'RATE_LIMITED',
-          message: 'Rate limit exceeded. Please wait before sending another message.',
-        },
-        {
-          status: 429,
-          headers: {
-            'Retry-After': String(Math.ceil((rateLimit.reset - Date.now()) / 1000)),
+    const ip = getClientIp(req);
+    try {
+      const rateLimit = await checkRateLimit('contact', ip, 5, '1 h');
+      if (!rateLimit.success) {
+        const retryAfterSec = Math.ceil((rateLimit.reset - Date.now()) / 1000);
+        console.warn(`[CONTACT_WARN] code=RATE_LIMITED status=429 requestId=${requestId}`);
+        return Response.json(
+          {
+            ok: false,
+            code: 'RATE_LIMITED',
+            message: 'Rate limit exceeded (5 submissions / hour). Please email directly.',
+            contactEmail: 'rajendrabist396@gmail.com',
           },
-        },
-      )
+          {
+            status: 429,
+            headers: {
+              'Retry-After': String(Math.max(1, retryAfterSec)),
+            },
+          },
+        );
+      }
+    } catch (rateLimitErr) {
+      console.warn(`[CONTACT_WARN] Rate limiter error requestId=${requestId}:`, rateLimitErr);
     }
 
     // 4. Parse JSON Body
-    const rawBody = await req.text()
+    const rawBody = await req.text();
     if (rawBody.length > 10240) {
+      console.error(`[CONTACT_ERROR] code=INVALID_INPUT status=413 requestId=${requestId}`);
       return Response.json(
         {
           ok: false,
-          code: 'PAYLOAD_TOO_LARGE',
+          code: 'INVALID_INPUT',
           message: 'Request payload exceeds 10 KB limit.',
+          contactEmail: 'rajendrabist396@gmail.com',
         },
         { status: 413 },
-      )
+      );
     }
 
-    let body: unknown = null
+    let body: unknown = null;
     try {
-      body = JSON.parse(rawBody)
+      body = JSON.parse(rawBody);
     } catch {
+      console.error(`[CONTACT_ERROR] code=INVALID_INPUT status=400 requestId=${requestId}`);
       return Response.json(
         {
           ok: false,
-          code: 'VALIDATION_FAILED',
+          code: 'INVALID_INPUT',
           message: 'Malformed JSON payload.',
+          contactEmail: 'rajendrabist396@gmail.com',
         },
         { status: 400 },
-      )
+      );
     }
 
     // 5. Honeypot Check (_hp or company_url)
-    const maybeHoneypot = body as { _hp?: string; company_url?: string } | null
+    const maybeHoneypot = body as { _hp?: string; company_url?: string } | null;
     if (maybeHoneypot?._hp || maybeHoneypot?.company_url) {
-      // Silently accept without dispatching email or saving to DB
       return Response.json(
         {
           ok: true,
           code: 'DELIVERED',
-          message: 'Message received.',
+          message: 'Message delivered.',
         },
         { status: 200 },
-      )
+      );
     }
 
     // 6. Zod Schema Validation
-    const parsed = contactRequestSchema.safeParse(body)
+    const parsed = contactRequestSchema.safeParse(body);
     if (!parsed.success) {
       const issueMessage =
         parsed.error.issues[0]?.message ||
-        'Please provide a valid name, email, and message (min 20 characters).'
+        'Please provide a valid name, email, and message (min 20 characters).';
+      console.error(`[CONTACT_ERROR] code=INVALID_INPUT status=400 requestId=${requestId}`);
       return Response.json(
         {
           ok: false,
-          code: 'VALIDATION_FAILED',
+          code: 'INVALID_INPUT',
           message: issueMessage,
+          contactEmail: 'rajendrabist396@gmail.com',
         },
         { status: 400 },
-      )
+      );
     }
 
-    const { name, email, message } = parsed.data
-    const env = getServerEnv()
+    const { name, email, message, isTest } = parsed.data;
 
-    let emailSent = false
-    let dbSaved = false
+    // Handle test / smoke test validation dispatches without sending live email
+    if (isTest) {
+      return Response.json(
+        {
+          ok: true,
+          code: 'DELIVERED',
+          message: 'Test message validated successfully.',
+        },
+        { status: 200 },
+      );
+    }
+    const env = getServerEnv();
 
-    // 7. Email Dispatch with 3 Retries
-    const resendApiKey = env.RESEND_API_KEY
+    let emailSent = false;
+    let dbSaved = false;
+
+    // 7. Email Dispatch via Resend
+    const resendApiKey = env.RESEND_API_KEY;
     const notificationRecipient =
-      env.CONTACT_NOTIFICATION_EMAIL || 'bistrajendra07@gmail.com'
+      process.env.CONTACT_TO_EMAIL ||
+      env.CONTACT_NOTIFICATION_EMAIL ||
+      'bistrajendra07@gmail.com';
+    const senderFrom =
+      process.env.CONTACT_FROM ||
+      env.RESEND_FROM_EMAIL ||
+      'Portfolio Contact <contact@bistrajendra.com.np>';
 
     if (resendApiKey) {
       emailSent = await sendEmailWithRetry(resendApiKey, {
-        from:
-          env.RESEND_FROM_EMAIL ||
-          'Portfolio Contact <onboarding@resend.dev>',
+        from: senderFrom,
         to: [notificationRecipient],
         reply_to: email,
         subject: `[bistrajendra.com.np] New Message from ${name}`,
@@ -235,49 +246,61 @@ ${escapeHtml(message)}
             </p>
           </div>
         `,
-      })
+      });
     }
 
-    // 8. Save to Database
-    try {
-      if (env.MONGODB_URI) {
-        await connectToDatabase()
-        await ContactMessage.create({ name, email, message })
-        dbSaved = true
+    // 8. Best-effort non-blocking database write with 2-second timeout
+    if (env.MONGODB_URI) {
+      try {
+        const dbPromise = async () => {
+          await connectToDatabase();
+          await ContactMessage.create({ name, email, message });
+        };
+
+        await Promise.race([
+          dbPromise(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('DB_TIMEOUT')), 2000)),
+        ]);
+        dbSaved = true;
+      } catch (dbErr: any) {
+        console.warn(`[CONTACT_WARN] Non-blocking DB write failed:`, dbErr?.message || dbErr);
       }
-    } catch {
-      // Log silently without crashing
     }
 
-    // 9. Uniform Result Check
+    // 9. Delivery Verification
     if (!emailSent && !dbSaved) {
+      console.error(`[CONTACT_ERROR] code=SERVICE_UNAVAILABLE status=503 requestId=${requestId}`);
       return Response.json(
         {
           ok: false,
           code: 'SERVICE_UNAVAILABLE',
           message:
-            'Live message forwarding is currently offline. Please reach out directly to rajendrabist396@gmail.com.',
+            'Message forwarding is currently unavailable. Please reach out directly to rajendrabist396@gmail.com.',
+          contactEmail: 'rajendrabist396@gmail.com',
         },
         { status: 503 },
-      )
+      );
     }
 
     return Response.json(
       {
         ok: true,
-        code: 'SUCCESS',
-        message: 'Message delivered successfully.',
+        code: 'DELIVERED',
+        message: 'Message delivered. Rajendra will respond to your email shortly.',
       },
       { status: 200 },
-    )
-  } catch {
+    );
+  } catch (error) {
+    console.error(`[CONTACT_ERROR] code=INTERNAL status=500 requestId=${requestId}:`, error);
     return Response.json(
       {
         ok: false,
-        code: 'INTERNAL_ERROR',
-        message: 'Could not send message right now. Please try again shortly.',
+        code: 'SERVICE_UNAVAILABLE',
+        message:
+          'Could not send message right now. Please email directly to rajendrabist396@gmail.com.',
+        contactEmail: 'rajendrabist396@gmail.com',
       },
-      { status: 500 },
-    )
+      { status: 503 },
+    );
   }
 }

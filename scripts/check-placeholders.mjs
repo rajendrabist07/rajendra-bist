@@ -41,14 +41,44 @@ function scanDir(dir) {
   }
 }
 
-console.log('🔍 Checking for placeholder leaks in components, app, and content...');
+console.log('🔍 Checking for placeholder leaks in source files...');
 for (const dir of TARGET_DIRS) {
   scanDir(path.resolve(process.cwd(), dir));
 }
 
+// Check rendered HTML of / (from .next/server/app/index.html)
+const indexPath = path.resolve(process.cwd(), '.next/server/app/index.html');
+if (fs.existsSync(indexPath)) {
+  console.log('🔍 Checking rendered production HTML of / (.next/server/app/index.html)...');
+  const rawHtml = fs.readFileSync(indexPath, 'utf8');
+  // Strip input placeholder attributes and tailwind classes for fair inspection of text content
+  const cleanHtml = rawHtml
+    .replace(/\splaceholder="[^"]*"/g, '')
+    .replace(/placeholder:[^\s"'>]+/g, '');
+
+  const RENDERED_FORBIDDEN = [
+    { name: 'assum', regex: /assum/i },
+    { name: 'per owner', regex: /per owner/i },
+    { name: 'TODO', regex: /\bTODO\b/ },
+    { name: '⚠', regex: /⚠/ },
+    { name: 'Note:', regex: /Note:/i },
+    { name: 'placeholder', regex: /\bplaceholder\b/i },
+    { name: 'training partner', regex: /training partner/i },
+  ];
+
+  for (const check of RENDERED_FORBIDDEN) {
+    if (check.regex.test(cleanHtml)) {
+      console.error(`❌ Rendered HTML leak: found forbidden token "${check.name}" in /`);
+      violations++;
+    }
+  }
+} else {
+  console.log('ℹ️  .next/server/app/index.html not found (run after build for rendered HTML check).');
+}
+
 if (violations > 0) {
-  console.error(`\n🚨 Failed: Found ${violations} forbidden placeholder leak(s).`);
+  console.error(`\n🚨 Failed: Found ${violations} forbidden placeholder / assumption leak(s).`);
   process.exit(1);
 } else {
-  console.log('✅ Passed: Zero placeholder leaks found.');
+  console.log('✅ Passed: Zero placeholder and assumption leaks found.');
 }

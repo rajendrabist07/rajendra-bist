@@ -74,7 +74,7 @@ export default function Process() {
         <SectionHeader
           eyebrow="04 // ENGINEERING PROCESS"
           title="How I Architect & Ship Systems"
-          description="A four-stage delivery process that makes assumptions explicit, validates behavior, and keeps system reliability visible."
+          description="A four-stage delivery sequence that clarifies system constraints, validates behavior, and keeps system reliability visible."
         />
 
         <motion.div

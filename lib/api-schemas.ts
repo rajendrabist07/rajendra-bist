@@ -25,6 +25,7 @@ export const contactRequestSchema = z.object({
     .regex(multilineNoControlCharsRegex, 'Message must not contain control characters'),
   _hp: z.string().optional(),
   company_url: z.string().optional(),
+  isTest: z.boolean().optional(),
 })
 
 export const chatRequestSchema = z.object({

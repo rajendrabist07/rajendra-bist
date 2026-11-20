@@ -2,9 +2,16 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, redesign/v4]
   pull_request:
     branches: [main]
+
+env:
+  GEMINI_API_KEY: 'ci-dummy-gemini-key'
+  RESEND_API_KEY: 'ci-dummy-resend-key'
+  IP_HASH_SECRET: 'ci-dummy-hash-secret'
+  UPSTASH_REDIS_REST_URL: 'https://dummy.upstash.io'
+  UPSTASH_REDIS_REST_TOKEN: 'dummy-token'
 
 jobs:
   validate:
@@ -13,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm run lint
@@ -21,6 +28,7 @@ jobs:
       - run: npm run check:contrast
       - run: npm run check:placeholders
       - run: npm run check:evidence
+      - run: npm run check:citations
       - run: npm run check:links
       - run: npm test
       - run: npm run build
@@ -32,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm run build
@@ -46,8 +54,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
       - run: npm run lighthouse

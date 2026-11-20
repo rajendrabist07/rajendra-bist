@@ -47,7 +47,7 @@ describe('Chat API Hardening & Verification', () => {
     const res = await POST(req)
     const json = await res.json()
     expect(res.status).toBe(503)
-    expect(json.code).toBe('SERVICE_UNAVAILABLE')
+    expect(json.code).toBe('ASSISTANT_OFFLINE')
   })
 
   it('2. Input cap: rejects message exceeding 600 characters', async () => {
@@ -58,7 +58,7 @@ describe('Chat API Hardening & Verification', () => {
     const res = await POST(req)
     const json = await res.json()
     expect(res.status).toBe(400)
-    expect(json.code).toBe('VALIDATION_FAILED')
+    expect(json.code).toBe('INVALID_INPUT')
     expect(json.error).toContain('600')
   })
 
@@ -73,7 +73,7 @@ describe('Chat API Hardening & Verification', () => {
     const res = await POST(req)
     const json = await res.json()
     expect(res.status).toBe(400)
-    expect(json.code).toBe('VALIDATION_FAILED')
+    expect(json.code).toBe('INVALID_INPUT')
     expect(json.error).toContain('6')
   })
 
@@ -85,7 +85,7 @@ describe('Chat API Hardening & Verification', () => {
     const res = await POST(req)
     const json = await res.json()
     expect(res.status).toBe(413)
-    expect(json.code).toBe('PAYLOAD_TOO_LARGE')
+    expect(json.code).toBe('INVALID_INPUT')
   })
 
   it('5. Rate limiting: caps requests at 30/hour per IP', async () => {

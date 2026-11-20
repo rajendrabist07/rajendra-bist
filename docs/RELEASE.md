@@ -15,15 +15,38 @@ Configure the following environment variable names in the **Vercel Dashboard > S
 > [!IMPORTANT]
 > Never commit actual secrets or credentials to git. All keys are read from serverless runtime environment.
 
-| Variable Name | Required | Scope | Description / Purpose |
+| Variable Name | Required | Environment | Description / Purpose |
 |---|---|---|---|
-| `MONGODB_URI` | Yes | Serverless API | Connection string for MongoDB Atlas cluster (stores contact submissions and telemetry) |
-| `GEMINI_API_KEY` | Yes | Serverless API | Google Gemini API key powering `/api/chat` streaming AI portfolio assistant |
-| `RESEND_API_KEY` | Yes | Serverless API | Resend API key for delivering verified contact form submissions to personal email |
-| `CONTACT_NOTIFICATION_EMAIL` | Yes | Serverless API | Notification recipient email address (e.g. `bistrajendra07@gmail.com`) |
-| `RESEND_FROM_EMAIL` | Yes | Serverless API | Verified sender email address (e.g. `Portfolio Contact <contact@bistrajendra.com.np>`) |
-| `UPSTASH_REDIS_REST_URL` | Yes | Edge / API | Upstash Redis REST endpoint for distributed IP rate limiting |
-| `UPSTASH_REDIS_REST_TOKEN` | Yes | Edge / API | Upstash Redis REST bearer token |
+| `MONGODB_URI` | Optional | Preview & Production | Connection string for MongoDB Atlas cluster (stores contact submissions and telemetry) |
+| `GEMINI_API_KEY` | Recommended | Preview & Production | Google Gemini API key powering `/api/chat` streaming AI portfolio assistant |
+| `GEMINI_MODEL` | Optional | Preview & Production | Primary Gemini model name (defaults to `gemini-2.5-flash`) |
+| `GEMINI_MODEL_FALLBACKS` | Optional | Preview & Production | Comma-separated list of fallback models if primary model is unavailable |
+| `RESEND_API_KEY` | Recommended | Preview & Production | Resend API key for delivering verified contact form submissions to personal email |
+| `CONTACT_FROM` | Recommended | Production | Verified sender header (e.g. `Portfolio Contact <contact@bistrajendra.com.np>`) |
+| `CONTACT_TO_EMAIL` | Recommended | Preview & Production | Notification recipient address (e.g. `bistrajendra07@gmail.com`) |
+| `CONTACT_NOTIFICATION_EMAIL`| Optional | Preview & Production | Fallback recipient address alias |
+| `RESEND_FROM_EMAIL` | Optional | Preview & Production | Fallback sender address alias |
+| `UPSTASH_REDIS_REST_URL` | Optional | Preview & Production | Upstash Redis REST endpoint for distributed IP rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | Optional | Preview & Production | Upstash Redis REST bearer token |
+| `IP_HASH_SECRET` | Optional | Production | Salt used for GDPR-compliant SHA-256 IP hashing in rate limiter |
+
+### Resend Domain Verification & DNS Configuration (SPF & DKIM)
+
+> [!IMPORTANT]
+> If using Resend's shared test address (`onboarding@resend.dev`), emails can ONLY be delivered to the email address registered on the Resend account. For real production delivery to any inbox, you must verify your custom domain `bistrajendra.com.np` in the Resend Dashboard:
+
+1. In the [Resend Dashboard](https://resend.com/domains), click **Add Domain** and enter `bistrajendra.com.np`.
+2. Add the following DNS records at your domain registrar / DNS provider:
+   - **DKIM (TXT Record)**:
+     - Host: `resend._domainkey.bistrajendra.com.np`
+     - Value: Provided by Resend (e.g. `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQ...`)
+   - **SPF (TXT Record)**:
+     - Host: `bistrajendra.com.np`
+     - Value: `v=spf1 include:amazonses.com ~all` (or Resend SPF directive)
+   - **Return-Path (MX Record / CNAME)**:
+     - Host: `bounces.bistrajendra.com.np`
+     - Value: `feedback-smtp.us-east-1.amazonses.com` (priority 10)
+3. Once status displays **Verified**, set `CONTACT_FROM="Portfolio Contact <contact@bistrajendra.com.np>"` in Vercel Production Environment Variables.
 
 ---
 
