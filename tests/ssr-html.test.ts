@@ -1,10 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 
 describe('Server HTML Content Integrity (No-JS / Crawler Verification)', () => {
   it('verifies that prerendered server HTML contains all critical content sections', () => {
     const htmlPath = path.resolve(process.cwd(), '.next/server/app/index.html');
+    if (!fs.existsSync(htmlPath)) {
+      execSync('npx next build', { stdio: 'inherit' });
+    }
     expect(fs.existsSync(htmlPath), 'Production prerendered index.html must exist').toBe(true);
 
     const html = fs.readFileSync(htmlPath, 'utf8');
