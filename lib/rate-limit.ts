@@ -5,9 +5,14 @@ import { createHmac } from 'node:crypto'
 type LocalLimit = { count: number; resetAt: number }
 
 const localLimits = new Map<string, LocalLimit>()
-const hasUpstash = Boolean(
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN,
-)
+const isTestEnv = process.env.NODE_ENV === 'test' || Boolean(process.env.VITEST)
+const hasUpstash =
+  !isTestEnv &&
+  Boolean(
+    process.env.UPSTASH_REDIS_REST_URL &&
+      process.env.UPSTASH_REDIS_REST_TOKEN &&
+      !process.env.UPSTASH_REDIS_REST_URL.includes('dummy'),
+  )
 const redis = hasUpstash ? Redis.fromEnv() : null
 const limiters = new Map<string, Ratelimit>()
 
@@ -50,8 +55,12 @@ export async function checkRateLimit(
   const key = `${namespace}:${hashedId}`
 
   if (redis) {
-    const result = await getLimiter(limit, window).limit(key)
-    return { success: result.success, remaining: result.remaining, reset: result.reset }
+    try {
+      const result = await getLimiter(limit, window).limit(key)
+      return { success: result.success, remaining: result.remaining, reset: result.reset }
+    } catch (redisErr) {
+      console.warn('[RATE_LIMIT] Upstash Redis call failed, falling back to local memory:', redisErr)
+    }
   }
 
   const now = Date.now()

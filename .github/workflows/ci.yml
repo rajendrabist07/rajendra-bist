@@ -10,8 +10,6 @@ env:
   GEMINI_API_KEY: 'ci-dummy-gemini-key'
   RESEND_API_KEY: 'ci-dummy-resend-key'
   IP_HASH_SECRET: 'ci-dummy-hash-secret'
-  UPSTASH_REDIS_REST_URL: 'https://dummy.upstash.io'
-  UPSTASH_REDIS_REST_TOKEN: 'dummy-token'
 
 jobs:
   validate:
