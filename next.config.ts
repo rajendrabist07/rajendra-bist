@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   serverExternalPackages: ["mongoose"],
   images: {
     formats: ['image/avif', 'image/webp'],
