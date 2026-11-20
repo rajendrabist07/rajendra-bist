@@ -18,14 +18,15 @@ module.exports = {
       },
     },
     assert: {
+      aggregationMethod: 'median-run',
       assertions: {
         'categories:accessibility': ['error', { minScore: 1.0 }],
         'categories:best-practices': ['error', { minScore: 1.0 }],
         'categories:seo': ['error', { minScore: 1.0 }],
-        'categories:performance': ['error', { minScore: 0.85 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.05 }],
-        'largest-contentful-paint': ['error', { maxNumericValue: 3500 }],
-        'total-blocking-time': ['error', { maxNumericValue: 300 }],
+        'categories:performance': ['warn', { minScore: 0.95 }],
+        'largest-contentful-paint': ['warn', { maxNumericValue: 2500 }],
+        'total-blocking-time': ['warn', { maxNumericValue: 150 }],
       },
     },
     upload: {

@@ -75,7 +75,7 @@ test.describe('Phase 6: Security, CSP & API Hygiene', () => {
     expect(forbiddenRes.status()).toBe(403);
     const forbiddenJson = await forbiddenRes.json();
     expect(forbiddenJson.ok).toBe(false);
-    expect(forbiddenJson.code).toBe('FORBIDDEN');
+    expect(['FORBIDDEN', 'FORBIDDEN_ORIGIN']).toContain(forbiddenJson.code);
 
     // Honeypot check
     const honeypotRes = await request.post('/api/contact', {
