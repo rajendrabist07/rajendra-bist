@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direction B: "Quiet Graphite" — Identity Mockup</title>
+  <style>
+    /* Direction B Design Tokens */
+    :root[data-theme="dark"] {
+      --bg-page: #0E0F11;
+      --bg-surface-1: #16181B;
+      --bg-surface-2: #1E2125;
+      --bg-surface-3: #272B30;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text-primary: #F5F5F7;
+      --text-secondary: #A1A1A6;
+      --text-tertiary: #98989D;
+      --accent: #2997FF;
+      --accent-ink: #FFFFFF;
+      --accent-dim: rgba(41, 151, 255, 0.12);
+      --status-live: #30D158;
+    }
+
+    :root[data-theme="light"] {
+      --bg-page: #F5F5F7;
+      --bg-surface-1: #FFFFFF;
+      --bg-surface-2: #E5E5EA;
+      --bg-surface-3: #D1D1D6;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.16);
+      --text-primary: #1D1D1F;
+      --text-secondary: #48484A;
+      --text-tertiary: #545458;
+      --accent: #0062CC;
+      --accent-ink: #FFFFFF;
+      --accent-dim: rgba(0, 98, 204, 0.10);
+      --status-live: #1B6C2F;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Glass Navigation */
+    header {
+      background: var(--bg-surface-1);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 18px 0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .theme-toggle {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 100px 0 120px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 0;
+      }
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--status-live);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero-role {
+      font-size: clamp(16px, 2.2vw, 20px);
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-pitch {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 50ch;
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+    .btn-secondary {
+      background: var(--bg-surface-2);
+      color: var(--text-primary);
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Portrait Image Card */
+    .portrait-card {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 4/5;
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+    }
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Case Study Card */
+    .section-h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+    .case-card {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 44px;
+      margin-bottom: 80px;
+    }
+    .case-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .case-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      max-width: 60ch;
+    }
+    .bullet-list {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .bullet-list li {
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .evidence-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .evidence-pill {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 18px;
+    }
+    .evidence-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .evidence-val {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Contact Section */
+    .contact-card {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 44px;
+      margin-bottom: 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    @media (max-width: 900px) {
+      .contact-card { grid-template-columns: 1fr; padding: 24px; }
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 15px;
+      margin-bottom: 16px;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <span>Rajendra Bist</span>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-label">Switch Theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-section">
+      <div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Available immediately · Delhi NCR / Remote</span>
+        </div>
+        <h1>Systems-First Full-Stack Engineer</h1>
+        <div class="hero-role">Next.js · TypeScript · Node.js · PostgreSQL</div>
+        <p class="hero-pitch">
+          Designing and deploying end-to-end applications with verified multi-tenant isolation, typed contracts, and bounded workflow orchestration.
+        </p>
+        <div class="btn-group">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="/resume/Rajendra_Bist_Full_Stack_Developer.pdf" class="btn-secondary">Download CV</a>
+        </div>
+      </div>
+      <div>
+        <div class="portrait-card">
+          <img src="../../../public/images/Rajendra-Bist.png" alt="Rajendra Bist">
+        </div>
+      </div>
+    </section>
+
+    <div class="section-h2">Featured Case Study</div>
+    <div class="case-card">
+      <div class="case-title">Sovereign</div>
+      <div class="case-desc">
+        Multi-tenant B2B SaaS platform where organizations run autonomous AI workflow agents with database-level isolation.
+      </div>
+      <ul class="bullet-list">
+        <li>Enforced database tenant isolation using PostgreSQL Row-Level Security with fail-closed policies.</li>
+        <li>Implemented durable multi-step executions via Inngest with human approval checkpoints.</li>
+        <li>Created reviewer queue interface for real-time run inspection and action confirmation.</li>
+      </ul>
+      <div class="evidence-row">
+        <div class="evidence-pill">
+          <div class="evidence-label">TENANT ISOLATION</div>
+          <div class="evidence-val">PostgreSQL RLS (fail-closed)</div>
+        </div>
+        <div class="evidence-pill">
+          <div class="evidence-label">WORKFLOW ENGINE</div>
+          <div class="evidence-val">Inngest Resumable Runs</div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a href="https://sovereign-saas-platform.vercel.app/" class="btn-primary" target="_blank">Live Platform</a>
+        <a href="https://github.com/rajendrabist07/sovereign" class="btn-secondary" target="_blank">View Code</a>
+      </div>
+    </div>
+
+    <div class="section-h2">Contact Hub</div>
+    <div class="contact-card">
+      <div>
+        <h3 style="margin-bottom: 12px; font-size: 22px;">Get in Touch</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">Direct inquiries for full-stack engineering and backend systems roles.</p>
+        <p style="margin-bottom: 8px;"><strong>Email:</strong> rajendrabist396@gmail.com</p>
+        <p style="margin-bottom: 8px;"><strong>Location:</strong> New Delhi, India (Asia/Kolkata)</p>
+        <p><strong>Eligibility:</strong> India (1950 Indo-Nepal Treaty, no visa needed)</p>
+      </div>
+      <div>
+        <form onsubmit="event.preventDefault(); alert('Message sent.');">
+          <input type="text" class="form-input" placeholder="Name" required>
+          <input type="email" class="form-input" placeholder="Email" required>
+          <textarea class="form-input" rows="3" placeholder="Message or role details..." required></textarea>
+          <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+    }
+  </script>
+</body>
+</html>

@@ -15,10 +15,11 @@ test.describe('Portfolio Critical End-to-End User Journeys', () => {
 
   test('command palette trigger opens terminal search modal', async ({ page }) => {
     await page.goto('/')
-    const searchBtn = page.getByLabel('Open Command Palette')
+    await page.waitForLoadState('networkidle')
+    const searchBtn = page.getByRole('button', { name: /search/i }).first()
     await expect(searchBtn).toBeVisible()
     await searchBtn.click()
-    await expect(page.locator('[cmdk-root]')).toBeVisible()
+    await expect(page.locator('div[role="dialog"]')).toBeVisible()
     await expect(page.locator('[cmdk-input]')).toBeVisible()
   })
 

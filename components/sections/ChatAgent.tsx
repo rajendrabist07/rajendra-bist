@@ -647,6 +647,9 @@ export default function ChatAgent() {
                   </button>
                 </div>
               </form>
+              <p className="px-4 pb-3 pt-0 text-center font-mono text-[10px] text-[--text-tertiary]">
+                Chats are stored for 30 days to prevent abuse.
+              </p>
             </motion.div>
           </div>
         ) : null}

@@ -1,38 +1,31 @@
+import dynamic from "next/dynamic";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
-import CommandPalette from "@/components/ui/CommandPalette";
-import PremiumBackground from "@/components/ui/PremiumBackground";
+import BlueprintBackground from "@/components/ui/BlueprintBackground";
 import ScrollProgress from "@/components/ui/ScrollProgress";
-import FloatingAskAI from "@/components/ui/FloatingAskAI";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Skills from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
-import Process from "@/components/sections/Process";
-import Experience from "@/components/sections/Experience";
-import Credentials from "@/components/sections/Credentials";
-import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
-import ChatAgent from "@/components/sections/ChatAgent";
+import ClientModals from "@/components/providers/ClientModals";
+
+const About = dynamic(() => import("@/components/sections/About"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+const Skills = dynamic(() => import("@/components/sections/Skills"));
+const Experience = dynamic(() => import("@/components/sections/Experience"));
+const Credentials = dynamic(() => import("@/components/sections/Credentials"));
+const Contact = dynamic(() => import("@/components/sections/Contact"));
 
 export default function HomePage() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[--bg-void] text-[--text-primary]">
+      <div className="relative min-h-screen bg-[--bg-page] text-[--text-primary] overflow-x-clip">
         {/* Top Viewport Scroll Progress Bar */}
         <ScrollProgress />
 
-        {/* ⌘K Command Palette */}
-        <CommandPalette />
-
-        {/* Fixed Mesh Gradient & Noise Background */}
-        <PremiumBackground />
+        {/* Fixed Blueprint Grid Background */}
+        <BlueprintBackground />
 
         {/* Navigation & Header */}
         <Navbar />
-
-        {/* Floating Quick Comms */}
-        <FloatingAskAI />
 
         {/* Main Content Sections */}
         <main id="main-content" className="relative z-10">
@@ -40,7 +33,6 @@ export default function HomePage() {
           <About />
           <Skills />
           <Projects />
-          <Process />
           <Experience />
           <Credentials />
           <Contact />
@@ -49,8 +41,8 @@ export default function HomePage() {
         {/* Telemetry Footer */}
         <Footer />
 
-        {/* Gemini 2.5 AI Assistant Modal */}
-        <ChatAgent />
+        {/* Client Interactive Modals (Command Palette, Floating Quick Comms, Chat Agent) */}
+        <ClientModals />
       </div>
     </SmoothScrollProvider>
   );

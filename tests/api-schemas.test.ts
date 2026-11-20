@@ -17,14 +17,16 @@ describe('API request schemas', () => {
     }
   })
 
-  it('rejects invalid contact input (too short, bad email, empty name)', () => {
+  it('rejects invalid contact input (too short, bad email, empty name, control characters)', () => {
     expect(contactRequestSchema.safeParse({ name: '', email: 'bad', message: '' }).success).toBe(false)
     expect(contactRequestSchema.safeParse({ name: 'R', email: 'good@gmail.com', message: 'too short' }).success).toBe(false)
+    expect(contactRequestSchema.safeParse({ name: 'Bad\x00Name', email: 'good@gmail.com', message: 'Valid message exceeding twenty characters' }).success).toBe(false)
   })
 
-  it('limits chat history and message size to max 500 characters', () => {
+  it('limits chat history to 6 turns and message size to max 600 characters', () => {
     expect(chatRequestSchema.safeParse({ message: 'hello', history: [] }).success).toBe(true)
-    expect(chatRequestSchema.safeParse({ message: 'hello', history: Array.from({ length: 15 }, () => ({ role: 'user', content: 'x' })) }).success).toBe(false)
-    expect(chatRequestSchema.safeParse({ message: 'x'.repeat(501), history: [] }).success).toBe(false)
+    expect(chatRequestSchema.safeParse({ message: 'hello', history: Array.from({ length: 7 }, () => ({ role: 'user', content: 'x' })) }).success).toBe(false)
+    expect(chatRequestSchema.safeParse({ message: 'x'.repeat(600), history: [] }).success).toBe(true)
+    expect(chatRequestSchema.safeParse({ message: 'x'.repeat(601), history: [] }).success).toBe(false)
   })
 })

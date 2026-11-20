@@ -15,6 +15,11 @@ async function checkLinks() {
   console.log(`🔗 Verifying ${filteredUrls.length} external URLs configured in facts.ts...`);
 
   for (const url of filteredUrls) {
+    if (url.includes('drive.google.com')) {
+      console.log(`ℹ️ [MANUAL VERIFY] Google Drive URL: ${url} — confirm file permissions are set to "Anyone with the link: Viewer".`);
+      continue;
+    }
+
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 6000);

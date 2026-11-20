@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "../styles/globals.css";
 import { Providers } from "./providers";
 import { PERSONAL, PROJECTS, SKILLS } from "@/lib/portfolio-data";
@@ -10,17 +10,17 @@ import {
   SITE_URL,
 } from "@/lib/site-config";
 
-const displayFont = Plus_Jakarta_Sans({
+const displayFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
 const monoFont = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -73,6 +73,11 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: ["/opengraph-image"],
   },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? {
+        google: process.env.GOOGLE_SITE_VERIFICATION,
+      }
+    : undefined,
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -90,17 +95,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07080a",
+  themeColor: "#0B1220",
 };
 
 const themeInitScript = `
 (() => {
   try {
-    const storedTheme = window.localStorage.getItem('theme');
+    const match = document.cookie.match(/(?:^|; )theme=([^;]*)/);
+    const cookieTheme = match ? decodeURIComponent(match[1]) : null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    document.documentElement.dataset.theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : systemTheme;
+    const resolvedTheme = (cookieTheme === 'light' || cookieTheme === 'dark') ? cookieTheme : systemTheme;
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
+    document.documentElement.dataset.theme = resolvedTheme;
+    document.documentElement.style.colorScheme = resolvedTheme;
   } catch {
+    document.documentElement.setAttribute('data-theme', 'dark');
     document.documentElement.dataset.theme = 'dark';
+    document.documentElement.style.colorScheme = 'dark';
   }
 })();
 `;
@@ -152,8 +163,8 @@ const jsonLdGraph = {
       email: `mailto:${PERSONAL.email}`,
       sameAs: [PERSONAL.github, PERSONAL.linkedin],
       knowsAbout: [
-        "React 18.3",
-        "Next.js 15",
+        "React",
+        "Next.js",
         "TypeScript",
         "JavaScript",
         "Tailwind CSS v4",
@@ -183,17 +194,6 @@ const jsonLdGraph = {
         {
           "@type": "EducationalOrganization",
           name: "Kailali Multiple Campus",
-        },
-      ],
-      hasCredential: [
-        {
-          "@type": "EducationalOccupationalCredential",
-          name: "Diploma in IT (Full-Stack Web Development)",
-          credentialCategory: "Professional Engineering Training",
-          recognizedBy: {
-            "@type": "EducationalOrganization",
-            name: "Vcare Technical Institute",
-          },
         },
       ],
       address: {
@@ -258,41 +258,18 @@ const jsonLdGraph = {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "SoftwareApplication",
+          "@type": "SoftwareSourceCode",
           name: project.title,
           description: project.description,
-          applicationCategory: "WebApplication",
-          operatingSystem: "Web",
           url: project.liveUrl,
           codeRepository: project.githubUrl,
-          creator: {
+          programmingLanguage: "TypeScript",
+          author: {
             "@id": personId,
           },
           keywords: project.stack.join(", "),
         },
       })),
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${SITE_URL}/#faq`,
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Who is Rajendra Bist?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Rajendra Bist is a backend-focused full-stack developer (Node.js, TypeScript, PostgreSQL) based in New Delhi, India. Originally from Nepal, he is legally authorized to work across India under the 1950 Indo-Nepal Treaty without visa sponsorship or a work permit. He designs and ships complete applications end to end: schema design, REST APIs, authentication, tenant isolation, and production deployments.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What does Rajendra Bist specialize in?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Rajendra specializes in full-stack and backend systems engineering: Node.js, Express.js, PostgreSQL (Row-Level Security, pgvector), Next.js 15 (App Router, ISR), Inngest durable workflows, Prisma ORM, Zod validation, and schema-guarded AI agent loops.",
-          },
-        },
-      ],
     },
   ],
 };
@@ -303,19 +280,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${displayFont.variable} ${monoFont.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <meta name="author" content={PERSONAL.name} />
-        <meta
-          name="classification"
-          content="Portfolio, Software Engineering, Full-Stack Development, Backend Development, AI Systems, Remote Software Engineer"
+        <link
+          rel="preload"
+          as="image"
+          href="/images/rajendra-bist-portrait-sm.webp"
+          type="image/webp"
+          media="(max-width: 640px)"
+          fetchPriority="high"
         />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/rajendra-bist-portrait.webp"
+          type="image/webp"
+          media="(min-width: 641px)"
+          fetchPriority="high"
+        />
+        <meta name="author" content={PERSONAL.name} />
         <meta name="format-detection" content="telephone=no" />
         <link rel="manifest" href="/manifest.json" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph).replace(/</g, '\\u003c') }}
         />
       </head>
       <body
@@ -323,7 +312,7 @@ export default function RootLayout({
       >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#FF7A33] focus:text-[#050608] focus:rounded-lg focus:font-mono focus:text-xs focus:font-semibold focus:shadow-2xl"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[--accent] focus:text-[--accent-ink] focus:rounded-[--radius-control] focus:font-mono focus:text-xs focus:font-semibold focus:shadow-2xl"
         >
           Skip to main content
         </a>

@@ -13,9 +13,9 @@ export default function Error({
   }, []);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[--bg-void] px-6 text-[--text-primary]">
+    <main className="flex min-h-screen items-center justify-center bg-[--bg-page] px-6 text-[--text-primary]">
       <section className="max-w-md text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent-warm]">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent]">
           500 // SYSTEM ERROR
         </p>
         <h1 className="mt-4 text-3xl font-semibold">
@@ -34,7 +34,7 @@ export default function Error({
           </button>
           <a
             href="/"
-            className="premium-button-secondary rounded-xl px-5 py-3 font-semibold transition-all hover:border-[--accent-warm]"
+            className="premium-button-secondary rounded-xl px-5 py-3 font-semibold transition-all hover:border-[--accent]"
           >
             Return Home
           </a>

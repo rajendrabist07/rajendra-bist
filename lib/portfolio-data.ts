@@ -9,8 +9,10 @@ export {
   EDUCATION,
   CREDENTIALS,
   EXPERIENCE,
+  TIMELINE_EVENTS,
   SKILLS,
   PROJECTS,
+  DRAFT_PROJECTS,
   SITE_CONFIG,
 } from '../content/facts'
 

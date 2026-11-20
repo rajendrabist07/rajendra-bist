@@ -1,26 +1,34 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { BLOG_POSTS } from "@/lib/blog";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Engineering Notes",
-  description: "Engineering notes on backend systems, architecture, and applied AI.",
+  description: "Engineering notes on backend systems, database architecture, and applied AI by Rajendra Bist.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Engineering Notes | Rajendra Bist",
+    description: "Engineering notes on backend systems, database architecture, and applied AI by Rajendra Bist.",
+    url: "https://www.bistrajendra.com.np/blog",
+    locale: "en_IN",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Rajendra Bist Engineering Notes" }],
+  },
 };
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-[--bg-void] py-32 text-[--text-primary]">
+    <main id="main-content" className="min-h-screen bg-[--bg-page] py-32 text-[--text-primary]">
       <Container>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent-warm] mb-6"
+          className="inline-flex items-center gap-2 font-mono text-xs text-[--text-tertiary] transition-colors hover:text-[--accent] mb-6"
         >
           <ArrowLeft size={14} />
           Back to Overview
         </Link>
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent-warm]">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[--accent]">
           Notes // Engineering
         </p>
         <h1 className="mt-4 text-4xl font-semibold md:text-6xl">

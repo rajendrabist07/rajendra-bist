@@ -1,11 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { chatRequestSchema, contactRequestSchema } from '../lib/api-schemas';
 import { PORTFOLIO_CONTEXT } from '../lib/portfolio-context';
+import { StreamTagSanitizer } from '../lib/stream-sanitizer';
 
 describe('AI Assistant & API Security Hardening (Adversarial Tests)', () => {
   // Test 1: Extremely long input capping
-  it('1. Capping: rejects input exceeding 500 characters', () => {
-    const maliciousPayload = 'A'.repeat(501);
+  it('1. Capping: rejects input exceeding 600 characters', () => {
+    const maliciousPayload = 'A'.repeat(601);
     const parsed = chatRequestSchema.safeParse({
       message: maliciousPayload,
       history: [],
@@ -67,5 +70,46 @@ describe('AI Assistant & API Security Hardening (Adversarial Tests)', () => {
     const parsed = contactRequestSchema.safeParse(spamPayload);
     expect(parsed.success).toBe(true);
     expect(parsed.data?._hp).toBe('gotcha_bot');
+  });
+
+  // Test 7: Secret leakage prevention in static bundles
+  it('7. Client Isolation: verifies no server secrets are exposed in client bundles', () => {
+    const staticDir = path.resolve(process.cwd(), '.next/static');
+    if (!fs.existsSync(staticDir)) return;
+
+    const files = fs.readdirSync(staticDir, { recursive: true }) as string[];
+    const jsFiles = files.filter((f) => typeof f === 'string' && f.endsWith('.js'));
+
+    const forbiddenPatterns = [
+      'GEMINI_API_KEY',
+      'RESEND_API_KEY',
+      'MONGODB_URI',
+      'UPSTASH_REDIS_REST_TOKEN',
+      'CONTACT_NOTIFICATION_EMAIL',
+    ];
+
+    for (const file of jsFiles) {
+      const fullPath = path.join(staticDir, file);
+      const content = fs.readFileSync(fullPath, 'utf8');
+      for (const pattern of forbiddenPatterns) {
+        expect(content).not.toContain(pattern);
+      }
+    }
+  });
+
+  // Test 8: Stream tag sanitizer handles HTML tags split across chunks
+  it('8. Sanitization: handles HTML tag split across multiple stream chunks', () => {
+    const sanitizer = new StreamTagSanitizer();
+    const chunk1 = 'Hello <scr';
+    const chunk2 = 'ipt>alert("xss")</script> world!';
+
+    const out1 = sanitizer.processChunk(chunk1);
+    const out2 = sanitizer.processChunk(chunk2);
+    const out3 = sanitizer.flush();
+
+    const fullOutput = out1 + out2 + out3;
+    expect(fullOutput).not.toContain('<script>');
+    expect(fullOutput).not.toContain('</script>');
+    expect(fullOutput).toBe('Hello alert("xss") world!');
   });
 });

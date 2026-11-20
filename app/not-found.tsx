@@ -9,9 +9,9 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <main id="main-content" className="flex min-h-screen flex-col items-center justify-center bg-[--bg-void] px-4 py-32 text-center text-[--text-primary]">
+    <main id="main-content" className="flex min-h-screen flex-col items-center justify-center bg-[--bg-page] px-4 py-32 text-center text-[--text-primary]">
       <Container className="max-w-md">
-        <p className="font-mono text-xs uppercase tracking-widest text-[--accent-warm]">
+        <p className="font-mono text-xs uppercase tracking-widest text-[--accent]">
           404 // ROUTE_NOT_FOUND
         </p>
         <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight">
@@ -31,7 +31,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/#projects"
-            className="premium-button-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold transition-all hover:border-[--accent-warm]"
+            className="premium-button-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold transition-all hover:border-[--accent]"
           >
             <ArrowLeft size={14} />
             Explore Projects

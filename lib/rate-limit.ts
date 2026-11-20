@@ -1,5 +1,6 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
+import { createHmac } from 'node:crypto'
 
 type LocalLimit = { count: number; resetAt: number }
 
@@ -9,6 +10,19 @@ const hasUpstash = Boolean(
 )
 const redis = hasUpstash ? Redis.fromEnv() : null
 const limiters = new Map<string, Ratelimit>()
+
+export function hashIdentifier(id: string): string {
+  const secret = process.env.IP_HASH_SECRET
+  if (!secret && process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV === 'production') {
+    throw new Error('IP_HASH_SECRET environment variable is missing in production environment.')
+  }
+  const key = secret || 'dev-fallback-salt-only-for-local-testing'
+  return createHmac('sha256', key).update(id || 'unknown').digest('hex').slice(0, 32)
+}
+
+export function resetLocalRateLimits(): void {
+  localLimits.clear()
+}
 
 function getLimiter(limit: number, window: `${number} ${'m' | 'h' | 'd'}`) {
   const key = `${limit}:${window}`
@@ -31,7 +45,8 @@ export async function checkRateLimit(
   limit: number,
   window: `${number} ${'m' | 'h' | 'd'}`,
 ) {
-  const key = `${namespace}:${identifier}`
+  const hashedId = hashIdentifier(identifier)
+  const key = `${namespace}:${hashedId}`
 
   if (redis) {
     const result = await getLimiter(limit, window).limit(key)

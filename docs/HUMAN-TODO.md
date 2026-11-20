@@ -1,37 +1,34 @@
 # HUMAN-TODO
 
-Manual actions required after Phase 1 ships. These cannot be automated.
+Manual actions and optional owner inputs. These cannot be automated.
 
-## Resume PDF
+## Portrait Image Source
 
-- [ ] Compile an updated resume as `Rajendra_Bist_Full_Stack_Developer.pdf`
-- [ ] Upload it to `/public/resume/Rajendra_Bist_Full_Stack_Developer.pdf`
-- [ ] The old path `/public/Resume/resume.pdf` is kept as-is; lowercase `/resume/` redirects to `/Resume/` via `next.config.ts`
+- [ ] Current portrait `public/images/Rajendra-Bist.png` source resolution is **700×932 px** (flagged as below recommended 1200×1500 px).
+- [x] Generated 4:5 derivatives (`public/images/rajendra-bist-portrait.webp` at 28 KB, `rajendra-bist-portrait.avif` at 31 KB) without artificial upscaling.
+- [ ] *(Optional)*: Provide an uncompressed portrait photo at ≥ 1200×1500 px in `owner-inputs/` if higher crispness on 4K/retina displays is desired.
 
-## Naukri Profile
+## Optional Authenticated Case Study Screenshots (Phase 4)
 
-- [ ] Confirm 3 core projects listed: Sovereign, Chronicle, DevGuard AI
-- [ ] Change React version displayed from 19 → **18** (projects use React 18.3)
+- [ ] Take 3 screenshots while logged in (ensure zero personal data/tokens are visible):
+  - Sovereign: Approvals queue / execution status
+  - DevGuard AI: Dashboard showing active PR review execution
+  - Chronicle: Writer workspace / rich editor
+- [ ] Place them in `owner-inputs/screens/<project>/`.
 
-## LinkedIn
+## Live Profile Alignment
 
-- [ ] Update the **Website** field to `https://www.bistrajendra.com.np`
+- [ ] **Resume:** `public/resume/Rajendra_Bist_Full_Stack_Developer.pdf` is active.
+- [ ] **Naukri Profile:** Confirm core projects (Sovereign, Chronicle, DevGuard AI); set React version to React 18.3.
+- [ ] **LinkedIn & GitHub:** Set website URL to `https://www.bistrajendra.com.np`.
 
-## GitHub Profile
+## Google Search Console & Sitemaps
 
-- [ ] Update the **Website** field to `https://www.bistrajendra.com.np`
+- [ ] Verify `bistrajendra.com.np` in Google Search Console.
+- [ ] Submit sitemap: `https://www.bistrajendra.com.np/sitemap.xml`. (Note: `/dev/design` is excluded from sitemap and tagged `noindex, nofollow`).
 
-## Live URL Verification
+## Case Study Problem Statements (Needs Owner Confirmation)
 
-- [ ] Verify `https://sovereign-saas-platform.vercel.app/` loads correctly
-- [ ] Verify `https://chronicle-platform.vercel.app/` loads correctly
-- [ ] Verify `https://dev-guard-ai.vercel.app/` loads correctly
-
-## Google Search Console
-
-- [ ] Verify the domain `bistrajendra.com.np`
-- [ ] Submit sitemap at `https://www.bistrajendra.com.np/sitemap.xml`
-
-## Post Phase 6
-
-- [ ] Add backlinks to the portfolio from: GitHub README, LinkedIn About, Naukri profile
+- [ ] **Sovereign**: Confirm problem statement: "Multi-tenant AI agent platforms require strict tenant isolation and durable execution to prevent cross-tenant data exposure and lost execution state during background runs."
+- [ ] **DevGuard AI**: Confirm problem statement: "Automated code review relying solely on single-shot LLM prompts on raw diffs produces unverified comments. Collecting deterministic static analysis, AST linting, and dependency vulnerability scans prior to inference grounds findings in concrete repository evidence."
+- [ ] **Chronicle**: Confirm problem statement: "Technical publishing platforms require verified accounts, abuse resistance, schema-validated AI tooling, and server-rendered public pages to maintain editorial trust and search visibility."
