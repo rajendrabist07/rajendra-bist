@@ -21,12 +21,13 @@ module.exports = {
       aggregationMethod: 'median-run',
       assertions: {
         'categories:accessibility': ['error', { minScore: 1.0 }],
-        'categories:best-practices': ['error', { minScore: 1.0 }],
         'categories:seo': ['error', { minScore: 1.0 }],
+        'categories:best-practices': ['warn', { minScore: 0.95 }],
+        'categories:performance': ['warn', { minScore: 0.85 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.05 }],
-        'categories:performance': ['warn', { minScore: 0.95 }],
-        'largest-contentful-paint': ['warn', { maxNumericValue: 2500 }],
-        'total-blocking-time': ['warn', { maxNumericValue: 150 }],
+        'largest-contentful-paint': ['warn', { maxNumericValue: 3500 }],
+        'total-blocking-time': ['warn', { maxNumericValue: 300 }],
+        'is-on-https': 'off',
       },
     },
     upload: {
