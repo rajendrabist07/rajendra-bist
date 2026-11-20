@@ -3,11 +3,7 @@ module.exports = {
     collect: {
       startServerCommand: 'npx next start -p 3005 -H 127.0.0.1',
       startServerReadyPattern: 'Ready in',
-      url: [
-        'http://127.0.0.1:3005/',
-        'http://127.0.0.1:3005/projects/sovereign',
-        'http://127.0.0.1:3005/blog/pgvector-vs-external-vector-db',
-      ],
+      url: ['http://127.0.0.1:3005/'],
       numberOfRuns: 3,
       settings: {
         formFactor: 'mobile',

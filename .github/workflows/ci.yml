@@ -22,7 +22,7 @@ env:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
           echo "::error title=Validation Failure::Validate job failed on commit ${{ github.sha }}"
 
   browser:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 15
     needs: validate
     steps:
@@ -75,7 +75,7 @@ jobs:
       - name: Build Next.js application
         run: npm run build
       - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium || npx playwright install chromium
+        run: npx playwright install --with-deps chromium
       - name: Run Playwright E2E tests
         run: npm run test:e2e
       - name: Upload Playwright Report
@@ -96,7 +96,7 @@ jobs:
           echo "::error title=Browser Test Failure::Browser Playwright test suite failed on commit ${{ github.sha }}"
 
   lighthouse:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 15
     needs: validate
     steps:
