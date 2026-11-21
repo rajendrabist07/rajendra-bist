@@ -15,7 +15,7 @@ export default function SectionHeader({ title, subtitle, eyebrow, description }:
   return (
     <div className="mb-10 max-w-3xl">
       {tag && (
-        <div className="flex items-center gap-2 font-mono text-xs font-semibold tracking-wider text-[--accent] uppercase">
+        <div className="flex items-center gap-2 font-sans text-xs font-medium text-[--text-secondary]">
           <span className="h-1.5 w-1.5 rounded-full bg-[--accent]" />
           <span>{tag}</span>
         </div>

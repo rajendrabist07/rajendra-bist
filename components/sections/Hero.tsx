@@ -189,13 +189,7 @@ export default function Hero() {
                     />
                   </picture>
 
-                  {/* Two real-data annotation chips */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">
-                    <Annotation>
-                      {FACTS.availability.status}
-                    </Annotation>
-                  </div>
-
+                  {/* Live clock annotation */}
                   <div className="absolute bottom-3 right-3 pointer-events-none">
                     {istTime ? (
                       <Annotation>{istTime}</Annotation>

@@ -13,11 +13,10 @@ interface ChatMessage {
   content: string;
 }
 
-const QUICK_PROMPTS = [
-  'What projects has Rajendra built?',
-  'What is his full backend tech stack?',
-  'Tell me about PostgreSQL Row-Level Security in Sovereign',
-  'Is he authorized to work in India?',
+const STARTER_CHIPS = [
+  'What has Rajendra built?',
+  'What is his stack?',
+  'Is he available?',
 ];
 
 export default function CommandPalette() {
@@ -31,6 +30,14 @@ export default function CommandPalette() {
 
   const previousActiveElement = useRef<HTMLElement | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to newest message
+  useEffect(() => {
+    if (mode === 'ai' && messages.length > 0) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, mode, isLoading]);
 
   // Keyboard trigger ⌘K / Ctrl+K and custom event listener
   useEffect(() => {
@@ -81,6 +88,12 @@ export default function CommandPalette() {
     }
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    setInputMessage('');
+    setSessionId('');
+  };
+
   const sendAiMessage = async (textToSend: string) => {
     const trimmed = textToSend.trim();
     if (!trimmed || isLoading) return;
@@ -94,15 +107,25 @@ export default function CommandPalette() {
     setIsLoading(true);
 
     try {
-      const historyPayload = messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
+      // Filter out empty messages and limit to last 6 turns
+      const historyPayload = messages
+        .filter((m) => m.content.trim().length > 0)
+        .slice(-6)
+        .map((m) => ({
+          role: m.role,
+          content: m.content.trim(),
+        }));
 
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed, history: historyPayload, sessionId }),
+        body: JSON.stringify({
+          message: trimmed,
+          question: trimmed,
+          prompt: trimmed,
+          history: historyPayload,
+          sessionId: sessionId || undefined,
+        }),
       });
 
       if (!res.ok) {
@@ -166,26 +189,27 @@ export default function CommandPalette() {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Terminal Command Palette and AI Assistant"
+      aria-label="Search and AI Assistant"
       ref={dialogRef}
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 p-4 pt-[12vh] backdrop-blur-md transition-all"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 p-4 pt-[10vh] sm:pt-[12vh] backdrop-blur-md transition-all"
       onClick={handleClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         role="document"
-        className="w-full max-w-2xl bg-[--bg-surface-1] border border-[--border-strong] rounded-[--radius-card] shadow-2xl overflow-hidden font-mono text-sm"
+        className="w-full max-w-2xl bg-[--bg-surface-1] border border-[--line-soft] rounded-[16px] shadow-2xl overflow-hidden font-sans text-sm"
       >
-        {/* Mode switcher tabs */}
-        <div className="flex items-center justify-between border-b border-[--border-hairline] bg-[--bg-surface-2] px-3 pt-2">
-          <div className="flex items-center gap-1">
+        {/* Mode switcher tabs + Close header */}
+        <div className="flex items-center justify-between border-b border-[--line-hair] bg-[--bg-surface-2] px-3 py-2">
+          {/* Segmented control for Search | Ask AI (sans, 8px radius) */}
+          <div className="flex items-center bg-[--bg-surface-3] p-0.5 rounded-[--radius-control]">
             <button
               type="button"
               onClick={() => setMode('search')}
-              className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-t-[--radius-control] border-b-2 transition-all cursor-pointer ${
+              className={`px-3 py-1 text-xs font-sans font-medium rounded-[--radius-control] transition-all cursor-pointer ${
                 mode === 'search'
-                  ? 'border-[--accent] text-[--accent] bg-[--accent-dim] font-semibold'
-                  : 'border-transparent text-[--text-tertiary] hover:text-[--text-primary]'
+                  ? 'bg-[--accent] text-[--accent-ink] shadow-sm'
+                  : 'text-[--text-secondary] hover:text-[--text-primary]'
               }`}
             >
               Search
@@ -193,37 +217,44 @@ export default function CommandPalette() {
             <button
               type="button"
               onClick={() => setMode('ai')}
-              className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-t-[--radius-control] border-b-2 transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3 py-1 text-xs font-sans font-medium rounded-[--radius-control] transition-all cursor-pointer flex items-center gap-1.5 ${
                 mode === 'ai'
-                  ? 'border-[--accent] text-[--accent] bg-[--accent-dim] font-semibold'
-                  : 'border-transparent text-[--text-tertiary] hover:text-[--text-primary]'
+                  ? 'bg-[--accent] text-[--accent-ink] shadow-sm'
+                  : 'text-[--text-secondary] hover:text-[--text-primary]'
               }`}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[--accent] animate-pulse" />
+              <span className={`w-1.5 h-1.5 rounded-full ${mode === 'ai' ? 'bg-[--accent-ink]' : 'bg-[--accent] animate-pulse'}`} />
               Ask AI
             </button>
           </div>
-          <button
-            type="button"
-            onClick={handleClose}
-            aria-label="ESC close command palette"
-            className="text-xs text-[--text-tertiary] hover:text-[--text-primary] px-2 py-1 cursor-pointer"
-          >
-            ESC
-          </button>
+
+          {/* Close hint with Esc key and X button */}
+          <div className="flex items-center gap-2">
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded border border-[--line-hair] bg-[--bg-surface-3] text-[10px] text-[--text-tertiary] font-mono">
+              Esc
+            </kbd>
+            <button
+              type="button"
+              onClick={handleClose}
+              aria-label="Close dialog"
+              className="p-1 rounded-[--radius-control] text-[--text-tertiary] hover:text-[--text-primary] hover:bg-[--bg-surface-3] transition-colors cursor-pointer"
+            >
+              <Icon name="x" size={16} />
+            </button>
+          </div>
         </div>
 
         {/* SEARCH MODE */}
         {mode === 'search' && (
           <Command label="Search Navigation and Projects" className="w-full">
-            <div className="flex items-center gap-2 border-b border-[--border-hairline] px-4 py-3">
-              <Icon name="terminal" size={15} className="text-[--accent]" />
+            <div className="flex items-center gap-2.5 border-b border-[--line-hair] px-4 py-3">
+              <Icon name="search" size={16} className="text-[--accent]" />
               <Command.Input
                 value={query}
                 onValueChange={setQuery}
-                placeholder="Type a section or project name (e.g. projects, sovereign, chronicle)..."
+                placeholder="Type a section or command (e.g. projects, sovereign, chronicle)..."
                 aria-label="Search sections or projects"
-                className="w-full bg-transparent text-sm text-[--text-primary] placeholder-[--text-tertiary] focus:outline-none font-mono"
+                className="w-full bg-transparent text-sm text-[--text-primary] placeholder-[--text-tertiary] focus:outline-none font-sans"
                 autoFocus
               />
             </div>
@@ -233,7 +264,7 @@ export default function CommandPalette() {
                 No matching section or command found.
               </Command.Empty>
 
-              <Command.Group heading="Navigation" className="text-xs font-mono text-[--text-tertiary] px-2 py-1">
+              <Command.Group heading="Navigation" className="text-xs font-sans text-[--text-tertiary] px-2 py-1">
                 <Command.Item
                   onSelect={() => navigateTo('#about')}
                   className="flex items-center gap-2 px-3 py-2 rounded-[--radius-control] text-xs text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim] cursor-pointer"
@@ -246,7 +277,7 @@ export default function CommandPalette() {
                   className="flex items-center gap-2 px-3 py-2 rounded-[--radius-control] text-xs text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim] cursor-pointer"
                 >
                   <Icon name="arrow-right" size={12} className="text-[--accent]" />
-                  <span>Projects & Case Files (Sovereign, Chronicle, DevGuard)</span>
+                  <span>Projects & Case Studies (Sovereign, Chronicle, DevGuard)</span>
                 </Command.Item>
                 <Command.Item
                   onSelect={() => navigateTo('#skills')}
@@ -271,7 +302,7 @@ export default function CommandPalette() {
                 </Command.Item>
               </Command.Group>
 
-              <Command.Group heading="External & Actions" className="text-xs font-mono text-[--text-tertiary] px-2 py-1 mt-2">
+              <Command.Group heading="External & Actions" className="text-xs font-sans text-[--text-tertiary] px-2 py-1 mt-2">
                 <Command.Item
                   onSelect={() => navigateTo(FACTS.resume.url)}
                   className="flex items-center gap-2 px-3 py-2 rounded-[--radius-control] text-xs text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim] cursor-pointer"
@@ -297,7 +328,7 @@ export default function CommandPalette() {
                   onSelect={() => setMode('ai')}
                   className="flex items-center gap-2 px-3 py-2 rounded-[--radius-control] text-xs text-[--accent] hover:bg-[--accent-dim] cursor-pointer font-medium"
                 >
-                  <Icon name="terminal" size={12} className="text-[--accent]" />
+                  <Icon name="message-square" size={12} className="text-[--accent]" />
                   <span>Switch to Ask AI Assistant</span>
                 </Command.Item>
               </Command.Group>
@@ -307,22 +338,42 @@ export default function CommandPalette() {
 
         {/* AI MODE */}
         {mode === 'ai' && (
-          <div className="flex flex-col h-96">
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex flex-col h-[400px]">
+            {/* Conversation header action */}
+            {messages.length > 0 && (
+              <div className="flex items-center justify-between px-4 py-1.5 border-b border-[--line-hair] bg-[--bg-surface-2]/60 text-xs text-[--text-tertiary]">
+                <span>Conversation</span>
+                <button
+                  type="button"
+                  onClick={handleClearChat}
+                  className="text-[11px] text-[--text-secondary] hover:text-[--accent] transition-colors cursor-pointer"
+                >
+                  Clear chat
+                </button>
+              </div>
+            )}
+
+            {/* Messages list with aria-live */}
+            <div
+              className="flex-1 overflow-y-auto p-4 space-y-3.5"
+              aria-live="polite"
+              aria-relevant="additions text"
+            >
               {messages.length === 0 ? (
-                <div className="py-6 text-center space-y-4">
-                  <p className="text-xs text-[--text-secondary]">
+                <div className="py-8 text-center space-y-4">
+                  <p className="text-xs text-[--text-secondary] max-w-md mx-auto leading-relaxed">
                     Ask any question regarding Rajendra&apos;s full-stack experience, database schema design, or project architectures:
                   </p>
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {QUICK_PROMPTS.map((prompt) => (
+                  {/* Three starter chips shown only before the first message */}
+                  <div className="flex flex-wrap justify-center gap-2 pt-2">
+                    {STARTER_CHIPS.map((chip) => (
                       <button
-                        key={prompt}
+                        key={chip}
                         type="button"
-                        onClick={() => sendAiMessage(prompt)}
-                        className="text-xs px-2.5 py-1.5 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] text-[--text-secondary] hover:text-[--text-primary] hover:border-[--border-strong] cursor-pointer"
+                        onClick={() => sendAiMessage(chip)}
+                        className="text-xs font-sans px-3 py-1.5 rounded-[--radius-control] border border-[--line-hair] bg-[--bg-surface-2] text-[--text-secondary] hover:text-[--text-primary] hover:border-[--line-accent] hover:bg-[--accent-dim] transition-all cursor-pointer"
                       >
-                        {prompt}
+                        {chip}
                       </button>
                     ))}
                   </div>
@@ -331,13 +382,20 @@ export default function CommandPalette() {
                 messages.map((msg) => (
                   <div
                     key={msg.id}
-                    className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
+                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start gap-2.5 items-start'}`}
                   >
+                    {/* Small RB avatar for assistant bubbles */}
+                    {msg.role === 'assistant' && (
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[--accent-dim] border border-[--line-accent] text-[10px] font-bold text-[--accent] shrink-0 mt-0.5">
+                        RB
+                      </div>
+                    )}
+
                     <div
-                      className={`max-w-[85%] rounded-[--radius-control] px-3.5 py-2.5 text-xs leading-relaxed ${
+                      className={`max-w-[85%] px-3.5 py-2.5 text-xs leading-relaxed ${
                         msg.role === 'user'
-                          ? 'bg-[--accent] text-[--accent-ink] font-medium'
-                          : 'bg-[--bg-surface-2] text-[--text-primary] border border-[--border-hairline]'
+                          ? 'bg-[--accent-dim] text-[--text-primary] border border-[--line-accent] rounded-[14px] rounded-br-[4px] font-medium'
+                          : 'bg-[--bg-surface-2] text-[--text-primary] border border-[--line-hair] rounded-[14px] rounded-bl-[4px]'
                       }`}
                     >
                       {msg.role === 'assistant' && msg.content.includes('rajendrabist396@gmail.com') ? (
@@ -352,38 +410,58 @@ export default function CommandPalette() {
                           {msg.content.split('rajendrabist396@gmail.com')[1]}
                         </span>
                       ) : (
-                        msg.content || (isLoading ? 'Analyzing portfolio facts...' : '')
+                        msg.content || (
+                          isLoading ? (
+                            <span className="inline-flex items-center gap-1 py-1" aria-label="Thinking">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[--accent] animate-bounce [animation-delay:-0.3s]" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-[--accent] animate-bounce [animation-delay:-0.15s]" />
+                              <span className="w-1.5 h-1.5 rounded-full bg-[--accent] animate-bounce" />
+                            </span>
+                          ) : ''
+                        )
                       )}
                     </div>
                   </div>
                 ))
               )}
+              <div ref={messagesEndRef} />
             </div>
 
+            {/* Input Form with Character Counter */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 sendAiMessage(inputMessage);
               }}
-              className="flex items-center gap-2 border-t border-[--border-hairline] p-3 bg-[--bg-surface-2]"
+              className="border-t border-[--line-hair] p-3 bg-[--bg-surface-2] space-y-1"
             >
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Ask about PostgreSQL RLS, Next.js, or availability..."
-                disabled={isLoading}
-                aria-label="Ask AI Assistant question"
-                className="flex-1 bg-[--bg-surface-3] border border-[--border-hairline] rounded-[--radius-control] px-3 py-2 text-xs text-[--text-primary] placeholder-[--text-tertiary] focus:outline-none focus:border-[--accent]"
-                autoFocus
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !inputMessage.trim()}
-                className="px-3.5 py-2 bg-[--accent] text-[--accent-ink] font-medium text-xs rounded-[--radius-control] disabled:opacity-50 cursor-pointer"
-              >
-                Send
-              </button>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value.slice(0, 600))}
+                  placeholder="Ask about PostgreSQL RLS, Next.js, or availability..."
+                  disabled={isLoading}
+                  maxLength={600}
+                  aria-label="Ask AI Assistant question"
+                  className="flex-1 bg-[--bg-surface-3] border border-[--line-hair] rounded-[--radius-control] px-3 py-2 text-xs text-[--text-primary] placeholder-[--text-tertiary] focus:outline-none focus:border-[--accent] disabled:opacity-50"
+                  autoFocus
+                />
+                <button
+                  type="submit"
+                  disabled={isLoading || !inputMessage.trim()}
+                  className="px-3.5 py-2 bg-[--accent] text-[--accent-ink] font-medium text-xs rounded-[--radius-control] disabled:opacity-50 cursor-pointer hover:brightness-105 active:scale-95 transition-all"
+                >
+                  Send
+                </button>
+              </div>
+
+              {/* Character counter shown near the 600 limit */}
+              {inputMessage.length > 300 && (
+                <div className="text-right text-[10px] text-[--text-tertiary] pr-1">
+                  <span>{inputMessage.length}</span>/600
+                </div>
+              )}
             </form>
           </div>
         )}

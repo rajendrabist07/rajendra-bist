@@ -18,6 +18,12 @@
   --border-strong: rgba(148, 178, 255, 0.28);
   --border-ui: #5B79AD;
 
+  /* Soft Blueprint Lines & Elevation (Message 9B) */
+  --line-hair: rgba(232, 238, 251, 0.08);
+  --line-soft: rgba(232, 238, 251, 0.16);
+  --line-accent: rgba(56, 208, 240, 0.45);
+  --inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+
   /* Typography Colors */
   --text-primary: #E8EEFB;
   --text-secondary: #A9B6D3;
@@ -52,6 +58,12 @@
   --border-strong: rgba(15, 34, 64, 0.25);
   --border-ui: #64748B;
 
+  /* Soft Blueprint Lines & Elevation (Message 9B) */
+  --line-hair: rgba(11, 18, 32, 0.08);
+  --line-soft: rgba(11, 18, 32, 0.16);
+  --line-accent: rgba(3, 105, 161, 0.45);
+  --inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+
   /* Typography Colors */
   --text-primary: #0B1220;
   --text-secondary: #334155;
@@ -73,11 +85,13 @@
 }
 
 :root {
-  /* Radii — 3 levels plus pill */
+  /* Radii — Soft Blueprint (Message 9B) */
   --radius-control: 8px;
-  --radius-card: 16px;
-  --radius-feature: 24px;
-  --radius-pill: 9999px;
+  --radius-card: 14px;
+  --radius-feature: 20px;
+  --radius-pill: 999px;
+  --radius-dialog: 16px;
+  --radius-annotation: 6px;
 
   /* Fluid Typography Scale */
   --text-display: clamp(2.5rem, 6vw, 4.2rem);

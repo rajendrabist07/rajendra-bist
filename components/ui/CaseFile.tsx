@@ -17,20 +17,20 @@ export default function CaseFile({ project }: CaseFileProps) {
   return (
     <article
       id={`project-${project.slug}`}
-      className={`relative rounded-[--radius-feature] border bg-[--bg-surface-1] p-6 sm:p-8 lg:p-10 transition-all hover:border-[--border-strong] ${
+      className={`relative rounded-[--radius-feature] border bg-[--bg-surface-1] p-6 sm:p-8 lg:p-10 transition-all hover:border-[--line-accent] [box-shadow:var(--inner-highlight)] ${
         isLead
-          ? 'border-[--border-strong] shadow-2xl ring-1 ring-[--accent-dim]'
-          : 'border-[--border-hairline] shadow-lg'
+          ? 'border-[--line-accent] shadow-2xl ring-1 ring-[--accent-dim]'
+          : 'border-[--line-soft] shadow-lg'
       }`}
     >
       {/* Top Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[--border-hairline]">
+      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[--line-hair]">
         <div className="flex flex-wrap items-center gap-3">
           <span
-            className={`font-mono text-xs px-2.5 py-1 rounded-[--radius-control] border ${
+            className={`font-sans text-xs px-2.5 py-1 rounded-[--radius-control] border ${
               project.status === 'Live'
-                ? 'border-[--status-live] text-[--status-live] bg-[--status-live-dim] font-semibold'
-                : 'border-[--accent] text-[--accent] bg-[--accent-dim] font-semibold'
+                ? 'border-[--status-live]/30 text-[--status-live] bg-[--status-live-dim] font-semibold'
+                : 'border-[--line-accent] text-[--accent] bg-[--accent-dim] font-semibold'
             }`}
           >
             {project.status === 'Live' ? '● Live Service' : '◐ In Development'}
@@ -43,20 +43,20 @@ export default function CaseFile({ project }: CaseFileProps) {
             {project.title}
           </h3>
           {isLead && (
-            <span className="font-mono text-[11px] text-[--accent] bg-[--accent-dim] px-2 py-0.5 rounded-[--radius-pill] border border-[--accent]">
+            <span className="font-sans text-[11px] text-[--accent] bg-[--accent-dim] px-2 py-0.5 rounded-[--radius-pill] border border-[--line-accent]">
               Featured
             </span>
           )}
         </div>
 
         {/* Project External Links */}
-        <div className="flex items-center gap-3 font-mono text-xs">
+        <div className="flex items-center gap-3 font-sans text-xs">
           {project.links.live && (
             <a
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] text-[--text-primary] hover:border-[--border-strong] hover:text-[--accent] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] border border-[--line-hair] bg-[--bg-surface-2] text-[--text-primary] hover:border-[--line-accent] hover:text-[--accent] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
               aria-label={`Live Site for ${project.title}`}
             >
               <span>Live Site</span>
@@ -68,7 +68,7 @@ export default function CaseFile({ project }: CaseFileProps) {
               href={project.links.code}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] text-[--text-secondary] hover:text-[--text-primary] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] border border-[--line-hair] bg-[--bg-surface-2] text-[--text-secondary] hover:text-[--text-primary] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
               aria-label={`Code repository for ${project.title}`}
             >
               <Github size={13} />
@@ -77,7 +77,7 @@ export default function CaseFile({ project }: CaseFileProps) {
           )}
           <Link
             href={project.links.caseStudy}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] bg-[--accent] text-[--accent-ink] font-semibold hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[--radius-control] bg-[--accent] text-[--accent-ink] font-semibold hover:brightness-105 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
             aria-label={`Case study: ${project.title}`}
           >
             <span>Case Study</span>
@@ -96,7 +96,7 @@ export default function CaseFile({ project }: CaseFileProps) {
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: What I Built (3 bullets) */}
         <div className="lg:col-span-7 space-y-4">
-          <h4 className="font-mono text-xs uppercase tracking-wider text-[--accent] font-semibold">
+          <h4 className="font-sans text-xs text-[--accent] font-semibold">
             What I Built · Core Deliverables
           </h4>
           <ul className="space-y-3 font-sans text-sm text-[--text-secondary] leading-relaxed">
@@ -110,7 +110,7 @@ export default function CaseFile({ project }: CaseFileProps) {
 
           {/* Frontend UI Note with Repo File Path */}
           {project.frontendNote && (
-            <div className="mt-6 rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-2] p-4 text-xs font-mono">
+            <div className="mt-6 rounded-[--radius-card] border border-[--line-hair] bg-[--bg-surface-2] p-4 text-xs font-mono">
               <div className="flex items-center gap-2 text-[--text-primary] font-semibold mb-1">
                 <FileCode size={14} className="text-[--accent]" />
                 <span>Frontend Implementation:</span>
@@ -118,7 +118,7 @@ export default function CaseFile({ project }: CaseFileProps) {
               <p className="text-[--text-secondary] leading-relaxed mb-2 font-sans">
                 {project.frontendNote.summary}
               </p>
-              <span className="text-[11px] text-[--text-tertiary] bg-[--bg-surface-3] px-2 py-0.5 rounded-[--radius-control] border border-[--border-hairline]">
+              <span className="text-[11px] text-[--text-tertiary] bg-[--bg-surface-3] px-2 py-0.5 rounded-[--radius-control] border border-[--line-hair]">
                 Source: {project.frontendNote.filePath}
               </span>
             </div>
@@ -126,8 +126,8 @@ export default function CaseFile({ project }: CaseFileProps) {
         </div>
 
         {/* Right Column: Key Decision & Tradeoff */}
-        <div className="lg:col-span-5 rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-2] p-5 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-mono text-[--accent] font-semibold uppercase tracking-wider">
+        <div className="lg:col-span-5 rounded-[--radius-card] border border-[--line-hair] bg-[--bg-surface-2] p-5 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-sans text-[--accent] font-semibold">
             <ShieldCheck size={15} />
             <span>Key Decision & Trade-Off</span>
           </div>
@@ -140,7 +140,7 @@ export default function CaseFile({ project }: CaseFileProps) {
             {project.decision.description}
           </p>
 
-          <div className="pt-3 border-t border-[--border-hairline] font-mono text-xs text-[--text-tertiary]">
+          <div className="pt-3 border-t border-[--line-hair] font-sans text-xs text-[--text-tertiary]">
             <span className="text-[--text-secondary] font-semibold">Trade-off: </span>
             {project.decision.tradeoff}
           </div>
@@ -201,8 +201,8 @@ export default function CaseFile({ project }: CaseFileProps) {
       )}
 
       {/* Measurable Evidence Strip (Auto-fit grid, no orphan cells) */}
-      <div className="mt-8 pt-6 border-t border-[--border-hairline]">
-        <h4 className="font-mono text-xs uppercase tracking-wider text-[--accent] font-semibold mb-3">
+      <div className="mt-8 pt-6 border-t border-[--line-hair]">
+        <h4 className="font-sans text-xs text-[--accent] font-semibold mb-3">
           Verifiable Repository Evidence
         </h4>
 
@@ -210,7 +210,7 @@ export default function CaseFile({ project }: CaseFileProps) {
           {project.evidence.map((ev) => (
             <div
               key={ev.label}
-              className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-2] p-3 text-xs font-mono flex flex-col justify-between"
+              className="rounded-[--radius-card] border border-[--line-hair] bg-[--bg-surface-2] p-3 text-xs font-mono flex flex-col justify-between"
             >
               <div>
                 <span className="text-[10px] text-[--text-tertiary] block mb-1">
@@ -224,7 +224,7 @@ export default function CaseFile({ project }: CaseFileProps) {
                 href={ev.source}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 pt-2 border-t border-[--border-hairline] text-[10px] text-[--accent] hover:underline inline-flex items-center gap-1 truncate"
+                className="mt-2 pt-2 border-t border-[--line-hair] text-[10px] text-[--accent] hover:underline inline-flex items-center gap-1 truncate"
               >
                 <span>Verify Source</span>
                 <ExternalLink size={10} />

@@ -61,16 +61,16 @@ export default function HeroSvgTrace() {
       aria-hidden="true"
     >
       <svg
-        className="w-full h-full opacity-35"
+        className="w-full h-full opacity-20"
         viewBox="0 0 1440 800"
         fill="none"
         preserveAspectRatio="none"
       >
         <path
-          d="M -50,450 L 320,450 L 480,280 L 960,280 L 1120,520 L 1500,520"
+          d="M 980,160 L 1220,160 L 1360,320 L 1500,320"
           stroke="var(--accent)"
-          strokeWidth="1.5"
-          strokeDasharray="8 12"
+          strokeWidth="1.2"
+          strokeDasharray="6 10"
           className={isPaused ? '' : 'animate-blueprint-trace'}
           style={{
             animationPlayState: isPaused ? 'paused' : 'running',

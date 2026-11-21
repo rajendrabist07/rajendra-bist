@@ -147,12 +147,12 @@ export default function Contact() {
         />
 
         {/* Availability & Timezone Badges */}
-        <div className="mt-4 flex flex-wrap items-center gap-3 font-mono text-xs">
-          <span className="inline-flex items-center gap-2 rounded-[--radius-control] border border-[--status-live] bg-[--status-live-dim] px-3 py-1 text-[--status-live]">
+        <div className="mt-4 flex flex-wrap items-center gap-3 font-sans text-xs">
+          <span className="inline-flex items-center gap-2 rounded-[--radius-control] border border-[--status-live]/30 bg-[--status-live-dim] px-3 py-1 text-[--status-live] font-medium">
             <span className="h-2 w-2 rounded-full bg-[--status-live] animate-pulse" />
             {PERSONAL.availability.formatted}
           </span>
-          <span className="rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] px-3 py-1 text-[--text-tertiary]">
+          <span className="rounded-[--radius-control] border border-[--line-hair] bg-[--bg-surface-2] px-3 py-1 text-[--text-tertiary]">
             New Delhi · IST (UTC+5:30)
           </span>
         </div>
@@ -162,9 +162,9 @@ export default function Contact() {
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="rounded-[--radius-card] border border-[--border-strong] bg-[--bg-surface-1] p-6 shadow-xl sm:p-8"
+            className="rounded-[--radius-card] border border-[--line-soft] bg-[--bg-surface-1] p-6 shadow-xl [box-shadow:var(--inner-highlight)] sm:p-8"
           >
-            <div className="flex items-center justify-between border-b border-[--border-hairline] pb-4 font-mono text-xs">
+            <div className="flex items-center justify-between border-b border-[--line-hair] pb-4 font-sans text-xs">
               <span className="font-bold text-[--text-primary]">
                 Direct Message Dispatch
               </span>
@@ -304,7 +304,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-[--radius-control] bg-[--accent] px-5 py-3.5 font-mono text-xs font-semibold text-[--accent-ink] transition-opacity hover:opacity-90 disabled:opacity-50 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-[--radius-control] bg-[--accent] px-5 py-3.5 font-sans text-xs font-semibold text-[--accent-ink] transition-all hover:brightness-105 active:scale-95 disabled:opacity-50 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
               >
                 <Send size={14} />
                 <span>{status === 'sending' ? 'Dispatching...' : 'Send message'}</span>
@@ -313,7 +313,7 @@ export default function Contact() {
               <a
                 href={PERSONAL.resumeUrl}
                 download="Rajendra_Bist_Full_Stack_Developer.pdf"
-                className="inline-flex items-center justify-center gap-2 rounded-[--radius-control] border border-[--border-hairline] bg-[--bg-surface-2] px-4 py-3.5 font-mono text-xs font-medium text-[--text-secondary] transition-colors hover:text-[--text-primary] hover:border-[--border-strong] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+                className="inline-flex items-center justify-center gap-2 rounded-[--radius-control] border border-[--line-soft] bg-[--bg-surface-2] px-4 py-3.5 font-sans text-xs font-medium text-[--text-secondary] transition-all hover:text-[--text-primary] hover:border-[--accent] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
               >
                 <Download size={14} className="text-[--accent]" />
                 <span>Download resume (PDF)</span>

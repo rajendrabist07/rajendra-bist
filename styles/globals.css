@@ -10,6 +10,9 @@
   --color-border-hairline: var(--border-hairline);
   --color-border-strong: var(--border-strong);
   --color-border-ui: var(--border-ui);
+  --color-line-hair: var(--line-hair);
+  --color-line-soft: var(--line-soft);
+  --color-line-accent: var(--line-accent);
 
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
@@ -31,6 +34,8 @@
   --radius-card: var(--radius-card);
   --radius-feature: var(--radius-feature);
   --radius-pill: var(--radius-pill);
+  --radius-dialog: var(--radius-dialog);
+  --radius-annotation: var(--radius-annotation);
 
   --ease-blueprint: var(--ease-blueprint);
 }

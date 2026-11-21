@@ -9,9 +9,8 @@ export default function Projects() {
     <section id="projects" className="relative py-20 sm:py-28" aria-label="Selected Projects">
       <Container>
         <SectionHeader
-          eyebrow="Case Files · Shipped Systems"
           title="Architected & Built"
-          description="Production systems built with multi-tenant boundaries, event-driven orchestration, and verifiable repository proof. Interactive architecture diagrams and live public captures."
+          description="Three projects I designed and built, with the architecture and the code behind each."
         />
 
         <div className="mt-12 flex flex-col gap-12 sm:gap-16">

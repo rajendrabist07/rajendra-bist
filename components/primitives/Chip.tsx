@@ -14,11 +14,11 @@ export const Chip: React.FC<ChipProps> = ({
 }) => {
   const variantStyles = {
     status:
-      'bg-[--status-live-dim] text-[--status-live] border border-[--status-live] font-mono text-xs rounded-[--radius-pill] px-3 py-1 font-medium inline-flex items-center gap-1.5',
+      'bg-[--status-live-dim] text-[--status-live] border border-[--status-live]/30 font-sans text-xs rounded-[--radius-pill] px-3 py-1 font-medium inline-flex items-center gap-1.5',
     tech:
-      'bg-[--bg-surface-2] text-[--text-secondary] border border-[--border-hairline] font-mono text-xs rounded-[--radius-control] px-2.5 py-0.5 inline-flex items-center gap-1.5',
+      'bg-[--bg-surface-2] text-[--text-secondary] border border-[--line-hair] hover:border-[--line-accent] hover:text-[--text-primary] hover:-translate-y-px transition-all font-sans text-xs rounded-[--radius-control] px-2.5 py-0.5 inline-flex items-center gap-1.5 motion-reduce:transform-none',
     blueprint:
-      'bg-[--accent-dim] text-[--accent] border border-[--accent] font-mono text-xs uppercase tracking-wider px-2.5 py-0.5 rounded-[--radius-pill] font-medium inline-flex items-center gap-1.5',
+      'bg-[--accent-dim] text-[--accent] border border-[--line-accent] font-sans text-xs px-2.5 py-0.5 rounded-[--radius-pill] font-medium inline-flex items-center gap-1.5',
   }[variant];
 
   return (

@@ -28,21 +28,45 @@ export const contactRequestSchema = z.object({
   isTest: z.boolean().optional(),
 })
 
-export const chatRequestSchema = z.object({
+export const chatRequestSchema = z.preprocess((val) => {
+  if (val && typeof val === 'object') {
+    const rawMsg = (val as any).message ?? (val as any).question ?? (val as any).prompt;
+    const msg = typeof rawMsg === 'string' ? rawMsg.trim() : rawMsg;
+    const rawHistory = (val as any).history;
+    // Filter out empty placeholder entries from history (e.g., initial assistant message with content: '')
+    const cleanHistory = Array.isArray(rawHistory)
+      ? rawHistory.filter(
+          (h) =>
+            h &&
+            typeof h === 'object' &&
+            typeof h.content === 'string' &&
+            h.content.trim().length > 0
+        )
+      : rawHistory;
+    return {
+      ...(val as any),
+      message: msg,
+      history: cleanHistory,
+    };
+  }
+  return val;
+}, z.object({
   message: z
     .string()
     .trim()
     .min(1, 'Message cannot be empty')
     .max(600, 'Message length capped at 600 characters')
     .regex(multilineNoControlCharsRegex, 'Message must not contain control characters'),
+  question: z.string().trim().max(600).optional(),
+  prompt: z.string().trim().max(600).optional(),
   history: z
     .array(
       z.object({
         role: z.enum(['user', 'assistant']),
-        content: z.string().trim().min(1).max(2000),
+        content: z.string().trim().min(1, 'History content cannot be empty').max(2000),
       }),
     )
     .max(6, 'Chat history capped at last 6 turns')
     .default([]),
   sessionId: z.string().trim().min(1).max(120).optional(),
-})
+}))

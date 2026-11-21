@@ -11,16 +11,26 @@ const NAV_ITEMS = [
   { label: 'Projects', href: '#projects', id: 'projects' },
   { label: 'Stack', href: '#skills', id: 'skills' },
   { label: 'Experience', href: '#experience', id: 'experience' },
-  { label: 'Process', href: '#process', id: 'process' },
   { label: 'Notes', href: '/blog', id: 'blog' },
   { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const [platformKey, setPlatformKey] = useState<string>('⌘K');
   const drawerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll position for header height and glass blur
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Platform-aware keyboard shortcut hint
   useEffect(() => {
@@ -31,7 +41,7 @@ export default function Navbar() {
 
   // Active section tracking via IntersectionObserver
   useEffect(() => {
-    const sectionIds = ['home', 'about', 'projects', 'skills', 'experience', 'process', 'contact'];
+    const sectionIds = ['home', 'about', 'projects', 'skills', 'experience', 'contact'];
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
@@ -87,25 +97,31 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-[--border-hairline] bg-[--bg-page]/85 backdrop-blur-md supports-[backdrop-filter:none]:bg-[--bg-page] transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? 'h-[60px] border-b border-[--line-hair] bg-[--bg-page]/85 backdrop-blur-md supports-[backdrop-filter:none]:bg-[--bg-page]'
+          : 'h-[72px] border-b border-transparent bg-transparent'
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full">
         {/* Brand Monogram */}
         <a
           href="#home"
           onClick={handleAnchorClick('#home')}
-          className="group flex items-center gap-2.5 font-mono text-sm font-bold tracking-tight text-[--text-primary] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] rounded-[--radius-control] p-1"
+          className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-[--text-primary] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] rounded-[--radius-control] p-1"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-[--radius-control] border border-[--accent] bg-[--accent-dim] text-xs font-bold text-[--accent] transition-transform group-hover:scale-105">
+          <span className="flex h-[30px] w-[30px] items-center justify-center rounded-[--radius-control] border border-[--line-accent] bg-[--accent-dim] text-xs font-bold text-[--accent] transition-transform group-hover:scale-105">
             RB
           </span>
-          <span className="text-xs tracking-wider text-[--text-secondary] group-hover:text-[--text-primary] transition-colors hidden sm:inline">
-            bistrajendra<span className="text-[--accent]">.com.np</span>
+          <span className="font-sans font-semibold text-sm text-[--text-primary] group-hover:text-[--accent] transition-colors hidden sm:inline">
+            Rajendra Bist
           </span>
         </a>
 
         {/* Desktop Nav Items with Active State Highlight */}
         <nav
-          className="hidden lg:flex items-center gap-1 font-mono text-xs"
+          className="hidden lg:flex items-center gap-1 font-sans font-medium text-xs"
           aria-label="Main Navigation"
         >
           {NAV_ITEMS.map((item) => {
@@ -141,12 +157,12 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => openCommandPalette('search')}
-            className="flex items-center gap-2 px-2.5 py-1.5 font-mono text-xs text-[--text-secondary] bg-[--bg-surface-2] border border-[--border-hairline] hover:border-[--border-strong] hover:text-[--text-primary] rounded-[--radius-control] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+            className="flex items-center gap-2 px-2.5 py-1.5 font-sans text-xs text-[--text-secondary] bg-[--bg-surface-2] border border-[--line-soft] hover:border-[--accent] hover:text-[--text-primary] rounded-[--radius-control] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
           >
-            <Icon name="terminal" size={13} className="text-[--accent]" />
-            <span className="hidden md:inline text-[11px]">Search</span>
+            <Icon name="search" size={13} className="text-[--accent]" />
+            <span className="hidden md:inline text-[11px] font-medium">Search</span>
             <span className="md:hidden sr-only">Search</span>
-            <kbd aria-hidden="true" className="hidden sm:inline-block px-1.5 py-0.5 rounded border border-[--border-hairline] bg-[--bg-surface-3] text-[10px] text-[--text-tertiary]">
+            <kbd aria-hidden="true" className="hidden sm:inline-block px-1.5 py-0.5 rounded border border-[--line-hair] bg-[--bg-surface-3] text-[10px] text-[--text-tertiary] font-mono">
               {platformKey}
             </kbd>
           </button>
@@ -156,7 +172,7 @@ export default function Navbar() {
             href={FACTS.resume.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs font-medium text-[--accent] bg-[--accent-dim] border border-[--accent] hover:brightness-110 rounded-[--radius-control] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 font-sans text-xs font-medium text-[--accent-ink] bg-[--accent] hover:brightness-105 active:scale-95 rounded-[--radius-control] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring]"
           >
             <span>Resume</span>
           </a>
@@ -168,7 +184,7 @@ export default function Navbar() {
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
             aria-controls="mobile-nav-menu"
-            className="lg:hidden p-2 text-[--text-secondary] hover:text-[--text-primary] border border-[--border-hairline] bg-[--bg-surface-2] rounded-[--radius-control] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] cursor-pointer"
+            className="lg:hidden p-2 text-[--text-secondary] hover:text-[--text-primary] border border-[--line-soft] bg-[--bg-surface-2] rounded-[--radius-control] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--focus-ring] cursor-pointer"
           >
             <span aria-hidden="true">{isOpen ? '✕' : '☰'}</span>
           </button>
@@ -183,7 +199,7 @@ export default function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation"
-          className="lg:hidden border-t border-[--border-hairline] bg-[--bg-page] px-6 py-6 font-mono text-sm space-y-4"
+          className="lg:hidden border-t border-[--line-hair] bg-[--bg-page] px-6 py-6 font-sans text-sm space-y-4"
         >
           <div className="flex flex-col space-y-2">
             {NAV_ITEMS.map((item) => (
@@ -191,7 +207,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={handleAnchorClick(item.href)}
-                className="flex items-center justify-between px-3 py-2.5 rounded-[--radius-control] text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim] transition-colors"
+                className="flex items-center justify-between px-3 py-2.5 rounded-[--radius-control] font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--accent-dim] transition-colors"
               >
                 <span>{item.label}</span>
                 <span className="text-[--accent]">→</span>
@@ -199,16 +215,16 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="pt-4 border-t border-[--border-hairline] flex flex-col gap-3">
+          <div className="pt-4 border-t border-[--line-hair] flex flex-col gap-3">
             <button
               type="button"
               onClick={() => {
                 setIsOpen(false);
                 openCommandPalette('search');
               }}
-              className="w-full flex items-center justify-center gap-2 py-2.5 bg-[--bg-surface-2] border border-[--border-hairline] rounded-[--radius-control] text-xs font-mono text-[--text-primary]"
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-[--bg-surface-2] border border-[--line-soft] rounded-[--radius-control] text-xs font-sans font-medium text-[--text-primary] cursor-pointer"
             >
-              <Icon name="terminal" size={14} className="text-[--accent]" />
+              <Icon name="search" size={14} className="text-[--accent]" />
               Command Palette ({platformKey})
             </button>
 
@@ -217,7 +233,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 bg-[--accent] text-[--accent-ink] font-medium rounded-[--radius-control] text-xs font-mono"
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-[--accent] text-[--accent-ink] font-medium rounded-[--radius-control] text-xs font-sans cursor-pointer hover:brightness-105 active:scale-95 transition-all"
             >
               Download Resume (PDF)
             </a>

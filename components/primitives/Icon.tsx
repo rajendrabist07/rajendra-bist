@@ -1,7 +1,19 @@
 import React from 'react';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
-  name: 'github' | 'linkedin' | 'mail' | 'terminal' | 'arrow-right' | 'copy' | 'check' | 'sun' | 'moon';
+  name:
+    | 'github'
+    | 'linkedin'
+    | 'mail'
+    | 'terminal'
+    | 'arrow-right'
+    | 'copy'
+    | 'check'
+    | 'sun'
+    | 'moon'
+    | 'search'
+    | 'message-square'
+    | 'x';
   label?: string;
   size?: number;
 }
@@ -94,6 +106,36 @@ export const Icon: React.FC<IconProps> = ({
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+      />
+    ),
+    search: (
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    ),
+    'message-square': (
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+      />
+    ),
+    x: (
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M18 6L6 18M6 6l12 12"
       />
     ),
   };

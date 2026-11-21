@@ -258,10 +258,10 @@ export default function ChatAgent() {
 
     const history = historyMessagesForApi
       .filter(item => item.content.trim())
-      .slice(-20)
+      .slice(-6)
       .map(item => ({
         role: item.role,
-        content: item.content,
+        content: item.content.trim(),
       }))
 
     setMessages(updatedMessages)
@@ -272,7 +272,13 @@ export default function ChatAgent() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed, history, sessionId }),
+        body: JSON.stringify({
+          message: trimmed,
+          question: trimmed,
+          prompt: trimmed,
+          history,
+          sessionId: sessionId || undefined,
+        }),
       })
 
       if (!response.ok) {

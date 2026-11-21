@@ -29,4 +29,31 @@ describe('API request schemas', () => {
     expect(chatRequestSchema.safeParse({ message: 'x'.repeat(600), history: [] }).success).toBe(true)
     expect(chatRequestSchema.safeParse({ message: 'x'.repeat(601), history: [] }).success).toBe(false)
   })
+
+  it('accepts question or prompt keys and filters out empty history placeholders', () => {
+    const qResult = chatRequestSchema.safeParse({ question: 'What projects has Rajendra built?' })
+    expect(qResult.success).toBe(true)
+    if (qResult.success) {
+      expect(qResult.data.message).toBe('What projects has Rajendra built?')
+    }
+
+    const pResult = chatRequestSchema.safeParse({ prompt: 'What is his tech stack?' })
+    expect(pResult.success).toBe(true)
+    if (pResult.success) {
+      expect(pResult.data.message).toBe('What is his tech stack?')
+    }
+
+    const hResult = chatRequestSchema.safeParse({
+      message: 'Hello',
+      history: [
+        { role: 'user', content: 'Hi' },
+        { role: 'assistant', content: '' }, // empty placeholder should be safely filtered out
+      ],
+    })
+    expect(hResult.success).toBe(true)
+    if (hResult.success) {
+      expect(hResult.data.history).toHaveLength(1)
+      expect(hResult.data.history[0].content).toBe('Hi')
+    }
+  })
 })

@@ -345,8 +345,8 @@ export default function Skills() {
         </div>
 
         {/* Trademark & Attribution Disclaimer */}
-        <div className="mt-10 pt-4 border-t border-[--border-hairline] text-center font-mono text-[11px] text-[--text-tertiary]">
-          Logos are trademarks of their respective owners. CC0 simple-icons implementation.
+        <div className="mt-10 pt-4 border-t border-[--line-hair] text-center font-sans text-xs text-[--text-tertiary]">
+          Logos belong to their respective owners.
         </div>
       </Container>
     </section>

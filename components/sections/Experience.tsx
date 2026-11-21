@@ -59,17 +59,17 @@ const LEARNING_MILESTONES: TimelineEntry[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-20 md:py-28 border-b border-[--border-hairline]">
+    <section id="experience" className="relative py-20 md:py-28 border-b border-[--line-hair]">
       <Container>
         <SectionHeader
-          eyebrow="CHRONOLOGY & TRACK RECORD"
+          eyebrow="Chronology & Track Record"
           title="Dual-Lane Experience Timeline"
           description="Parallel progression across self-directed production software and structured technical education."
         />
 
         {/* "Today" Live Marker */}
         <div className="mt-12 flex items-center justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[--border-strong] bg-[--bg-surface-2] px-4 py-1.5 font-mono text-xs text-[--text-primary] shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[--line-soft] bg-[--bg-surface-2] px-4 py-1.5 font-sans text-xs text-[--text-primary] shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[--status-live] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[--status-live]" />
@@ -83,11 +83,11 @@ export default function Experience() {
         {/* Dual Lane Desktop Grid / Single Column Mobile */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 relative">
           {/* Subtle center dividing guideline on desktop */}
-          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-[--border-hairline] -translate-x-1/2 pointer-events-none" />
+          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-[--line-hair] -translate-x-1/2 pointer-events-none" />
 
           {/* Lane 1: Building */}
           <div className="space-y-6">
-            <h3 className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--accent] font-semibold uppercase tracking-wider">
+            <h3 className="flex items-center gap-2 pb-3 border-b border-[--line-hair] font-sans text-xs text-[--accent] font-semibold">
               <Hammer size={15} />
               <span>Building · Shipped Software</span>
             </h3>
@@ -96,7 +96,7 @@ export default function Experience() {
               {BUILDING_MILESTONES.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-1] p-5 transition-all hover:border-[--border-strong] focus-within:ring-2 focus-within:ring-[--focus-ring]"
+                  className="rounded-[--radius-card] border border-[--line-soft] bg-[--bg-surface-1] p-5 transition-all hover:border-[--line-accent] [box-shadow:var(--inner-highlight)] focus-within:ring-2 focus-within:ring-[--focus-ring]"
                 >
                   <div className="flex items-start justify-between gap-2 mb-1.5">
                     <h4 className="text-sm font-bold text-[--text-primary] tracking-tight">
@@ -123,7 +123,7 @@ export default function Experience() {
                   </p>
 
                   {item.stack && (
-                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[--border-hairline]">
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[--line-hair]">
                       {item.stack.map((t) => (
                         <span
                           key={t}
@@ -141,7 +141,7 @@ export default function Experience() {
 
           {/* Lane 2: Learning */}
           <div className="space-y-6">
-            <h3 className="flex items-center gap-2 pb-3 border-b border-[--border-hairline] font-mono text-xs text-[--text-secondary] font-semibold uppercase tracking-wider">
+            <h3 className="flex items-center gap-2 pb-3 border-b border-[--line-hair] font-sans text-xs text-[--text-secondary] font-semibold">
               <GraduationCap size={15} className="text-[--accent]" />
               <span>Learning · Education & Training</span>
             </h3>
@@ -150,7 +150,7 @@ export default function Experience() {
               {LEARNING_MILESTONES.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-1] p-5 transition-all hover:border-[--border-strong] focus-within:ring-2 focus-within:ring-[--focus-ring]"
+                  className="rounded-[--radius-card] border border-[--line-soft] bg-[--bg-surface-1] p-5 transition-all hover:border-[--line-accent] [box-shadow:var(--inner-highlight)] focus-within:ring-2 focus-within:ring-[--focus-ring]"
                 >
                   <div className="flex items-start justify-between gap-2 mb-1.5">
                     <h4 className="text-sm font-bold text-[--text-primary] tracking-tight">
@@ -171,7 +171,7 @@ export default function Experience() {
                   </p>
 
                   {item.stack && (
-                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[--border-hairline]">
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[--line-hair]">
                       {item.stack.map((t) => (
                         <span
                           key={t}

@@ -45,10 +45,10 @@ const CREDENTIAL_CARDS: CredentialItem[] = [
 
 export default function Credentials() {
   return (
-    <section id="credentials" className="relative py-20 md:py-28 border-b border-[--border-hairline]">
+    <section id="credentials" className="relative py-20 md:py-28 border-b border-[--line-hair]">
       <Container>
         <SectionHeader
-          eyebrow="CREDENTIALS & ACADEMIC FOUNDATION"
+          eyebrow="Credentials & Academic Foundation"
           title="Education & Certifications"
           description="Formal diplomas, verified certificates, and foundational mathematics and science."
         />
@@ -60,11 +60,11 @@ export default function Credentials() {
             return (
               <article
                 key={card.title}
-                className="rounded-[--radius-card] border border-[--border-hairline] bg-[--bg-surface-1] p-6 flex flex-col justify-between transition-all hover:border-[--border-strong] focus-within:ring-2 focus-within:ring-[--focus-ring]"
+                className="rounded-[--radius-card] border border-[--line-soft] bg-[--bg-surface-1] p-6 flex flex-col justify-between transition-all hover:border-[--line-accent] [box-shadow:var(--inner-highlight)] focus-within:ring-2 focus-within:ring-[--focus-ring]"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-[--radius-control] bg-[--bg-surface-2] border border-[--border-hairline] text-[--accent]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-[--radius-control] bg-[--bg-surface-2] border border-[--line-hair] text-[--accent]">
                       <Icon size={18} />
                     </div>
                     {card.timeframe && (
@@ -76,7 +76,7 @@ export default function Credentials() {
                   </div>
 
                   {card.type && (
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-[--accent] font-semibold">
+                    <span className="font-sans text-[11px] text-[--accent] font-medium">
                       {card.type}
                     </span>
                   )}
@@ -86,7 +86,7 @@ export default function Credentials() {
                   </h3>
 
                   {card.institution && (
-                    <div className="text-xs font-mono text-[--text-secondary] mb-3">
+                    <div className="text-xs font-sans text-[--text-secondary] mb-3">
                       {card.institution}
                     </div>
                   )}
@@ -96,7 +96,7 @@ export default function Credentials() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[--border-hairline]">
+                <div className="mt-6 pt-4 border-t border-[--line-hair]">
                   {card.verifyUrl ? (
                     <a
                       href={card.verifyUrl}
