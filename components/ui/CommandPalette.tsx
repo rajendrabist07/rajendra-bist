@@ -14,7 +14,7 @@ interface ChatMessage {
 }
 
 const STARTER_CHIPS = [
-  'What has Rajendra built?',
+  'What projects has Rajendra built?',
   'What is his stack?',
   'Is he available?',
 ];

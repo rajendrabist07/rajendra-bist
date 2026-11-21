@@ -346,7 +346,7 @@ export default function Skills() {
 
         {/* Trademark & Attribution Disclaimer */}
         <div className="mt-10 pt-4 border-t border-[--line-hair] text-center font-sans text-xs text-[--text-tertiary]">
-          Logos belong to their respective owners.
+          Logos are trademarks of their respective owners.
         </div>
       </Container>
     </section>
