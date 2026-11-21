@@ -103,7 +103,20 @@ export default function Contact() {
       const data = await response.json().catch(() => null);
 
       if (!response.ok) {
-        throw new Error(data?.message || data?.error || 'Could not send message right now.');
+        const code = data?.code;
+        let msg = 'Could not send message right now. Please email rajendrabist396@gmail.com directly.';
+        if (code === 'RATE_LIMITED') {
+          msg = 'Submission limit reached (5 messages / hour). Please wait or email rajendrabist396@gmail.com directly.';
+        } else if (code === 'FORBIDDEN_ORIGIN') {
+          msg = 'Request origin not authorized. Please reach out via rajendrabist396@gmail.com directly.';
+        } else if (code === 'INVALID_INPUT') {
+          msg = data?.message || 'Invalid form input. Please verify fields or email rajendrabist396@gmail.com.';
+        } else if (code === 'SERVICE_UNAVAILABLE' || code === 'PROVIDER_ERROR') {
+          msg = 'Email delivery service temporarily unavailable. Please email rajendrabist396@gmail.com directly.';
+        } else if (data?.message) {
+          msg = `${data.message} You can also email rajendrabist396@gmail.com directly.`;
+        }
+        throw new Error(msg);
       }
 
       setStatus('success');

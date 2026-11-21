@@ -276,8 +276,23 @@ export default function ChatAgent() {
       })
 
       if (!response.ok) {
-        const json = await response.json().catch(() => null)
-        throw new Error(json?.error || 'Unable to reach the chat service.')
+        const json = await response.json().catch(() => null);
+        const code = json?.code;
+        let msg = 'Unable to connect to assistant right now. Please email rajendrabist396@gmail.com directly.';
+        if (code === 'ASSISTANT_OFFLINE') {
+          msg = 'The AI assistant is currently offline. Please email rajendrabist396@gmail.com directly.';
+        } else if (code === 'RATE_LIMITED') {
+          msg = 'You have reached the rate limit (30 messages / hour). Please wait a moment or email rajendrabist396@gmail.com directly.';
+        } else if (code === 'PROVIDER_ERROR') {
+          msg = 'The AI provider service encountered an upstream issue. Please try again or reach out at rajendrabist396@gmail.com.';
+        } else if (code === 'PROVIDER_TIMEOUT') {
+          msg = 'The AI assistant timed out while generating a response. Please try again or contact rajendrabist396@gmail.com.';
+        } else if (code === 'FORBIDDEN_ORIGIN') {
+          msg = 'Request origin not authorized. Please email rajendrabist396@gmail.com directly.';
+        } else if (code === 'INVALID_INPUT') {
+          msg = json?.error || 'Invalid query format. Please rephrase or email rajendrabist396@gmail.com.';
+        }
+        throw new Error(msg);
       }
 
       const reader = response.body?.getReader()
@@ -303,8 +318,9 @@ export default function ChatAgent() {
         prev.map(item => (item.id === assistantId ? { ...item, isStreaming: false } : item)),
       )
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
-      setMessages(prev => prev.filter(item => item.id !== assistantId))
+      const displayMsg = err instanceof Error ? err.message : 'Unable to connect to assistant right now. Please email rajendrabist396@gmail.com directly.';
+      setError(displayMsg);
+      setMessages(prev => prev.map(item => item.id === assistantId ? { ...item, content: displayMsg, isStreaming: false } : item));
     } finally {
       setIsLoading(false)
     }

@@ -11,3 +11,6 @@ docs/private/
 test-results
 playwright-report
 *.tsbuildinfo
+.status-cache
+vitest-report.json
+summary-*.md

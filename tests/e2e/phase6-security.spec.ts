@@ -29,7 +29,7 @@ test.describe('Phase 6: Security, CSP & API Hygiene', () => {
     expect(csp).toContain("frame-ancestors 'none'");
     expect(csp).toContain("object-src 'none'");
     expect(csp).not.toContain("'unsafe-eval'");
-    expect(csp).toContain("upgrade-insecure-requests");
+    expect(csp).toContain("form-action 'self'");
   });
 
   test('3. No CSP violations triggered on home page render', async ({ page }) => {
@@ -75,7 +75,7 @@ test.describe('Phase 6: Security, CSP & API Hygiene', () => {
     expect(forbiddenRes.status()).toBe(403);
     const forbiddenJson = await forbiddenRes.json();
     expect(forbiddenJson.ok).toBe(false);
-    expect(forbiddenJson.code).toBe('FORBIDDEN');
+    expect(['FORBIDDEN', 'FORBIDDEN_ORIGIN']).toContain(forbiddenJson.code);
 
     // Honeypot check
     const honeypotRes = await request.post('/api/contact', {

@@ -10,5 +10,9 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['tests/**/*.test.ts'],
+    env: {
+      RATE_LIMIT_DRIVER: 'memory',
+    },
+    reporters: process.env.CI ? ['default', 'github-actions'] : ['default'],
   },
 })

@@ -2,9 +2,20 @@
 
 > **Portfolio:** Rajendra Bist — Full-Stack Developer  
 > **Production Canonical URL:** `https://www.bistrajendra.com.np`  
-> **Deployment Target:** Vercel (Edge Network + Serverless Node.js 20)  
+> **Deployment Target:** Vercel (Edge Network + Serverless Node.js 22.x)  
 > **Repository:** `github.com/rajendrabist07/rajendra-bist`  
 > **Release Branch:** `redesign/v4` → `main` (via PR Squash Merge)
+
+---
+
+## 0. Vercel Project Node.js Version Configuration
+
+> [!IMPORTANT]
+> The repository uses Node.js 22.x (`.nvmrc` is `22.12.0` and `package.json` specifies `"node": ">=22.12.0"`).
+> 
+> In **Vercel Dashboard > Project Settings > General > Node.js Version**:
+> Ensure the runtime is set to **`22.x`**.
+> If left on legacy default `20.x`, npm will warn or fail during dependencies resolution. Also verify that `vercel.json` contains `"installCommand": "npm ci"`.
 
 ---
 

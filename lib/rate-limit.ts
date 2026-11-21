@@ -5,9 +5,9 @@ import { createHmac } from 'node:crypto'
 type LocalLimit = { count: number; resetAt: number }
 
 const localLimits = new Map<string, LocalLimit>()
-const isTestEnv = process.env.NODE_ENV === 'test' || Boolean(process.env.VITEST)
+const useMemoryDriver = process.env.RATE_LIMIT_DRIVER === 'memory'
 const hasUpstash =
-  !isTestEnv &&
+  !useMemoryDriver &&
   Boolean(
     process.env.UPSTASH_REDIS_REST_URL &&
       process.env.UPSTASH_REDIS_REST_TOKEN &&

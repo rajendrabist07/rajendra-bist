@@ -6,33 +6,83 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
+  RATE_LIMIT_DRIVER: memory
+  NEXT_TELEMETRY_DISABLED: 1
   GEMINI_API_KEY: 'ci-dummy-gemini-key'
   RESEND_API_KEY: 'ci-dummy-resend-key'
   IP_HASH_SECRET: 'ci-dummy-hash-secret'
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm run build
-      - run: npm run check:contrast
-      - run: npm run check:placeholders
-      - run: npm run check:evidence
-      - run: npm run check:citations
-      - run: npm run check:links
-      - run: npm test
+      - name: Install dependencies
+        run: |
+          npm ci 2>&1 | tee npm-ci.log
+          echo "### Node & Package Manager Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node version:** \`$(node -v)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **npm version:** \`$(npm -v)\`" >> $GITHUB_STEP_SUMMARY
+          EBADENGINE_COUNT=$(grep -c "EBADENGINE" npm-ci.log || true)
+          echo "- **EBADENGINE warnings:** \`$EBADENGINE_COUNT\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$EBADENGINE_COUNT" -ne 0 ]; then
+            echo "::error::EBADENGINE warnings detected in npm ci"
+            exit 1
+          fi
+      - name: Run lint
+        run: npm run lint
+      - name: Run typecheck
+        run: npm run typecheck
+      - name: Build Next.js application
+        run: npm run build
+      - name: Check contrast
+        run: npm run check:contrast
+      - name: Check placeholders
+        run: npm run check:placeholders
+      - name: Check evidence
+        run: npm run check:evidence
+      - name: Check citations
+        run: npm run check:citations
+      - name: Check links
+        run: npm run check:links
+      - name: Run unit & integration tests
+        run: npm test -- --reporter=json --outputFile=vitest-report.json
+      - name: Generate Validate Step Summary
+        if: always()
+        run: node scripts/ci-summary.mjs validate
+      - name: Upload Validate Summary Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validate-summary
+          path: summary-validate.md
+          retention-days: 14
+      - name: Report Failure Diagnostics
+        if: failure()
+        run: |
+          echo "## ❌ Validate Job Failed" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Validate Job | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit SHA | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "::error title=Validation Failure::Validate job failed on commit ${{ github.sha }}"
 
   browser:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
     needs: validate
     steps:
       - uses: actions/checkout@v4
@@ -40,13 +90,54 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
+      - name: Install dependencies
+        run: |
+          npm ci 2>&1 | tee npm-ci.log
+          echo "### Node & Package Manager Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node version:** \`$(node -v)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **npm version:** \`$(npm -v)\`" >> $GITHUB_STEP_SUMMARY
+          EBADENGINE_COUNT=$(grep -c "EBADENGINE" npm-ci.log || true)
+          echo "- **EBADENGINE warnings:** \`$EBADENGINE_COUNT\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$EBADENGINE_COUNT" -ne 0 ]; then
+            echo "::error::EBADENGINE warnings detected in npm ci"
+            exit 1
+          fi
+      - name: Build Next.js application
+        run: npm run build
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright E2E tests
+        run: npm run test:e2e
+      - name: Generate Browser Step Summary
+        if: always()
+        run: node scripts/ci-summary.mjs browser
+      - name: Upload Browser Summary Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-summary
+          path: summary-browser.md
+          retention-days: 14
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+      - name: Report Failure Diagnostics
+        if: failure()
+        run: |
+          echo "## ❌ Browser E2E Job Failed" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Browser Job | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit SHA | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "::error title=Browser Test Failure::Browser Playwright test suite failed on commit ${{ github.sha }}"
 
   lighthouse:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
     needs: validate
     steps:
       - uses: actions/checkout@v4
@@ -54,7 +145,45 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - run: npm run lighthouse
+      - name: Install dependencies
+        run: |
+          npm ci 2>&1 | tee npm-ci.log
+          echo "### Node & Package Manager Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node version:** \`$(node -v)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **npm version:** \`$(npm -v)\`" >> $GITHUB_STEP_SUMMARY
+          EBADENGINE_COUNT=$(grep -c "EBADENGINE" npm-ci.log || true)
+          echo "- **EBADENGINE warnings:** \`$EBADENGINE_COUNT\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$EBADENGINE_COUNT" -ne 0 ]; then
+            echo "::error::EBADENGINE warnings detected in npm ci"
+            exit 1
+          fi
+      - name: Build Next.js application
+        run: npm run build
+      - name: Run Lighthouse CI Audit
+        run: npm run lighthouse
+      - name: Generate Lighthouse Step Summary
+        if: always()
+        run: node scripts/ci-summary.mjs lighthouse
+      - name: Upload Lighthouse Summary Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-summary
+          path: summary-lighthouse.md
+          retention-days: 14
+      - name: Upload Lighthouse Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report
+          path: .lighthouseci/
+          retention-days: 14
+      - name: Report Failure Diagnostics
+        if: failure()
+        run: |
+          echo "## ❌ Lighthouse CI Job Failed" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lighthouse Job | ❌ Failed |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit SHA | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "::error title=Lighthouse CI Failure::Lighthouse CI audit threshold failed on commit ${{ github.sha }}"

@@ -23,8 +23,8 @@ export const SKILL_PROOFS: SkillProof[] = [
   {
     name: 'Node.js',
     tier: 'Core',
-    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json',
-    regex: '"@types/node":\\s*"\\^?22',
+    proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json',
+    regex: '"node":\\s*">=22',
   },
   {
     name: 'PostgreSQL',
@@ -48,7 +48,7 @@ export const SKILL_PROOFS: SkillProof[] = [
     name: 'Prisma ORM',
     tier: 'Core',
     proofUrl: 'https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json',
-    regex: '"prisma":\\s*\\{',
+    regex: '"@prisma/client":\\s*"\\^?6',
   },
   {
     name: 'Zod',
