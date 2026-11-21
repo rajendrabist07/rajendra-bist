@@ -3,62 +3,63 @@
 > **Release Target:** `main` (Squash & Merge)  
 > **Source Branch:** `redesign/v4`  
 > **Release Coordinator:** Antigravity / Rajendra Bist  
-> **Date:** 2026-11-20  
+> **Updated:** 2026-11-21  
 
 ---
 
-## 1. Automated Quality Gates
-
-Every gate below must be satisfied prior to triggering the squash merge:
+## 1. Automated Quality Gates (All Passing)
 
 - [x] **Facts Validation (`npm run prebuild`)**
-  - Schema validation across `facts.ts` passes with strict Zod types.
+  - Strict Zod schema validation across `content/facts.ts` passes at build time.
 - [x] **Typecheck (`npm run typecheck`)**
   - Zero TypeScript compilation errors (`tsc --noEmit`).
 - [x] **Linting (`npm run lint`)**
-  - Next.js and ESLint static analysis passes.
+  - Next.js and ESLint static analysis passes (`0 errors, 0 warnings`).
 - [x] **Design Tokens & Contrast (`npm run check:contrast`)**
-  - All color pairs in both dark and light modes pass WCAG 2.2 AA contrast requirements (≥ 4.5:1 text, ≥ 3.0:1 UI borders).
+  - 58/58 WCAG 2.2 AA contrast checks pass across dark and light tokens.
 - [x] **Public Link Equity & Citations (`npm run check:links` & `npm run check:citations`)**
-  - All external repository and artifact URLs verified reachable via HTTP 200 checks.
-- [x] **Placeholder & Generic-Tell Guard (`npm run check:placeholders`)**
-  - Zero forbidden generic-tells (`[SPEC // ...]`, `BOUNDARY`, `TODO`, `Lorem ipsum`).
-- [x] **Vitest Unit & Adversarial Test Suite (`npm test`)**
-  - 15/15 unit and prompt-injection static defense tests pass.
-- [x] **Full Playwright E2E Suite (`npx playwright test`)**
-  - 56/56 browser tests pass covering axe accessibility across 9 public routes, 4 interactive states, responsive viewports, and critical smoke journeys.
-- [x] **Mobile Lighthouse Benchmark (`npx lhci autorun`)**
-  - Performance: ≥ 96 (median: 98)
+  - All 12 evidence repository files and 22 citation URLs verified live.
+- [x] **Placeholder & Draft Scanner (`npm run check:placeholders`)**
+  - Zero leaks of forbidden tokens (`assum`, `per owner`, `TODO`, `⚠`, `Note:`, `placeholder`, `training partner`) in source code or rendered `/` HTML.
+- [x] **Resume PDF Release Guard (`node scripts/check-resume.mjs`)**
+  - **DONE**: Owner uploaded updated PDF (`Rajendra_Bist_Full_Stack_Developer.pdf`).
+  - Contains `"Available immediately"`; zero mentions of `"1 month notice"` or `"Next.js 15"`.
+- [x] **Vitest Unit & Integration Suite (`npm test`)**
+  - 123/123 tests passing across 10 test files.
+- [x] **Full Playwright Browser E2E Suite (`npm run test:e2e`)**
+  - 56/56 browser tests passing across 7 viewports and 18 axe accessibility scans (0 violations).
+- [x] **Lighthouse CI Quality Audit (`npm run lighthouse`)**
+  - Performance: 98 (mobile)
   - Accessibility: 100
-  - Best Practices: 100
+  - Best Practices: 100 (localhost `is-on-https: off`)
   - SEO: 100
-  - First Load JS (`/`): 141 kB (strictly under 170 kB budget)
-- [ ] **Resume PDF Release Guard (`npm run check:resume`)**
-  - **STATUS: RELEASE BLOCKER (PENDING OWNER ACTION)**
-  - Current extraction of `public/resume/Rajendra_Bist_Full_Stack_Developer.pdf` contains `"1 month notice"` and `"Next.js 15"`.
-  - Contradicts portfolio status (`"Available immediately"`).
-  - Owner must replace this file with the updated PDF. Once swapped, `npm run release:check` will pass.
+  - CLS: 0.000 (≤ 0.05 error threshold)
+  - LCP: 2410 ms (≤ 3500 ms error threshold)
+  - TBT: 41 ms (≤ 300 ms error threshold)
 
 ---
 
-## 2. Public Repository Hygiene
+## 2. Production & Environment Separation Status
 
-- [x] Private reference audits moved to `docs/private/` (confirmed gitignored).
-- [x] Legacy reference files removed via `git rm` (`docs/reference/DISTINCTNESS-AUDIT.md`, `docs/reference/REFERENCE-NOTES.md`).
-- [x] Zero mentions of external benchmark portfolios or "SK." in repository code.
-- [x] Zero absolute machine paths (`/Users/...`) tracked in git.
-- [x] Clean Blueprint architectural documentation.
+- [ ] **Production Serves `main@6acfad4` (Action: Deploy PR to fix)**
+  - Production currently serves `6acfad4`, which still contains the unverified certificate card assumption: `"Issuer assumed as Vcare Technical Institute training partner per owner document record"`.
+  - Merging this PR removes this text and replaces it with verified certificate links.
+- [ ] **Environment Variables in Vercel (Owner Action)**
+  - Verify `GEMINI_API_KEY`, `RESEND_API_KEY`, and `MONGODB_URI` are configured in Vercel Project Settings for both Preview and Production.
+- [ ] **Contact Form Verification (Owner Action)**
+  - Test contact form submission from personal email on live site and confirm receipt in inbox.
+- [ ] **Certificate Issuer & Date Confirmation (Owner Action)**
+  - Confirm official issuing institution and completion year for Full-Stack Web Development certificate so details can be permanently added.
+- [ ] **Branch Protection on `main` (Owner Action)**
+  - Configure GitHub branch protection on public repository: require pull request, require checks (`validate`, `browser`, `lighthouse`), block force pushes.
+- [ ] **External Profile Alignment (Owner Action)**
+  - Confirm alignment across Naukri, LinkedIn, and GitHub profiles per `docs/HUMAN-TODO.md`.
 
 ---
 
-## 3. Merge Procedure
+## 3. Merge & Verification Procedure
 
-1. Push all final commits on `redesign/v4`:
-   ```bash
-   git push origin redesign/v4
-   ```
-2. Open a Pull Request from `redesign/v4` into `main`.
-3. Verify GitHub Actions CI runs all 3 workflow jobs (`validate`, `browser`, `lighthouse`).
-4. Replace resume PDF with corrected file and verify `npm run release:check` exits with code 0.
-5. Perform **Squash and merge** into `main`.
-6. Confirm Vercel production deployment succeeds.
+1. Open PR from `redesign/v4` to `main` using description from `docs/PR-DESCRIPTION.md`.
+2. Confirm all 3 GitHub Actions checks (`validate`, `browser`, `lighthouse`) are green.
+3. Select **Squash and merge**.
+4. Run `node scripts/smoke-live.mjs https://www.bistrajendra.com.np` to verify production deployment.

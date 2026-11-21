@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T10:10:31.020Z",
+  "generatedAt": "2026-11-21T10:33:03.226Z",
   "skills": [
     {
       "name": "TypeScript",
@@ -12,10 +12,10 @@
     {
       "name": "Node.js",
       "tier": "Core",
-      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/dev-guard-ai/main/package.json",
-      "regex": "\"@types/node\":\\s*\"\\^?22",
+      "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json",
+      "regex": "\"node\":\\s*\">=22",
       "status": "VERIFIED",
-      "matchedLine": "\"@types/node\": \"^22.13.0\","
+      "matchedLine": "\"node\": \">=22.0.0\""
     },
     {
       "name": "PostgreSQL",
@@ -45,9 +45,9 @@
       "name": "Prisma ORM",
       "tier": "Core",
       "proofUrl": "https://raw.githubusercontent.com/rajendrabist07/content-platform/main/package.json",
-      "regex": "\"prisma\":\\s*\\{",
+      "regex": "\"@prisma/client\":\\s*\"\\^?6",
       "status": "VERIFIED",
-      "matchedLine": "\"prisma\": {"
+      "matchedLine": "\"@prisma/client\": \"^6.19.3\","
     },
     {
       "name": "Zod",

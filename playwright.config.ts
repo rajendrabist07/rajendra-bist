@@ -5,7 +5,11 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
-  reporter: [['github'], ['html', { open: 'never' }]],
+  reporter: [
+    ['github'],
+    ['html', { open: 'never' }],
+    ['json', { outputFile: 'playwright-report/results.json' }],
+  ],
   use: {
     baseURL: 'http://127.0.0.1:3005',
     trace: 'on-first-retry',

@@ -59,7 +59,17 @@ jobs:
       - name: Check links
         run: npm run check:links
       - name: Run unit & integration tests
-        run: npm test
+        run: npm test -- --reporter=json --outputFile=vitest-report.json
+      - name: Generate Validate Step Summary
+        if: always()
+        run: node scripts/ci-summary.mjs validate
+      - name: Upload Validate Summary Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validate-summary
+          path: summary-validate.md
+          retention-days: 14
       - name: Report Failure Diagnostics
         if: failure()
         run: |
@@ -98,6 +108,16 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run Playwright E2E tests
         run: npm run test:e2e
+      - name: Generate Browser Step Summary
+        if: always()
+        run: node scripts/ci-summary.mjs browser
+      - name: Upload Browser Summary Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-summary
+          path: summary-browser.md
+          retention-days: 14
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
         if: always()
@@ -141,6 +161,16 @@ jobs:
         run: npm run build
       - name: Run Lighthouse CI Audit
         run: npm run lighthouse
+      - name: Generate Lighthouse Step Summary
+        if: always()
+        run: node scripts/ci-summary.mjs lighthouse
+      - name: Upload Lighthouse Summary Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-summary
+          path: summary-lighthouse.md
+          retention-days: 14
       - name: Upload Lighthouse Report
         uses: actions/upload-artifact@v4
         if: always()

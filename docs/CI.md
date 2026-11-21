@@ -125,6 +125,9 @@ On macOS (`darwin-arm64`), npm does not automatically download or include Linux-
 
 ## 6. GitHub Branch Protection Setup (Instructions for Repository Owner)
 
+> [!NOTE]
+> Because `rajendra-bist` is a public repository, branch protection rules and rulesets are completely free and natively supported without requiring a GitHub Team or Enterprise subscription.
+
 To ensure unreviewed or unverified commits can never be pushed directly to production:
 
 1. Open the repository on GitHub: `https://github.com/rajendrabist07/rajendra-bist/settings/branches`.

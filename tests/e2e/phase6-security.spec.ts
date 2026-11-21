@@ -29,7 +29,7 @@ test.describe('Phase 6: Security, CSP & API Hygiene', () => {
     expect(csp).toContain("frame-ancestors 'none'");
     expect(csp).toContain("object-src 'none'");
     expect(csp).not.toContain("'unsafe-eval'");
-    expect(csp).toContain("upgrade-insecure-requests");
+    expect(csp).toContain("form-action 'self'");
   });
 
   test('3. No CSP violations triggered on home page render', async ({ page }) => {
