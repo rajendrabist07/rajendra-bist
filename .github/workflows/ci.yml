@@ -31,7 +31,17 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci 2>&1 | tee npm-ci.log
+          echo "### Node & Package Manager Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node version:** \`$(node -v)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **npm version:** \`$(npm -v)\`" >> $GITHUB_STEP_SUMMARY
+          EBADENGINE_COUNT=$(grep -c "EBADENGINE" npm-ci.log || true)
+          echo "- **EBADENGINE warnings:** \`$EBADENGINE_COUNT\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$EBADENGINE_COUNT" -ne 0 ]; then
+            echo "::error::EBADENGINE warnings detected in npm ci"
+            exit 1
+          fi
       - name: Run lint
         run: npm run lint
       - name: Run typecheck
@@ -71,7 +81,17 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci 2>&1 | tee npm-ci.log
+          echo "### Node & Package Manager Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node version:** \`$(node -v)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **npm version:** \`$(npm -v)\`" >> $GITHUB_STEP_SUMMARY
+          EBADENGINE_COUNT=$(grep -c "EBADENGINE" npm-ci.log || true)
+          echo "- **EBADENGINE warnings:** \`$EBADENGINE_COUNT\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$EBADENGINE_COUNT" -ne 0 ]; then
+            echo "::error::EBADENGINE warnings detected in npm ci"
+            exit 1
+          fi
       - name: Build Next.js application
         run: npm run build
       - name: Install Playwright Chromium
@@ -106,7 +126,17 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci 2>&1 | tee npm-ci.log
+          echo "### Node & Package Manager Versions" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node version:** \`$(node -v)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **npm version:** \`$(npm -v)\`" >> $GITHUB_STEP_SUMMARY
+          EBADENGINE_COUNT=$(grep -c "EBADENGINE" npm-ci.log || true)
+          echo "- **EBADENGINE warnings:** \`$EBADENGINE_COUNT\`" >> $GITHUB_STEP_SUMMARY
+          if [ "$EBADENGINE_COUNT" -ne 0 ]; then
+            echo "::error::EBADENGINE warnings detected in npm ci"
+            exit 1
+          fi
       - name: Build Next.js application
         run: npm run build
       - name: Run Lighthouse CI Audit
