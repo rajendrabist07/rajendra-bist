@@ -16,6 +16,8 @@
 
 ### 🌐 Key Links & Telemetry
 - **Live Production Domain:** [https://www.bistrajendra.com.np](https://www.bistrajendra.com.np) *(Canonical 308 redirect from root)*
+- **Interactive Swagger UI:** [bistrajendra.com.np/api/v1/docs](https://www.bistrajendra.com.np/api/v1/docs)
+- **OpenAPI 3.1.0 Specification:** [bistrajendra.com.np/api/v1/docs.json](https://www.bistrajendra.com.np/api/v1/docs.json)
 - **GitHub Repository:** [github.com/rajendrabist07/rajendra-bist](https://github.com/rajendrabist07/rajendra-bist)
 - **Canonical Resume (Verified PDF):** [bistrajendra.com.np/resume/Rajendra_Bist_Full_Stack_Developer.pdf](https://www.bistrajendra.com.np/resume/Rajendra_Bist_Full_Stack_Developer.pdf)
 - **LinkedIn Profile:** [linkedin.com/in/rajendra-bist-721591325](https://www.linkedin.com/in/rajendra-bist-721591325)
